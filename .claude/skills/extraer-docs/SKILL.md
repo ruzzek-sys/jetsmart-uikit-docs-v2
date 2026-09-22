@@ -1,6 +1,6 @@
 ---
 name: extraer-docs
-description: Extrae el section "Docs · <Componente>" de una página de Figma del Jetsmart UI Kit y rellena las secciones Resumen y Propiedades de la página HTML correspondiente. Úsalo cuando el usuario pase una página del kit más un link de Figma y pida documentar, extraer las propiedades, rellenar el resumen, o escriba /extraer-docs.
+description: Extrae los sections "Docs · <Componente>" de una página de Figma del Jetsmart UI Kit y rellena la página HTML correspondiente, sea de un componente o de varios. Úsalo cuando el usuario pase una página del kit más un link de Figma y pida documentar, extraer las propiedades, rellenar el resumen, separar o poner en orden los componentes de una página, o escriba /extraer-docs.
 argument-hint: "[pagina.html] [link-figma]"
 ---
 
@@ -9,8 +9,23 @@ argument-hint: "[pagina.html] [link-figma]"
 Rellena **Resumen** y **Propiedades** de una página del kit con la información del
 section `Docs · <Componente>` que vive en la página de Figma del componente.
 
-Las páginas de componente tienen exactamente dos secciones: **Resumen** y
+Una página de **un solo componente** tiene exactamente dos secciones: **Resumen** y
 **Propiedades**. No agregues ninguna otra.
+
+Una página de Figma puede traer **varios componentes**, y entonces hay dos formas de
+resolverla. Cuál corresponde se decide por los nombres (paso 5):
+
+- **Familia** — los componentes son variantes del concepto que nombra la página
+  (Banner → «Promotional Banner» y «Membership Banner»; Avatar Selector → «Avatar» y
+  «Avatar Selector»). Siguen siendo dos secciones: un Resumen conjunto y una
+  Propiedades con un `<h3>` por componente.
+- **Componentes distintos** — cada uno tiene identidad propia y su nombre no deriva del
+  de la página (Tabs → «Chips», «Toggle Tab», «Tab Bar / Searchbox», «Tab Bar Filter»,
+  «Tab Underline Item»). Ahí va un bloque completo por componente. Referencia:
+  `components/tabs.html`.
+
+Si dudas entre las dos, pregunta antes de escribir: rehacer la estructura después es
+mucho más caro que la pregunta.
 
 ## Argumentos
 
@@ -53,6 +68,27 @@ viene ahí. Es mucho más barato.
 
 Si la salida es grande, la herramienta la guarda en un archivo y te da la ruta. Úsala
 tal cual en el paso 3. Si vino inline, pégala en un `.txt` en el scratchpad.
+
+**Cuenta los frames `Live Preview` y los sections `Docs ·` del dump.** Si hay más de uno
+de cada, la página trae varios componentes y tienes que mapearlos. Los frames se llaman
+todos igual, así que **no los identifiques por su posición en el canvas**: hazlo por la
+instancia que llevan dentro.
+
+```bash
+python - <<'EOF'
+import re, io
+lines = io.open(r"<ruta-metadata.xml>", encoding="utf-8").read().splitlines()
+for i, l in enumerate(lines):
+    m = re.match(r'^  <frame id="([^"]+)" name="Live Preview"', l)
+    if not m:
+        continue
+    child = re.search(r'name="([^"]+)"', lines[i + 1])
+    print(m.group(1), "->", child.group(1) if child else "?")
+EOF
+```
+
+El orden de los componentes en la página HTML es el del canvas, de arriba hacia abajo
+(por la coordenada `y` del frame `Matriz · <Componente>`).
 
 ### 3. Parsea las propiedades
 
@@ -120,7 +156,7 @@ en el Resumen:
   Entre los primeros resultados están el compuesto y sus partes. Descarta los frames
   auxiliares de la matriz (`Column Headers`, `lbl · …`, `nota slot · …`, `bracket …`).
 
-### 5. Escribe las dos secciones
+### 5. Escribe las secciones
 
 **Resumen** — dos párrafos:
 1. Qué es el componente y para qué sirve, en una o dos frases. Redáctalo tú a partir
@@ -130,16 +166,38 @@ en el Resumen:
    - si era de **familia**, nombra el compuesto y sus partes en `<code>` y recién
      después menciona qué recorren las columnas y las filas de la matriz.
 
-**Propiedades** — pega tal cual la salida del paso 3. Si vinieron varios componentes,
-quedan las tablas una tras otra, cada una bajo su `<h3>`.
+**Propiedades** — pega tal cual la salida del paso 3.
 
-**Si la página trae varios componentes**, el Resumen los trata juntos: explica en un
-párrafo qué es cada uno y cómo se relacionan, y en el segundo pon la cobertura de
-variantes de cada uno. No hagas una sección por componente: el kit tiene una sola
-página para el conjunto.
+**Si la página trae varios componentes de una familia**, el Resumen los trata juntos:
+explica en un párrafo qué es cada uno y cómo se relacionan, y en el segundo pon la
+cobertura de variantes de cada uno. Las tablas quedan una tras otra bajo su `<h3>`.
+Ejemplo: `components/banner.html`.
 
-Reemplaza sólo los `<p class="coming-soon">` de esas dos secciones. La estructura
-queda así:
+**Si son componentes distintos**, va un bloque completo por componente, en el orden del
+canvas, cada uno en su propia `<section class="doc-section">`:
+
+1. `<h2 id="doc-<slug>">` con el nombre del componente.
+2. Un párrafo de descripción corta: qué es y para qué sirve.
+3. Su `<div class="figma-preview">` con el iframe de **su** frame Live Preview.
+4. `<h3 id="doc-<slug>-resumen">Resumen</h3>` — los mismos dos párrafos de siempre.
+5. `<h3 id="doc-<slug>-propiedades">Propiedades</h3>` — subtítulo + tabla.
+
+El índice lateral se anida solo: `renderInPageNav` en `assets/js/layout.js` etiqueta
+cada ítem con `page-toc__item--h2` / `--h3` y el CSS indenta los h3 cuando la lista
+tiene alguno. Para que un h3 aparezca en el índice **su id tiene que empezar con
+`doc-`**: el selector es `main [id^='doc-']`.
+
+Actualiza además el manifiesto, porque la página ya no tiene un solo preview:
+
+- `tools/generate-pages.mjs` — en el item de la página, `nodes` con **todos** los nodos
+  de Live Preview (en el orden de la página) y `live: true`.
+- `assets/js/nav-data.js` — la misma lista en `figmaNodeIds`, con `figmaNodeId` igual al
+  primero. Es un archivo derivado: si no lo sincronizas, la próxima corrida del
+  generador pisa el cambio.
+
+En una página de un componente reemplaza sólo los `<p class="coming-soon">` de esas
+dos secciones; en una de componentes distintos se reescribe el cuerpo entero. La
+estructura queda así:
 
 ```html
           <section class="doc-section">
@@ -154,6 +212,31 @@ queda así:
             <div class="ty-table-wrap">
               <table class="ty-table">…</table>
             </div>
+          </section>
+```
+
+Y así queda una página de componentes distintos:
+
+```html
+          <section class="doc-section">
+            <h2 id="doc-chips">Chips</h2>
+            <p>…qué es y para qué sirve…</p>
+            <div class="figma-preview">
+              <p class="figma-preview__label">Live Preview</p>
+              <div class="figma-preview__frame">
+                <iframe … loading="lazy" allowfullscreen></iframe>
+              </div>
+            </div>
+            <h3 id="doc-chips-resumen">Resumen</h3>
+            <p>…</p>
+            <h3 id="doc-chips-propiedades">Propiedades</h3>
+            <p>…subtítulo…</p>
+            <div class="ty-table-wrap">…</div>
+          </section>
+
+          <section class="doc-section">
+            <h2 id="doc-toggle-tab">Toggle Tab</h2>
+            …lo mismo para cada componente…
           </section>
 ```
 
@@ -178,14 +261,21 @@ panel que ve el diseñador. Las descripciones van en español, copiadas textualm
 Recorta con PIL y mira el resultado. Confirma que:
 - Resumen y Propiedades tienen contenido y no quedó ningún `coming-soon`,
 - la tabla tiene tantas filas como propiedades (`grep -c '<tr>'` = props + 1),
-- el TOC lateral lista las dos secciones.
+- el TOC lateral lista las dos secciones —o, si son componentes distintos, los lista
+  todos con sus dos subsecciones anidadas debajo.
 
 El iframe del Live Preview sale en blanco en headless — es normal, no es un error.
 
 ## Convenciones del kit que debes respetar
 
 - Títulos de sección en español: **Resumen** y **Propiedades**, con ids
-  `doc-resumen` y `doc-propiedades`. No hay más secciones en una página de componente.
+  `doc-resumen` y `doc-propiedades`. En una página de componentes distintos, el `h2`
+  es el nombre del componente (`doc-<slug>`) y los ids de las subsecciones llevan su
+  prefijo: `doc-<slug>-resumen`, `doc-<slug>-propiedades`.
+- Todo heading que deba salir en el índice necesita un id que empiece con `doc-`.
+- Los iframes de Live Preview llevan `loading="lazy"`: si cargan varios a la vez sin
+  eso, Figma responde 403. Y si un embed muestra el frame equivocado, sospecha de la
+  caché del navegador antes de tocar el node-id.
 - Tablas con `.ty-table-wrap` > `.ty-table`, descripciones en `<td class="ty-muted">`,
   tipos en `<code>`.
 - Nada de tooltips en hover: las etiquetas y tablas se leen directo.
@@ -193,7 +283,8 @@ El iframe del Live Preview sale en blanco en headless — es normal, no es un er
 
 ## Resultado
 
-Cierra reportando: qué componente documentaste y cuántas propiedades entraron.
+Cierra reportando: qué componente documentaste y cuántas propiedades entraron. Si eran
+varios, nómbralos en el orden en que quedaron y di cuántas props entró cada uno.
 
 No hace falta proteger la página de `tools/generate-pages.mjs`: el generador no
 sobrescribe archivos que ya existen. Solo `--force` lo haría, y eso avisa en pantalla.
