@@ -2025,6 +2025,183 @@ main {
   line-height: 1;
 }
 
+/* ── Elevations ─────────────────────────────────────────── */
+
+.el-swatch-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 48px 56px;
+  line-height: 0;
+}
+
+.el-swatch {
+  display: inline-block;
+  border-radius: 12px;
+  background: #fff;
+  border: 1px solid rgba(152, 170, 192, 0.25);
+}
+
+.ty-table td.el-cell-swatch {
+  padding: 0 14px;
+  text-align: center;
+}
+
+.el-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.el-card {
+  display: flex;
+  flex-direction: column;
+  padding: 18px;
+  border: 1px solid var(--js-border);
+  border-radius: 12px;
+  background: var(--js-bg);
+}
+
+.el-card__demo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: var(--js-bg-subtle);
+}
+
+.el-card__body h4 {
+  margin: 14px 0 6px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.el-card__meta {
+  margin: 0;
+  font-family: var(--js-mono);
+  font-size: 11px;
+  color: var(--js-text-muted);
+}
+
+.el-card__desc {
+  margin: 10px 0 0;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--js-text-muted);
+}
+
+.el-scrim-chip {
+  display: inline-block;
+  width: 74px;
+  height: 20px;
+  border-radius: 6px;
+  vertical-align: middle;
+}
+
+/* Demos de prácticas ------------------------------------------------------ */
+
+.el-demo {
+  display: flex;
+  align-self: stretch;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  min-height: 180px;
+  padding: 24px;
+  border-radius: 10px;
+  background: var(--js-bg-subtle);
+}
+
+.el-surface {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 20px;
+  border-radius: 12px;
+  background: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.el-surface--muted {
+  font-weight: 400;
+  color: var(--js-text-muted);
+}
+
+.el-nest {
+  width: 100%;
+  max-width: 280px;
+  padding: 20px;
+  border-radius: 14px;
+  background: #fff;
+}
+
+.el-nest__inner {
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: #fff;
+  font-size: 12px;
+  color: var(--js-text-muted);
+}
+
+.el-nest__label {
+  display: block;
+  margin-bottom: 12px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.el-scrim-demo {
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+  height: 160px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.el-scrim-demo__bg {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+}
+
+.el-scrim-demo__line {
+  display: block;
+  height: 10px;
+  border-radius: 999px;
+  background: #33465f;
+}
+
+.el-scrim-demo__line--title {
+  height: 16px;
+  margin-bottom: 4px;
+  background: var(--js-brand);
+}
+
+.el-scrim-demo__veil {
+  position: absolute;
+  inset: 0;
+}
+
+.el-scrim-demo__sheet {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  bottom: 18px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: #fff;
+  font-size: 12px;
+  font-weight: 600;
+}
+
 @media (min-width: 1024px) {
   #sidebar {
     transform: none;

@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Elevations - JetSmart UI Kit</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Encode+Sans:wght@100..900&family=Lato:wght@100;300;400;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/css/custom.css">
 </head>
 <body data-page-id="elevations">
@@ -18,22 +21,346 @@
           <header class="page-header">
             <p class="page-header__eyebrow">Foundations</p>
             <h1>Elevations</h1>
-            <p>Sombras y niveles de elevación.</p>
+            <p>20 primitivos de sombra, 21 tokens semánticos, 5 estilos de efecto y 4 tokens de scrim que definen la altura del kit.</p>
           </header>
 
           <section class="doc-section">
             <h2 id="doc-resumen">Resumen</h2>
-            <p class="coming-soon">Foundation pendiente de documentar desde Figma.</p>
+            <p>
+              Una sombra no puede ser un token único: Figma vincula variables campo por campo. Por eso cada nivel
+              de elevación se arma en tres capas. Los <strong>primitivos de Tier 1</strong> son los valores crudos,
+              repartidos en cuatro dimensiones independientes (color, offset-y, blur y spread). Los
+              <strong>tokens semánticos de Tier 2</strong> agrupan esos valores por nivel: cuatro tokens por cada
+              uno, más el offset-x que comparten los cinco. Y el <strong>estilo de efecto</strong> es el envoltorio
+              que reúne los cinco campos y es lo único que se aplica sobre un nodo.
+            </p>
+
+            <div class="ty-stats">
+              <div class="ty-stat">
+                <span class="ty-stat__value">5</span>
+                <span class="ty-stat__label">Niveles de elevation</span>
+              </div>
+              <div class="ty-stat">
+                <span class="ty-stat__value">20</span>
+                <span class="ty-stat__label">Primitivos Tier 1</span>
+              </div>
+              <div class="ty-stat">
+                <span class="ty-stat__value">21</span>
+                <span class="ty-stat__label">Tokens semánticos</span>
+              </div>
+              <div class="ty-stat">
+                <span class="ty-stat__value">4</span>
+                <span class="ty-stat__label">Tokens de scrim</span>
+              </div>
+            </div>
+
+            <div class="ty-chain">
+              <div class="ty-chain__step">
+                <span class="ty-chain__tier">Tier 1 · Primitivo</span>
+                <code>shadow/blur/32</code>
+                <span class="ty-chain__note">32 px · valor crudo, scope vacío</span>
+              </div>
+              <div class="ty-chain__arrow" aria-hidden="true">→</div>
+              <div class="ty-chain__step ty-chain__step--focus">
+                <span class="ty-chain__tier">Tier 2 · Semántico</span>
+                <code>elevation/md/blur</code>
+                <span class="ty-chain__note">aquí vive el nivel</span>
+              </div>
+              <div class="ty-chain__arrow" aria-hidden="true">→</div>
+              <div class="ty-chain__step">
+                <span class="ty-chain__tier">Estilo de efecto</span>
+                <code>Elevation-md</code>
+                <span class="ty-chain__note">los 5 campos en un solo envoltorio</span>
+              </div>
+              <div class="ty-chain__arrow" aria-hidden="true">→</div>
+              <div class="ty-chain__step">
+                <span class="ty-chain__tier">Producto</span>
+                <code>Todos los componentes que lo usan</code>
+                <span class="ty-chain__note">se actualizan solos</span>
+              </div>
+            </div>
+
+            <div class="ty-note">
+              <strong>Dos colecciones para un mismo nivel:</strong> el color de la sombra vive en
+              <code>Tier 2: Color</code>, junto a los demás colores, para poder rematizarse por mode. La geometría
+              (offset-y, blur y spread) vive en <code>Tier 2: Spatial &amp; Shape</code>. El estilo de efecto es el
+              que vuelve a juntarlas.
+            </div>
           </section>
 
           <section class="doc-section">
-            <h2 id="doc-tokens">Tokens</h2>
-            <p>Tokens y valores por documentar.</p>
+            <h2 id="doc-primitivos">Tokens primitivos · Tier 1</h2>
+            <p>
+              20 primitivos: cuatro dimensiones por cinco pasos. Son los valores crudos de la rampa de sombras.
+              Ninguno se aplica de forma directa: cada uno alimenta un único token semántico de Tier 2.
+            </p>
+            <div data-el="primitives"></div>
+
+            <h3>Cómo se lee la rampa</h3>
+            <p>
+              La rampa no escala de forma proporcional. Una superficie más elevada no solo se desplaza más:
+              proyecta una sombra más difusa y más opaca, así que las cuatro dimensiones suben a ritmos distintos.
+            </p>
+            <div data-el="ramp"></div>
+            <p class="ty-caption">
+              Las cuatro dimensiones son variables independientes: se pueden recombinar sin tocar Tier 2, pero hoy
+              cada primitivo tiene exactamente un consumidor.
+            </p>
           </section>
 
           <section class="doc-section">
-            <h2 id="doc-uso">Uso</h2>
-            <p>Guidelines de uso por definir.</p>
+            <h2 id="doc-semanticos">Tokens semánticos · Tier 2</h2>
+            <p>
+              Los cinco niveles del kit, de menor a mayor altura. Cada nivel combina offset vertical, blur y
+              spread; el color es siempre <code>#98AAC0</code> con el alpha que corresponde al escalón.
+            </p>
+            <div data-el="levels"></div>
+
+            <h3>Qué resuelve cada nivel</h3>
+            <p>
+              La elevación comunica distancia respecto del fondo, y esa distancia tiene que corresponder a cuánto
+              interrumpe el elemento. Si hay duda entre dos niveles consecutivos, conviene elegir el menor: subir
+              de escalón después es cambiar un estilo, bajar toda una pantalla saturada de sombras es rehacerla.
+            </p>
+            <div data-el="level-uses"></div>
+          </section>
+
+          <section class="doc-section">
+            <h2 id="doc-scrim">Scrim</h2>
+            <p>
+              El scrim es el fondo oscuro que separa un overlay del contenido que tapa. Combina un color
+              translúcido y un blur de fondo. Cada intensidad (<code>scrim</code> y <code>scrim-subtle</code>)
+              tiene su propio par de primitivas: alpha para el color, píxeles para el desenfoque.
+            </p>
+            <div data-el="scrim-primitives"></div>
+
+            <h3>Tokens semánticos de scrim</h3>
+            <div data-el="scrim-semantic"></div>
+          </section>
+
+          <section class="doc-section">
+            <h2 id="doc-figma">Cómo usar en Figma</h2>
+
+            <h3>1 · Dónde están</h3>
+            <p>
+              Lo que se aplica en un componente es el estilo de efecto. Detrás, los valores viven repartidos en
+              tres colecciones de variables: los primitivos en Tier 1 y los semánticos separados entre color y
+              geometría.
+            </p>
+            <div data-el="collections"></div>
+            <p class="ty-caption">
+              Los estilos se consumen por librería desde los archivos de producto, igual que el resto de los
+              tokens del kit.
+            </p>
+
+            <h3>2 · Anatomía de la sombra</h3>
+            <p>
+              Un estilo <code>Elevation-*</code> son cinco campos vinculados a variables. Cuatro cambian por
+              nivel; el quinto, el offset en X, es el mismo para los cinco.
+            </p>
+            <div data-el="anatomy"></div>
+
+            <div class="ty-note">
+              <strong>La luz del sistema es cenital:</strong> el offset en X es siempre 0. Una sombra desplazada
+              hacia un costado no pertenece a la rampa, aunque se vea bien en la pantalla donde se dibujó.
+            </div>
+
+            <h3>3 · Cómo se aplican</h3>
+            <p>
+              Los cinco campos de cada estilo están vinculados a variables. Editar un valor directamente en el
+              estilo lo desvincula del token y rompe la cadena Tier 1 → Tier 2 → estilo.
+            </p>
+            <div data-el="apply"></div>
+
+            <div class="ty-note ty-note--warn">
+              <strong>Lo que interrumpe la cadena:</strong> escribir un número en Blur, Spread o Position, o
+              cambiar el color del efecto a mano, desenlaza la variable. El componente se mantiene visualmente
+              igual y pasa la revisión, pero deja de heredar.
+            </div>
+          </section>
+
+          <section class="doc-section">
+            <h2 id="doc-practicas">Buenas y malas prácticas</h2>
+            <p>
+              Cuatro pares que contrastan el uso correcto de las elevations con el error equivalente. Casi todos
+              los errores se ven idénticos al original. El impacto aparece al cambiar la rampa, al rematizar por
+              mode o al auditar los bindings.
+            </p>
+
+            <article class="ty-pair">
+              <p class="ty-pair__eyebrow">01 · Siempre el estilo, nunca el valor</p>
+              <h3>Aplicar Elevation-md, no escribir 0 · 12 · 32 · -3</h3>
+              <p>
+                La sombra escrita a mano es indistinguible de la del estilo. La diferencia aparece cuando la rampa
+                cambia: el estilo se actualiza solo, el valor literal queda congelado y hay que buscarlo nodo por
+                nodo.
+              </p>
+              <div class="ty-pair__grid">
+                <div class="ty-pair__col ty-pair__col--do">
+                  <p class="ty-pair__label">Estilo de efecto aplicado</p>
+                  <div class="ty-pair__demo">
+                    <div class="el-demo">
+                      <div class="el-surface" style="box-shadow:0 12px 32px -3px rgba(152,170,192,0.24)">Dropdown</div>
+                    </div>
+                  </div>
+                  <p class="ty-pair__styles">Effects: Elevation-md</p>
+                  <p class="ty-pair__note">
+                    El nodo apunta al estilo. Cambiar la altura del nivel de panel es editar cuatro tokens.
+                  </p>
+                </div>
+                <div class="ty-pair__col ty-pair__col--dont">
+                  <p class="ty-pair__label">Drop shadow escrita a mano</p>
+                  <div class="ty-pair__demo">
+                    <div class="el-demo">
+                      <div class="el-surface" style="box-shadow:0 12px 32px -3px rgba(152,170,192,0.24)">Dropdown</div>
+                    </div>
+                  </div>
+                  <p class="ty-pair__styles">Drop shadow: X 0 · Y 12 · Blur 32 · Spread -3</p>
+                  <p class="ty-pair__note">
+                    El resultado es idéntico. Cuando la rampa se ajuste, este dropdown seguirá en 32 px de blur y
+                    no habrá forma de encontrarlo por búsqueda de estilo.
+                  </p>
+                </div>
+              </div>
+            </article>
+
+            <article class="ty-pair">
+              <p class="ty-pair__eyebrow">02 · Un nivel por capa</p>
+              <h3>No apilar dos elevaciones en padre e hijo directos</h3>
+              <p>
+                Dos sombras superpuestas no suman altura: suman ruido. El contenido interno de una superficie ya
+                elevada se separa con fondo, borde o espaciado, no con otra sombra.
+              </p>
+              <div class="ty-pair__grid">
+                <div class="ty-pair__col ty-pair__col--do">
+                  <p class="ty-pair__label">Elevación solo en el contenedor</p>
+                  <div class="ty-pair__demo">
+                    <div class="el-demo">
+                      <div class="el-nest" style="box-shadow:0 16px 48px -4px rgba(152,170,192,0.32)">
+                        <span class="el-nest__label">Modal</span>
+                        <div class="el-nest__inner" style="background:#f7f7f7">Contenido interno</div>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="ty-pair__styles">Modal: Elevation-lg · interior: sin efecto</p>
+                  <p class="ty-pair__note">
+                    Una sola sombra define el plano. El interior se distingue por su fondo, no por altura propia.
+                  </p>
+                </div>
+                <div class="ty-pair__col ty-pair__col--dont">
+                  <p class="ty-pair__label">Elevación en el padre y en el hijo</p>
+                  <div class="ty-pair__demo">
+                    <div class="el-demo">
+                      <div class="el-nest" style="box-shadow:0 16px 48px -4px rgba(152,170,192,0.32)">
+                        <span class="el-nest__label">Modal</span>
+                        <div class="el-nest__inner" style="box-shadow:0 12px 32px -3px rgba(152,170,192,0.24)">Contenido interno</div>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="ty-pair__styles">Modal: Elevation-lg · interior: Elevation-md</p>
+                  <p class="ty-pair__note">
+                    El bloque interno parece flotar dentro del modal. La jerarquía deja de leerse y el borde de la
+                    sombra interior ensucia la superficie.
+                  </p>
+                </div>
+              </div>
+            </article>
+
+            <article class="ty-pair">
+              <p class="ty-pair__eyebrow">03 · El nivel dice cuánto interrumpe</p>
+              <h3>La altura corresponde al rol, no al énfasis que se quiere dar</h3>
+              <p>
+                <code>Elevation-xl</code> es el techo de la rampa y está reservado para el overlay que ocupa la
+                pantalla. Usarlo en una card en reposo deja el resto de la interfaz sin escalones disponibles
+                hacia arriba.
+              </p>
+              <div class="ty-pair__grid">
+                <div class="ty-pair__col ty-pair__col--do">
+                  <p class="ty-pair__label">xs en la card, xl en el overlay</p>
+                  <div class="ty-pair__demo">
+                    <div class="el-demo">
+                      <div class="el-surface el-surface--muted" style="box-shadow:0 4px 12px -1px rgba(152,170,192,0.14)">Card</div>
+                      <div class="el-surface" style="box-shadow:0 24px 64px -6px rgba(152,170,192,0.42)">Overlay</div>
+                    </div>
+                  </div>
+                  <p class="ty-pair__styles">Card: Elevation-xs · Overlay: Elevation-xl</p>
+                  <p class="ty-pair__note">
+                    La distancia entre ambos comunica cuál de los dos bloquea la interacción.
+                  </p>
+                </div>
+                <div class="ty-pair__col ty-pair__col--dont">
+                  <p class="ty-pair__label">xl en todo</p>
+                  <div class="ty-pair__demo">
+                    <div class="el-demo">
+                      <div class="el-surface el-surface--muted" style="box-shadow:0 24px 64px -6px rgba(152,170,192,0.42)">Card</div>
+                      <div class="el-surface" style="box-shadow:0 24px 64px -6px rgba(152,170,192,0.42)">Overlay</div>
+                    </div>
+                  </div>
+                  <p class="ty-pair__styles">Card: Elevation-xl · Overlay: Elevation-xl</p>
+                  <p class="ty-pair__note">
+                    Con todo en el mismo plano la rampa deja de significar algo y no queda nivel para destacar lo
+                    que de verdad interrumpe.
+                  </p>
+                </div>
+              </div>
+            </article>
+
+            <article class="ty-pair">
+              <p class="ty-pair__eyebrow">04 · Scrim: color y blur van juntos</p>
+              <h3>Los dos tokens se aplican sobre el mismo elemento</h3>
+              <p>
+                <code>blur/background/scrim</code> todavía no tiene una propiedad compuesta con su color, así que
+                es fácil aplicar uno y olvidar el otro. Sin el desenfoque, el contenido de atrás sigue compitiendo
+                por la atención.
+              </p>
+              <div class="ty-pair__grid">
+                <div class="ty-pair__col ty-pair__col--do">
+                  <p class="ty-pair__label">Color translúcido + blur de fondo</p>
+                  <div class="ty-pair__demo">
+                    <div class="el-demo">
+                      <div class="el-scrim-demo">
+                        <div class="el-scrim-demo__bg" aria-hidden="true">
+                          <span class="el-scrim-demo__line el-scrim-demo__line--title" style="width:60%"></span>
+                          <span class="el-scrim-demo__line" style="width:100%"></span>
+                          <span class="el-scrim-demo__line" style="width:88%"></span>
+                          <span class="el-scrim-demo__line" style="width:94%"></span>
+                          <span class="el-scrim-demo__line" style="width:70%"></span>
+                        </div>
+                        <span class="el-scrim-demo__veil" style="background:rgba(11,22,36,0.6);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)"></span>
+                        <div class="el-scrim-demo__sheet" style="box-shadow:0 16px 48px -4px rgba(152,170,192,0.32)">Bottom sheet</div>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="ty-pair__styles">color/background/scrim + blur/background/scrim</p>
+                  <p class="ty-pair__note">
+                    El fondo se apaga y se desenfoca. El overlay queda como único plano legible.
+                  </p>
+                </div>
+                <div class="ty-pair__col ty-pair__col--dont">
+                  <p class="ty-pair__label">Solo el color, sin blur</p>
+                  <div class="ty-pair__demo">
+                    <div class="el-demo">
+                      <div class="el-scrim-demo">
+                        <div class="el-scrim-demo__bg" aria-hidden="true">
+                          <span class="el-scrim-demo__line el-scrim-demo__line--title" style="width:60%"></span>
+                          <span class="el-scrim-demo__line" style="width:100%"></span>
+                          <span class="el-scrim-demo__line" style="width:88%"></span>
+                          <span class="el-scrim-demo__line" style="width:94%"></span>
+                          <span class="el-scrim-demo__line" style="width:70%"></span>
+                        </div>
+                        <span class="el-scrim-demo__veil" style="background:rgba(11,22,36,0.6)"></span>
+                        <div class="el-scrim-demo__sheet" style="box-shadow:0 16px 48px -4px rgba(152,170,192,0.32)">Bottom sheet</div>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="ty-pair__styles">color/background/scrim, sin blur/background/scrim</p>
+                  <p class="ty-pair__note">
+                    El scrim queda a medio aplicar: el contenido de atrás se sigue leyendo a través del velo y la
+                    separación entre planos se pierde.
+                  </p>
+                </div>
+              </div>
+            </article>
           </section>
         </main>
         <aside id="page-toc"></aside>
@@ -44,5 +371,6 @@
   <script src="../assets/js/nav-data.js"></script>
   <script src="../assets/js/layout.js"></script>
   <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/elevations.js"></script>
 </body>
 </html>
