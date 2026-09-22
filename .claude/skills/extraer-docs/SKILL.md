@@ -74,7 +74,8 @@ El script ya resuelve:
 - la estructura `Frame · <Prop>` con sus tres `<text>` (nombre, tipo, descripción),
 - los tipos `VARIANT`/`TEXT`/`BOOLEAN` → `Variant`/`Text`/`Boolean` (Title Case, que es
   la convención del kit),
-- las entidades HTML (`&quot;`) y las comillas rectas → comillas angulares `«»`,
+- las entidades HTML (`&quot;`, `&#39;`) y las comillas rectas, simples o dobles,
+  → comillas angulares `«»`,
 - el subtítulo del encabezado de la leyenda.
 
 Si avisa que un frame tiene menos de 3 textos, míralo a mano: suele ser una propiedad

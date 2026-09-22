@@ -41,12 +41,53 @@
 
           <section class="doc-section">
             <h2 id="doc-resumen">Resumen</h2>
-            <p class="coming-soon">Documentación pendiente. Edita esta página para agregar contenido.</p>
+            <p>Dos familias de banner con propósitos distintos. <strong>Promotional Banner</strong> es el banner promocional genérico: badge, título, descripción, CTA e imagen. <strong>Membership Banner</strong> es el banner del Club, con logo de partner, lista de beneficios, selector de membresía y precio.</p>
+            <p>En Promotional, el eje <code>Size</code> cubre los tres anchos de escritorio; la versión móvil es un componente independiente equivalente a los tres. Membership tiene dos maestros —uno horizontal (<code>Size</code> × <code>Image Position</code>) y uno vertical (<code>Breakpoint</code>)— que comparten las mismas doce booleanas y el slot <code>Benefits List</code>.</p>
           </section>
 
           <section class="doc-section">
             <h2 id="doc-propiedades">Propiedades</h2>
-            <p class="coming-soon">Propiedades pendientes de documentar desde Figma.</p>
+            <h3>Promotional Banner</h3>
+            <p>Lo que se puede ajustar desde la instancia del banner.</p>
+            <div class="ty-table-wrap">
+              <table class="ty-table">
+                <thead>
+                  <tr><th>Propiedad</th><th>Tipo</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Image Position</strong></td><td><code>Variant</code></td><td class="ty-muted">Right ubica la imagen a la derecha y el bloque de texto a la izquierda. Left invierte la composición, dejando la imagen a la izquierda. Right es el valor por defecto.</td></tr>
+                  <tr><td><strong>Size</strong></td><td><code>Variant</code></td><td class="ty-muted">Large ocupa el ancho completo con mayor espacio para imagen y texto. Medium y Small reducen el banner a un formato más compacto, con menos espacio para la imagen. Large es el valor por defecto.</td></tr>
+                  <tr><td><strong>Show Badge</strong></td><td><code>Boolean</code></td><td class="ty-muted">Muestra la etiqueta superior sobre el título. Activado por defecto.</td></tr>
+                  <tr><td><strong>Show Button</strong></td><td><code>Boolean</code></td><td class="ty-muted">Muestra el botón de acción al final del bloque de texto. Activado por defecto.</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <h3>Membership Banner</h3>
+            <p>Lo que se puede ajustar desde la instancia del banner.</p>
+            <div class="ty-table-wrap">
+              <table class="ty-table">
+                <thead>
+                  <tr><th>Propiedad</th><th>Tipo</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Size</strong></td><td><code>Variant</code></td><td class="ty-muted">Large ocupa el ancho completo de escritorio en dos columnas holgadas. Medium reduce el ancho de la tarjeta, haciendo que los textos ocupen más líneas. Large es el valor por defecto.</td></tr>
+                  <tr><td><strong>Image Position</strong></td><td><code>Variant</code></td><td class="ty-muted">Left ubica el contenido a la izquierda y la imagen a la derecha. Right invierte la composición, dejando la imagen a la izquierda. Left es el valor por defecto.</td></tr>
+                  <tr><td><strong>Show Close Button</strong></td><td><code>Boolean</code></td><td class="ty-muted">Muestra el botón de cierre (ícono X) en la esquina superior derecha de la tarjeta. Activado por defecto.</td></tr>
+                  <tr><td><strong>Show Logo</strong></td><td><code>Boolean</code></td><td class="ty-muted">Muestra el logo de la marca aliada sobre el pretitle. Activado por defecto.</td></tr>
+                  <tr><td><strong>Show Info Tertiary</strong></td><td><code>Boolean</code></td><td class="ty-muted">Muestra la fila «¿Ya eres miembro?» bajo la selección de membresía, incluyendo su botón terciario. Activado por defecto.</td></tr>
+                  <tr><td><strong>Show Pretitle</strong></td><td><code>Boolean</code></td><td class="ty-muted">Muestra el texto superior en mayúsculas sobre el título principal. Activado por defecto.</td></tr>
+                  <tr><td><strong>Show Badge</strong></td><td><code>Boolean</code></td><td class="ty-muted">Muestra la etiqueta «Badge» en la esquina superior izquierda. Activado por defecto.</td></tr>
+                  <tr><td><strong>Show Description</strong></td><td><code>Boolean</code></td><td class="ty-muted">Muestra el párrafo descriptivo bajo el título principal. Activado por defecto.</td></tr>
+                  <tr><td><strong>Show Button Tertiary</strong></td><td><code>Boolean</code></td><td class="ty-muted">Muestra el enlace «Iniciar sesión» dentro de la fila «¿Ya eres miembro?». Activado por defecto.</td></tr>
+                  <tr><td><strong>Show Membership Options</strong></td><td><code>Boolean</code></td><td class="ty-muted">Muestra la sección «Elige tu membresía» completa, con ambas opciones de radio. Activado por defecto.</td></tr>
+                  <tr><td><strong>Show Items</strong></td><td><code>Boolean</code></td><td class="ty-muted">Muestra la lista de beneficios con check, independiente del contenido del slot «Benefits List». Activado por defecto.</td></tr>
+                  <tr><td><strong>Show Button Secondary</strong></td><td><code>Boolean</code></td><td class="ty-muted">Muestra el botón secundario de borde «Ser parte del club». Activado por defecto.</td></tr>
+                  <tr><td><strong>Show Price</strong></td><td><code>Boolean</code></td><td class="ty-muted">Muestra el bloque de precio («Precio desde» + monto). Activado por defecto.</td></tr>
+                  <tr><td><strong>Show Button Primary</strong></td><td><code>Boolean</code></td><td class="ty-muted">Muestra el botón primario relleno «Ser parte del club». Activado por defecto.</td></tr>
+                  <tr><td><strong>Benefits List</strong></td><td><code>Slot</code></td><td class="ty-muted">Recibe un set de componentes «Feature Item» para poblar la lista de beneficios. Su visibilidad depende de «Show Items».</td></tr>
+                </tbody>
+              </table>
+            </div>
           </section>
 
         </main>

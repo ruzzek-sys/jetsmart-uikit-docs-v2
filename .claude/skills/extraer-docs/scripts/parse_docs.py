@@ -46,8 +46,10 @@ def cargar(path):
 
 def limpiar(s):
     s = html.unescape(s)
-    # las comillas rectas de Figma se normalizan a comillas angulares del kit
+    # Figma entrecomilla con " o con ', según quién escribió la ficha; el kit usa «».
+    # Ambos patrones exigen el par, así que un apóstrofo suelto no se toca.
     s = re.sub(r'"([^"]+)"', r'«\1»', s)
+    s = re.sub(r"'([^']+)'", r'«\1»', s)
     return ' '.join(s.split())
 
 
