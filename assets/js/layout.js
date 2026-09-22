@@ -188,6 +188,9 @@
 
     headings.forEach(function (heading) {
       var li = document.createElement("li");
+      /* El nivel del heading permite anidar el índice en las páginas que
+         documentan varios componentes (h2 = componente, h3 = subsección). */
+      li.className = "page-toc__item page-toc__item--" + heading.tagName.toLowerCase();
       var link = document.createElement("a");
       link.href = "#" + heading.id;
       link.textContent = heading.textContent;

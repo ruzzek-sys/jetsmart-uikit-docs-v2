@@ -152,6 +152,28 @@ main {
   color: var(--js-brand);
 }
 
+/* Índice anidado: solo se activa en páginas que documentan varios componentes,
+   donde el h2 es el componente y los h3 sus subsecciones. */
+.page-toc__list:has(.page-toc__item--h3) .page-toc__item--h2 > a {
+  font-weight: 600;
+  color: var(--js-text);
+}
+
+.page-toc__list:has(.page-toc__item--h3) .page-toc__item--h2 + .page-toc__item--h2 > a,
+.page-toc__list .page-toc__item--h3 + .page-toc__item--h2 > a {
+  margin-top: 8px;
+}
+
+.page-toc__item--h3 > a {
+  padding: 4px 0 4px 12px;
+  border-left: 1px solid var(--js-border);
+  font-size: 12px;
+}
+
+.page-toc__item--h3 > a:hover {
+  border-left-color: var(--js-brand);
+}
+
 .sidebar-inner {
   padding: 20px 16px 32px;
 }
