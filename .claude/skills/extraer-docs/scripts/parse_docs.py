@@ -24,7 +24,9 @@ TIPOS = {
     'BOOLEAN': 'Boolean',
     'INSTANCE': 'Instance',
     'INSTANCE SWAP': 'Instance',
+    'SLOT': 'Slot',
 }
+# Un tipo no listado cae al fallback .title(), que resuelve bien los de una palabra.
 
 
 def cargar(path):

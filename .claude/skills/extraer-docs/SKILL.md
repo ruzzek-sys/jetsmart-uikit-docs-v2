@@ -88,12 +88,40 @@ leerla de una imagen:
    ```
 4. Lee `h.png` y transcribe el subtítulo.
 
+**El subtítulo no siempre habla de lo mismo.** Hay dos casos y cambian lo que escribes
+en el Resumen:
+
+- **Ejes de variante** — lo habitual. Ej. Alert Dialog: «Un solo eje de variante:
+  Breakpoint. Desktop y Mobile no son el mismo diseño reescalado…». Transcríbelo y
+  listo.
+- **Familia / composición** — cuando menciona «maestros», «partes», «compuesto» o
+  «familia». Ej. Accordion: «Cuatro maestros. El compuesto arriba y sus partes debajo,
+  en el orden en que se ensamblan». Acá el subtítulo describe de qué se arma el
+  componente, no cómo varía, y **hay que nombrar esos maestros**. Sácalos del
+  metadata, no los adivines:
+
+  ```bash
+  python -c "
+  import json,re
+  t=''.join(b['text'] for b in json.load(open(r'<ruta-metadata>',encoding='utf-8')))
+  i=t.find('<id-del-frame-Matriz>')
+  for m in re.finditer(r'<frame\s+id="([^"]+)"\s+name="([^"]+)"', t[i:i+20000]):
+      print(m.group(1), '|', m.group(2))
+  " | head -20
+  ```
+
+  Entre los primeros resultados están el compuesto y sus partes. Descarta los frames
+  auxiliares de la matriz (`Column Headers`, `lbl · …`, `nota slot · …`, `bracket …`).
+
 ### 5. Escribe las dos secciones
 
 **Resumen** — dos párrafos:
 1. Qué es el componente y para qué sirve, en una o dos frases. Redáctalo tú a partir
    de las propiedades y de la card; no lo inventes más allá de lo que muestran.
-2. La bajada del paso 4, con los nombres de props envueltos en `<code>`.
+2. La bajada del paso 4:
+   - si era de **ejes de variante**, transcríbela con los nombres de props en `<code>`;
+   - si era de **familia**, nombra el compuesto y sus partes en `<code>` y recién
+     después menciona qué recorren las columnas y las filas de la matriz.
 
 **Propiedades** — pega tal cual la salida del paso 3.
 
