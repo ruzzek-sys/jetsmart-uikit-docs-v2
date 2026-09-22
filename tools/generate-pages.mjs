@@ -30,8 +30,7 @@ const FILE_NAME = "Jetsmart-UI-Kit-v1.0";
 
 const COMPONENT_DOCS = [
   ["Resumen", "Documentación pendiente. Edita esta página para agregar contenido.", true],
-  ["Propiedades", "Propiedades pendientes de documentar desde Figma.", true],
-  ["Anatomía", "Anatomía pendiente de documentar desde Figma.", true]
+  ["Propiedades", "Propiedades pendientes de documentar desde Figma.", true]
 ];
 
 const FOUNDATION_DOCS = [
@@ -42,8 +41,7 @@ const FOUNDATION_DOCS = [
 
 const PATTERN_DOCS = [
   ["Resumen", "Pattern pendiente de documentar.", true],
-  ["Propiedades", "Propiedades pendientes de documentar desde Figma.", true],
-  ["Anatomía", "Anatomía pendiente de documentar desde Figma.", true]
+  ["Propiedades", "Propiedades pendientes de documentar desde Figma.", true]
 ];
 
 const FLOW_DOCS = [

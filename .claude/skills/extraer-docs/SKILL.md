@@ -1,6 +1,6 @@
 ---
 name: extraer-docs
-description: Extrae el section "Docs · <Componente>" de una página de Figma del Jetsmart UI Kit y rellena las secciones Resumen y Propiedades de la página HTML correspondiente. Úsalo cuando el usuario pase una página del kit más un link de Figma y pida documentar, extraer las propiedades, rellenar el resumen, o escriba /extraer-docs. No toca la sección Anatomía.
+description: Extrae el section "Docs · <Componente>" de una página de Figma del Jetsmart UI Kit y rellena las secciones Resumen y Propiedades de la página HTML correspondiente. Úsalo cuando el usuario pase una página del kit más un link de Figma y pida documentar, extraer las propiedades, rellenar el resumen, o escriba /extraer-docs.
 argument-hint: "[pagina.html] [link-figma]"
 ---
 
@@ -9,8 +9,8 @@ argument-hint: "[pagina.html] [link-figma]"
 Rellena **Resumen** y **Propiedades** de una página del kit con la información del
 section `Docs · <Componente>` que vive en la página de Figma del componente.
 
-**No toques la sección Anatomía.** Esa se documenta aparte y debe quedar con su
-placeholder intacto.
+Las páginas de componente tienen exactamente dos secciones: **Resumen** y
+**Propiedades**. No agregues ninguna otra.
 
 ## Argumentos
 
@@ -154,11 +154,6 @@ queda así:
               <table class="ty-table">…</table>
             </div>
           </section>
-
-          <section class="doc-section">
-            <h2 id="doc-anatomia">Anatomía</h2>
-            <p class="coming-soon">Anatomía pendiente de documentar desde Figma.</p>
-          </section>
 ```
 
 **Cuidado con los ejes de la matriz:** a veces el rótulo del eje no coincide con el
@@ -180,16 +175,16 @@ panel que ve el diseñador. Las descripciones van en español, copiadas textualm
 ```
 
 Recorta con PIL y mira el resultado. Confirma que:
-- Resumen y Propiedades tienen contenido y Anatomía sigue con su placeholder,
+- Resumen y Propiedades tienen contenido y no quedó ningún `coming-soon`,
 - la tabla tiene tantas filas como propiedades (`grep -c '<tr>'` = props + 1),
-- el TOC lateral lista las tres secciones.
+- el TOC lateral lista las dos secciones.
 
 El iframe del Live Preview sale en blanco en headless — es normal, no es un error.
 
 ## Convenciones del kit que debes respetar
 
-- Títulos de sección en español: **Resumen**, **Propiedades**, **Anatomía**, con ids
-  `doc-resumen`, `doc-propiedades`, `doc-anatomia`.
+- Títulos de sección en español: **Resumen** y **Propiedades**, con ids
+  `doc-resumen` y `doc-propiedades`. No hay más secciones en una página de componente.
 - Tablas con `.ty-table-wrap` > `.ty-table`, descripciones en `<td class="ty-muted">`,
   tipos en `<code>`.
 - Nada de tooltips en hover: las etiquetas y tablas se leen directo.
@@ -197,8 +192,7 @@ El iframe del Live Preview sale en blanco en headless — es normal, no es un er
 
 ## Resultado
 
-Cierra reportando: qué componente documentaste, cuántas propiedades entraron y que
-Anatomía quedó pendiente.
+Cierra reportando: qué componente documentaste y cuántas propiedades entraron.
 
 No hace falta proteger la página de `tools/generate-pages.mjs`: el generador no
 sobrescribe archivos que ya existen. Solo `--force` lo haría, y eso avisa en pantalla.
