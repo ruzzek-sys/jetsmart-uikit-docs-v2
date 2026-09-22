@@ -34,12 +34,26 @@
 
           <section class="doc-section">
             <h2 id="doc-resumen">Resumen</h2>
-            <p class="coming-soon">Documentación pendiente. Edita esta página para agregar contenido.</p>
+            <p>Panel plegable que agrupa contenido bajo un encabezado con resumen. Colapsado muestra solo ese encabezado; expandido revela el contenido central y, opcionalmente, un pie con el resumen de la selección y los botones de acción. El contenido central es un slot, así que puede alojar cualquier capa o instancia sin salir de la variante.</p>
+            <p>Familia de cuatro maestros: el compuesto <code>Accordion</code> y sus partes —<code>Accordion Header Desktop</code>, <code>Accordion Header Mobile</code> y <code>Action Bar Footer</code>— en el orden en que se ensamblan. En la matriz, las columnas recorren <code>Breakpoint</code> y las filas <code>Expansion</code> dentro de cada banda.</p>
           </section>
 
           <section class="doc-section">
             <h2 id="doc-propiedades">Propiedades</h2>
-            <p class="coming-soon">Propiedades pendientes de documentar desde Figma.</p>
+            <p>Lo que se puede ajustar en cada instancia del accordion.</p>
+            <div class="ty-table-wrap">
+              <table class="ty-table">
+                <thead>
+                  <tr><th>Propiedad</th><th>Tipo</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Breakpoint</strong></td><td><code>Variant</code></td><td class="ty-muted">Adapta el layout del encabezado y las acciones al ancho de pantalla. Desktop alinea los botones en fila; Mobile los apila en columna. Desktop es el valor por defecto.</td></tr>
+                  <tr><td><strong>Expansion</strong></td><td><code>Variant</code></td><td class="ty-muted">Collapsed muestra solo el encabezado con el resumen y la flecha cerrada. Expanded revela el contenido central y el pie con la selección y las acciones. Collapsed es el valor por defecto.</td></tr>
+                  <tr><td><strong>Show Footer</strong></td><td><code>Boolean</code></td><td class="ty-muted">Muestra el pie con el resumen de la selección y los botones de acción cuando el accordion está expandido. Activado por defecto.</td></tr>
+                  <tr><td><strong>Content</strong></td><td><code>Slot</code></td><td class="ty-muted">Reemplaza el contenido central del accordion por cualquier capa o instancia, sin salir de la variante ni del breakpoint. Vacío por defecto.</td></tr>
+                </tbody>
+              </table>
+            </div>
           </section>
 
           <section class="doc-section">
