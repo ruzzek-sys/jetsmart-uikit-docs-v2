@@ -2,7 +2,11 @@
  * Genera las páginas placeholder del sitio y assets/js/nav-data.js a partir del
  * manifiesto de páginas del archivo de Figma "Jetsmart UI Kit v1.0".
  *
- * Uso: node tools/generate-pages.mjs
+ * Uso: node tools/generate-pages.mjs            crea solo las páginas que faltan
+ *      node tools/generate-pages.mjs --force    reescribe TODAS desde la plantilla
+ *
+ * El generador no sobrescribe páginas existentes: una vez creado el archivo, lo que
+ * escribas ahí a mano queda. `nav-data.js` sí se regenera siempre, es derivado.
  *
  * Campos de cada item:
  *   label  -> título de la página (igual al nombre de la página en Figma)
@@ -12,13 +16,12 @@
  *   live   -> false cuando la página no tiene frame "Live Preview" y `nodes`
  *             apunta a otro frame de esa misma página como provisional
  *   id     -> data-page-id, solo cuando no puede ser el slug (colisiones)
- *   custom -> true cuando la página ya está documentada a mano: sigue apareciendo
- *             en el nav pero el generador NO reescribe su archivo html
  *
  * Las secciones con `preview: false` (Foundations) se generan sin iframe.
  */
 
 import { mkdir, writeFile, rm } from "node:fs/promises";
+import { existsSync } from "node:fs";
 import path from "node:path";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
@@ -62,32 +65,28 @@ const SECTIONS = [
         slug: "typography",
         desc: "Dos familias, una escala de 15 pasos y 8 escalas semánticas que resuelven todo el texto del kit.",
         nodes: ["5405:113123"],
-        live: false,
-        custom: true
+        live: false
       },
       {
         label: "Colors",
         slug: "colors",
         desc: "Nueve rampas primitivas, 77 tokens semánticos y 18 parejas de fondo y contenido ya validadas por contraste.",
         nodes: ["5520:1926"],
-        live: false,
-        custom: true
+        live: false
       },
       {
         label: "Spacing",
         slug: "spacing",
         desc: "19 primitivos en múltiplos de 4 px, 6 familias semánticas y un grid de 3 breakpoints que ordenan el espacio del kit.",
         nodes: ["5572:2054"],
-        live: false,
-        custom: true
+        live: false
       },
       {
         label: "Radius & Width",
         slug: "radius-width",
         desc: "21 primitivos de radio, 8 roles semánticos, 9 grosores de borde y 7 tokens de stroke que definen la forma del kit.",
         nodes: ["5590:2050"],
-        live: false,
-        custom: true
+        live: false
       },
       { label: "Elevations", slug: "elevations", desc: "Sombras y niveles de elevación.", nodes: ["5824:1928"], live: false },
       {
@@ -95,8 +94,7 @@ const SECTIONS = [
         slug: "icons",
         desc: "Dos librerías enlazadas en Figma: Font Awesome 7 para íconos de interfaz y Round World Flags para banderas circulares.",
         nodes: ["5564:123884"],
-        live: false,
-        custom: true
+        live: false
       }
     ]
   },
@@ -108,8 +106,8 @@ const SECTIONS = [
     docs: COMPONENT_DOCS,
     items: [
       { label: "Accordion", slug: "accordion", desc: "Contenedor colapsable para agrupar contenido extenso.", nodes: ["5167:54214"], live: true },
-      { label: "Alert Dialog", slug: "alert-dialog", desc: "Diálogo modal para confirmaciones y avisos críticos.", nodes: ["3588:81707"], live: true, custom: true },
-      { label: "Action Card", slug: "action-card", desc: "Tarjeta con una acción principal destacada.", nodes: ["5167:54342"], live: true, custom: true },
+      { label: "Alert Dialog", slug: "alert-dialog", desc: "Diálogo modal para confirmaciones y avisos críticos.", nodes: ["3588:81707"], live: true },
+      { label: "Action Card", slug: "action-card", desc: "Tarjeta con una acción principal destacada.", nodes: ["5167:54342"], live: true },
       { label: "Avatar Selector", slug: "avatar-selector", desc: "Selector de avatar para perfiles de usuario.", nodes: ["5167:54454", "5167:54480"], live: true },
       { label: "Badge", slug: "badge", desc: "Etiqueta compacta para estados y conteos.", nodes: ["5167:54501"], live: true },
       { label: "Banner", slug: "banner", desc: "Mensaje destacado de ancho completo.", nodes: ["5167:55805", "5167:55812"], live: true },
@@ -172,7 +170,7 @@ const SECTIONS = [
     docs: COMPONENT_DOCS,
     items: [
       { label: "Action Panel", slug: "action-panel", desc: "Panel de acciones contextuales del producto.", nodes: ["6187:2321"], live: false },
-      { label: "Add Baggage Card", slug: "add-baggage-card", desc: "Tarjeta para agregar equipaje.", nodes: ["6186:135425"], live: true, custom: true },
+      { label: "Add Baggage Card", slug: "add-baggage-card", desc: "Tarjeta para agregar equipaje.", nodes: ["6186:135425"], live: true },
       { label: "Add-on Selector", slug: "add-on-selector", desc: "Selector de servicios adicionales.", nodes: ["5469:12321"], live: true },
       { label: "Boarding Pass Card", slug: "boarding-pass-card", desc: "Tarjeta de pase de abordar.", nodes: ["6186:138537"], live: true },
       { label: "Bundle Card", slug: "bundle-card", desc: "Tarjeta de paquete de servicios.", nodes: ["6186:139756"], live: true },
@@ -399,29 +397,46 @@ window.JETSMART_NAV.findItemById = function (pageId) {
 `;
 }
 
-let count = 0;
-let skipped = 0;
+// Por defecto el generador NUNCA sobrescribe una página que ya existe: solo crea las
+// que faltan. Así documentar una página a mano no exige marcarla de ninguna forma.
+// Con --force vuelve al comportamiento antiguo y reescribe todo desde la plantilla.
+const FORCE = process.argv.includes("--force");
+
+let creadas = 0;
+let conservadas = 0;
+const nuevas = [];
 
 for (const section of SECTIONS) {
   await mkdir(path.join(ROOT, section.dir), { recursive: true });
 
   for (const item of section.items) {
-    if (item.custom) {
-      skipped++;
+    const rel = `${section.dir}/${item.slug}.html`;
+    if (!FORCE && existsSync(path.join(ROOT, rel))) {
+      conservadas++;
       continue;
     }
-    await writeFile(path.join(ROOT, section.dir, `${item.slug}.html`), pageHtml(section, item), "utf8");
-    count++;
+    await writeFile(path.join(ROOT, rel), pageHtml(section, item), "utf8");
+    creadas++;
+    nuevas.push(rel);
   }
 }
 
+// nav-data.js sí se regenera siempre: es un archivo derivado, no se edita a mano.
 await writeFile(path.join(ROOT, "assets/js/nav-data.js"), navDataJs(), "utf8");
 
 for (const relPath of STALE_FILES) {
   await rm(path.join(ROOT, relPath), { force: true });
 }
 
-console.log(`Páginas generadas: ${count} (${skipped} documentadas a mano, sin regenerar)`);
+if (FORCE) {
+  console.log(`--force: ${creadas} páginas reescritas desde la plantilla.`);
+  console.log("  Revisa `git status`: esto pisa cualquier documentación escrita a mano.");
+} else {
+  console.log(`Páginas creadas: ${creadas} · conservadas sin tocar: ${conservadas}`);
+  for (const rel of nuevas) {
+    console.log(`  + ${rel}`);
+  }
+}
 for (const section of SECTIONS) {
   const preview = section.preview ? "con preview" : "sin preview";
   console.log(`  ${section.label}: ${section.items.length} (${preview}, ${section.docs.length} secciones doc)`);

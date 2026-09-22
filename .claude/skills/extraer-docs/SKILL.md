@@ -38,8 +38,8 @@ grep -c 'coming-soon' components/<slug>.html
 ```
 
 Si Resumen o Propiedades ya tienen contenido real (no `coming-soon`), **para y
-pregunta** antes de sobrescribir. Este proyecto no usa git: lo que borres no se
-recupera.
+pregunta** antes de sobrescribir. El proyecto está en git, así que se puede revertir,
+pero igual conviene confirmar antes de pisar trabajo ajeno.
 
 ### 2. Baja el metadata del nodo
 
@@ -125,28 +125,7 @@ Los nombres de las propiedades van **en inglés**, tal como aparecen en Figma
 (`Show Button Secondary`, no «Mostrar botón secundario»): tienen que calzar con el
 panel que ve el diseñador. Las descripciones van en español, copiadas textualmente.
 
-### 6. Protege la página del generador
-
-`tools/generate-pages.mjs` reescribe todas las páginas en cada corrida y borraría lo
-que acabas de escribir. Marca la entrada como `custom: true`:
-
-```bash
-python - <<'PY'
-p='tools/generate-pages.mjs'
-s=open(p,encoding='utf-8').read()
-out=[]
-for line in s.split('\n'):
-    if 'slug: "<slug>"' in line and 'custom' not in line:
-        line=line.rstrip()
-        assert line.endswith('},'), line
-        line=line[:-2]+', custom: true },'
-    out.append(line)
-open(p,'w',encoding='utf-8').write('\n'.join(out))
-PY
-node --check tools/generate-pages.mjs
-```
-
-### 7. Verifica en el navegador
+### 6. Verifica en el navegador
 
 ```bash
 "/c/Program Files (x86)/Microsoft/Edge/Application/msedge.exe" --headless=new \
@@ -173,5 +152,8 @@ El iframe del Live Preview sale en blanco en headless — es normal, no es un er
 
 ## Resultado
 
-Cierra reportando: qué componente documentaste, cuántas propiedades entraron, que
-Anatomía quedó pendiente, y si marcaste la página como `custom`.
+Cierra reportando: qué componente documentaste, cuántas propiedades entraron y que
+Anatomía quedó pendiente.
+
+No hace falta proteger la página de `tools/generate-pages.mjs`: el generador no
+sobrescribe archivos que ya existen. Solo `--force` lo haría, y eso avisa en pantalla.
