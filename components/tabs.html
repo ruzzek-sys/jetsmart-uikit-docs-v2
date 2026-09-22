@@ -18,28 +18,192 @@
           <header class="page-header">
             <p class="page-header__eyebrow">Components</p>
             <h1>Tabs</h1>
-            <p>Pestañas para alternar entre vistas.</p>
+            <p>Cinco componentes para alternar entre vistas y filtrar contenido: el chip base y las cuatro barras que se arman con él. Cada uno tiene su propio maestro, su matriz de variantes y sus propiedades.</p>
           </header>
 
-          <section class="figma-preview">
-            <p class="figma-preview__label">Preview · frame provisional</p>
-            <div class="figma-preview__frame">
-              <iframe
-                title="Tabs - Figma preview"
-                src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FdKd6jNGAnng8hIV5MS4Avd%2FJetsmart-UI-Kit-v1.0%3Fnode-id%3D4581-742"
-                allowfullscreen>
-              </iframe>
+          <section class="doc-section">
+            <h2 id="doc-chips">Chips</h2>
+            <p>La píldora base del sistema de tabs: ícono opcional, texto y tres estados. Es el átomo con el que se construyen Toggle Tab, Tab Bar / Searchbox y Tab Bar Filter.</p>
+
+            <div class="figma-preview">
+              <p class="figma-preview__label">Live Preview</p>
+              <div class="figma-preview__frame">
+                <iframe
+                  title="Chips - Figma preview"
+                  src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FdKd6jNGAnng8hIV5MS4Avd%2FJetsmart-UI-Kit-v1.0%3Fnode-id%3D7350-106944"
+                  loading="lazy"
+                  allowfullscreen>
+                </iframe>
+              </div>
+            </div>
+
+            <h3 id="doc-chips-resumen">Resumen</h3>
+            <p>Botón en forma de píldora que representa una opción dentro de un grupo: lleva un label y hasta dos íconos, uno a cada lado. No navega por sí solo; su sentido aparece cuando se repite dentro de una barra, donde uno de los chips queda seleccionado y el resto no.</p>
+            <p>Dos ejes de variante: <code>Size</code> y <code>State</code>, nueve variantes en total. <code>Size</code> cubre los tres tamaños del kit (Large, Medium, Small), que cambian alto, tipografía, tamaño de ícono y padding. <code>State</code> distingue el chip seleccionado del no seleccionado y agrega una tercera forma sin fondo ni borde, Unselected Ghost.</p>
+
+            <h3 id="doc-chips-propiedades">Propiedades</h3>
+            <p>Lo que puedes ajustar en cada instancia del Chip sin salir de la variante.</p>
+            <div class="ty-table-wrap">
+              <table class="ty-table">
+                <thead>
+                  <tr><th>Propiedad</th><th>Tipo</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Size</strong></td><td><code>Variant</code></td><td class="ty-muted">Large mide 241×52 (texto 18px, ícono 20px, padding horizontal 28px). Medium reduce a 204×44 (texto 16px, ícono 16px, padding 20px). Small baja a 174×36. El gap entre ícono y texto es 8px en los tres. Large es el valor por defecto.</td></tr>
+                  <tr><td><strong>State</strong></td><td><code>Variant</code></td><td class="ty-muted">Selected usa fondo color/background/brand-tertiary y texto blanco. Unselected usa fondo color/background/primary con borde color/border/secondary y texto oscuro. Unselected Ghost quita fondo y borde, dejando solo el texto y el ícono. Selected es el valor por defecto.</td></tr>
+                  <tr><td><strong>Show Icon Left</strong></td><td><code>Boolean</code></td><td class="ty-muted">Muestra un ícono a la izquierda del texto (por defecto la flecha «arrow-right»). Activado por defecto.</td></tr>
+                  <tr><td><strong>Show Icon Right</strong></td><td><code>Boolean</code></td><td class="ty-muted">Muestra un ícono a la derecha del texto. Desactivado por defecto.</td></tr>
+                  <tr><td><strong>Label</strong></td><td><code>Text</code></td><td class="ty-muted">Texto del chip. Valor por defecto: «Administra tu vuelo».</td></tr>
+                </tbody>
+              </table>
             </div>
           </section>
 
           <section class="doc-section">
-            <h2 id="doc-resumen">Resumen</h2>
-            <p class="coming-soon">Documentación pendiente. Edita esta página para agregar contenido.</p>
+            <h2 id="doc-toggle-tab">Toggle Tab</h2>
+            <p>Barra segmentada: hasta cuatro opciones dentro de un mismo contenedor redondeado, con una sola activa. Se usa para alternar entre vistas equivalentes de un mismo contenido.</p>
+
+            <div class="figma-preview">
+              <p class="figma-preview__label">Live Preview</p>
+              <div class="figma-preview__frame">
+                <iframe
+                  title="Toggle Tab - Figma preview"
+                  src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FdKd6jNGAnng8hIV5MS4Avd%2FJetsmart-UI-Kit-v1.0%3Fnode-id%3D6617-86190"
+                  loading="lazy"
+                  allowfullscreen>
+                </iframe>
+              </div>
+            </div>
+
+            <h3 id="doc-toggle-tab-resumen">Resumen</h3>
+            <p>Grupo de hasta cuatro ítems encerrados en un contenedor de ancho fijo (636px): el ítem activo se rellena con el color de marca y los demás quedan sobre el fondo del contenedor. A diferencia de Tab Bar, los ítems no se leen como piezas sueltas sino como un único control segmentado.</p>
+            <p>Dos ejes de variante: <code>Breakpoint</code> y <code>State</code>, ocho variantes en total. <code>Breakpoint</code> ajusta el alto de la fila y el tamaño del texto entre escritorio y móvil; <code>State</code> determina cuál de los cuatro ítems está activo. La cantidad de ítems visibles no es un eje: se controla con las cuatro booleanas <code>Show Item</code>.</p>
+
+            <h3 id="doc-toggle-tab-propiedades">Propiedades</h3>
+            <p>Lo que puedes ajustar en cada instancia del Toggle Tab sin salir de la variante.</p>
+            <div class="ty-table-wrap">
+              <table class="ty-table">
+                <thead>
+                  <tr><th>Propiedad</th><th>Tipo</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Breakpoint</strong></td><td><code>Variant</code></td><td class="ty-muted">Desktop usa texto 14px y fila de 44px de alto. Mobile sube el texto a 16px y la fila a 52px. El ancho es fijo en 636px en ambos. Desktop es el valor por defecto.</td></tr>
+                  <tr><td><strong>State</strong></td><td><code>Variant</code></td><td class="ty-muted">Determina cuál de los 4 chips se muestra activo (con el fondo de marca), mientras los demás quedan en su estilo neutro. First Item es el valor por defecto.</td></tr>
+                  <tr><td><strong>Show Item 1</strong></td><td><code>Boolean</code></td><td class="ty-muted">Muestra u oculta el primer chip (Chip 1) de la barra. Activado por defecto.</td></tr>
+                  <tr><td><strong>Show Item 2</strong></td><td><code>Boolean</code></td><td class="ty-muted">Muestra u oculta el segundo chip (Chip 2) de la barra. Activado por defecto.</td></tr>
+                  <tr><td><strong>Show Item 3</strong></td><td><code>Boolean</code></td><td class="ty-muted">Muestra u oculta el tercer chip (Chip 3) de la barra. Activado por defecto.</td></tr>
+                  <tr><td><strong>Show Item 4</strong></td><td><code>Boolean</code></td><td class="ty-muted">Muestra u oculta el cuarto chip (Chip 4) de la barra. Activado por defecto.</td></tr>
+                </tbody>
+              </table>
+            </div>
           </section>
 
           <section class="doc-section">
-            <h2 id="doc-propiedades">Propiedades</h2>
-            <p class="coming-soon">Propiedades pendientes de documentar desde Figma.</p>
+            <h2 id="doc-tab-bar-searchbox">Tab Bar / Searchbox</h2>
+            <p>Selector del tipo de búsqueda sobre el buscador: Vuelos, Administra tu vuelo, Check-in y Hoteles, cada uno con su ícono. Los chips van sueltos, sin contenedor común.</p>
+
+            <div class="figma-preview">
+              <p class="figma-preview__label">Live Preview</p>
+              <div class="figma-preview__frame">
+                <iframe
+                  title="Tab Bar Searchbox - Figma preview"
+                  src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FdKd6jNGAnng8hIV5MS4Avd%2FJetsmart-UI-Kit-v1.0%3Fnode-id%3D7350-106892"
+                  loading="lazy"
+                  allowfullscreen>
+                </iframe>
+              </div>
+            </div>
+
+            <h3 id="doc-tab-bar-searchbox-resumen">Resumen</h3>
+            <p>Fila de hasta cuatro chips con ícono que cambia el contenido del buscador. Cada chip es una instancia de <code>Chips</code>: el seleccionado va relleno en color de marca y el resto queda sobre fondo blanco con borde.</p>
+            <p>Dos ejes de variante: <code>Breakpoint</code> y <code>Selected</code>, ocho variantes en total. <code>Breakpoint</code> cambia el tamaño de los chips (Large en escritorio, Medium en móvil) y el ancho total de la barra; <code>Selected</code> determina cuál de los cuatro está activo. Los dos primeros chips no se pueden ocultar; el tercero y el cuarto tienen su propia booleana.</p>
+
+            <h3 id="doc-tab-bar-searchbox-propiedades">Propiedades</h3>
+            <p>Lo que puedes ajustar en cada instancia del Tab Bar / Searchbox sin salir de la variante.</p>
+            <div class="ty-table-wrap">
+              <table class="ty-table">
+                <thead>
+                  <tr><th>Propiedad</th><th>Tipo</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Breakpoint</strong></td><td><code>Variant</code></td><td class="ty-muted">Desktop usa chips Large (52px alto, texto 18px, ícono 20px, 718px de ancho total). Mobile cambia a chips Medium (44px alto, texto 16px, ícono 16px, 605px de ancho). El gap entre chips es 12px en ambos. Desktop es el valor por defecto.</td></tr>
+                  <tr><td><strong>Selected</strong></td><td><code>Variant</code></td><td class="ty-muted">Determina cuál de los 4 chips (Vuelos, Administra tu vuelo, Check-in, Hoteles) se muestra en estado seleccionado, mientras los demás quedan neutros. First es el valor por defecto.</td></tr>
+                  <tr><td><strong>Show Third</strong></td><td><code>Boolean</code></td><td class="ty-muted">Muestra u oculta el tercer chip, «Check-in». Los chips 1 y 2 (Vuelos, Administra tu vuelo) no tienen booleano propio: siempre están visibles. Activado por defecto.</td></tr>
+                  <tr><td><strong>Show Fourth</strong></td><td><code>Boolean</code></td><td class="ty-muted">Muestra u oculta el cuarto chip, «Hoteles». Activado por defecto.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="doc-section">
+            <h2 id="doc-tab-bar-filter">Tab Bar Filter</h2>
+            <p>Fila de seis filtros de contenido —Todos, Nacionales, Internacionales, Playa, Naturaleza y Urbano— con un divisor que separa «Todos» del resto.</p>
+
+            <div class="figma-preview">
+              <p class="figma-preview__label">Live Preview</p>
+              <div class="figma-preview__frame">
+                <iframe
+                  title="Tab Bar Filter - Figma preview"
+                  src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FdKd6jNGAnng8hIV5MS4Avd%2FJetsmart-UI-Kit-v1.0%3Fnode-id%3D6617-87408"
+                  loading="lazy"
+                  allowfullscreen>
+                </iframe>
+              </div>
+            </div>
+
+            <h3 id="doc-tab-bar-filter-resumen">Resumen</h3>
+            <p>Barra de filtros para acotar un listado de destinos. Se arma con seis chips Medium de 44px, separados por 8px, sobre un ancho total fijo de 832px. El divisor vertical después del primer chip marca que «Todos» es la opción que anula a las demás.</p>
+            <p>Un solo eje de variante: <code>Selected</code>, con seis valores —uno por chip— y ninguna versión de móvil. La cantidad de filtros no es configurable: la única booleana de la instancia es la del divisor.</p>
+
+            <h3 id="doc-tab-bar-filter-propiedades">Propiedades</h3>
+            <p>Lo que puedes ajustar en cada instancia del Tab Bar Filter sin salir de la variante.</p>
+            <div class="ty-table-wrap">
+              <table class="ty-table">
+                <thead>
+                  <tr><th>Propiedad</th><th>Tipo</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Selected</strong></td><td><code>Variant</code></td><td class="ty-muted">Determina cuál de los 6 chips (Todos, Nacionales, Internacionales, Playa, Naturaleza, Urbano) se muestra en estado Selected, mientras el resto queda Unselected. Todos son chips Medium (44px, texto 16px, ícono 16px), con 8px de gap y 832px de ancho total fijo. Option 1 (Todos) es el valor por defecto.</td></tr>
+                  <tr><td><strong>Show Divider</strong></td><td><code>Boolean</code></td><td class="ty-muted">Muestra la línea vertical que separa el primer chip («Todos») del resto de la barra. Activado por defecto.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="doc-section">
+            <h2 id="doc-tab-underline">Tab Underline Item</h2>
+            <p>Ítem de tramo de vuelo: sentido, contador, origen, destino y fecha, con un subrayado que marca el tramo activo. Es el único de los cinco que no se arma con chips.</p>
+
+            <div class="figma-preview">
+              <p class="figma-preview__label">Live Preview</p>
+              <div class="figma-preview__frame">
+                <iframe
+                  title="Tab Underline Item - Figma preview"
+                  src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FdKd6jNGAnng8hIV5MS4Avd%2FJetsmart-UI-Kit-v1.0%3Fnode-id%3D6617-87480"
+                  loading="lazy"
+                  allowfullscreen>
+                </iframe>
+              </div>
+            </div>
+
+            <h3 id="doc-tab-underline-resumen">Resumen</h3>
+            <p>Pestaña de texto para recorrer los tramos de un itinerario. Cada ítem mide 319×46 y muestra dos líneas: arriba el sentido del vuelo con su contador (IDA · 1/3), abajo la ruta y la fecha. El tramo activo se marca con un subrayado de 2px; el resto queda sin remarcar.</p>
+            <p>Un solo eje de variante: <code>Selected</code>, con dos valores. La selección se resuelve ítem por ítem, no desde un contenedor: una barra de tres tramos son tres instancias, y solo una de ellas va en <code>True</code>. El contenido de cada tramo se escribe en la instancia.</p>
+
+            <h3 id="doc-tab-underline-propiedades">Propiedades</h3>
+            <p>Lo que puedes ajustar en cada instancia del Tab Underline Item sin salir de la variante.</p>
+            <div class="ty-table-wrap">
+              <table class="ty-table">
+                <thead>
+                  <tr><th>Propiedad</th><th>Tipo</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Selected</strong></td><td><code>Variant</code></td><td class="ty-muted">True agrega un subrayado inferior de 2px en color/border/brand-tertiary bajo todo el bloque, marcando el tramo activo. False lo quita, dejando el mismo contenido sin remarcar. Ambos miden 319×46. True es el valor por defecto.</td></tr>
+                  <tr><td><strong>Step</strong></td><td><code>Text</code></td><td class="ty-muted">Contador de tramo, a la derecha del separador (ej. «1/3»). Valor por defecto: «1/3».</td></tr>
+                  <tr><td><strong>Flight Direction</strong></td><td><code>Text</code></td><td class="ty-muted">Sentido del vuelo, a la izquierda del separador (ej. «IDA» o «VUELTA»). Valor por defecto: «IDA».</td></tr>
+                </tbody>
+              </table>
+            </div>
           </section>
 
         </main>

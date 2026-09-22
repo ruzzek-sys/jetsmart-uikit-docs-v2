@@ -152,7 +152,7 @@ const SECTIONS = [
       { label: "Step Bar", slug: "step-bar", desc: "Barra de pasos de un flujo.", nodes: ["6065:116934"], live: true },
       { label: "Stepper", slug: "stepper", desc: "Indicador de avance por etapas.", nodes: ["6567:81598"], live: true },
       { label: "Table", slug: "table", desc: "Tabla de datos.", nodes: ["6567:84339"], live: true },
-      { label: "Tabs", slug: "tabs", desc: "Pestañas para alternar entre vistas.", nodes: ["4581:742"], live: false },
+      { label: "Tabs", slug: "tabs", desc: "Chips y barras de pestañas para alternar entre vistas.", nodes: ["7350:106944", "6617:86190", "7350:106892", "6617:87408", "6617:87480"], live: true },
       { label: "Timeline", slug: "timeline", desc: "Línea de tiempo de eventos.", nodes: ["6065:117652"], live: true },
       { label: "Toggle", slug: "toggle", desc: "Interruptor de encendido y apagado.", nodes: ["6065:117797"], live: true },
       { label: "Toggle Card", slug: "toggle-card", desc: "Tarjeta con interruptor integrado.", nodes: ["6077:118393"], live: true },
@@ -267,6 +267,7 @@ function previewSection(item) {
               <iframe
                 title="${escapeHtml(item.label)} - Figma preview${item.nodes.length > 1 ? ` ${index + 1}` : ""}"
                 src="${embedUrl(nodeId)}"
+                loading="lazy"
                 allowfullscreen>
               </iframe>
             </div>`

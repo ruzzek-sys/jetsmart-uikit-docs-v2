@@ -68,7 +68,7 @@ window.JETSMART_NAV = {
         { id: "step-bar", label: "Step Bar", href: "components/step-bar.html", figmaNodeId: "6065:116934" },
         { id: "stepper", label: "Stepper", href: "components/stepper.html", figmaNodeId: "6567:81598" },
         { id: "table", label: "Table", href: "components/table.html", figmaNodeId: "6567:84339" },
-        { id: "tabs", label: "Tabs", href: "components/tabs.html", figmaNodeId: "4581:742" },
+        { id: "tabs", label: "Tabs", href: "components/tabs.html", figmaNodeId: "7350:106944", figmaNodeIds: ["7350:106944","6617:86190","7350:106892","6617:87408","6617:87480"] },
         { id: "timeline", label: "Timeline", href: "components/timeline.html", figmaNodeId: "6065:117652" },
         { id: "toggle", label: "Toggle", href: "components/toggle.html", figmaNodeId: "6065:117797" },
         { id: "toggle-card", label: "Toggle Card", href: "components/toggle-card.html", figmaNodeId: "6077:118393" },
