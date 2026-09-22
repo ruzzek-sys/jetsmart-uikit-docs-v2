@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Getting started - JetSmart UI Kit</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="assets/css/custom.css">
+</head>
+<body data-page-id="home">
+  <div id="sidebar-overlay" aria-hidden="true"></div>
+  <div id="app-shell">
+    <aside id="sidebar"></aside>
+    <div class="main-column">
+      <header id="topbar"></header>
+      <div class="content-wrap">
+        <main>
+          <header class="page-header">
+            <p class="page-header__eyebrow">Design System</p>
+            <h1>JetSmart UI Kit</h1>
+            <p>
+              Documentación del sistema de diseño de JetSmart. Explora foundations,
+              componentes, product components y patterns documentados desde Figma.
+            </p>
+            <a
+              class="js-btn"
+              href="https://www.figma.com/design/dKd6jNGAnng8hIV5MS4Avd/Jetsmart-UI-Kit-v1.0"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Abrir UI Kit en Figma
+            </a>
+          </header>
+
+          <section class="doc-section">
+            <h2 id="doc-about">About this site</h2>
+            <p>
+              Este sitio es una referencia estática del UI Kit v1.0. Cada página incluye
+              un preview embebido desde Figma y secciones de documentación para guiar
+              diseño e implementación.
+            </p>
+          </section>
+
+          <section class="doc-section">
+            <h2 id="doc-structure">Structure</h2>
+            <p>La documentación está organizada en cinco áreas principales:</p>
+            <div class="card-grid">
+              <a class="card" href="foundations/typography.html">
+                <h3 class="card__title">Foundations</h3>
+                <p class="card__desc">Typography, colors, spacing, radius, elevations e icons — los building blocks del sistema.</p>
+              </a>
+              <a class="card" href="components/buttons.html">
+                <h3 class="card__title">Components</h3>
+                <p class="card__desc">Componentes reutilizables del UI Kit: buttons, inputs, tabs y más.</p>
+              </a>
+              <a class="card" href="product-components/flight-card.html">
+                <h3 class="card__title">Product Components</h3>
+                <p class="card__desc">Componentes específicos del producto: flight card, searchbox widget.</p>
+              </a>
+              <a class="card" href="patterns/index.html">
+                <h3 class="card__title">Patterns</h3>
+                <p class="card__desc">Combinaciones de componentes para flujos y experiencias completas.</p>
+              </a>
+              <a class="card" href="flows/home.html">
+                <h3 class="card__title">Flows</h3>
+                <p class="card__desc">Pantallas end-to-end: home, booking, administra tu vuelo y cuenta.</p>
+              </a>
+            </div>
+          </section>
+
+          <section class="doc-section">
+            <h2 id="doc-figma">Figma source</h2>
+            <p>
+              El archivo fuente del design system es
+              <strong>Jetsmart UI Kit v1.0</strong>.
+              Cada página de componente enlaza al nodo correspondiente dentro de ese archivo.
+            </p>
+            <a
+              class="js-btn js-btn--secondary"
+              href="https://www.figma.com/design/dKd6jNGAnng8hIV5MS4Avd/Jetsmart-UI-Kit-v1.0"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Abrir UI Kit en Figma
+            </a>
+          </section>
+
+          <section class="doc-section">
+            <h2 id="doc-usage">How to use locally</h2>
+            <p>Abre <code>index.html</code> directamente en el navegador. No requiere servidor ni build step.</p>
+            <ul>
+              <li>HTML, CSS y JavaScript vanilla</li>
+              <li>Tailwind via CDN para layout utilitario</li>
+              <li>Navegación compartida desde <code>nav-data.js</code></li>
+            </ul>
+          </section>
+        </main>
+        <aside id="page-toc"></aside>
+      </div>
+    </div>
+  </div>
+  <script>window.JETSMART_BASE = "./";</script>
+  <script src="assets/js/nav-data.js"></script>
+  <script src="assets/js/layout.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

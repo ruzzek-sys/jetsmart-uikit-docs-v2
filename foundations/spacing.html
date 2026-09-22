@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spacing - JetSmart UI Kit</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Encode+Sans:wght@100..900&family=Lato:wght@100;300;400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/custom.css">
+</head>
+<body data-page-id="spacing">
+  <div id="sidebar-overlay" aria-hidden="true"></div>
+  <div id="app-shell">
+    <aside id="sidebar"></aside>
+    <div class="main-column">
+      <header id="topbar"></header>
+      <div class="content-wrap">
+        <main>
+          <header class="page-header">
+            <p class="page-header__eyebrow">Foundations</p>
+            <h1>Spacing</h1>
+            <p>19 primitivos en múltiplos de 4 px, 6 familias semánticas y un grid de 3 breakpoints que ordenan el espacio del kit.</p>
+          </header>
+
+          <section class="doc-section">
+            <h2 id="doc-resumen">Resumen</h2>
+            <p>
+              El spacing del kit se organiza en dos niveles. Los <strong>primitivos de Tier 1</strong> son la escala
+              cruda: 19 pasos de 0 a 128 px, casi todos múltiplos de 4, sin rol. Los <strong>tokens semánticos de
+              Tier 2</strong> hacen alias a un primitivo y le suman el trabajo que importa: stack, inline, inset-x,
+              inset-y, inset-page o gap-page. Un espaciado aplicado en un componente no guarda un valor: guarda una
+              referencia. Esa cadena es lo que permite cambiar el ritmo del producto en un solo lugar.
+            </p>
+
+            <div class="ty-stats">
+              <div class="ty-stat">
+                <span class="ty-stat__value">19</span>
+                <span class="ty-stat__label">Pasos primitivos</span>
+              </div>
+              <div class="ty-stat">
+                <span class="ty-stat__value">57</span>
+                <span class="ty-stat__label">Tokens semánticos</span>
+              </div>
+              <div class="ty-stat">
+                <span class="ty-stat__value">6</span>
+                <span class="ty-stat__label">Familias de rol</span>
+              </div>
+              <div class="ty-stat">
+                <span class="ty-stat__value">3</span>
+                <span class="ty-stat__label">Breakpoints de grid</span>
+              </div>
+            </div>
+
+            <div class="ty-chain">
+              <div class="ty-chain__step">
+                <span class="ty-chain__tier">Tier 1 · Primitivo</span>
+                <code>spacing/6</code>
+                <span class="ty-chain__note">24 px · valor crudo, sin rol</span>
+              </div>
+              <div class="ty-chain__arrow" aria-hidden="true">→</div>
+              <div class="ty-chain__step ty-chain__step--focus">
+                <span class="ty-chain__tier">Tier 2 · Semántico</span>
+                <code>spacing/stack/3xl</code>
+                <span class="ty-chain__note">aquí vive el rol</span>
+              </div>
+              <div class="ty-chain__arrow" aria-hidden="true">→</div>
+              <div class="ty-chain__step">
+                <span class="ty-chain__tier">Aplicación</span>
+                <code>Gap del auto layout</code>
+                <span class="ty-chain__note">nunca el primitivo, nunca un número</span>
+              </div>
+              <div class="ty-chain__arrow" aria-hidden="true">→</div>
+              <div class="ty-chain__step">
+                <span class="ty-chain__tier">Producto</span>
+                <code>Todos los componentes que lo usan</code>
+                <span class="ty-chain__note">se actualizan solos</span>
+              </div>
+            </div>
+
+            <div class="ty-note">
+              <strong>El scope es GAP:</strong> el campo de Gap o Padding del panel filtra automáticamente los tokens
+              de spacing. Si el picker no muestra el token esperado, la causa habitual es estar en la propiedad
+              incorrecta: stack es gap de columna, inline es gap de fila, inset es padding.
+            </div>
+          </section>
+
+          <section class="doc-section">
+            <h2 id="doc-primitivos">Tokens primitivos · Tier 1</h2>
+            <p>
+              Escala completa de 0 a 128 px. Cubre el ritmo entre elementos, los paddings de componente y los bloques
+              grandes de layout. Es la escala con más alias en Tier 2: cada barra se dibuja a partir del mismo valor
+              en px, y la columna de alias cuenta cuántos tokens semánticos apuntan a ese paso.
+            </p>
+            <div data-sp="primitives"></div>
+          </section>
+
+          <section class="doc-section">
+            <h2 id="doc-semanticos">Tokens semánticos · Tier 2</h2>
+            <p>
+              Seis familias, dos escalas. stack, inline, inset-x e inset-y cubren el componente (0–36 px). inset-page
+              y gap-page cubren el layout de página (0–128 px). Cada fila muestra el token, el primitivo al que
+              apunta y el gap o padding real aplicado en el ejemplo. El nombre del paso no se comparte entre esas
+              dos escalas: <code>md</code> no significa lo mismo en todas las familias.
+            </p>
+            <div data-sp="families"></div>
+          </section>
+
+          <section class="doc-section">
+            <h2 id="doc-comparativa">Dos escalas, no confundir</h2>
+            <p>
+              El prefijo de familia importa tanto como el paso seleccionado. Ante la duda entre inset y gap: si se
+              separa el contenido del borde, corresponde inset; si se separan dos bloques entre sí, corresponde gap.
+            </p>
+            <div data-sp="compare"></div>
+          </section>
+
+          <section class="doc-section">
+            <h2 id="doc-grid">Sistema de grid</h2>
+            <p>
+              Columnas, gutter y margin ordenan cualquier layout. Los tres cambian según el ancho de pantalla; el
+              gutter es el único valor que se mantiene fijo en 20 px en todo el kit. El ancho de columna es siempre
+              automático (stretch): se reparte el espacio disponible entre el número de columnas del breakpoint.
+            </p>
+
+            <div class="ty-info-grid">
+              <div class="ty-info">
+                <span class="ty-info__tag">Columnas</span>
+                <h4>Guía de ancho</h4>
+                <p>Definen el ancho de los contenedores. 4 columnas en mobile, 12 en tablet y desktop.</p>
+              </div>
+              <div class="ty-info">
+                <span class="ty-info__tag">Gutter</span>
+                <h4>Canal entre columnas</h4>
+                <p>20 px constantes. No debe contener ningún elemento; si un bloque abarca varias columnas, los gutters internos pueden ignorarse.</p>
+              </div>
+              <div class="ty-info">
+                <span class="ty-info__tag">Margin</span>
+                <h4>Margen lateral</h4>
+                <p>Espacio entre cada extremo de la pantalla y las columnas. Crece con el ancho: 20, 32 y 64 px.</p>
+              </div>
+              <div class="ty-info">
+                <span class="ty-info__tag">Breakpoints</span>
+                <h4>SM · MD · LG</h4>
+                <p>MD adopta las 12 columnas de LG: solo cambia el margin. SM es el único nivel con 4 columnas.</p>
+              </div>
+            </div>
+
+            <div data-sp="grid"></div>
+          </section>
+
+          <section class="doc-section">
+            <h2 id="doc-figma">Cómo usar en Figma</h2>
+
+            <h3>1 · Dónde están las variables</h3>
+            <p>
+              El spacing vive repartido en dos colecciones del archivo <code>Jetsmart UI Kit v1.0</code> y se consume
+              por librería desde los archivos de producto.
+            </p>
+            <div data-sp="collections"></div>
+            <p class="ty-caption">
+              La nomenclatura es <code>spacing/familia/paso</code>, por ejemplo <code>spacing/inset-x/lg</code>.
+              Tier 2: Spatial &amp; Shape tiene un solo modo (Theme 1) y comparte colección con radios y bordes.
+            </p>
+
+            <h3>2 · Cómo se aplican</h3>
+            <p>
+              La propiedad en edición determina la familia del token. Si el picker no muestra el token esperado, la
+              causa habitual es estar en la propiedad incorrecta.
+            </p>
+            <div data-sp="apply"></div>
+
+            <ul class="ty-rules">
+              <li class="ty-rules__do">Se aplica desde el icono de variable del Gap o del Padding, nunca escribiendo el número en el campo.</li>
+              <li class="ty-rules__do">El auto layout en columna usa <code>spacing/stack</code>; el auto layout en fila usa <code>spacing/inline</code>.</li>
+              <li class="ty-rules__dont">No se aplica un primitivo de Tier 1 sobre un componente, aunque el picker lo ofrezca.</li>
+              <li class="ty-rules__dont">No se usa un paso de página (64–128 px) como gap de un botón o un input: si el componente requiere ese espacio, el problema es de layout, no de spacing interno.</li>
+            </ul>
+
+            <h3>3 · Cómo se actualizan</h3>
+            <p>
+              Un cambio de spacing se hace siempre en la variable, nunca en el nodo. Dónde se edita depende de si
+              cambia el rol de un token o la escala base.
+            </p>
+            <div class="ty-items" data-sp="updates"></div>
+
+            <div class="ty-note ty-note--warn">
+              <strong>Lo que interrumpe la cadena:</strong> escribir un número directamente en Gap o Padding
+              desenlaza la variable. El layout se mantiene visualmente igual y pasa la revisión, pero deja de
+              heredar: el siguiente ajuste de ritmo no lo alcanza.
+            </div>
+
+            <div class="ty-note ty-note--warn">
+              <strong>Editar un primitivo afecta a todos sus alias:</strong> cambiar <code>spacing/4</code> de
+              16 a 18 alcanza a cada token semántico que lo referencia —stack/xl, inline/xl, inset-x/xl e
+              inset-y/xl—, incluidos aquellos que no se pretendía modificar.
+            </div>
+          </section>
+
+          <section class="doc-section">
+            <h2 id="doc-practicas">Buenas y malas prácticas</h2>
+            <p>
+              Cinco pares que contrastan el uso correcto del sistema de spacing con el error equivalente. La mayoría
+              de los errores pasa una revisión visual. El impacto aparece al cambiar el ritmo del producto, al
+              reutilizar un mismo paso en dos escalas distintas, o al apuntar el auto layout a la familia incorrecta.
+              La regla es siempre la misma: la propiedad decide la familia, la familia decide la escala y el
+              primitivo nunca se aplica al componente.
+            </p>
+
+            <article class="ty-pair">
+              <p class="ty-pair__eyebrow">01 · La propiedad decide la familia</p>
+              <h3>Gap de columna es stack; gap de fila es inline</h3>
+              <p>
+                El mismo 8 px existe en <code>stack/md</code> e <code>inline/md</code>. No son dos copias del valor:
+                son dos roles distintos. Si el ritmo vertical se ajusta y el horizontal no, solo conserva el
+                comportamiento esperado el componente que apunta a la familia correcta.
+              </p>
+              <div class="ty-pair__grid">
+                <div class="ty-pair__col ty-pair__col--do">
+                  <p class="ty-pair__label">Columna con stack, fila con inline</p>
+                  <div class="ty-pair__demo">
+                    <div class="sp-demo sp-demo--stack">
+                      <span class="sp-demo__block">Título</span>
+                      <span class="sp-demo__gap">stack/md · 8 px</span>
+                      <span class="sp-demo__block">Párrafo</span>
+                    </div>
+                    <div class="sp-demo sp-demo--inline">
+                      <span class="sp-demo__chip">Icono</span>
+                      <span class="sp-demo__gap">inline/sm · 4 px</span>
+                      <span class="sp-demo__chip">Label</span>
+                    </div>
+                  </div>
+                  <p class="ty-pair__styles">itemSpacing columna: spacing/stack/md · fila: spacing/inline/sm</p>
+                  <p class="ty-pair__note">
+                    Cada gap vive en la propiedad para la que fue declarado. El picker de Figma solo ofrece la
+                    familia correcta si el auto layout está en la dirección correcta.
+                  </p>
+                </div>
+                <div class="ty-pair__col ty-pair__col--dont">
+                  <p class="ty-pair__label">Stack usado en una fila</p>
+                  <div class="ty-pair__demo">
+                    <div class="sp-demo sp-demo--inline">
+                      <span class="sp-demo__chip">Icono</span>
+                      <span class="sp-demo__gap sp-demo__gap--wrong">stack/sm · 4 px</span>
+                      <span class="sp-demo__chip">Label</span>
+                    </div>
+                  </div>
+                  <p class="ty-pair__styles">itemSpacing fila: spacing/stack/sm</p>
+                  <p class="ty-pair__note">
+                    El resultado visual es idéntico: stack/sm e inline/sm apuntan ambos a 4 px. Cuando el ritmo
+                    vertical cambie, el botón modificará su separación horizontal sin una decisión explícita.
+                  </p>
+                </div>
+              </div>
+            </article>
+
+            <article class="ty-pair">
+              <p class="ty-pair__eyebrow">02 · El mismo paso no es el mismo valor</p>
+              <h3>inset-x/md no es inset-page/md</h3>
+              <p>
+                Las dos escalas reutilizan los mismos nombres de paso. <code>md</code> en componente son 8 px;
+                <code>md</code> en página son 48 px. Elegir por el sufijo y no por la familia es el error de mayor
+                impacto del sistema.
+              </p>
+              <div class="ty-pair__grid">
+                <div class="ty-pair__col ty-pair__col--do">
+                  <p class="ty-pair__label">Botón con inset de componente</p>
+                  <div class="ty-pair__demo">
+                    <div class="sp-demo-pad" style="padding: 8px 12px">
+                      <strong>Reservar</strong>
+                      <span>inset-y/md · inset-x/lg</span>
+                    </div>
+                  </div>
+                  <p class="ty-pair__styles">padding: spacing/inset-y/md + spacing/inset-x/lg · 8 / 12 px</p>
+                  <p class="ty-pair__note">
+                    El botón cabe en una toolbar. El padding es de componente: none a 6xl, 0 a 36 px.
+                  </p>
+                </div>
+                <div class="ty-pair__col ty-pair__col--dont">
+                  <p class="ty-pair__label">Botón con inset de página</p>
+                  <div class="ty-pair__demo">
+                    <div class="sp-demo-pad sp-demo-pad--huge" style="padding: 48px">
+                      <strong>Reservar</strong>
+                      <span>inset-page/md</span>
+                    </div>
+                  </div>
+                  <p class="ty-pair__styles">padding: spacing/inset-page/md · 48 px</p>
+                  <p class="ty-pair__note">
+                    Seis veces más grande, mismo nombre de paso. inset-page es el padding de una pantalla, no el de
+                    un control.
+                  </p>
+                </div>
+              </div>
+            </article>
+
+            <article class="ty-pair">
+              <p class="ty-pair__eyebrow">03 · Tier 1 no se aplica</p>
+              <h3>Un primitivo nunca toca un componente</h3>
+              <p>
+                Tier 1 es la escala cruda: 19 números sin significado. Tier 2 les asigna un rol. Aplicar
+                <code>spacing/4</code> de forma directa funciona en la primera revisión y desvincula el componente
+                del sistema en la siguiente.
+              </p>
+              <div class="ty-pair__grid">
+                <div class="ty-pair__col ty-pair__col--do">
+                  <p class="ty-pair__label">El componente usa el token semántico</p>
+                  <div class="ty-pair__demo">
+                    <div class="sp-demo sp-demo--stack">
+                      <span class="sp-demo__block">Campo</span>
+                      <span class="sp-demo__gap">stack/md → spacing/2</span>
+                      <span class="sp-demo__block">Campo</span>
+                    </div>
+                  </div>
+                  <p class="ty-pair__styles">Gap: spacing/stack/md → spacing/2 · 8 px</p>
+                  <p class="ty-pair__note">
+                    El formulario apunta a Tier 2, y Tier 2 apunta a Tier 1. Cambiar el ritmo entre campos es editar
+                    un alias en un solo lugar.
+                  </p>
+                </div>
+                <div class="ty-pair__col ty-pair__col--dont">
+                  <p class="ty-pair__label">El componente usa el primitivo directo</p>
+                  <div class="ty-pair__demo">
+                    <div class="sp-demo sp-demo--stack">
+                      <span class="sp-demo__block">Campo</span>
+                      <span class="sp-demo__gap sp-demo__gap--wrong">spacing/2 · 8 px</span>
+                      <span class="sp-demo__block">Campo</span>
+                    </div>
+                  </div>
+                  <p class="ty-pair__styles">Gap: spacing/2 · 8 px</p>
+                  <p class="ty-pair__note">
+                    El resultado es visualmente idéntico. Cuando el ritmo de stack/md cambie, este componente
+                    permanecerá en 8 px y deberá localizarse de forma manual.
+                  </p>
+                </div>
+              </div>
+            </article>
+
+            <article class="ty-pair">
+              <p class="ty-pair__eyebrow">04 · Los pasos grandes son de página</p>
+              <h3>64–128 px no caben dentro de un componente</h3>
+              <p>
+                Los primitivos 16, 20, 24 y 32 (64 a 128 px) existen para inset-page y gap-page. Si un botón, un
+                input o una tarjeta requieren ese espacio, el problema no es el padding: el bloque debería tratarse
+                como layout.
+              </p>
+              <div class="ty-pair__grid">
+                <div class="ty-pair__col ty-pair__col--do">
+                  <p class="ty-pair__label">Tarjeta con inset de componente, secciones con gap-page</p>
+                  <div class="ty-pair__demo">
+                    <div class="sp-demo-pad" style="padding: 16px 16px">
+                      <strong>Tarifa Zero</strong>
+                      <span>inset-x/xl · inset-y/xl · 16 px</span>
+                    </div>
+                  </div>
+                  <p class="ty-pair__styles">padding: spacing/inset-x/xl + spacing/inset-y/xl</p>
+                  <p class="ty-pair__note">
+                    16 px es el límite superior habitual de una tarjeta. La separación entre esa tarjeta y la
+                    siguiente corresponde a gap-page, no a un inset adicional.
+                  </p>
+                </div>
+                <div class="ty-pair__col ty-pair__col--dont">
+                  <p class="ty-pair__label">Tarjeta con un paso de página</p>
+                  <div class="ty-pair__demo">
+                    <div class="sp-demo-pad sp-demo-pad--huge" style="padding: 64px 16px">
+                      <strong>Tarifa Zero</strong>
+                      <span>inset-y/… no · spacing/16</span>
+                    </div>
+                  </div>
+                  <p class="ty-pair__styles">padding-top/bottom: spacing/16 · 64 px</p>
+                  <p class="ty-pair__note">
+                    El primitivo de 64 px no tiene alias en inset-y. Aplicarlo directamente en la tarjeta la
+                    convierte en una sección sin declararlo.
+                  </p>
+                </div>
+              </div>
+            </article>
+
+            <article class="ty-pair">
+              <p class="ty-pair__eyebrow">05 · Inset no es gap</p>
+              <h3>Aplicar padding a un contenedor no es separar dos contenedores</h3>
+              <p>
+                inset-page separa el contenido del borde de la pantalla. gap-page separa secciones entre sí.
+                Intercambiarlos produce pantallas con exceso de espacio o con separación insuficiente, aunque el
+                valor numérico sea el mismo.
+              </p>
+              <div class="ty-pair__grid">
+                <div class="ty-pair__col ty-pair__col--do">
+                  <p class="ty-pair__label">Padding de página + gap entre secciones</p>
+                  <div class="ty-pair__demo">
+                    <div class="sp-page">
+                      <div class="sp-page__section">Hero</div>
+                      <span class="sp-demo__gap">gap-page/md · 48 px</span>
+                      <div class="sp-page__section">Tarifas</div>
+                    </div>
+                  </div>
+                  <p class="ty-pair__styles">padding: inset-page/lg · gap: gap-page/md</p>
+                  <p class="ty-pair__note">
+                    El contenedor usa inset-page como padding. Las secciones se separan con gap-page. Cada token
+                    tiene una función definida y puede actualizarse de forma independiente.
+                  </p>
+                </div>
+                <div class="ty-pair__col ty-pair__col--dont">
+                  <p class="ty-pair__label">Toda la separación resuelta como padding</p>
+                  <div class="ty-pair__demo">
+                    <div class="sp-page sp-page--padded">
+                      <div class="sp-page__section">Hero</div>
+                      <div class="sp-page__section">Tarifas</div>
+                    </div>
+                  </div>
+                  <p class="ty-pair__styles">padding adicional entre bloques · sin gap-page</p>
+                  <p class="ty-pair__note">
+                    Las dos secciones se perciben como un único bloque con padding excesivo. Para ajustar la
+                    separación entre ellas habría que editar el padding de cada una en lugar de un solo gap.
+                  </p>
+                </div>
+              </div>
+            </article>
+          </section>
+        </main>
+        <aside id="page-toc"></aside>
+      </div>
+    </div>
+  </div>
+  <script>window.JETSMART_BASE = "../";</script>
+  <script src="../assets/js/nav-data.js"></script>
+  <script src="../assets/js/layout.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/spacing.js"></script>
+</body>
+</html>

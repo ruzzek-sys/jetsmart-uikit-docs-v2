@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Typography - JetSmart UI Kit</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Encode+Sans:wght@100..900&family=Lato:wght@100;300;400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/custom.css">
+</head>
+<body data-page-id="typography">
+  <div id="sidebar-overlay" aria-hidden="true"></div>
+  <div id="app-shell">
+    <aside id="sidebar"></aside>
+    <div class="main-column">
+      <header id="topbar"></header>
+      <div class="content-wrap">
+        <main>
+          <header class="page-header">
+            <p class="page-header__eyebrow">Foundations</p>
+            <h1>Typography</h1>
+            <p>Dos familias, una escala de 15 pasos y 8 escalas semánticas que resuelven todo el texto del kit.</p>
+          </header>
+
+          <section class="doc-section">
+            <h2 id="doc-resumen">Resumen</h2>
+            <p>
+              La tipografía del kit se organiza en tres niveles. Las <strong>primitivas de Tier 1</strong>
+              son la escala base —tamaños, pesos, interlineados y tracking— y nunca se aplican directamente
+              sobre un componente. Los <strong>tokens semánticos de Tier 2</strong> combinan esas primitivas
+              en un rol concreto (display, heading, body, label…) y son el único punto donde entra un cambio.
+              Los <strong>estilos de texto</strong> publicados enlazan sus cinco propiedades a esas variables,
+              y los nodos de texto sólo aplican el estilo.
+            </p>
+
+            <div class="ty-stats">
+              <div class="ty-stat">
+                <span class="ty-stat__value">2</span>
+                <span class="ty-stat__label">Familias tipográficas</span>
+              </div>
+              <div class="ty-stat">
+                <span class="ty-stat__value">15</span>
+                <span class="ty-stat__label">Pasos de font-size</span>
+              </div>
+              <div class="ty-stat">
+                <span class="ty-stat__value">53</span>
+                <span class="ty-stat__label">Estilos publicados</span>
+              </div>
+              <div class="ty-stat">
+                <span class="ty-stat__value">8</span>
+                <span class="ty-stat__label">Escalas semánticas</span>
+              </div>
+            </div>
+
+            <div class="ty-chain">
+              <div class="ty-chain__step">
+                <span class="ty-chain__tier">Tier 1 · Primitiva</span>
+                <code>typography/font-size/xl</code>
+                <span class="ty-chain__note">20 · valor fijo, no se edita</span>
+              </div>
+              <div class="ty-chain__arrow" aria-hidden="true">→</div>
+              <div class="ty-chain__step ty-chain__step--focus">
+                <span class="ty-chain__tier">Tier 2 · Semántica</span>
+                <code>typography/body/regular/xl/font-size</code>
+                <span class="ty-chain__note">aquí se cambia el enlace</span>
+              </div>
+              <div class="ty-chain__arrow" aria-hidden="true">→</div>
+              <div class="ty-chain__step">
+                <span class="ty-chain__tier">Estilo de texto</span>
+                <code>Body/Regular/xl</code>
+                <span class="ty-chain__note">hereda 20 / 28</span>
+              </div>
+              <div class="ty-chain__arrow" aria-hidden="true">→</div>
+              <div class="ty-chain__step">
+                <span class="ty-chain__tier">Nodos de texto</span>
+                <code>Todos los textos con ese estilo</code>
+                <span class="ty-chain__note">se actualizan solos</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="doc-section">
+            <h2 id="doc-familias">Familias tipográficas</h2>
+            <p>
+              Las familias se declaran como variables de tipo string y se referencian desde los tokens
+              semánticos. Nunca se escribe el nombre de la fuente directamente en un componente.
+            </p>
+
+            <div class="ty-families">
+              <article class="ty-family">
+                <div class="ty-family__aa ty-lato">Aa</div>
+                <div class="ty-family__body">
+                  <div class="ty-family__head">
+                    <h3>Lato</h3>
+                    <span class="ty-badge ty-badge--brand">Primary</span>
+                  </div>
+                  <code class="ty-family__token">typography/font-family/primary</code>
+                  <p>Familia base del producto. Cubre body, labels, captions y la mayoría de la interfaz.</p>
+                  <p class="ty-family__charset ty-lato">
+                    ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>
+                    abcdefghijklmnopqrstuvwxyz<br>
+                    0123456789 $ % &amp; @ ? ! ( )
+                  </p>
+                  <p class="ty-caption">
+                    Pesos disponibles: Thin 100 · ExtraLight 200 · Light 300 · Regular 400 · Medium 500 ·
+                    SemiBold 600 · Bold 700 · ExtraBold 800 · Black 900
+                  </p>
+                </div>
+              </article>
+
+              <article class="ty-family">
+                <div class="ty-family__aa ty-encode">Aa</div>
+                <div class="ty-family__body">
+                  <div class="ty-family__head">
+                    <h3>Encode Sans</h3>
+                    <span class="ty-badge ty-badge--neutral">Secondary</span>
+                  </div>
+                  <code class="ty-family__token">typography/font-family/secondary</code>
+                  <p>Familia de énfasis para displays, headings y piezas de marketing con más presencia.</p>
+                  <p class="ty-family__charset ty-encode">
+                    ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>
+                    abcdefghijklmnopqrstuvwxyz<br>
+                    0123456789 $ % &amp; @ ? ! ( )
+                  </p>
+                  <p class="ty-caption">
+                    Pesos disponibles: Thin 100 · ExtraLight 200 · Light 300 · Regular 400 · Medium 500 ·
+                    SemiBold 600 · Bold 700 · ExtraBold 800 · Black 900
+                  </p>
+                </div>
+              </article>
+            </div>
+
+          </section>
+
+          <section class="doc-section">
+            <h2 id="doc-primitivos">Tokens primitivos · Tier 1</h2>
+            <p>
+              La escala base del sistema. Son valores fijos: editar una primitiva no ajusta un estilo, mueve ese
+              paso en todas las familias que lo usan.
+            </p>
+
+            <h3>Font size · 15 pasos</h3>
+            <p>
+              Escala de 10 px a 128 px con base en 16 px (1 rem). La progresión no es lineal: crece de forma suave
+              en los tamaños de interfaz (razón 1,11–1,14) y se acelera en los de display (razón 1,25–1,33).
+            </p>
+            <div data-ty="font-sizes"></div>
+            <div class="ty-note">
+              <strong>Regla de uso:</strong> los primitivos de font-size no se aplican nunca de forma directa sobre
+              un componente. Se consumen desde los tokens semánticos de Tier 2, que son los que definen la
+              combinación final de familia, peso, tamaño, line-height y letter-spacing.
+            </div>
+
+            <h3>Font weight · 9 pasos</h3>
+            <p>
+              Escala numérica CSS de 100 a 900. En Figma cada peso corresponde a un estilo con nombre propio, así
+              que el token numérico debe traducirse al nombre del estilo de la familia.
+            </p>
+            <div data-ty="font-weights"></div>
+
+            <h3>Line height · 22 pasos</h3>
+            <p>
+              El interlineado se define en píxeles absolutos, no en múltiplos relativos. Todos los valores son
+              múltiplos de 2 y, desde lh-16, múltiplos de 4: así cualquier bloque de texto sigue cayendo en la
+              grilla base de 4 px que comparten spacing y radius. Desde lh-48 la escala avanza de 8 en 8.
+            </p>
+            <div data-ty="line-heights"></div>
+            <p class="ty-caption">
+              lh-12, lh-72, lh-88, lh-112 y lh-128 existen como primitivos pero hoy ningún token semántico los
+              referencia: quedan disponibles como reserva de la escala.
+            </p>
+
+            <h3>Letter spacing · 6 pasos</h3>
+            <p>
+              Valores absolutos en píxeles, simétricos alrededor de 0 y en múltiplos de 0,4 px. El tracking
+              negativo compensa el exceso de aire de los tamaños grandes; el positivo abre el texto en mayúsculas
+              de pretitles y labels pequeños.
+            </p>
+            <div data-ty="letter-spacing"></div>
+          </section>
+
+          <section class="doc-section">
+            <h2 id="doc-semanticas">Escalas semánticas · Tier 2</h2>
+            <p>
+              Ocho escalas, una por rol de texto. Cada una fija familia, peso y tracking, y define sus pasos como
+              una combinación de tamaño e interlineado. La columna de usos indica cuántas veces se aplica ese paso
+              en el archivo de Figma: es el mejor indicador de qué está realmente en producción.
+            </p>
+            <div data-ty="scales"></div>
+          </section>
+
+          <section class="doc-section">
+            <h2 id="doc-roles">El rol de cada escala</h2>
+            <p>
+              Elegir bien es elegir el rol. Esta es la pregunta que resuelve cada familia y el límite que no
+              conviene cruzar.
+            </p>
+            <div data-ty="roles"></div>
+          </section>
+
+          <section class="doc-section">
+            <h2 id="doc-ratio">Ratio de interlineado</h2>
+            <p>
+              El ratio es el resultado de dividir el line-height entre el tamaño de fuente. Cuanto más alto, más
+              aire respira cada línea de texto.
+            </p>
+
+            <div class="ty-info-grid">
+              <div class="ty-info">
+                <span class="ty-info__tag">Fórmula</span>
+                <h4>Qué es</h4>
+                <p>Line-height dividido por el tamaño de fuente. Un texto de 16 px con LH 24 px da un ratio de 24 ÷ 16 = 1,50.</p>
+              </div>
+              <div class="ty-info">
+                <span class="ty-info__tag">Legibilidad</span>
+                <h4>Para qué sirve</h4>
+                <p>Regula el espacio entre líneas de un mismo párrafo: muy bajo, las líneas se pisan; muy alto, se desconectan entre sí.</p>
+              </div>
+              <div class="ty-info">
+                <span class="ty-info__tag">Por familia</span>
+                <h4>Patrón del kit</h4>
+                <p>Baja a 1,17–1,25 en los pasos grandes de Display y Heading, donde el tamaño ya aporta aire, y sube a 1,40–1,50 en Body, Label y Caption, donde el texto es pequeño y necesita más espacio.</p>
+              </div>
+              <div class="ty-info">
+                <span class="ty-info__tag">Piso en md</span>
+                <h4>En este kit</h4>
+                <p>body/regular/md y body/strong/md (16/24) llegan justo a ratio 1,50. Úsalos como piso para lectura extendida; los pasos con ratio menor a 1,33 son sólo para títulos y textos cortos.</p>
+              </div>
+            </div>
+
+            <div class="ty-note ty-note--accent">
+              <strong>Mínimo de accesibilidad · WCAG 1.4.8 y 1.4.12:</strong> el interlineado dentro de un párrafo
+              debe alcanzar al menos 1,5 veces el tamaño de fuente (1.4.8, nivel AAA), y el contenido debe seguir
+              funcionando si el usuario fuerza ese valor (1.4.12, nivel AA).
+            </div>
+          </section>
+
+          <section class="doc-section">
+            <h2 id="doc-figma">Cómo usar en Figma</h2>
+
+            <h3>1 · Anatomía de un estilo</h3>
+            <p>
+              Un estilo de texto no guarda valores propios. Sus cinco propiedades están enlazadas, una por una, a
+              variables de la colección Tier 2: Typography. El ejemplo es el estilo <code>Body/Regular/xl</code>.
+            </p>
+            <div data-ty="anatomy"></div>
+            <p class="ty-caption">
+              En el panel Edit text style, el icono de variable a la izquierda de cada campo indica que la
+              propiedad está enlazada: los valores 28 y 0 que se ven escritos son la resolución de la variable, no
+              un número editado a mano.
+            </p>
+
+            <h3>2 · Dónde están los estilos</h3>
+            <p>
+              Los estilos viven en el panel de estilos del archivo, agrupados por familia semántica. Cada familia
+              es una escala completa y el sufijo del nombre indica el paso dentro de ella. Es el único punto desde
+              donde se aplica tipografía: no se copian propiedades de un texto a otro.
+            </p>
+            <div data-ty="inventory"></div>
+            <p class="ty-caption">
+              53 estilos en 8 familias. El archivo publica además los 6 pasos de Label/Strong-Underline para
+              enlaces, con lo que el total llega a 59.
+            </p>
+
+            <h3>3 · Cómo se aplican a los textos</h3>
+            <p>
+              Se selecciona el nodo de texto y se le aplica el estilo desde el panel de estilos. El estilo trae las
+              cinco propiedades juntas, así que no se escribe ningún valor a mano en el nodo.
+            </p>
+            <div class="ty-table-wrap">
+              <table class="ty-table">
+                <thead>
+                  <tr><th>Parte del nombre</th><th>Ejemplo</th><th>Qué indica</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Family</strong></td><td><code>Body</code></td><td class="ty-muted">El rol del texto en la interfaz</td></tr>
+                  <tr><td><strong>Weight</strong></td><td><code>Regular</code></td><td class="ty-muted">Sólo en Body y Label, que tienen Regular y Strong</td></tr>
+                  <tr><td><strong>Step</strong></td><td><code>xl</code></td><td class="ty-muted">El tamaño dentro de la escala de esa familia</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <ul class="ty-rules">
+              <li class="ty-rules__do">Se aplica el estilo completo. Si un texto necesita más énfasis, se cambia al estilo Strong de la misma escala (Body/Regular/md → Body/Strong/md).</li>
+              <li class="ty-rules__do">El interlineado siempre llega en píxeles desde la variable. No se usa AUTO ni porcentaje.</li>
+              <li class="ty-rules__dont">No se desprende el estilo ni se sobrescribe tamaño, peso o interlineado en el nodo: ese texto queda fuera del sistema y deja de heredar cambios.</li>
+              <li class="ty-rules__dont">No se crean estilos con valores escritos a mano. Primero se crea la variable en Tier 2 y después el estilo que la enlaza.</li>
+            </ul>
+
+            <h3>4 · Cómo se actualizan</h3>
+            <p>
+              La variable semántica de Tier 2 se re-apunta a otra primitiva de la escala: eso es todo el cambio.
+              El estilo hereda el nuevo enlace y todos los textos que lo usan se actualizan solos, sin reaplicar ni
+              republicar nada.
+            </p>
+            <div data-ty="updates"></div>
+
+            <div class="ty-note ty-note--warn">
+              <strong>Lo que rompe la cadena:</strong> escribir un número directamente en el panel Edit text style
+              desenlaza esa propiedad de su variable. El estilo sigue funcionando y a la vista nada cambia, pero
+              deja de heredar: el próximo cambio en Tier 2 ya no lo alcanza. Lo mismo pasa al sobrescribir tamaño,
+              peso o interlineado en un nodo de texto suelto.
+            </div>
+
+            <div class="ty-note ty-note--warn">
+              <strong>Editar una primitiva mueve la escala completa:</strong> cambiar el valor de una variable de
+              Tier 1 —por ejemplo font-size/xl de 20 a 21— no ajusta un estilo: mueve ese paso en toda la escala y
+              alcanza a cualquier familia que lo use, incluidas las que nadie quería tocar. Se reserva para un
+              rediseño deliberado de la escala base.
+            </div>
+          </section>
+
+          <section class="doc-section">
+            <h2 id="doc-practicas">Buenas y malas prácticas</h2>
+            <p>
+              Ocho pares de ejemplos que contrastan el uso correcto de las escalas semánticas con el error
+              equivalente. Cada par muestra el mismo contenido resuelto de las dos maneras: a la izquierda con el
+              estilo que le corresponde, a la derecha con el atajo que rompe el sistema. La regla de fondo es
+              siempre la misma: el rol del texto decide la familia, el paso decide el tamaño y el peso decide el
+              énfasis. Ninguna de las tres decisiones se toma escribiendo valores a mano en el nodo.
+            </p>
+
+            <article class="ty-pair">
+              <p class="ty-pair__eyebrow">01 · El rol decide la familia</p>
+              <h3>Elegir la escala por el rol del texto, no por el tamaño que se quiere ver</h3>
+              <p>
+                Cada familia semántica tiene un rol declarado: Heading titula, Body se lee, Label rotula, Featured
+                destaca cifras dentro de una tarjeta. Cuando se elige la escala por el tamaño que uno tiene en
+                mente y no por lo que el texto hace, el resultado se ve grande pero deja de significar lo que debía.
+              </p>
+              <div class="ty-pair__grid">
+                <div class="ty-pair__col ty-pair__col--do">
+                  <p class="ty-pair__label">El precio usa Featured, el título usa Heading</p>
+                  <div class="ty-pair__demo">
+                    <div class="ts-pretitle-md">Tarifa Zero</div>
+                    <div class="ts-heading-md">Vuelo directo a Lima</div>
+                    <div class="ts-featured-lg">CLP 39.990</div>
+                    <div class="ts-body-regular-sm">Incluye equipaje de mano</div>
+                  </div>
+                  <p class="ty-pair__styles">Pretitle/md · Heading/md · Featured/lg · Body/Regular/sm</p>
+                  <p class="ty-pair__note">
+                    Featured es la escala de énfasis numérico: Lato Bold con interlineado ajustado, pensada para
+                    precios, horarios y códigos dentro de una tarjeta. El título de la opción se mantiene en
+                    Heading, así que las dos cosas se distinguen sin pelearse.
+                  </p>
+                </div>
+                <div class="ty-pair__col ty-pair__col--dont">
+                  <p class="ty-pair__label">El precio se puso en Heading para verse grande</p>
+                  <div class="ty-pair__demo">
+                    <div class="ts-pretitle-md">Tarifa Zero</div>
+                    <div class="ts-body-regular-lg">Vuelo directo a Lima</div>
+                    <div class="ts-heading-lg">CLP 39.990</div>
+                    <div class="ts-body-regular-sm">Incluye equipaje de mano</div>
+                  </div>
+                  <p class="ty-pair__styles">Pretitle/md · Body/Regular/lg · Heading/lg · Body/Regular/sm</p>
+                  <p class="ty-pair__note">
+                    El precio quedó en Encode Sans Medium, la familia de los títulos, y sin el peso Bold que un
+                    dato necesita para leerse de un golpe. Peor todavía: al bajar el título a Body/Regular/lg la
+                    tarjeta ya no tiene título, tiene dos párrafos y una cifra.
+                  </p>
+                </div>
+              </div>
+            </article>
+
+            <article class="ty-pair">
+              <p class="ty-pair__eyebrow">02 · Un nivel, un escalón</p>
+              <h3>Cada nivel de jerarquía baja de escala, no de paso dentro de la misma escala</h3>
+              <p>
+                Un bloque de portada se resuelve con tres escalas distintas —Display para el titular, Subheading
+                para la bajada, Body para el párrafo—. Encadenar dos pasos de la misma familia produce dos títulos
+                del mismo rango compitiendo, y el lector no sabe cuál manda.
+              </p>
+              <div class="ty-pair__grid">
+                <div class="ty-pair__col ty-pair__col--do">
+                  <p class="ty-pair__label">Display titula, Subheading baja, Body explica</p>
+                  <div class="ty-pair__demo">
+                    <div class="ts-display-md">Vuela por Sudamérica</div>
+                    <div class="ts-subheading-lg">Nuevas rutas desde Santiago</div>
+                    <div class="ts-body-regular-md">Reserva desde la app y elige tu asiento sin costo adicional hasta 24 horas antes del vuelo.</div>
+                  </div>
+                  <p class="ty-pair__styles">Display/md 36/48 · Subheading/lg 20/28 · Body/Regular/md 16/24</p>
+                  <p class="ty-pair__note">
+                    Los tres niveles cambian de familia y de peso a la vez: Encode Sans Medium, Lato Medium y Lato
+                    Regular. La jerarquía se sostiene incluso si mañana Tier 2 mueve un paso, porque no depende de
+                    la diferencia exacta de píxeles.
+                  </p>
+                </div>
+                <div class="ty-pair__col ty-pair__col--dont">
+                  <p class="ty-pair__label">Dos pasos de Display seguidos aplanan la jerarquía</p>
+                  <div class="ty-pair__demo">
+                    <div class="ts-display-md">Vuela por Sudamérica</div>
+                    <div class="ts-display-sm">Nuevas rutas desde Santiago</div>
+                    <div class="ts-body-regular-md">Reserva desde la app y elige tu asiento sin costo adicional hasta 24 horas antes del vuelo.</div>
+                  </div>
+                  <p class="ty-pair__styles">Display/md 36/48 · Display/sm 30/40 · Body/Regular/md 16/24</p>
+                  <p class="ty-pair__note">
+                    Seis píxeles de diferencia no alcanzan para crear un nivel: las dos líneas se leen como un
+                    titular partido en dos. Y después el salto a 16 px es brusco, porque el escalón intermedio
+                    —Subheading— quedó sin usar.
+                  </p>
+                </div>
+              </div>
+            </article>
+
+            <article class="ty-pair">
+              <p class="ty-pair__eyebrow">03 · Énfasis con el peso</p>
+              <h3>Destacar cambiando Regular por Strong en el mismo paso, no subiendo de tamaño</h3>
+              <p>
+                Body y Label son las dos únicas familias con dos pesos, y existen justamente para esto: dar énfasis
+                sin salir del paso. Subir un escalón para destacar cambia el interlineado además del cuerpo, y con
+                eso se desalinea la fila completa.
+              </p>
+              <div class="ty-pair__grid">
+                <div class="ty-pair__col ty-pair__col--do">
+                  <p class="ty-pair__label">Mismo paso, peso Strong</p>
+                  <div class="ty-pair__demo">
+                    <div class="ts-body-strong-md">Equipaje de mano incluido</div>
+                    <div class="ts-body-regular-md">Un bolso de hasta 10 kg que viaja contigo en cabina, sin costo adicional.</div>
+                  </div>
+                  <p class="ty-pair__styles">Body/Strong/md 16/24 + Body/Regular/md 16/24</p>
+                  <p class="ty-pair__note">
+                    Las dos líneas comparten cuerpo e interlineado, así que el bloque mantiene su ritmo vertical y
+                    el énfasis se lee igual de claro. Es también el único cambio que sobrevive a un ajuste de
+                    escala en Tier 2.
+                  </p>
+                </div>
+                <div class="ty-pair__col ty-pair__col--dont">
+                  <p class="ty-pair__label">Se subió de paso para destacar</p>
+                  <div class="ty-pair__demo">
+                    <div class="ts-body-regular-xl">Equipaje de mano incluido</div>
+                    <div class="ts-body-regular-md">Un bolso de hasta 10 kg que viaja contigo en cabina, sin costo adicional.</div>
+                  </div>
+                  <p class="ty-pair__styles">Body/Regular/xl 20/28 + Body/Regular/md 16/24</p>
+                  <p class="ty-pair__note">
+                    La primera línea es más grande pero igual de liviana: gana tamaño y pierde énfasis. Y el
+                    interlineado pasa de 24 a 28 px, así que el bloque deja de calzar con la grilla de 8 y con
+                    cualquier otra fila de la misma tarjeta.
+                  </p>
+                </div>
+              </div>
+            </article>
+
+            <article class="ty-pair">
+              <p class="ty-pair__eyebrow">04 · Label rotula, Body se lee</p>
+              <h3>Los párrafos van en Body: Label tiene el interlineado calculado para una sola línea</h3>
+              <p>
+                Label existe para rótulos de interfaz —botones, campos, chips, tabs, contadores— y por eso comprime
+                el interlineado: Label/Regular/sm es 14/16, ratio 1,14. Body/Regular/sm es el mismo cuerpo con 20 px
+                de interlineado, ratio 1,43. En una línea la diferencia no se nota; en cuatro, decide si el texto se
+                puede leer.
+              </p>
+              <div class="ty-pair__grid">
+                <div class="ty-pair__col ty-pair__col--do">
+                  <p class="ty-pair__label">Body/Regular/sm — ratio 1,43</p>
+                  <div class="ty-pair__demo">
+                    <div class="ts-body-regular-sm">Los cambios de fecha se pueden solicitar hasta cuatro horas antes de la salida programada, siempre sujetos a disponibilidad y al pago de la diferencia de tarifa vigente al momento del cambio. La solicitud se realiza desde Mis viajes y no aplica a tramos ya volados.</div>
+                  </div>
+                  <p class="ty-pair__styles">Body/Regular/sm · 14 px de cuerpo, 20 px de interlineado</p>
+                  <p class="ty-pair__note">
+                    Los 6 px de aire entre líneas son los que permiten que el ojo vuelva al inicio del renglón
+                    siguiente sin perderse. Es la escala de lectura del kit y la más usada del archivo.
+                  </p>
+                </div>
+                <div class="ty-pair__col ty-pair__col--dont">
+                  <p class="ty-pair__label">Label/Regular/sm — ratio 1,14</p>
+                  <div class="ty-pair__demo">
+                    <div class="ts-label-regular-sm">Los cambios de fecha se pueden solicitar hasta cuatro horas antes de la salida programada, siempre sujetos a disponibilidad y al pago de la diferencia de tarifa vigente al momento del cambio. La solicitud se realiza desde Mis viajes y no aplica a tramos ya volados.</div>
+                  </div>
+                  <p class="ty-pair__styles">Label/Regular/sm · 14 px de cuerpo, 16 px de interlineado</p>
+                  <p class="ty-pair__note">
+                    Mismo cuerpo, mismo color, mismo texto: sólo cambian 4 px de interlineado y el párrafo se cierra
+                    sobre sí mismo. Label es correcta en el rótulo de un campo o en un chip; nunca en más de una
+                    línea de lectura.
+                  </p>
+                </div>
+              </div>
+            </article>
+
+            <article class="ty-pair">
+              <p class="ty-pair__eyebrow">05 · Caption es letra pequeña</p>
+              <h3>Caption se reserva para notas, legales y leyendas: no reemplaza al cuerpo de texto</h3>
+              <p>
+                Caption baja hasta 10 px porque su contenido es accesorio: condiciones, notas al pie, etiquetas de
+                eje de un gráfico. Usarla para el contenido principal no ahorra espacio, sólo traslada el problema
+                al usuario, que en mobile queda leyendo por debajo del mínimo cómodo.
+              </p>
+              <div class="ty-pair__grid">
+                <div class="ty-pair__col ty-pair__col--do">
+                  <p class="ty-pair__label">Body para el contenido, Caption para la condición</p>
+                  <div class="ty-pair__demo">
+                    <div class="ts-body-regular-md">Elige tu asiento sin costo adicional hasta 24 horas antes del vuelo desde Mis viajes.</div>
+                    <div class="ts-caption-sm">Sujeto a disponibilidad en la aeronave asignada. No aplica a tarifas promocionales.</div>
+                  </div>
+                  <p class="ty-pair__styles">Body/Regular/md 16/24 + Caption/sm 12/16</p>
+                  <p class="ty-pair__note">
+                    La diferencia de escala hace el trabajo de jerarquía sin necesidad de un separador ni de otro
+                    color: se entiende de inmediato qué es la información y qué es la condición.
+                  </p>
+                </div>
+                <div class="ty-pair__col ty-pair__col--dont">
+                  <p class="ty-pair__label">Todo el bloque en Caption para que quepa</p>
+                  <div class="ty-pair__demo">
+                    <div class="ts-caption-sm">Elige tu asiento sin costo adicional hasta 24 horas antes del vuelo desde Mis viajes.</div>
+                    <div class="ts-caption-sm">Sujeto a disponibilidad en la aeronave asignada. No aplica a tarifas promocionales.</div>
+                  </div>
+                  <p class="ty-pair__styles">Caption/sm 12/16 + Caption/sm 12/16</p>
+                  <p class="ty-pair__note">
+                    Con las dos líneas en la misma escala se pierde la jerarquía: la condición legal pesa lo mismo
+                    que la información que el usuario vino a buscar. Si el bloque no cabe, se recorta el texto o se
+                    rediseña el contenedor, no se baja la escala.
+                  </p>
+                </div>
+              </div>
+            </article>
+
+            <article class="ty-pair">
+              <p class="ty-pair__eyebrow">06 · Las mayúsculas son de Pretitle</p>
+              <h3>El antetítulo en mayúsculas es Pretitle, que ya trae el tracking abierto</h3>
+              <p>
+                Pretitle es la única escala del kit pensada para caja alta: Lato SemiBold con letter-spacing +0,8 px
+                y textCase UPPER aplicado desde el estilo publicado. Escribir mayúsculas a mano sobre un Heading
+                arrastra el tracking tight de −0,4 px, que está calculado para caja baja y en mayúsculas apiña las
+                letras.
+              </p>
+              <div class="ty-pair__grid">
+                <div class="ty-pair__col ty-pair__col--do">
+                  <p class="ty-pair__label">Pretitle/md — tracking +0,8 px</p>
+                  <div class="ty-pair__demo">
+                    <div class="ts-pretitle-md">Oferta por tiempo limitado</div>
+                    <div class="ts-heading-md">Vuelos desde CLP 19.990</div>
+                  </div>
+                  <p class="ty-pair__styles">Pretitle/md 14/20 · ls +0,8 + Heading/md 24/32 · ls −0,4</p>
+                  <p class="ty-pair__note">
+                    El tracking abierto separa las mayúsculas lo justo para que se lean como una etiqueta y no como
+                    una palabra apretada. Además el estilo aplica el textCase, así que el texto se escribe normal y
+                    no hay que reescribirlo si mañana deja de ir en caja alta.
+                  </p>
+                </div>
+                <div class="ty-pair__col ty-pair__col--dont">
+                  <p class="ty-pair__label">Heading en mayúsculas escritas a mano</p>
+                  <div class="ty-pair__demo">
+                    <div class="ts-heading-2xs">OFERTA POR TIEMPO LIMITADO</div>
+                    <div class="ts-heading-md">Vuelos desde CLP 19.990</div>
+                  </div>
+                  <p class="ty-pair__styles">Heading/2xs 16/20 · ls −0,4 + Heading/md 24/32 · ls −0,4</p>
+                  <p class="ty-pair__note">
+                    Las letras se pegan y el antetítulo compite en familia y en peso con el título que viene abajo.
+                    Como las mayúsculas están escritas en el contenido, tampoco se pueden revertir sin volver a
+                    editar cada texto.
+                  </p>
+                </div>
+              </div>
+            </article>
+
+            <article class="ty-pair">
+              <p class="ty-pair__eyebrow">07 · Interlineado en píxeles</p>
+              <h3>El interlineado llega en píxeles desde la variable: nunca AUTO ni porcentaje</h3>
+              <p>
+                Las cinco propiedades de un estilo están enlazadas a variables de Tier 2, y line-height es una de
+                ellas. Con AUTO el valor lo decide la métrica de la fuente, distinta entre Lato y Encode Sans, y
+                deja de responder a cualquier ajuste posterior de la escala.
+              </p>
+              <div class="ty-pair__grid">
+                <div class="ty-pair__col ty-pair__col--do">
+                  <p class="ty-pair__label">Body/Regular/md — 24 px desde la variable</p>
+                  <div class="ty-pair__demo">
+                    <div class="ts-body-regular-md">Reserva desde la app y elige tu asiento sin costo adicional hasta 24 horas antes del vuelo. El cambio queda confirmado al instante y puedes revisarlo en Mis viajes cuando quieras.</div>
+                  </div>
+                  <p class="ty-pair__styles">Body/Regular/md · line-height 24 px · ratio 1,50</p>
+                  <p class="ty-pair__note">
+                    El valor viene de typography/body/regular/md/line-height. Si mañana ese enlace se re-apunta a
+                    otro paso de la escala, todos los párrafos del archivo se actualizan solos.
+                  </p>
+                </div>
+                <div class="ty-pair__col ty-pair__col--dont">
+                  <p class="ty-pair__label">Interlineado en AUTO</p>
+                  <div class="ty-pair__demo">
+                    <div class="ty-lato" style="font-size:16px;line-height:normal">Reserva desde la app y elige tu asiento sin costo adicional hasta 24 horas antes del vuelo. El cambio queda confirmado al instante y puedes revisarlo en Mis viajes cuando quieras.</div>
+                  </div>
+                  <p class="ty-pair__styles">Sin estilo aplicado · Lato Regular 16 px · line-height AUTO</p>
+                  <p class="ty-pair__note">
+                    Las líneas quedan más apretadas de lo que define la escala y el valor cambia si el texto pasa a
+                    Encode Sans. El nodo tampoco tiene estilo, así que queda fuera del sistema: ningún cambio en
+                    Tier 2 lo alcanza.
+                  </p>
+                </div>
+              </div>
+            </article>
+
+            <article class="ty-pair">
+              <p class="ty-pair__eyebrow">08 · El estilo completo, sin retoques</p>
+              <h3>Si falta un paso se crea la variable en Tier 2, no se escribe el número en el nodo</h3>
+              <p>
+                Escribir un valor a mano sobre un nodo con estilo lo desprende: a la vista casi no cambia nada, y
+                ahí está el problema. El texto sigue pareciendo parte del sistema pero dejó de heredar, así que el
+                próximo ajuste de escala lo salta sin avisar.
+              </p>
+              <div class="ty-pair__grid">
+                <div class="ty-pair__col ty-pair__col--do">
+                  <p class="ty-pair__label">Heading/md aplicado tal cual</p>
+                  <div class="ty-pair__demo">
+                    <div class="ts-heading-md">Selecciona tu asiento</div>
+                    <span class="ty-badge ty-badge--on">Estilo vinculado · 24 / 32 · hereda de Tier 2</span>
+                  </div>
+                  <p class="ty-pair__styles">Heading/md · 24/32 · ls −0,4</p>
+                  <p class="ty-pair__note">
+                    Las cinco propiedades llegan juntas desde el estilo y ninguna está sobrescrita. Es el estado en
+                    que un texto puede seguir cambios de escala sin que nadie lo toque de nuevo.
+                  </p>
+                </div>
+                <div class="ty-pair__col ty-pair__col--dont">
+                  <p class="ty-pair__label">Se escribieron 26 px encima del estilo</p>
+                  <div class="ty-pair__demo">
+                    <div class="ty-encode" style="font-weight:500;font-size:26px;line-height:30px;letter-spacing:0">Selecciona tu asiento</div>
+                    <span class="ty-badge ty-badge--off">Estilo desprendido · 26 / 30 · ya no hereda</span>
+                  </div>
+                  <p class="ty-pair__styles">Heading/md + override · 26/30 · ls 0</p>
+                  <p class="ty-pair__note">
+                    26 px no existe en la escala, el interlineado quedó en 30 y el tracking se perdió. La diferencia
+                    con el ejemplo de la izquierda es de 2 px, imposible de detectar en una revisión visual: sólo
+                    aparece cuando el estilo cambia y este texto se queda atrás.
+                  </p>
+                </div>
+              </div>
+            </article>
+          </section>
+
+          <section class="doc-section">
+            <h2 id="doc-errores">Los cinco errores que rompen la cadena</h2>
+            <p>
+              Todos comparten el mismo síntoma: a la vista nada se ve mal, y por eso pasan la revisión. El daño
+              aparece después, cuando la escala cambia y esos textos se quedan atrás.
+            </p>
+            <div class="ty-items" data-ty="breakers"></div>
+          </section>
+        </main>
+        <aside id="page-toc"></aside>
+      </div>
+    </div>
+  </div>
+  <script>window.JETSMART_BASE = "../";</script>
+  <script src="../assets/js/nav-data.js"></script>
+  <script src="../assets/js/layout.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/typography.js"></script>
+</body>
+</html>

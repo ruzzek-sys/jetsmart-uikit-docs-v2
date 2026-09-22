@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Radius &amp; Width - JetSmart UI Kit</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Encode+Sans:wght@100..900&family=Lato:wght@100;300;400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/custom.css">
+</head>
+<body data-page-id="radius-width">
+  <div id="sidebar-overlay" aria-hidden="true"></div>
+  <div id="app-shell">
+    <aside id="sidebar"></aside>
+    <div class="main-column">
+      <header id="topbar"></header>
+      <div class="content-wrap">
+        <main>
+          <header class="page-header">
+            <p class="page-header__eyebrow">Foundations</p>
+            <h1>Radius &amp; Width</h1>
+            <p>21 primitivos de radio, 8 roles semánticos, 9 grosores de borde y 7 tokens de stroke que definen la forma del kit.</p>
+          </header>
+
+          <section class="doc-section">
+            <h2 id="doc-resumen">Resumen</h2>
+            <p>
+              Radius y border width se organizan en dos niveles. Los <strong>primitivos de Tier 1</strong> son la
+              rampa cruda: 21 pasos de radio (0–160 px más el centinela full) y 9 grosores (0–5 px), sin rol. Los
+              <strong>tokens semánticos de Tier 2</strong> hacen alias a un primitivo y definen el uso: none,
+              small, large, full para radios; hairline, base, medium, heavy para grosores. Un valor aplicado en un
+              componente no guarda un número: guarda una referencia.
+            </p>
+
+            <div class="ty-stats">
+              <div class="ty-stat">
+                <span class="ty-stat__value">21</span>
+                <span class="ty-stat__label">Primitivos de radius</span>
+              </div>
+              <div class="ty-stat">
+                <span class="ty-stat__value">8</span>
+                <span class="ty-stat__label">Roles de radius</span>
+              </div>
+              <div class="ty-stat">
+                <span class="ty-stat__value">9</span>
+                <span class="ty-stat__label">Primitivos de width</span>
+              </div>
+              <div class="ty-stat">
+                <span class="ty-stat__value">7</span>
+                <span class="ty-stat__label">Roles de width</span>
+              </div>
+            </div>
+
+            <div class="ty-chain">
+              <div class="ty-chain__step">
+                <span class="ty-chain__tier">Tier 1 · Primitivo</span>
+                <code>border/radius/6</code>
+                <span class="ty-chain__note">16 px · valor crudo, sin rol</span>
+              </div>
+              <div class="ty-chain__arrow" aria-hidden="true">→</div>
+              <div class="ty-chain__step ty-chain__step--focus">
+                <span class="ty-chain__tier">Tier 2 · Semántico</span>
+                <code>border/radius/medium</code>
+                <span class="ty-chain__note">aquí vive el rol</span>
+              </div>
+              <div class="ty-chain__arrow" aria-hidden="true">→</div>
+              <div class="ty-chain__step">
+                <span class="ty-chain__tier">Aplicación</span>
+                <code>Corner radius / Stroke</code>
+                <span class="ty-chain__note">nunca el primitivo, nunca un número</span>
+              </div>
+              <div class="ty-chain__arrow" aria-hidden="true">→</div>
+              <div class="ty-chain__step">
+                <span class="ty-chain__tier">Producto</span>
+                <code>Todos los componentes que lo usan</code>
+                <span class="ty-chain__note">se actualizan solos</span>
+              </div>
+            </div>
+
+            <div class="ty-note">
+              <strong>Scopes distintos:</strong> radius usa <code>CORNER_RADIUS</code>; border width usa
+              <code>STROKE_FLOAT</code>. El picker de Figma filtra por propiedad: un token de grosor no aparece en
+              Corner radius, y un token de radio no aparece en Stroke.
+            </div>
+          </section>
+
+          <section class="doc-section">
+            <h2 id="doc-radius-primitivos">Radius · Tokens primitivos</h2>
+            <p>
+              Rampa de 0 a 160 px más el valor centinela full (999). No crece de forma lineal: los saltos aumentan
+              con el tamaño del componente. La columna de alias indica cuántos tokens semánticos apuntan a cada paso.
+            </p>
+            <div data-rw="radius-primitives"></div>
+
+            <h3>Cómo se lee la rampa</h3>
+            <div data-rw="radius-zones"></div>
+          </section>
+
+          <section class="doc-section">
+            <h2 id="doc-radius-semanticos">Radius · Tokens semánticos</h2>
+            <p>
+              Ocho roles, de menor a mayor curvatura. Cada uno resuelve un tipo de componente distinto. Si hay duda
+              entre dos pasos consecutivos, conviene elegir el menor: es más sencillo aumentar la curvatura después
+              que corregir un componente excesivamente redondeado.
+            </p>
+            <div data-rw="radius-semantic"></div>
+
+            <div class="ty-info-grid" style="margin-top:28px">
+              <div class="ty-info">
+                <span class="ty-info__tag">large-increased</span>
+                <h4>Escala</h4>
+                <p>Es un número real: 32 px. Sobre un elemento grande se percibe como esquina curva, no como círculo.</p>
+              </div>
+              <div class="ty-info">
+                <span class="ty-info__tag">full</span>
+                <h4>Comportamiento</h4>
+                <p>Siempre alcanza el límite matemático de Figma. Sobre cualquier elemento cuadrado es un círculo.</p>
+              </div>
+              <div class="ty-info">
+                <span class="ty-info__tag">Ambigüedad</span>
+                <h4>Botón pequeño</h4>
+                <p>En 32×32, large-increased y full se ven casi iguales. La diferencia aparece al redimensionar.</p>
+              </div>
+              <div class="ty-info">
+                <span class="ty-info__tag">Criterio</span>
+                <h4>Decidir por comportamiento</h4>
+                <p>Si al agrandar debe seguir siendo esquina curva, es large-increased. Si debe seguir siendo círculo, es full.</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="doc-section">
+            <h2 id="doc-width-primitivos">Border width · Tokens primitivos</h2>
+            <p>
+              Nueve pasos de 0 a 5 px. Arranca en incrementos de 0,25 px en la zona fina y pasa a 1 px en la zona
+              gruesa: bajo 1 px cada cuarto de píxel se percibe; sobre 2 px, no.
+            </p>
+            <div data-rw="width-primitives"></div>
+
+            <h3>Cómo se lee la rampa</h3>
+            <div data-rw="width-zones"></div>
+            <div class="ty-note ty-note--accent">
+              <strong>Rampa cerrada:</strong> si un diseño requiere 2,5 px, se corrige el diseño. No se agrega un
+              paso nuevo a la rampa.
+            </div>
+          </section>
+
+          <section class="doc-section">
+            <h2 id="doc-width-semanticos">Border width · Tokens semánticos</h2>
+            <p>
+              Siete roles de grosor, de menor a mayor. Cada uno resuelve un tipo de línea: divisor, borde de
+              control, estado o acento gráfico.
+            </p>
+            <div data-rw="width-semantic"></div>
+          </section>
+
+          <section class="doc-section">
+            <h2 id="doc-figma">Cómo usar en Figma</h2>
+
+            <h3>1 · Dónde están las variables</h3>
+            <p>
+              Radius y border width viven en las mismas dos colecciones que spacing, dentro del archivo
+              <code>Jetsmart UI Kit v1.0</code>, y se consumen por librería desde los archivos de producto.
+            </p>
+            <div data-rw="collections"></div>
+            <p class="ty-caption">
+              Nomenclatura: <code>border/radius/large</code> y <code>border/width/base</code>. Tier 2: Spatial
+              &amp; Shape tiene un solo modo (Theme 1).
+            </p>
+
+            <h3>2 · Cómo se aplican</h3>
+            <div data-rw="apply"></div>
+
+            <ul class="ty-rules">
+              <li class="ty-rules__do">Se aplica desde el icono de variable de Corner radius o Stroke, nunca escribiendo el número en el campo.</li>
+              <li class="ty-rules__do">El radio interior de un contenido anidado debe ser menor o igual al radio exterior del contenedor.</li>
+              <li class="ty-rules__dont">No se aplica un primitivo de Tier 1 sobre un componente, aunque el picker lo ofrezca.</li>
+              <li class="ty-rules__dont">No se usa full cuando el comportamiento requerido es una esquina curva fija: corresponde large-increased.</li>
+            </ul>
+
+            <h3>3 · Cómo se actualizan</h3>
+            <div class="ty-items" data-rw="updates"></div>
+
+            <div class="ty-note ty-note--warn">
+              <strong>Lo que interrumpe la cadena:</strong> escribir un número directamente en Corner radius o
+              Stroke desenlaza la variable. El componente se mantiene visualmente igual y pasa la revisión, pero
+              deja de heredar.
+            </div>
+          </section>
+
+          <section class="doc-section">
+            <h2 id="doc-practicas">Buenas y malas prácticas</h2>
+            <p>
+              Cuatro pares que contrastan el uso correcto de radius y border width con el error equivalente. La
+              mayoría de los errores pasa una revisión visual. El impacto aparece al redimensionar el componente, al
+              cambiar la marca o al auditar los bindings.
+            </p>
+
+            <article class="ty-pair">
+              <p class="ty-pair__eyebrow">01 · Full no es large-increased</p>
+              <h3>Decidir por comportamiento, no por el aspecto actual</h3>
+              <p>
+                En un control pequeño ambos pueden verse iguales. La diferencia aparece al cambiar el tamaño del
+                componente: full sigue siendo círculo; large-increased sigue siendo esquina curva.
+              </p>
+              <div class="ty-pair__grid">
+                <div class="ty-pair__col ty-pair__col--do">
+                  <p class="ty-pair__label">Avatar y chip con full; panel con large-increased</p>
+                  <div class="ty-pair__demo">
+                    <div class="rw-practice">
+                      <span class="rw-practice__circle"></span>
+                      <span class="rw-practice__chip">Chip</span>
+                      <span class="rw-practice__panel">Overlay · 32 px</span>
+                    </div>
+                  </div>
+                  <p class="ty-pair__styles">full en circular · large-increased en overlay</p>
+                  <p class="ty-pair__note">
+                    El avatar y el chip deben permanecer circulares al escalar. El overlay debe conservar esquinas
+                    curvas fijas de 32 px.
+                  </p>
+                </div>
+                <div class="ty-pair__col ty-pair__col--dont">
+                  <p class="ty-pair__label">Overlay con full</p>
+                  <div class="ty-pair__demo">
+                    <div class="rw-practice">
+                      <span class="rw-practice__panel rw-practice__panel--full">Overlay · full</span>
+                    </div>
+                  </div>
+                  <p class="ty-pair__styles">border/radius/full en un panel rectangular</p>
+                  <p class="ty-pair__note">
+                    Al ampliar el panel, las esquinas tienden a una forma de píldora. No es el comportamiento de un
+                    contenedor de overlay.
+                  </p>
+                </div>
+              </div>
+            </article>
+
+            <article class="ty-pair">
+              <p class="ty-pair__eyebrow">02 · Tier 1 no se aplica</p>
+              <h3>Un primitivo nunca se aplica a un componente</h3>
+              <p>
+                Tier 1 es la rampa cruda. Tier 2 asigna el rol. Aplicar <code>border/radius/7</code> de forma
+                directa funciona en la primera revisión y desvincula el componente del sistema en la siguiente.
+              </p>
+              <div class="ty-pair__grid">
+                <div class="ty-pair__col ty-pair__col--do">
+                  <p class="ty-pair__label">Tarjeta con token semántico</p>
+                  <div class="ty-pair__demo">
+                    <div class="rw-practice__card" style="border-radius:24px">
+                      <strong>Tarifa Zero</strong>
+                      <span>border/radius/large → radius/7</span>
+                    </div>
+                  </div>
+                  <p class="ty-pair__styles">Corner radius: border/radius/large</p>
+                  <p class="ty-pair__note">
+                    El componente apunta a Tier 2. Cambiar el radio estándar de contenedores es editar un alias.
+                  </p>
+                </div>
+                <div class="ty-pair__col ty-pair__col--dont">
+                  <p class="ty-pair__label">Tarjeta con primitivo directo</p>
+                  <div class="ty-pair__demo">
+                    <div class="rw-practice__card" style="border-radius:24px">
+                      <strong>Tarifa Zero</strong>
+                      <span>border/radius/7 · 24 px</span>
+                    </div>
+                  </div>
+                  <p class="ty-pair__styles">Corner radius: border/radius/7</p>
+                  <p class="ty-pair__note">
+                    El resultado es visualmente idéntico. Cuando large cambie de alias, esta tarjeta permanecerá en
+                    24 px y deberá localizarse de forma manual.
+                  </p>
+                </div>
+              </div>
+            </article>
+
+            <article class="ty-pair">
+              <p class="ty-pair__eyebrow">03 · Anidamiento de radios</p>
+              <h3>El radio interior debe ser menor o igual al exterior</h3>
+              <p>
+                Cuando un bloque redondeado vive dentro de otro, el radio interior excesivo hace que el contenido
+                no se perciba contenido por el contenedor.
+              </p>
+              <div class="ty-pair__grid">
+                <div class="ty-pair__col ty-pair__col--do">
+                  <p class="ty-pair__label">Exterior large, interior small</p>
+                  <div class="ty-pair__demo">
+                    <div class="rw-nest" style="border-radius:24px">
+                      <div class="rw-nest__inner" style="border-radius:8px"></div>
+                    </div>
+                  </div>
+                  <p class="ty-pair__styles">outer: large · inner: small</p>
+                  <p class="ty-pair__note">
+                    La diferencia de radio mantiene la jerarquía visual entre contenedor y contenido.
+                  </p>
+                </div>
+                <div class="ty-pair__col ty-pair__col--dont">
+                  <p class="ty-pair__label">Interior mayor que el exterior</p>
+                  <div class="ty-pair__demo">
+                    <div class="rw-nest" style="border-radius:8px">
+                      <div class="rw-nest__inner" style="border-radius:24px"></div>
+                    </div>
+                  </div>
+                  <p class="ty-pair__styles">outer: small · inner: large</p>
+                  <p class="ty-pair__note">
+                    El bloque interior parece escapar del contenedor. El anidamiento deja de leerse como una sola
+                    superficie.
+                  </p>
+                </div>
+              </div>
+            </article>
+
+            <article class="ty-pair">
+              <p class="ty-pair__eyebrow">04 · Grosor de estado no es decoración</p>
+              <h3>medium refuerza foco y error; heavy no va en formularios</h3>
+              <p>
+                La zona de estado (2 px) existe para que el borde se lea sin depender solo del color. La zona
+                gráfica (3–4 px) es para acentos visuales, no para controles.
+              </p>
+              <div class="ty-pair__grid">
+                <div class="ty-pair__col ty-pair__col--do">
+                  <p class="ty-pair__label">Input en error con width/medium</p>
+                  <div class="ty-pair__demo">
+                    <div class="rw-field" style="border-width:2px;border-color:#dc2626">
+                      Número de tarjeta
+                    </div>
+                  </div>
+                  <p class="ty-pair__styles">stroke: border/width/medium · 2 px</p>
+                  <p class="ty-pair__note">
+                    Duplica el grosor base. El estado se percibe además del color del borde.
+                  </p>
+                </div>
+                <div class="ty-pair__col ty-pair__col--dont">
+                  <p class="ty-pair__label">Input con width/heavy</p>
+                  <div class="ty-pair__demo">
+                    <div class="rw-field" style="border-width:4px;border-color:#dc2626">
+                      Número de tarjeta
+                    </div>
+                  </div>
+                  <p class="ty-pair__styles">stroke: border/width/heavy · 4 px</p>
+                  <p class="ty-pair__note">
+                    heavy está pensado para barras de acento y piezas promocionales. En un input el control pierde
+                    proporción y se confunde con un elemento gráfico.
+                  </p>
+                </div>
+              </div>
+            </article>
+          </section>
+        </main>
+        <aside id="page-toc"></aside>
+      </div>
+    </div>
+  </div>
+  <script>window.JETSMART_BASE = "../";</script>
+  <script src="../assets/js/nav-data.js"></script>
+  <script src="../assets/js/layout.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/radius-width.js"></script>
+</body>
+</html>

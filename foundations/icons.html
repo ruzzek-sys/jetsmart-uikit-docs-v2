@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Icons - JetSmart UI Kit</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Encode+Sans:wght@100..900&family=Lato:wght@100;300;400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <link rel="stylesheet" href="../assets/css/custom.css">
+</head>
+<body data-page-id="icons">
+  <div id="sidebar-overlay" aria-hidden="true"></div>
+  <div id="app-shell">
+    <aside id="sidebar"></aside>
+    <div class="main-column">
+      <header id="topbar"></header>
+      <div class="content-wrap">
+        <main>
+          <header class="page-header">
+            <p class="page-header__eyebrow">Foundations</p>
+            <h1>Icons</h1>
+            <p>Dos librerías enlazadas en Figma: Font Awesome 7 para íconos de interfaz y Round World Flags para banderas circulares.</p>
+          </header>
+
+          <section class="doc-section">
+            <h2 id="doc-resumen">Resumen</h2>
+            <p>
+              El kit no dibuja un set propio de glifos: consume dos librerías publicadas y enlazadas al archivo
+              <code>Jetsmart UI Kit v1.0</code>. <strong>Font Awesome 7</strong> cubre acciones, navegación y
+              estados de producto. <strong>Round World Flags</strong> cubre países y territorios en formato
+              circular. Cada librería se inserta desde Assets; no se importa un SVG suelto ni se redibuja el
+              pictograma a mano.
+            </p>
+
+            <div class="ty-stats">
+              <div class="ty-stat">
+                <span class="ty-stat__value">2</span>
+                <span class="ty-stat__label">Librerías enlazadas</span>
+              </div>
+              <div class="ty-stat">
+                <span class="ty-stat__value">3</span>
+                <span class="ty-stat__label">Packs Core FA</span>
+              </div>
+              <div class="ty-stat">
+                <span class="ty-stat__value">12</span>
+                <span class="ty-stat__label">Packs Pro+</span>
+              </div>
+              <div class="ty-stat">
+                <span class="ty-stat__value">~260</span>
+                <span class="ty-stat__label">Banderas en Figma</span>
+              </div>
+            </div>
+
+            <div class="ic-lib-links">
+              <a
+                class="ic-lib-link"
+                href="https://www.figma.com/design/dKd6jNGAnng8hIV5MS4Avd/Jetsmart-UI-Kit-v1.0?node-id=5564-123884"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <i class="fas fa-book ic-lib-link__icon" aria-hidden="true"></i>
+                <span>Ir a Font Awesome en el kit</span>
+              </a>
+              <a
+                class="ic-lib-link"
+                href="https://www.figma.com/design/dKd6jNGAnng8hIV5MS4Avd/Jetsmart-UI-Kit-v1.0?node-id=5860-132216"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <i class="fas fa-flag ic-lib-link__icon" aria-hidden="true"></i>
+                <span>Ir a Round World Flags en el kit</span>
+              </a>
+            </div>
+
+            <div class="ty-note">
+              <strong>En Figma:</strong> ambas librerías se abren desde el botón de enlace de cada sección o desde
+              el panel Assets. El componente se instancia; el glifo se elige por nombre o por variante de bandera,
+              no se edita el path.
+            </div>
+          </section>
+
+          <section class="doc-section">
+            <h2 id="doc-font-awesome">Font Awesome 7</h2>
+            <p>
+              Sistema principal de íconos de interfaz. Requiere instalar los archivos OTF de escritorio de los
+              paquetes contratados para que el componente renderice en Figma.
+            </p>
+
+            <h3>Core</h3>
+            <div data-ic="core"></div>
+
+            <h3>Pro+ Icon Packs</h3>
+            <p>
+              Doce packs de estilo adicionales sobre la misma familia de glifos. Se usan cuando el contexto pide
+              una lectura más gráfica; el pack por defecto del producto debe seguir siendo Core.
+            </p>
+            <div data-ic="pro-plus"></div>
+
+            <h3>Muestra de icon-name</h3>
+            <div data-ic="samples"></div>
+          </section>
+
+          <section class="doc-section">
+            <h2 id="doc-fa-figma">Cómo usar Font Awesome en Figma</h2>
+            <div class="ty-items" data-ic="steps"></div>
+
+            <h3>Propiedades del componente</h3>
+            <p>
+              El componente <code>Font Awesome Icon</code> expone el control en la barra lateral. Mono usa un solo
+              <code>icon-name</code>; Duo 1 y Duo 2 usan dos capas.
+            </p>
+            <div data-ic="properties"></div>
+
+            <div class="ty-info-grid" style="margin-top:28px">
+              <div class="ty-info">
+                <span class="ty-info__tag">Mono</span>
+                <h4>Una capa</h4>
+                <p>Un único campo <code>icon-name</code>. Caso por defecto para botones, inputs y navegación.</p>
+              </div>
+              <div class="ty-info">
+                <span class="ty-info__tag">Duotone</span>
+                <h4>Dos capas</h4>
+                <p>
+                  Escribir el nombre en <code>icon-name#</code> (capa principal) y en <code>icon-name##</code>
+                  (capa secundaria).
+                </p>
+              </div>
+              <div class="ty-info">
+                <span class="ty-info__tag">Catálogo</span>
+                <h4>Nombres oficiales</h4>
+                <p>
+                  Los nombres se toman del
+                  <a href="https://fontawesome.com/search" target="_blank" rel="noopener noreferrer">buscador de Font Awesome</a>,
+                  no de un alias interno del kit.
+                </p>
+              </div>
+              <div class="ty-info">
+                <span class="ty-info__tag">Docs</span>
+                <h4>Instalación de fuentes</h4>
+                <p>
+                  Detalle de instalación OTF en el
+                  <a href="https://docs.fontawesome.com/" target="_blank" rel="noopener noreferrer">centro de documentación de Font Awesome</a>.
+                </p>
+              </div>
+            </div>
+
+            <div class="ty-note ty-note--warn">
+              <strong>Atención · Duotone:</strong> al cambiar hacia o desde una variante Duotone, las elecciones de
+              <code>icon-name</code> no se conservan. Hay que volver a escribirlas.
+            </div>
+            <div class="ty-note ty-note--warn">
+              <strong>Atención · Slab y Notdog:</strong> hay un error de renderizado de fuentes en Figma que afecta
+              estos packs en escalas <code>.75x</code> y <code>1.25x</code>. Usarlos con precaución.
+            </div>
+
+            <ul class="ty-rules">
+              <li class="ty-rules__do">Instanciar el componente Font Awesome Icon desde la librería enlazada.</li>
+              <li class="ty-rules__do">Escribir el icon-name exacto del catálogo oficial.</li>
+              <li class="ty-rules__dont">No pegar un SVG suelto ni redibujar el glifo a mano dentro del archivo.</li>
+              <li class="ty-rules__dont">No mezclar packs Pro+ distintos dentro del mismo flujo sin criterio de producto.</li>
+            </ul>
+          </section>
+
+          <section class="doc-section">
+            <h2 id="doc-flags">Round World Flags</h2>
+            <p>
+              Librería de banderas circulares para selectores de país, idiomas y contextos de ruta. En el kit se
+              documentan más de 250 instancias (países, territorios y organizaciones). El componente se elige por
+              nombre de país, no por código ISO escrito a mano en un texto.
+            </p>
+            <div data-ic="flags"></div>
+
+            <ul class="ty-rules">
+              <li class="ty-rules__do">Usar Round World Flags cuando el dato es un país o territorio.</li>
+              <li class="ty-rules__do">Mantener el formato circular del componente; no recortar a rectángulo.</li>
+              <li class="ty-rules__dont">No sustituir una bandera por un emoji de texto ni por una imagen raster suelta.</li>
+              <li class="ty-rules__dont">No usar Font Awesome Brands como reemplazo de una bandera de país.</li>
+            </ul>
+          </section>
+
+          <section class="doc-section">
+            <h2 id="doc-practicas">Buenas y malas prácticas</h2>
+            <p>
+              Tres pares que contrastan el uso correcto de las librerías con el error equivalente. El impacto
+              aparece al actualizar la librería, al auditar Assets o al pasar a desarrollo.
+            </p>
+
+            <article class="ty-pair">
+              <p class="ty-pair__eyebrow">01 · Componente de librería</p>
+              <h3>Instanciar desde Assets, no pegar un SVG</h3>
+              <p>
+                El ícono del kit es una instancia del componente Font Awesome. Un SVG suelto se ve igual en la
+                primera revisión y se desconecta de actualizaciones, nombres y estilos del pack.
+              </p>
+              <div class="ty-pair__grid">
+                <div class="ty-pair__col ty-pair__col--do">
+                  <p class="ty-pair__label">Instancia Font Awesome Icon</p>
+                  <div class="ty-pair__demo">
+                    <div class="ic-practice">
+                      <i class="fas fa-plane" aria-hidden="true"></i>
+                      <span>icon-name: plane</span>
+                    </div>
+                  </div>
+                  <p class="ty-pair__styles">Assets → Font Awesome Icon · icon-name plane</p>
+                  <p class="ty-pair__note">
+                    Familia, estilo y escala siguen al componente. Un cambio de pack se propaga.
+                  </p>
+                </div>
+                <div class="ty-pair__col ty-pair__col--dont">
+                  <p class="ty-pair__label">SVG pegado en el frame</p>
+                  <div class="ty-pair__demo">
+                    <div class="ic-practice ic-practice--flat">
+                      <i class="fas fa-plane" aria-hidden="true"></i>
+                      <span>vector suelto</span>
+                    </div>
+                  </div>
+                  <p class="ty-pair__styles">Path local · sin icon-name · sin pack</p>
+                  <p class="ty-pair__note">
+                    Visualmente similar. No hereda updates de la librería ni el contrato de nombre para desarrollo.
+                  </p>
+                </div>
+              </div>
+            </article>
+
+            <article class="ty-pair">
+              <p class="ty-pair__eyebrow">02 · Duotone completo</p>
+              <h3>Las dos capas llevan el mismo icon-name</h3>
+              <p>
+                En Duo, la capa principal usa <code>#</code> y la secundaria <code>##</code>. Dejar una vacía o
+                con otro nombre rompe el glifo.
+              </p>
+              <div class="ty-pair__grid">
+                <div class="ty-pair__col ty-pair__col--do">
+                  <p class="ty-pair__label">Ambas capas con house</p>
+                  <div class="ty-pair__demo">
+                    <div class="ic-practice ic-practice--duo">
+                      <i class="fas fa-house" aria-hidden="true"></i>
+                      <div class="ic-practice__meta">
+                        <code>icon-name# · house</code>
+                        <code>icon-name## · house</code>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="ty-pair__styles">Family: Classic Duotone · Style: Solid</p>
+                  <p class="ty-pair__note">Las dos capas resuelven el mismo glifo con opacidades distintas.</p>
+                </div>
+                <div class="ty-pair__col ty-pair__col--dont">
+                  <p class="ty-pair__label">Solo la capa principal</p>
+                  <div class="ty-pair__demo">
+                    <div class="ic-practice ic-practice--duo ic-practice--broken">
+                      <i class="fas fa-house" aria-hidden="true"></i>
+                      <div class="ic-practice__meta">
+                        <code>icon-name# · house</code>
+                        <code>icon-name## · (vacío)</code>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="ty-pair__styles">Duotone incompleto</p>
+                  <p class="ty-pair__note">
+                    El render queda a medias o desaparece una capa. Tras cambiar de Mono a Duo hay que reescribir
+                    ambos campos.
+                  </p>
+                </div>
+              </div>
+            </article>
+
+            <article class="ty-pair">
+              <p class="ty-pair__eyebrow">03 · Bandera no es Brands</p>
+              <h3>País → Round World Flags; marca → Font Awesome Brands</h3>
+              <p>
+                Un selector de país usa la bandera circular. El logo de una red social o marca usa el pack Brands.
+                Mezclarlos confunde el dato.
+              </p>
+              <div class="ty-pair__grid">
+                <div class="ty-pair__col ty-pair__col--do">
+                  <p class="ty-pair__label">Chile con Round World Flags</p>
+                  <div class="ty-pair__demo">
+                    <div class="ic-practice">
+                      <img
+                        class="ic-flag__img"
+                        src="https://flagcdn.com/w80/cl.png"
+                        alt="Chile"
+                        width="40"
+                        height="40"
+                      >
+                      <span>chile</span>
+                    </div>
+                  </div>
+                  <p class="ty-pair__styles">Round World Flags · chile</p>
+                  <p class="ty-pair__note">Formato circular, nombre de país, listo para Flag Selector.</p>
+                </div>
+                <div class="ty-pair__col ty-pair__col--dont">
+                  <p class="ty-pair__label">País con Brands o emoji</p>
+                  <div class="ty-pair__demo">
+                    <div class="ic-practice ic-practice--flat">
+                      <span class="ic-practice__emoji" aria-hidden="true">🇨🇱</span>
+                      <span>emoji / Brands</span>
+                    </div>
+                  </div>
+                  <p class="ty-pair__styles">Texto emoji o glifo Brands</p>
+                  <p class="ty-pair__note">
+                    Pierde el contrato de la librería, el recorte circular y la consistencia entre plataformas.
+                  </p>
+                </div>
+              </div>
+            </article>
+          </section>
+        </main>
+        <aside id="page-toc"></aside>
+      </div>
+    </div>
+  </div>
+  <script>window.JETSMART_BASE = "../";</script>
+  <script src="../assets/js/nav-data.js"></script>
+  <script src="../assets/js/layout.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/icons.js"></script>
+</body>
+</html>

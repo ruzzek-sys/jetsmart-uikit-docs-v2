@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Colors - JetSmart UI Kit</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Encode+Sans:wght@100..900&family=Lato:wght@100;300;400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/custom.css">
+</head>
+<body data-page-id="colors">
+  <div id="sidebar-overlay" aria-hidden="true"></div>
+  <div id="app-shell">
+    <aside id="sidebar"></aside>
+    <div class="main-column">
+      <header id="topbar"></header>
+      <div class="content-wrap">
+        <main>
+          <header class="page-header">
+            <p class="page-header__eyebrow">Foundations</p>
+            <h1>Colors</h1>
+            <p>Nueve rampas primitivas, 77 tokens semánticos y 18 parejas de fondo y contenido ya validadas por contraste.</p>
+          </header>
+
+          <section class="doc-section">
+            <h2 id="doc-resumen">Resumen</h2>
+            <p>
+              El color del kit se organiza en tres niveles. Los <strong>primitivos de Tier 1</strong> son la paleta
+              cruda: rampas de 11 pasos sin rol y sin scope, que nunca se aplican sobre un componente. Los
+              <strong>tokens semánticos de Tier 2</strong> hacen alias a un primitivo y le suman las dos cosas que
+              importan al usarlo: el rol que representa y la propiedad donde puede aplicarse. La
+              <strong>aplicación</strong> en un componente apunta siempre a Tier 2, así que un color aplicado no
+              guarda un valor: guarda una referencia. Esa cadena es lo que permite cambiar la marca en un solo lugar.
+            </p>
+
+            <div class="ty-stats">
+              <div class="ty-stat">
+                <span class="ty-stat__value">9</span>
+                <span class="ty-stat__label">Rampas de 11 pasos</span>
+              </div>
+              <div class="ty-stat">
+                <span class="ty-stat__value">106</span>
+                <span class="ty-stat__label">Primitivos de color</span>
+              </div>
+              <div class="ty-stat">
+                <span class="ty-stat__value">77</span>
+                <span class="ty-stat__label">Tokens semánticos</span>
+              </div>
+              <div class="ty-stat">
+                <span class="ty-stat__value">18</span>
+                <span class="ty-stat__label">Parejas validadas</span>
+              </div>
+            </div>
+
+            <div class="ty-chain">
+              <div class="ty-chain__step">
+                <span class="ty-chain__tier">Tier 1 · Primitivo</span>
+                <code>color/brand/royal-navy-blue/500</code>
+                <span class="ty-chain__note">#153266 · valor crudo, sin rol</span>
+              </div>
+              <div class="ty-chain__arrow" aria-hidden="true">→</div>
+              <div class="ty-chain__step ty-chain__step--focus">
+                <span class="ty-chain__tier">Tier 2 · Semántico</span>
+                <code>color/background/brand-primary</code>
+                <span class="ty-chain__note">aquí viven el rol y el scope</span>
+              </div>
+              <div class="ty-chain__arrow" aria-hidden="true">→</div>
+              <div class="ty-chain__step">
+                <span class="ty-chain__tier">Aplicación</span>
+                <code>Fill del botón</code>
+                <span class="ty-chain__note">nunca al primitivo, nunca a un hex</span>
+              </div>
+              <div class="ty-chain__arrow" aria-hidden="true">→</div>
+              <div class="ty-chain__step">
+                <span class="ty-chain__tier">Producto</span>
+                <code>Todos los componentes que lo usan</code>
+                <span class="ty-chain__note">se actualizan solos</span>
+              </div>
+            </div>
+
+            <div class="ty-note">
+              <strong>El scope es parte del token:</strong> cada variable de Tier 2 declara en qué propiedades puede
+              aplicarse —<code>FRAME_FILL</code>, <code>SHAPE_FILL</code>, <code>TEXT_FILL</code>,
+              <code>STROKE_COLOR</code> o <code>EFFECT_COLOR</code>—. Si un token no aparece en el picker de una
+              propiedad, no es un error de Figma: es que no debe usarse ahí.
+            </div>
+          </section>
+
+          <section class="doc-section">
+            <h2 id="doc-primitivos">Tokens primitivos · Tier 1</h2>
+            <p>
+              Nueve rampas de 11 pasos —cuatro de marca, una neutra y cuatro de utilidad— más el blanco y el negro
+              absolutos. Los contrastes de cada tabla están calculados con la fórmula de WCAG 2.1 sobre los mismos
+              hex del archivo, y la columna de alias indica cuántos tokens semánticos referencian ese paso: es el
+              mejor indicador de qué está realmente en uso.
+            </p>
+            <div data-cl="ramps"></div>
+          </section>
+
+          <section class="doc-section">
+            <h2 id="doc-rampa">Cómo se lee una rampa</h2>
+            <p>
+              Todas las rampas comparten la misma estructura, y cada zona tiene un trabajo distinto. Saber qué hace
+              cada una evita elegir un paso por gusto visual.
+            </p>
+            <div data-cl="zones"></div>
+            <div class="ty-note ty-note--accent">
+              <strong>Regla única · Tier 1 → Tier 2:</strong> un primitivo nunca se aplica directo a un componente.
+              Solo alimenta un token semántico. Los pasos sin alias no son un olvido, son reserva: antes de crear un
+              token nuevo, revisa si ya existe uno semántico que resuelva el caso.
+            </div>
+          </section>
+
+          <section class="doc-section">
+            <h2 id="doc-semanticos">Tokens semánticos · Tier 2</h2>
+            <p>
+              Cuatro categorías que se corresponden con las cuatro propiedades que se pintan: fondo, contenido,
+              borde y sombra. La columna de primitivo muestra el alias real de cada token, así que la tabla también
+              se lee al revés: si cambia un paso de la rampa, ahí están los tokens afectados.
+            </p>
+            <div data-cl="semantic"></div>
+          </section>
+
+          <section class="doc-section">
+            <h2 id="doc-nombres">Anatomía del nombre</h2>
+            <p>
+              El nombre de un token de color dice dónde se aplica y con cuánto énfasis. Si tienes que abrir el
+              picker para saber qué hace, el nombre está mal usado.
+            </p>
+            <div data-cl="naming"></div>
+            <div class="ty-note">
+              <strong>Cómo se combinan:</strong> <code>background/brand-primary-subtle</code> es un fondo, de marca
+              primaria, en su versión tintada de baja énfasis. Y como todo fondo <code>-subtle</code> pide un
+              contenido <code>-strong</code>, su pareja es <code>content/brand-primary-strong</code>.
+            </div>
+          </section>
+
+          <section class="doc-section">
+            <h2 id="doc-pares">Pares fondo · contenido</h2>
+            <p>
+              Esta es la tabla que evita la mayoría de los errores de color: el fondo determina el contenido. No se
+              elige por gusto, se busca la pareja. Los tokens <code>on-*</code> existen justamente para que nadie
+              tenga que decidir el color del texto sobre un fondo sólido.
+            </p>
+            <div data-cl="pairs"></div>
+            <div class="ty-note ty-note--warn">
+              <strong>La única pareja que falla:</strong> <code>background/brand-tertiary</code> con
+              <code>content/on-brand-tertiary</code> queda en 2,66:1, porque bayou/500 es un color claro con
+              contenido blanco. Si el bloque lleva texto, usa el fondo <code>-subtle</code> con contenido
+              <code>-strong</code>, o el fondo <code>-strong</code> con contenido blanco.
+            </div>
+          </section>
+
+          <section class="doc-section">
+            <h2 id="doc-contraste">Cobertura de contraste</h2>
+            <p>
+              El paso 500 de una rampa es el color de identidad, no una garantía de contraste. Estos son los casos
+              donde el kit obliga a saltar a otro token, y los dos donde el bajo contraste es intencional.
+            </p>
+            <div data-cl="coverage"></div>
+
+            <div class="ty-info-grid">
+              <div class="ty-info">
+                <span class="ty-info__tag">1.4.3 · AA</span>
+                <h4>Texto normal</h4>
+                <p>4,5:1 contra su fondo. Es el mínimo de todo el texto de cuerpo, labels y captions del producto.</p>
+              </div>
+              <div class="ty-info">
+                <span class="ty-info__tag">1.4.3 · AA large</span>
+                <h4>Texto grande</h4>
+                <p>3:1 a partir de 18 px en Bold o 24 px en Regular. Aplica a displays y headings, no al cuerpo.</p>
+              </div>
+              <div class="ty-info">
+                <span class="ty-info__tag">1.4.11 · AA</span>
+                <h4>Componentes y bordes</h4>
+                <p>3:1 para bordes de input, contornos de control y el anillo de foco: todo lo que comunica estado.</p>
+              </div>
+              <div class="ty-info">
+                <span class="ty-info__tag">1.4.1 · A</span>
+                <h4>No solo color</h4>
+                <p>El color nunca puede ser el único portador de información. Siempre acompañado de texto o icono.</p>
+              </div>
+            </div>
+
+            <div class="ty-note ty-note--accent">
+              <strong>Regla corta:</strong> si el color comunica algo —estado, foco, acción— tiene que cumplir
+              contraste. Si solo decora, puede no cumplirlo.
+            </div>
+          </section>
+
+          <section class="doc-section">
+            <h2 id="doc-figma">Cómo usar en Figma</h2>
+
+            <h3>1 · Dónde están las variables</h3>
+            <p>
+              Todas las variables viven en el archivo <code>Jetsmart UI Kit v1.0</code> y se consumen por librería
+              desde los archivos de producto. Saber en qué colección buscar evita crear tokens duplicados.
+            </p>
+            <div data-cl="collections"></div>
+            <p class="ty-caption">
+              Tier 2: Color tiene un solo modo (Theme 1). La estructura de alias ya permite agregar un tema oscuro
+              más adelante sin tocar un solo componente.
+            </p>
+
+            <h3>2 · Cómo se aplican</h3>
+            <p>
+              La propiedad que estás pintando determina la categoría del token. Si el picker no te muestra el token
+              que buscas, casi siempre es porque lo estás aplicando en la propiedad equivocada.
+            </p>
+            <div data-cl="apply"></div>
+
+            <ul class="ty-rules">
+              <li class="ty-rules__do">Se aplica desde el icono de variable del panel, nunca escribiendo el hex en el campo de color.</li>
+              <li class="ty-rules__do">El icono es contenido: su Fill lleva un token <code>content/…</code>, igual que el texto que acompaña.</li>
+              <li class="ty-rules__dont">No se aplica un primitivo de Tier 1 sobre un componente, aunque el picker lo ofrezca desde la pestaña de la librería.</li>
+              <li class="ty-rules__dont">No se crea un token en Tier 3 si Tier 2 ya resuelve el caso: cada excepción es un color que después nadie encuentra.</li>
+            </ul>
+
+            <h3>3 · Cómo se actualizan</h3>
+            <p>
+              Un cambio de color se hace siempre en la variable, nunca en el componente. Dónde se edita depende de
+              si cambia el rol de un token o el color de la marca.
+            </p>
+            <div class="ty-items" data-cl="updates"></div>
+
+            <div class="ty-note ty-note--warn">
+              <strong>Lo que rompe la cadena:</strong> corregir el color directamente en el nodo —escribir un hex en
+              el Fill o desenlazar la variable— crea una excepción invisible. El componente se ve igual y pasa la
+              revisión, pero deja de heredar: el próximo cambio de marca no lo alcanza y hay que buscarlo a mano.
+            </div>
+
+            <div class="ty-note ty-note--warn">
+              <strong>Editar un primitivo mueve todo lo que lo referencia:</strong> cambiar el valor de una variable
+              de Tier 1 alcanza a cada token semántico que le hace alias, incluidos los que nadie quería tocar.
+              Antes de editarlo, revisa la columna de alias de su rampa y recalcula el contraste de las parejas
+              afectadas.
+            </div>
+          </section>
+
+          <section class="doc-section">
+            <h2 id="doc-practicas">Buenas y malas prácticas</h2>
+            <p>
+              Cinco pares de ejemplos que contrastan el uso correcto del sistema de color con el error equivalente.
+              Casi todos los errores comparten el mismo síntoma: el resultado se ve bien. El daño aparece después,
+              cuando hay que cambiar un color de marca, cuando alguien mide el contraste, o cuando el mismo
+              componente se usa sobre otro fondo. La regla de fondo es siempre la misma: la propiedad que se pinta
+              decide la categoría del token, el fondo decide el contenido y el contraste decide la variante.
+            </p>
+
+            <article class="ty-pair">
+              <p class="ty-pair__eyebrow">01 · La propiedad decide la categoría</p>
+              <h3>Elegir el token por lo que se pinta, no por el color que se quiere ver</h3>
+              <p>
+                Sobre un fondo de marca el texto lleva su par <code>on-*</code>, no un blanco genérico. Hoy
+                <code>content/on-brand-primary</code> y <code>content/inverse</code> se ven iguales —los dos
+                apuntan a blanco—, pero solo el primero está atado a ese fondo: si el azul de marca cambia, el
+                par se actualiza con él e inverse no.
+              </p>
+              <div class="ty-pair__grid">
+                <div class="ty-pair__col ty-pair__col--do">
+                  <p class="ty-pair__label">Texto con content/on-brand-primary</p>
+                  <div class="ty-pair__demo">
+                    <div class="cl-demo" style="background: var(--c-background-brand-primary); color: var(--c-content-on-brand-primary)">
+                      <span class="cl-demo__eyebrow">Tarifa Zero</span>
+                      <span class="cl-demo__title">Vuelo directo a Lima</span>
+                      <span class="cl-demo__text">Incluye equipaje de mano</span>
+                    </div>
+                  </div>
+                  <p class="cl-contrast" data-contrast="background/brand-primary|content/on-brand-primary"></p>
+                  <p class="ty-pair__styles">Fill: background/brand-primary · Texto: content/on-brand-primary</p>
+                  <p class="ty-pair__note">
+                    on-brand-primary es el contenido declarado para ese fondo. Si mañana brand-primary deja de
+                    admitir blanco, este token se re-apunta y el botón hereda el cambio sin que nadie lo toque.
+                  </p>
+                </div>
+                <div class="ty-pair__col ty-pair__col--dont">
+                  <p class="ty-pair__label">Texto con content/inverse (o white)</p>
+                  <div class="ty-pair__demo">
+                    <div class="cl-demo" style="background: var(--c-background-brand-primary); color: var(--c-content-inverse)">
+                      <span class="cl-demo__eyebrow">Tarifa Zero</span>
+                      <span class="cl-demo__title">Vuelo directo a Lima</span>
+                      <span class="cl-demo__text">Incluye equipaje de mano</span>
+                    </div>
+                  </div>
+                  <p class="cl-contrast" data-contrast="background/brand-primary|content/inverse"></p>
+                  <p class="ty-pair__styles">Fill: background/brand-primary · Texto: content/inverse</p>
+                  <p class="ty-pair__note">
+                    Hoy se ve idéntico: content/inverse y content/on-brand-primary apuntan los dos a blanco. Pero
+                    inverse es el contenido genérico sobre fondos oscuros, no el par de brand-primary. Si el azul
+                    de marca cambia a un tono que no admita blanco, on-brand-primary se actualiza con él e inverse
+                    no: el botón se queda con el color equivocado.
+                  </p>
+                </div>
+              </div>
+            </article>
+
+            <article class="ty-pair">
+              <p class="ty-pair__eyebrow">02 · Tier 1 no se aplica</p>
+              <h3>Un primitivo nunca toca un componente</h3>
+              <p>
+                Tier 1 es la paleta cruda: 106 colores sin significado. Tier 2 les da un rol. Aplicar un primitivo
+                directamente funciona a la primera y rompe el sistema en la segunda, porque el componente deja de
+                responder a los cambios de marca y de tema.
+              </p>
+              <div class="ty-pair__grid">
+                <div class="ty-pair__col ty-pair__col--do">
+                  <p class="ty-pair__label">El componente usa el token semántico</p>
+                  <div class="ty-pair__demo">
+                    <div class="cl-demo" style="background: var(--c-background-brand-secondary); color: var(--c-content-on-brand-secondary)">
+                      <span class="cl-demo__eyebrow">Oferta limitada</span>
+                      <span class="cl-demo__title">Reservar ahora</span>
+                    </div>
+                  </div>
+                  <p class="ty-pair__styles">Fill: background/brand-secondary → brand/medium-ruby/500</p>
+                  <p class="ty-pair__note">
+                    El componente apunta a Tier 2, y Tier 2 apunta a Tier 1. Cambiar el rojo de marca es editar un
+                    alias en un solo lugar.
+                  </p>
+                </div>
+                <div class="ty-pair__col ty-pair__col--dont">
+                  <p class="ty-pair__label">El componente usa el primitivo directo</p>
+                  <div class="ty-pair__demo">
+                    <div class="cl-demo" style="background: var(--p-brand-medium-ruby-500); color: var(--p-white)">
+                      <span class="cl-demo__eyebrow">Oferta limitada</span>
+                      <span class="cl-demo__title">Reservar ahora</span>
+                    </div>
+                  </div>
+                  <p class="ty-pair__styles">Fill: color/brand/medium-ruby/500 · Texto: color/white</p>
+                  <p class="ty-pair__note">
+                    Píxel por píxel es el mismo botón, y por eso pasa la revisión. Cuando la marca cambie de rojo,
+                    este botón se queda con el anterior y hay que buscarlo a mano.
+                  </p>
+                </div>
+              </div>
+            </article>
+
+            <article class="ty-pair">
+              <p class="ty-pair__eyebrow">03 · El fondo decide el contenido</p>
+              <h3>Cada fondo sólido ya tiene su pareja de contenido</h3>
+              <p>
+                Los tokens <code>on-*</code> existen para que nadie tenga que decidir el color del texto sobre un
+                fondo. Amber es el caso más claro del kit: su par es negro, aunque el instinto diga blanco porque el
+                fondo se ve saturado.
+              </p>
+              <div class="ty-pair__grid">
+                <div class="ty-pair__col ty-pair__col--do">
+                  <p class="ty-pair__label">Amber con contenido negro</p>
+                  <div class="ty-pair__demo">
+                    <div class="cl-demo" style="background: var(--c-background-brand-accent); color: var(--c-content-on-brand-accent)">
+                      <span class="cl-demo__eyebrow">Promoción</span>
+                      <span class="cl-demo__title">Oferta Zero · CLP 19.990</span>
+                    </div>
+                  </div>
+                  <p class="cl-contrast" data-contrast="background/brand-accent|content/on-brand-accent"></p>
+                  <p class="ty-pair__styles">background/brand-accent · content/on-brand-accent</p>
+                  <p class="ty-pair__note">
+                    content/on-brand-accent apunta a color/black. La pareja está declarada precisamente para no
+                    dejar esta decisión al ojo.
+                  </p>
+                </div>
+                <div class="ty-pair__col ty-pair__col--dont">
+                  <p class="ty-pair__label">Amber con contenido blanco</p>
+                  <div class="ty-pair__demo">
+                    <div class="cl-demo" style="background: var(--c-background-brand-accent); color: var(--c-content-inverse)">
+                      <span class="cl-demo__eyebrow">Promoción</span>
+                      <span class="cl-demo__title">Oferta Zero · CLP 19.990</span>
+                    </div>
+                  </div>
+                  <p class="cl-contrast" data-contrast="background/brand-accent|content/inverse"></p>
+                  <p class="ty-pair__styles">background/brand-accent · content/inverse</p>
+                  <p class="ty-pair__note">
+                    El texto todavía se adivina en una pantalla buena y desaparece con sol, con brillo bajo o para
+                    cualquier persona con baja visión.
+                  </p>
+                </div>
+              </div>
+            </article>
+
+            <article class="ty-pair">
+              <p class="ty-pair__eyebrow">04 · Subtle va con strong</p>
+              <h3>Sobre un fondo <code>-subtle</code>, el contenido va en <code>-strong</code></h3>
+              <p>
+                Los pasos claros de una rampa están pensados como fondo, no como color de contenido. Bayou y amber
+                son los casos críticos: su paso 500 sobre su paso 100 no supera 2,5:1. El kit lo resuelve con los
+                tokens <code>-strong</code>, que bajan a 700–900.
+              </p>
+              <div class="ty-pair__grid">
+                <div class="ty-pair__col ty-pair__col--do">
+                  <p class="ty-pair__label">Fondo tintado con contenido -strong</p>
+                  <div class="ty-pair__demo">
+                    <div class="cl-demo" style="background: var(--c-background-brand-tertiary-subtle); color: var(--c-content-brand-tertiary-strong)">
+                      <span class="cl-demo__eyebrow">Servicios incluidos</span>
+                      <span class="cl-demo__title">Equipaje de mano incluido</span>
+                    </div>
+                  </div>
+                  <p class="cl-contrast" data-contrast="background/brand-tertiary-subtle|content/brand-tertiary-strong"></p>
+                  <p class="ty-pair__styles">background/brand-tertiary-subtle · content/brand-tertiary-strong</p>
+                  <p class="ty-pair__note">
+                    El token -strong existe solo para esto. No es un tono más oscuro por gusto: es el paso que hace
+                    legible el bloque tintado.
+                  </p>
+                </div>
+                <div class="ty-pair__col ty-pair__col--dont">
+                  <p class="ty-pair__label">Fondo tintado con el color base</p>
+                  <div class="ty-pair__demo">
+                    <div class="cl-demo" style="background: var(--c-background-brand-tertiary-subtle); color: var(--c-content-brand-tertiary)">
+                      <span class="cl-demo__eyebrow">Servicios incluidos</span>
+                      <span class="cl-demo__title">Equipaje de mano incluido</span>
+                    </div>
+                  </div>
+                  <p class="cl-contrast" data-contrast="background/brand-tertiary-subtle|content/brand-tertiary"></p>
+                  <p class="ty-pair__styles">background/brand-tertiary-subtle · content/brand-tertiary</p>
+                  <p class="ty-pair__note">
+                    Los dos tokens son «bayou», así que el resultado parece coherente. Coherente y no legible: está
+                    lejos del 4,5:1 que exige el texto.
+                  </p>
+                </div>
+              </div>
+            </article>
+
+            <article class="ty-pair">
+              <p class="ty-pair__eyebrow">05 · El color no es el mensaje</p>
+              <h3>El estado se escribe; el color solo lo refuerza</h3>
+              <p>
+                WCAG 1.4.1 prohíbe usar el color como único portador de información. Alrededor de un 8% de los
+                hombres no distingue el rojo del verde, y nadie distingue nada con la pantalla en modo lectura o
+                bajo el sol.
+              </p>
+              <div class="ty-pair__grid">
+                <div class="ty-pair__col ty-pair__col--do">
+                  <p class="ty-pair__label">Icono, texto y color juntos</p>
+                  <div class="ty-pair__demo">
+                    <div class="cl-demo" style="background: var(--c-background-utility-error-subtle); color: var(--c-content-utility-error); border: 1px solid var(--c-border-utility-error)">
+                      <span class="cl-demo__eyebrow"><span class="cl-demo__icon">✕</span> Pago rechazado</span>
+                      <span class="cl-demo__text">Revisa los datos de tu tarjeta o intenta con otro medio de pago.</span>
+                      <span class="cl-field">
+                        <span class="cl-field__label">Número de tarjeta</span>
+                        <span class="cl-field__value">4242 4242 4242 424</span>
+                      </span>
+                    </div>
+                  </div>
+                  <p class="cl-contrast" data-contrast="background/utility-error-subtle|content/utility-error"></p>
+                  <p class="ty-pair__styles">background/utility-error-subtle · content/utility-error · border/utility-error</p>
+                  <p class="ty-pair__note">
+                    Tres señales redundantes: el icono, la frase y el color. Si se quita cualquiera de las tres, el
+                    mensaje sigue entendiéndose.
+                  </p>
+                </div>
+                <div class="ty-pair__col ty-pair__col--dont">
+                  <p class="ty-pair__label">Solo el borde rojo indica el error</p>
+                  <div class="ty-pair__demo">
+                    <div class="cl-demo" style="background: var(--c-background-primary); border: 2px solid var(--c-border-utility-error)">
+                      <span class="cl-field__label">Número de tarjeta</span>
+                      <span class="cl-field__value">4242 4242 4242 424</span>
+                    </div>
+                  </div>
+                  <p class="ty-pair__styles">border/utility-error · sin content/utility-error</p>
+                  <p class="ty-pair__note">
+                    El campo está mal y el usuario no sabe por qué. Además, en escala de grises el borde rojo y el
+                    borde por defecto son casi el mismo gris.
+                  </p>
+                </div>
+              </div>
+            </article>
+          </section>
+        </main>
+        <aside id="page-toc"></aside>
+      </div>
+    </div>
+  </div>
+  <script>window.JETSMART_BASE = "../";</script>
+  <script src="../assets/js/nav-data.js"></script>
+  <script src="../assets/js/layout.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/color.js"></script>
+</body>
+</html>

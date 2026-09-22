@@ -1,0 +1,4 @@
+# Normaliza los saltos de línea: LF en el repo, nativo en el working copy
+* text=auto
+
+*.png binary
