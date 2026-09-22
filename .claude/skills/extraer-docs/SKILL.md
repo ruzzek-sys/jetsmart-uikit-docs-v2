@@ -64,6 +64,12 @@ Imprime el bloque `<p>subtítulo</p>` + `<div class="ty-table-wrap">…</table><
 listo para pegar en la sección Propiedades. Sin `--html` imprime el JSON, útil para
 revisar antes de escribir.
 
+**Una página puede documentar más de un componente relacionado** (ej. Avatar Selector
+trae `Docs · Avatar` y `Docs · Avatar Selector`). El script los detecta todos y
+devuelve una entrada por cada uno. Con `--html`, si hay más de uno antepone un `<h3>`
+con el nombre a cada tabla; con uno solo no pone nada, como siempre. Revisa el JSON
+primero para saber cuántos vienen.
+
 El script ya resuelve:
 - la estructura `Frame · <Prop>` con sus tres `<text>` (nombre, tipo, descripción),
 - los tipos `VARIANT`/`TEXT`/`BOOLEAN` → `Variant`/`Text`/`Boolean` (Title Case, que es
@@ -123,7 +129,13 @@ en el Resumen:
    - si era de **familia**, nombra el compuesto y sus partes en `<code>` y recién
      después menciona qué recorren las columnas y las filas de la matriz.
 
-**Propiedades** — pega tal cual la salida del paso 3.
+**Propiedades** — pega tal cual la salida del paso 3. Si vinieron varios componentes,
+quedan las tablas una tras otra, cada una bajo su `<h3>`.
+
+**Si la página trae varios componentes**, el Resumen los trata juntos: explica en un
+párrafo qué es cada uno y cómo se relacionan, y en el segundo pon la cobertura de
+variantes de cada uno. No hagas una sección por componente: el kit tiene una sola
+página para el conjunto.
 
 Reemplaza sólo los `<p class="coming-soon">` de esas dos secciones. La estructura
 queda así:
@@ -148,6 +160,11 @@ queda así:
             <p class="coming-soon">Anatomía pendiente de documentar desde Figma.</p>
           </section>
 ```
+
+**Cuidado con los ejes de la matriz:** a veces el rótulo del eje no coincide con el
+nombre real de la propiedad. En Avatar Selector la matriz dice `STATE` pero la prop
+del componente es `Expansion`. Manda el nombre del section Docs, que es el que ve el
+diseñador en el panel; si los ves distintos, avísale al usuario.
 
 Los nombres de las propiedades van **en inglés**, tal como aparecen en Figma
 (`Show Button Secondary`, no «Mostrar botón secundario»): tienen que calzar con el

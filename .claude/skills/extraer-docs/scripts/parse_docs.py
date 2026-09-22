@@ -52,14 +52,23 @@ def limpiar(s):
 
 
 def extraer(xml):
-    m = re.search(r'<section\b[^>]*name="Docs · ([^"]+)"[^>]*>(.*?)</section>', xml, re.S)
-    if not m:
+    """Devuelve una lista con una entrada por cada section `Docs · …` de la página.
+
+    Una misma página puede documentar varios componentes relacionados —Avatar y
+    Avatar Selector, por ejemplo— así que siempre devuelve lista, aunque traiga uno.
+    """
+    secciones = re.findall(
+        r'<section\b[^>]*name="Docs · ([^"]+)"[^>]*>(.*?)</section>', xml, re.S
+    )
+    if not secciones:
         raise SystemExit(
-            'No encontré un <section name="Docs · ...">. '
+            'No encontré ningún <section name="Docs · ...">. '
             'Revisa que el nodeId apunte a la página del componente, no a la matriz.'
         )
-    componente, cuerpo = limpiar(m.group(1)), m.group(2)
+    return [_extraer_seccion(limpiar(n), c) for n, c in secciones]
 
+
+def _extraer_seccion(componente, cuerpo):
     subtitulo = ''
     props = []
     # cada propiedad vive en un <frame name="Frame · X"> con 3 <text> hijos
@@ -81,11 +90,13 @@ def extraer(xml):
         })
 
     if not props:
-        raise SystemExit('Encontré el section Docs pero ninguna propiedad. Revisa la estructura.')
+        raise SystemExit(
+            f'El section «Docs · {componente}» no lista ninguna propiedad. Revisa la estructura.'
+        )
     return {'componente': componente, 'subtitulo': subtitulo, 'props': props}
 
 
-def a_html(d):
+def a_html(d, con_titulo=False):
     filas = '\n'.join(
         '                  <tr><td><strong>{n}</strong></td><td><code>{t}</code></td>'
         '<td class="ty-muted">{d}</td></tr>'.format(
@@ -93,8 +104,13 @@ def a_html(d):
         )
         for p in d['props']
     )
+    # con varios componentes en la página, cada tabla se rotula con su nombre
+    encabezado = (
+        '            <h3>{c}</h3>\n'.format(c=html.escape(d['componente'])) if con_titulo else ''
+    )
     return (
-        '            <p>{sub}</p>\n'
+        encabezado
+        + '            <p>{sub}</p>\n'
         '            <div class="ty-table-wrap">\n'
         '              <table class="ty-table">\n'
         '                <thead>\n'
@@ -115,6 +131,6 @@ if __name__ == '__main__':
         raise SystemExit(f'No existe el archivo: {args[0]}')
     d = extraer(cargar(args[0]))
     if '--html' in sys.argv:
-        print(a_html(d))
+        print('\n'.join(a_html(x, con_titulo=len(d) > 1) for x in d))
     else:
         print(json.dumps(d, ensure_ascii=False, indent=2))
