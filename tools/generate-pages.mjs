@@ -108,7 +108,7 @@ const SECTIONS = [
       { label: "Action Card", slug: "action-card", desc: "Tarjeta con una acción principal destacada.", nodes: ["5167:54342"], live: true },
       { label: "Avatar Selector", slug: "avatar-selector", desc: "Selector de avatar para perfiles de usuario.", nodes: ["5167:54454", "5167:54480"], live: true },
       { label: "Badge", slug: "badge", desc: "Etiqueta compacta para estados y conteos.", nodes: ["5167:54501"], live: true },
-      { label: "Banner", slug: "banner", desc: "Mensaje destacado de ancho completo.", nodes: ["5167:55805", "5167:55812"], live: true },
+      { label: "Banner", slug: "banner", desc: "Banner promocional y banner del Club.", nodes: ["5167:55805", "5167:55812"], live: true },
       { label: "Breadcrumb", slug: "breadcrumb", desc: "Ruta de navegación jerárquica.", nodes: ["5167:59958"], live: true },
       { label: "Buttons", slug: "buttons", desc: "Botones de acción en sus distintas variantes y tamaños.", nodes: ["3570:80903", "5167:79401"], live: true },
       { label: "Calendar", slug: "calendar", desc: "Calendario para selección de fechas.", nodes: ["5167:80655"], live: true },

@@ -12,20 +12,15 @@ section `Docs · <Componente>` que vive en la página de Figma del componente.
 Una página de **un solo componente** tiene exactamente dos secciones: **Resumen** y
 **Propiedades**. No agregues ninguna otra.
 
-Una página de Figma puede traer **varios componentes**, y entonces hay dos formas de
-resolverla. Cuál corresponde se decide por los nombres (paso 5):
+Cuando la página de Figma trae **varios componentes** —varios frames `Live Preview` y
+varios sections `Docs ·`— van **separados, uno por componente**, cada uno con su propio
+título, descripción, Live Preview, Resumen y Propiedades (paso 5).
 
-- **Familia** — los componentes son variantes del concepto que nombra la página
-  (Banner → «Promotional Banner» y «Membership Banner»; Avatar Selector → «Avatar» y
-  «Avatar Selector»). Siguen siendo dos secciones: un Resumen conjunto y una
-  Propiedades con un `<h3>` por componente.
-- **Componentes distintos** — cada uno tiene identidad propia y su nombre no deriva del
-  de la página (Tabs → «Chips», «Toggle Tab», «Tab Bar / Searchbox», «Tab Bar Filter»,
-  «Tab Underline Item»). Ahí va un bloque completo por componente. Referencia:
-  `components/tabs.html`.
-
-Si dudas entre las dos, pregunta antes de escribir: rehacer la estructura después es
-mucho más caro que la pregunta.
+Esto vale siempre, aunque los componentes sean parientes: da igual que compartan el
+nombre de la página (Banner → «Promotional Banner» y «Membership Banner») o que uno sea
+parte del otro (Tabs → «Chips» y las barras que se arman con él). No juntes varios
+componentes bajo un mismo Resumen. Referencias: `components/tabs.html` (cinco) y
+`components/banner.html` (dos).
 
 ## Argumentos
 
@@ -168,13 +163,8 @@ en el Resumen:
 
 **Propiedades** — pega tal cual la salida del paso 3.
 
-**Si la página trae varios componentes de una familia**, el Resumen los trata juntos:
-explica en un párrafo qué es cada uno y cómo se relacionan, y en el segundo pon la
-cobertura de variantes de cada uno. Las tablas quedan una tras otra bajo su `<h3>`.
-Ejemplo: `components/banner.html`.
-
-**Si son componentes distintos**, va un bloque completo por componente, en el orden del
-canvas, cada uno en su propia `<section class="doc-section">`:
+**Si la página trae varios componentes**, va un bloque completo por cada uno, en el
+orden del canvas, cada uno en su propia `<section class="doc-section">`:
 
 1. `<h2 id="doc-<slug>">` con el nombre del componente.
 2. Un párrafo de descripción corta: qué es y para qué sirve.
@@ -196,7 +186,7 @@ Actualiza además el manifiesto, porque la página ya no tiene un solo preview:
   generador pisa el cambio.
 
 En una página de un componente reemplaza sólo los `<p class="coming-soon">` de esas
-dos secciones; en una de componentes distintos se reescribe el cuerpo entero. La
+dos secciones; en una de varios componentes se reescribe el cuerpo entero. La
 estructura queda así:
 
 ```html
@@ -215,7 +205,7 @@ estructura queda así:
           </section>
 ```
 
-Y así queda una página de componentes distintos:
+Y así queda una página de varios componentes:
 
 ```html
           <section class="doc-section">
@@ -269,7 +259,7 @@ El iframe del Live Preview sale en blanco en headless — es normal, no es un er
 ## Convenciones del kit que debes respetar
 
 - Títulos de sección en español: **Resumen** y **Propiedades**, con ids
-  `doc-resumen` y `doc-propiedades`. En una página de componentes distintos, el `h2`
+  `doc-resumen` y `doc-propiedades`. En una página de varios componentes, el `h2`
   es el nombre del componente (`doc-<slug>`) y los ids de las subsecciones llevan su
   prefijo: `doc-<slug>-resumen`, `doc-<slug>-propiedades`.
 - Todo heading que deba salir en el índice necesita un id que empiece con `doc-`.
