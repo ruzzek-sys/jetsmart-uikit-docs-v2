@@ -27,6 +27,7 @@
               <iframe
                 title="Inline Message - Figma preview"
                 src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FdKd6jNGAnng8hIV5MS4Avd%2FJetsmart-UI-Kit-v1.0%3Fnode-id%3D5550-107797"
+                loading="lazy"
                 allowfullscreen>
               </iframe>
             </div>
@@ -34,12 +35,26 @@
 
           <section class="doc-section">
             <h2 id="doc-resumen">Resumen</h2>
-            <p class="coming-soon">Documentación pendiente. Edita esta página para agregar contenido.</p>
+            <p>Inline Message es un mensaje contextual que vive dentro del contenido, junto al bloque al que se refiere, para informar, advertir, confirmar o señalar un error sin interrumpir el flujo. Se compone de un icono y un texto editable, y puede ir en una sola línea compacta o expandido en varias líneas.</p>
+            <p>10 variantes = <code>Type</code> (5) × <code>Layout</code> (2). <code>Type</code> recorre las filas y <code>Layout</code> las columnas porque el componente mide 642 de ancho: con <code>Type</code> en columnas la matriz superaría los 3.800 px.</p>
           </section>
 
           <section class="doc-section">
             <h2 id="doc-propiedades">Propiedades</h2>
-            <p class="coming-soon">Propiedades pendientes de documentar desde Figma.</p>
+            <p>Propiedades configurables del componente Inline Message.</p>
+            <div class="ty-table-wrap">
+              <table class="ty-table">
+                <thead>
+                  <tr><th>Propiedad</th><th>Tipo</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Type</strong></td><td><code>Variant</code></td><td class="ty-muted">Define el color y la semántica del mensaje: Default (neutro), Info (azul), Warning (amarillo), Success (verde) o Error (rojo). Default es el valor por defecto.</td></tr>
+                  <tr><td><strong>Layout</strong></td><td><code>Variant</code></td><td class="ty-muted">Controla el formato del mensaje. Inline muestra una sola línea compacta con el texto truncado; Block expande el componente y muestra el mensaje completo en varias líneas. Inline es el valor por defecto.</td></tr>
+                  <tr><td><strong>Message</strong></td><td><code>Text</code></td><td class="ty-muted">Texto del mensaje que se muestra dentro del componente. Es completamente editable y no tiene un límite de caracteres definido por el componente.</td></tr>
+                  <tr><td><strong>Icon</strong></td><td><code>Instance</code></td><td class="ty-muted">Icono que acompaña al mensaje. Por defecto usa el icono de información (Font Awesome) sin importar el Type seleccionado — no cambia automáticamente según el color, pero puede reemplazarse por cualquier otro icono mediante instance swap.</td></tr>
+                </tbody>
+              </table>
+            </div>
           </section>
 
         </main>

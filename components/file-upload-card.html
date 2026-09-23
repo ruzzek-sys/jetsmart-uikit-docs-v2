@@ -18,7 +18,7 @@
           <header class="page-header">
             <p class="page-header__eyebrow">Components</p>
             <h1>File Upload Card</h1>
-            <p>Tarjeta para carga de archivos.</p>
+            <p>Tarjeta para que el pasajero suba un documento (PDF, JPG o PNG) y vea el estado de la carga.</p>
           </header>
 
           <section class="figma-preview">
@@ -27,6 +27,7 @@
               <iframe
                 title="File Upload Card - Figma preview"
                 src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FdKd6jNGAnng8hIV5MS4Avd%2FJetsmart-UI-Kit-v1.0%3Fnode-id%3D5279-113127"
+                loading="lazy"
                 allowfullscreen>
               </iframe>
             </div>
@@ -34,12 +35,23 @@
 
           <section class="doc-section">
             <h2 id="doc-resumen">Resumen</h2>
-            <p class="coming-soon">Documentación pendiente. Edita esta página para agregar contenido.</p>
+            <p>File Upload Card es la tarjeta con la que el pasajero sube un archivo de respaldo, como un certificado. Muestra el nombre del pasajero con una etiqueta de estado y, debajo, una zona de arrastre que pasa a confirmar el archivo cargado o a indicar que fue rechazado.</p>
+            <p>4 variantes = <code>State</code> (4), matriz completa. Un eje: el estado de carga del archivo (<code>Default</code>, <code>Complete</code>, <code>Error</code> y <code>Disabled</code>). El componente no expone propiedades de instancia, así que el nombre del pasajero y los textos se editan entrando a las capas de la instancia. Junto a la matriz está <code>Attached File Chip</code>, un componente aparte de la tarjeta.</p>
           </section>
 
           <section class="doc-section">
             <h2 id="doc-propiedades">Propiedades</h2>
-            <p class="coming-soon">Propiedades pendientes de documentar desde Figma.</p>
+            <p>Propiedades del componente File Upload Card.</p>
+            <div class="ty-table-wrap">
+              <table class="ty-table">
+                <thead>
+                  <tr><th>Propiedad</th><th>Tipo</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>State</strong></td><td><code>Variant</code></td><td class="ty-muted">Default muestra la zona de arrastre para subir un archivo (PDF, JPG o PNG, máx. 5 MB). Complete confirma la carga mostrando el nombre del archivo subido. Error resalta el borde en rojo e indica que el archivo no es válido. Disabled atenúa el componente para bloquear la interacción. Default es el valor por defecto.</td></tr>
+                </tbody>
+              </table>
+            </div>
           </section>
 
         </main>

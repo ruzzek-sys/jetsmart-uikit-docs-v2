@@ -18,7 +18,7 @@
           <header class="page-header">
             <p class="page-header__eyebrow">Components</p>
             <h1>Flag Selector</h1>
-            <p>Selector de país e idioma.</p>
+            <p>Disparador del selector de país, con la bandera y el nombre del país seleccionado.</p>
           </header>
 
           <section class="figma-preview">
@@ -27,6 +27,7 @@
               <iframe
                 title="Flag Selector - Figma preview"
                 src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FdKd6jNGAnng8hIV5MS4Avd%2FJetsmart-UI-Kit-v1.0%3Fnode-id%3D5300-118764"
+                loading="lazy"
                 allowfullscreen>
               </iframe>
             </div>
@@ -34,12 +35,25 @@
 
           <section class="doc-section">
             <h2 id="doc-resumen">Resumen</h2>
-            <p class="coming-soon">Documentación pendiente. Edita esta página para agregar contenido.</p>
+            <p>Flag Selector es el disparador del selector de país: muestra la bandera y el nombre del país seleccionado junto a un ícono de despliegue. Se usa en la barra de navegación y en el menú mobile; el panel que abre está documentado en Dropdown Menu.</p>
+            <p>6 variantes = <code>Style</code> (2) × <code>Size</code> (3), matriz completa. <code>Outline</code> lleva un borde de 1 px con contorno visible y <code>Transparent</code> no tiene borde ni fondo propio; <code>Small</code>, <code>Medium</code> y <code>Large</code> miden 36, 44 y 52 px de alto, con texto de 14, 16 y 18.</p>
           </section>
 
           <section class="doc-section">
             <h2 id="doc-propiedades">Propiedades</h2>
-            <p class="coming-soon">Propiedades pendientes de documentar desde Figma.</p>
+            <p>Propiedades configurables del componente Flag Selector.</p>
+            <div class="ty-table-wrap">
+              <table class="ty-table">
+                <thead>
+                  <tr><th>Propiedad</th><th>Tipo</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Style</strong></td><td><code>Variant</code></td><td class="ty-muted">Outline muestra un borde y fondo blanco alrededor del selector. Transparent elimina el borde y el fondo, dejando visible solo la bandera, el texto y el ícono. Outline es el valor por defecto.</td></tr>
+                  <tr><td><strong>Size</strong></td><td><code>Variant</code></td><td class="ty-muted">Ajusta el tamaño del ícono de bandera, el texto y el padding interno del selector, de Small (compacto) a Large (mayor jerarquía visual). Small es el valor por defecto.</td></tr>
+                  <tr><td><strong>Label</strong></td><td><code>Text</code></td><td class="ty-muted">Texto editable que muestra el nombre del país seleccionado junto al ícono de bandera. «Chile» es el valor por defecto.</td></tr>
+                </tbody>
+              </table>
+            </div>
           </section>
 
         </main>

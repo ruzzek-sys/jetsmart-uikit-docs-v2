@@ -18,7 +18,7 @@
           <header class="page-header">
             <p class="page-header__eyebrow">Components</p>
             <h1>FAQ Panel</h1>
-            <p>Panel de preguntas frecuentes.</p>
+            <p>Bloque de preguntas frecuentes con título y filas de pregunta que se expanden para mostrar la respuesta.</p>
           </header>
 
           <section class="figma-preview">
@@ -27,6 +27,7 @@
               <iframe
                 title="FAQ Panel - Figma preview"
                 src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FdKd6jNGAnng8hIV5MS4Avd%2FJetsmart-UI-Kit-v1.0%3Fnode-id%3D5279-112230"
+                loading="lazy"
                 allowfullscreen>
               </iframe>
             </div>
@@ -34,12 +35,24 @@
 
           <section class="doc-section">
             <h2 id="doc-resumen">Resumen</h2>
-            <p class="coming-soon">Documentación pendiente. Edita esta página para agregar contenido.</p>
+            <p>FAQ Panel agrupa preguntas frecuentes bajo un título. Cada pregunta es un <code>FAQ Item</code> que se muestra colapsado, solo con la pregunta, o desplegado con su respuesta debajo, que puede ser texto, una tabla de precios u otros bloques de contenido.</p>
+            <p>La familia son tres componentes: <code>FAQ Question Row</code> es el átomo, la fila con la pregunta y el botón de ícono; <code>FAQ Item</code> lo reutiliza como instancia y es el component set con el eje <code>Type</code>; y <code>FAQ Panel</code> es el bloque compuesto, con título, que reúne varias filas. La matriz recorre en columnas los tres componentes y en filas las 2 variantes de <code>Type</code>: <code>Row</code>, solo la fila de pregunta (68 px), y <code>Accordion</code>, pregunta más contenido desplegado (544 px).</p>
           </section>
 
           <section class="doc-section">
             <h2 id="doc-propiedades">Propiedades</h2>
-            <p class="coming-soon">Propiedades pendientes de documentar desde Figma.</p>
+            <p>Lo que se cambia desde la instancia sin salir de la variante.</p>
+            <div class="ty-table-wrap">
+              <table class="ty-table">
+                <thead>
+                  <tr><th>Propiedad</th><th>Tipo</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Type</strong></td><td><code>Variant</code></td><td class="ty-muted">Row: fila colapsada que muestra solo la pregunta con un ícono «+». Accordion: expande la fila y revela el contenido de la respuesta debajo, cambiando el ícono a «−». Row es el valor por defecto.</td></tr>
+                  <tr><td><strong>Answer Content</strong></td><td><code>Slot</code></td><td class="ty-muted">Contenido de la respuesta que aparece debajo de la pregunta cuando Type está en Accordion: texto explicativo, tabla de precios u otros bloques de contenido según el caso.</td></tr>
+                </tbody>
+              </table>
+            </div>
           </section>
 
         </main>

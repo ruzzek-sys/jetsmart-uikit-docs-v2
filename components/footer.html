@@ -18,7 +18,7 @@
           <header class="page-header">
             <p class="page-header__eyebrow">Components</p>
             <h1>Footer</h1>
-            <p>Pie de página del sitio.</p>
+            <p>Pie de página del sitio, en versión de escritorio y móvil. La familia se arma con cinco maestros; dos de ellos exponen propiedades: la columna de enlaces y el footer móvil.</p>
           </header>
 
           <section class="figma-preview">
@@ -27,19 +27,55 @@
               <iframe
                 title="Footer - Figma preview"
                 src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FdKd6jNGAnng8hIV5MS4Avd%2FJetsmart-UI-Kit-v1.0%3Fnode-id%3D5550-103925"
+                loading="lazy"
                 allowfullscreen>
               </iframe>
             </div>
           </section>
 
           <section class="doc-section">
-            <h2 id="doc-resumen">Resumen</h2>
-            <p class="coming-soon">Documentación pendiente. Edita esta página para agregar contenido.</p>
+            <h2 id="doc-footer-item">Footer Item</h2>
+            <p>Columna de enlaces del footer de escritorio: un título y la lista de links que va debajo. Es la pieza que se repite dentro de <code>Footer Desktop</code>.</p>
+
+            <h3 id="doc-footer-item-resumen">Resumen</h3>
+            <p>Agrupa bajo un título (por defecto «JetSMART») los enlaces de una sección del sitio. El listado vive en un slot, así que cada columna lleva la cantidad de enlaces que necesite.</p>
+            <p>Es parte de la familia Footer: <code>Footer Summary</code> (cinta superior con logo y legales), <code>Footer Desktop</code> (footer completo de escritorio) y <code>Footer Item</code> (columna de enlaces) cubren el escritorio; <code>Footer Mobile</code> y <code>Accordion Mobile</code> cubren el móvil. En total son 5 componentes: 4 simples y un set de variantes, 6 nodos en total.</p>
+
+            <h3 id="doc-footer-item-propiedades">Propiedades</h3>
+            <p>Propiedades configurables del componente Footer Item.</p>
+            <div class="ty-table-wrap">
+              <table class="ty-table">
+                <thead>
+                  <tr><th>Propiedad</th><th>Tipo</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Menu Items</strong></td><td><code>Slot</code></td><td class="ty-muted">Reemplaza el listado de enlaces de la columna. La cantidad de ítems no es fija: en el archivo hay instancias con 4, 5, 6 y 7 enlaces. Por defecto trae 5 enlaces de ejemplo (Quiénes somos, Nuestro modelo, Sala de prensa, Blog SMART, Trabaja con nosotros) bajo el título «JetSMART».</td></tr>
+                </tbody>
+              </table>
+            </div>
           </section>
 
           <section class="doc-section">
-            <h2 id="doc-propiedades">Propiedades</h2>
-            <p class="coming-soon">Propiedades pendientes de documentar desde Figma.</p>
+            <h2 id="doc-footer-mobile">Footer Mobile</h2>
+            <p>Footer completo para móvil: menú de enlaces en acordeón, íconos de redes sociales, copyright y sellos.</p>
+
+            <h3 id="doc-footer-mobile-resumen">Resumen</h3>
+            <p>Reúne en una sola columna de 428 px lo que en escritorio se reparte entre <code>Footer Desktop</code> y <code>Footer Summary</code>. El menú y la fila de redes sociales se pueden apagar desde la instancia; el copyright y los sellos quedan siempre.</p>
+            <p>Sus secciones de enlaces se arman con <code>Accordion Mobile</code>, la sección plegable del menú móvil, que es el único set de variantes de la familia: en la matriz, el eje <code>IsExpanded</code> recorre <code>true</code> (panel de enlaces desplegado) y <code>false</code> (plegado); en el componente la propiedad se llama <code>Expansion</code>, con los valores Expanded y Collapsed.</p>
+
+            <h3 id="doc-footer-mobile-propiedades">Propiedades</h3>
+            <p>Propiedades configurables del componente Footer Mobile.</p>
+            <div class="ty-table-wrap">
+              <table class="ty-table">
+                <thead>
+                  <tr><th>Propiedad</th><th>Tipo</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Show Menu</strong></td><td><code>Boolean</code></td><td class="ty-muted">Determina si se muestra el acordeón de enlaces de navegación (Quiénes somos, Viaja con JetSMART, Beneficios y alianzas, Centro de ayuda, Información legal y transparencia). True muestra el menú completo; false lo oculta y deja solo los íconos sociales, el copyright y los sellos. True es el valor por defecto.</td></tr>
+                  <tr><td><strong>Show Social Media</strong></td><td><code>Boolean</code></td><td class="ty-muted">Determina si se muestra la fila de íconos de redes sociales (Instagram, Facebook, LinkedIn, X, TikTok) sobre la línea de copyright. True los muestra; false los oculta y deja solo el menú, el copyright y los sellos. True es el valor por defecto.</td></tr>
+                </tbody>
+              </table>
+            </div>
           </section>
 
         </main>

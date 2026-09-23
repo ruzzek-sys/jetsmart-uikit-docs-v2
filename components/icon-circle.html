@@ -18,7 +18,7 @@
           <header class="page-header">
             <p class="page-header__eyebrow">Components</p>
             <h1>Icon Circle</h1>
-            <p>Icono contenido en un círculo.</p>
+            <p>Número o ícono contenido en un círculo, para marcar pasos o destacar un ícono.</p>
           </header>
 
           <section class="figma-preview">
@@ -34,12 +34,29 @@
 
           <section class="doc-section">
             <h2 id="doc-resumen">Resumen</h2>
-            <p class="coming-soon">Documentación pendiente. Edita esta página para agregar contenido.</p>
+            <p>Icon Circle es un círculo que contiene un número o un ícono. Sirve para numerar pasos de una secuencia o para destacar un ícono dentro de una card o un listado, y puede llevar una etiqueta de texto debajo.</p>
+            <p>54 variantes = <code>Style</code> (3) × <code>Type</code> (3) × <code>Size</code> (3) × <code>Content</code> (2). <code>Value</code>, <code>Label</code> y <code>Show Label</code> son propiedades de instancia: se configuran en cada instancia y no multiplican el número de variantes.</p>
           </section>
 
           <section class="doc-section">
             <h2 id="doc-propiedades">Propiedades</h2>
-            <p class="coming-soon">Propiedades pendientes de documentar desde Figma.</p>
+            <p>Propiedades editables del componente Icon Circle.</p>
+            <div class="ty-table-wrap">
+              <table class="ty-table">
+                <thead>
+                  <tr><th>Propiedad</th><th>Tipo</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Style</strong></td><td><code>Variant</code></td><td class="ty-muted">Solid rellena el círculo con color sólido. Outline deja el círculo transparente con un borde del color de Type. Ghost elimina el círculo por completo, mostrando solo el número o ícono. Solid es el valor por defecto.</td></tr>
+                  <tr><td><strong>Type</strong></td><td><code>Variant</code></td><td class="ty-muted">Define la paleta de color: Primary usa azul marino oscuro, Tertiary usa turquesa/teal, Neutral usa gris. Primary es el valor por defecto.</td></tr>
+                  <tr><td><strong>Size</strong></td><td><code>Variant</code></td><td class="ty-muted">Controla el tamaño del círculo: Large (52px), Medium (44px) o Small (36px). Large es el valor por defecto.</td></tr>
+                  <tr><td><strong>Content</strong></td><td><code>Variant</code></td><td class="ty-muted">Number muestra un número dentro del círculo. Icon muestra un ícono en su lugar. Number es el valor por defecto.</td></tr>
+                  <tr><td><strong>Value</strong></td><td><code>Text</code></td><td class="ty-muted">Texto o número que se muestra dentro del círculo cuando Content está en Number. El valor por defecto es «1».</td></tr>
+                  <tr><td><strong>Label</strong></td><td><code>Text</code></td><td class="ty-muted">Texto que aparece debajo del círculo cuando Show Label está activado. El valor por defecto es «Paso».</td></tr>
+                  <tr><td><strong>Show Label</strong></td><td><code>Boolean</code></td><td class="ty-muted">Muestra u oculta el texto de Label debajo del círculo. Off (por defecto) lo oculta; On lo revela.</td></tr>
+                </tbody>
+              </table>
+            </div>
           </section>
 
         </main>

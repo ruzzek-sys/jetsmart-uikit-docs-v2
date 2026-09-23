@@ -18,7 +18,7 @@
           <header class="page-header">
             <p class="page-header__eyebrow">Components</p>
             <h1>Dropdown Menu</h1>
-            <p>Menú desplegable de opciones.</p>
+            <p>Paneles desplegables de opciones, armados con filas <code>Dropdown Option</code>.</p>
           </header>
 
           <section class="figma-preview">
@@ -27,6 +27,7 @@
               <iframe
                 title="Dropdown Menu - Figma preview"
                 src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FdKd6jNGAnng8hIV5MS4Avd%2FJetsmart-UI-Kit-v1.0%3Fnode-id%3D5230-109302"
+                loading="lazy"
                 allowfullscreen>
               </iframe>
             </div>
@@ -34,12 +35,33 @@
 
           <section class="doc-section">
             <h2 id="doc-resumen">Resumen</h2>
-            <p class="coming-soon">Documentación pendiente. Edita esta página para agregar contenido.</p>
+            <p><code>Dropdown Option</code> es la fila de un menú desplegable: una opción con texto, un elemento leading (ícono o bandera) y, opcionalmente, número de orden, código, badge contador y chevron. Es el átomo con que se arman todos los paneles de Dropdown Menu —<code>Dropdown Panel</code>, <code>Dropdown Step Selector</code>, <code>Dropdown Account Menu</code>, <code>Dropdown Flag Selector</code>, <code>Dropdown Destination Selector</code>, <code>Dropdown Notification</code>, <code>Dropdown Shopping Cart</code> y <code>Dropdown Search</code>—, que no tienen variantes propias y heredan sus estados y props.</p>
+            <p>12 variantes = <code>State</code> (3) × <code>Leading</code> (2) × <code>Weight</code> (2), matriz completa. Es el átomo que componen todos los paneles de Dropdown Menu.</p>
           </section>
 
           <section class="doc-section">
             <h2 id="doc-propiedades">Propiedades</h2>
-            <p class="coming-soon">Propiedades pendientes de documentar desde Figma.</p>
+            <p>Propiedades configurables del componente Dropdown Option.</p>
+            <div class="ty-table-wrap">
+              <table class="ty-table">
+                <thead>
+                  <tr><th>Propiedad</th><th>Tipo</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>State</strong></td><td><code>Variant</code></td><td class="ty-muted">Default es el estado en reposo del ítem en la lista. Hover resalta el fondo cuando el cursor pasa sobre la opción. Selected aplica un fondo navy sólido y texto blanco para marcar la opción actualmente elegida. Default es el valor por defecto.</td></tr>
+                  <tr><td><strong>Leading</strong></td><td><code>Variant</code></td><td class="ty-muted">Icon muestra un ícono genérico (por ejemplo, lápiz de edición) a la izquierda del texto. Flag muestra en su lugar una bandera de país. Icon es el valor por defecto.</td></tr>
+                  <tr><td><strong>Weight</strong></td><td><code>Variant</code></td><td class="ty-muted">Default usa peso de texto regular. Strong usa negrita para dar énfasis a la opción (por ejemplo, la opción seleccionada). Default es el valor por defecto.</td></tr>
+                  <tr><td><strong>Label</strong></td><td><code>Text</code></td><td class="ty-muted">Texto visible de la opción. Reemplaza el copy por defecto «Administrar mi reserva».</td></tr>
+                  <tr><td><strong>Show Leading</strong></td><td><code>Boolean</code></td><td class="ty-muted">Muestra u oculta el ícono o bandera izquierdo definido por Leading. Activado por defecto.</td></tr>
+                  <tr><td><strong>Show Number</strong></td><td><code>Boolean</code></td><td class="ty-muted">Muestra un número de orden (ej. «1.») antes del elemento leading, útil en listas numeradas. Desactivado por defecto.</td></tr>
+                  <tr><td><strong>Show Trailing</strong></td><td><code>Boolean</code></td><td class="ty-muted">Muestra u oculta el ícono chevron al extremo derecho de la opción. Activado por defecto.</td></tr>
+                  <tr><td><strong>Show Code</strong></td><td><code>Boolean</code></td><td class="ty-muted">Muestra un código de texto al final (ej. «SCL»), antes del chevron. Desactivado por defecto.</td></tr>
+                  <tr><td><strong>Number</strong></td><td><code>Text</code></td><td class="ty-muted">Valor del número de orden mostrado cuando Show Number está activo. Por defecto «1.».</td></tr>
+                  <tr><td><strong>Code</strong></td><td><code>Text</code></td><td class="ty-muted">Valor del código mostrado cuando Show Code está activo. Por defecto «SCL».</td></tr>
+                  <tr><td><strong>Show Badge</strong></td><td><code>Boolean</code></td><td class="ty-muted">Muestra un badge circular rojo con contador (ej. «+3») junto al chevron. Desactivado por defecto.</td></tr>
+                </tbody>
+              </table>
+            </div>
           </section>
 
         </main>

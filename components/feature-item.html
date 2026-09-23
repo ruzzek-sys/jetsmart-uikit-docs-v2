@@ -18,7 +18,7 @@
           <header class="page-header">
             <p class="page-header__eyebrow">Components</p>
             <h1>Feature Item</h1>
-            <p>Ítem para destacar características o beneficios.</p>
+            <p>Ítem de lista con ícono de check y texto para enumerar características o beneficios.</p>
           </header>
 
           <section class="figma-preview">
@@ -27,6 +27,7 @@
               <iframe
                 title="Feature Item - Figma preview"
                 src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FdKd6jNGAnng8hIV5MS4Avd%2FJetsmart-UI-Kit-v1.0%3Fnode-id%3D5279-113872"
+                loading="lazy"
                 allowfullscreen>
               </iframe>
             </div>
@@ -34,12 +35,26 @@
 
           <section class="doc-section">
             <h2 id="doc-resumen">Resumen</h2>
-            <p class="coming-soon">Documentación pendiente. Edita esta página para agregar contenido.</p>
+            <p>Feature Item es una línea de lista con un ícono de check y una etiqueta, pensada para enumerar lo que incluye un producto o servicio, como los beneficios de una membresía o el equipaje de una tarifa. Se apila en listas dentro de banners y cards.</p>
+            <p>6 variantes = <code>Size</code> (3) × <code>Inverse</code> (2), matriz completa. <code>Inverse</code>=True pinta texto e ícono en blanco para superficies oscuras: sobre el fondo claro de la matriz su columna se ve vacía, y es lo esperado. Por tamaño, Small usa texto de 14 px e ícono de 12, Medium texto de 16 px e ícono de 16, y Large texto de 18 px e ícono de 16.</p>
           </section>
 
           <section class="doc-section">
             <h2 id="doc-propiedades">Propiedades</h2>
-            <p class="coming-soon">Propiedades pendientes de documentar desde Figma.</p>
+            <p>Propiedades configurables del componente Feature Item.</p>
+            <div class="ty-table-wrap">
+              <table class="ty-table">
+                <thead>
+                  <tr><th>Propiedad</th><th>Tipo</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Size</strong></td><td><code>Variant</code></td><td class="ty-muted">Small es el valor por defecto. Medium y Large aumentan el tamaño de la tipografía y del ícono en cada paso.</td></tr>
+                  <tr><td><strong>Inverse</strong></td><td><code>Variant</code></td><td class="ty-muted">False es el valor por defecto: texto oscuro e ícono a color, pensado para fondos claros. True aclara el texto y atenúa el ícono para usarse sobre fondos oscuros o de color.</td></tr>
+                  <tr><td><strong>Show Icon</strong></td><td><code>Boolean</code></td><td class="ty-muted">True es el valor por defecto y muestra el ícono de check junto al texto. False lo oculta y deja solo la etiqueta.</td></tr>
+                  <tr><td><strong>Label</strong></td><td><code>Text</code></td><td class="ty-muted">Texto del ítem de la lista de características. El valor por defecto es «Bolso o mochila pequeña».</td></tr>
+                </tbody>
+              </table>
+            </div>
           </section>
 
         </main>
