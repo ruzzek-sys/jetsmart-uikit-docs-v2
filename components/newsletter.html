@@ -18,7 +18,7 @@
           <header class="page-header">
             <p class="page-header__eyebrow">Components</p>
             <h1>Newsletter</h1>
-            <p>Bloque de suscripción al newsletter.</p>
+            <p>Bloque de suscripción al newsletter con campo de correo, botón y aceptación de términos, en versión desktop y mobile.</p>
           </header>
 
           <section class="figma-preview">
@@ -27,6 +27,7 @@
               <iframe
                 title="Newsletter - Figma preview"
                 src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FdKd6jNGAnng8hIV5MS4Avd%2FJetsmart-UI-Kit-v1.0%3Fnode-id%3D5563-115388"
+                loading="lazy"
                 allowfullscreen>
               </iframe>
             </div>
@@ -34,12 +35,23 @@
 
           <section class="doc-section">
             <h2 id="doc-resumen">Resumen</h2>
-            <p class="coming-soon">Documentación pendiente. Edita esta página para agregar contenido.</p>
+            <p>Newsletter es el bloque de suscripción que va sobre el footer: un texto de invitación, un input para el correo, el botón «Suscribirme» y el checkbox de aceptación de términos.</p>
+            <p>2 componentes = <code>Breakpoint</code> (2): <code>Newsletter</code> (desktop, 1440 px) y <code>Newsletter Mobile</code> (428 px). Ninguno declara propiedades de variante ni de instancia.</p>
           </section>
 
           <section class="doc-section">
             <h2 id="doc-propiedades">Propiedades</h2>
-            <p class="coming-soon">Propiedades pendientes de documentar desde Figma.</p>
+            <p>Newsletter no declara propiedades de variante ni de instancia; se documenta la única distinción real, el breakpoint Desktop/Mobile.</p>
+            <div class="ty-table-wrap">
+              <table class="ty-table">
+                <thead>
+                  <tr><th>Propiedad</th><th>Tipo</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Breakpoint</strong></td><td><code>N/A</code></td><td class="ty-muted">Newsletter (1440×124) es una barra full-width para desktop/tablet: logo, texto y el bloque de formulario (input + botón) alineados en una sola fila, con el checkbox de términos debajo del formulario. Newsletter Mobile (428×306) apila el contenido en un bloque vertical: texto arriba, input de correo (con ícono de búsqueda), luego el checkbox con el texto en dos líneas, y el botón «Suscribirme» a todo el ancho al final. Son dos componentes independientes, no variantes de un mismo set — no hay un valor por defecto entre ellos.</td></tr>
+                </tbody>
+              </table>
+            </div>
           </section>
 
         </main>

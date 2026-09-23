@@ -18,35 +18,78 @@
           <header class="page-header">
             <p class="page-header__eyebrow">Components</p>
             <h1>Page Indicator</h1>
-            <p>Indicador de página para carruseles.</p>
+            <p>Dos piezas de navegación entre páginas: el indicador de puntos para carruseles y flujos por pasos, y el paginador que va al pie de una tabla.</p>
           </header>
 
-          <section class="figma-preview">
-            <p class="figma-preview__label">Live Preview</p>
-            <div class="figma-preview__frame">
-              <iframe
-                title="Page Indicator - Figma preview 1"
-                src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FdKd6jNGAnng8hIV5MS4Avd%2FJetsmart-UI-Kit-v1.0%3Fnode-id%3D5563-121829"
-                allowfullscreen>
-              </iframe>
+          <section class="doc-section">
+            <h2 id="doc-page-indicator">Page Indicator</h2>
+            <p>Indicador de puntos que marca en qué página o paso se encuentra el usuario dentro de una secuencia de cinco, típico de carruseles de cards.</p>
+
+            <div class="figma-preview">
+              <p class="figma-preview__label">Live Preview</p>
+              <div class="figma-preview__frame">
+                <iframe
+                  title="Page Indicator - Figma preview"
+                  src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FdKd6jNGAnng8hIV5MS4Avd%2FJetsmart-UI-Kit-v1.0%3Fnode-id%3D5563-121829"
+                  loading="lazy"
+                  allowfullscreen>
+                </iframe>
+              </div>
             </div>
-            <div class="figma-preview__frame">
-              <iframe
-                title="Page Indicator - Figma preview 2"
-                src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FdKd6jNGAnng8hIV5MS4Avd%2FJetsmart-UI-Kit-v1.0%3Fnode-id%3D5563-122964"
-                allowfullscreen>
-              </iframe>
+
+            <h3 id="doc-page-indicator-resumen">Resumen</h3>
+            <p>Una píldora con cinco puntos en la que el punto del paso actual aparece resaltado en color teal. Se usa bajo un carrusel o junto a sus flechas de navegación para mostrar la posición dentro de la secuencia.</p>
+            <p>10 variantes = <code>Step</code> (5) × <code>Orientation</code> (2), matriz completa. El paso activo es el punto relleno; la fila <code>Vertical</code> es la misma pieza rotada -90°.</p>
+
+            <h3 id="doc-page-indicator-propiedades">Propiedades</h3>
+            <p>Propiedades del componente Page Indicator</p>
+            <div class="ty-table-wrap">
+              <table class="ty-table">
+                <thead>
+                  <tr><th>Propiedad</th><th>Tipo</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Step</strong></td><td><code>Variant</code></td><td class="ty-muted">Controla qué punto de la secuencia de 5 aparece resaltado en color teal, indicando el paso actual dentro de un flujo con pasos. Step 1 resalta el primer punto y Step 5 el último. Step 1 es el valor por defecto.</td></tr>
+                  <tr><td><strong>Orientation</strong></td><td><code>Variant</code></td><td class="ty-muted">Define si los puntos se distribuyen en fila dentro de la píldora (Horizontal) o se apilan en columna (Vertical). Horizontal es el valor por defecto.</td></tr>
+                </tbody>
+              </table>
             </div>
           </section>
 
           <section class="doc-section">
-            <h2 id="doc-resumen">Resumen</h2>
-            <p class="coming-soon">Documentación pendiente. Edita esta página para agregar contenido.</p>
-          </section>
+            <h2 id="doc-table-pagination">Table Pagination</h2>
+            <p>Paginador que va al pie de una tabla o listado, con los botones «Anterior» y «Siguiente» y los números de página entre ellos.</p>
 
-          <section class="doc-section">
-            <h2 id="doc-propiedades">Propiedades</h2>
-            <p class="coming-soon">Propiedades pendientes de documentar desde Figma.</p>
+            <div class="figma-preview">
+              <p class="figma-preview__label">Live Preview</p>
+              <div class="figma-preview__frame">
+                <iframe
+                  title="Table Pagination - Figma preview"
+                  src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FdKd6jNGAnng8hIV5MS4Avd%2FJetsmart-UI-Kit-v1.0%3Fnode-id%3D5563-122964"
+                  loading="lazy"
+                  allowfullscreen>
+                </iframe>
+              </div>
+            </div>
+
+            <h3 id="doc-table-pagination-resumen">Resumen</h3>
+            <p>Barra de navegación entre páginas de resultados: el número de la página actual aparece resaltado y los botones de los extremos avanzan o retroceden. Se ubica debajo del contenido paginado, como en un listado de notificaciones.</p>
+            <p>2 variantes = <code>Type</code> (2), matriz completa. Un solo eje: las dos formas de presentar el paginador al pie de una tabla. <code>Show Badge</code> y <code>Badge Count</code> son propiedades de instancia, no variantes.</p>
+
+            <h3 id="doc-table-pagination-propiedades">Propiedades</h3>
+            <p>Propiedades configurables del componente Table Pagination.</p>
+            <div class="ty-table-wrap">
+              <table class="ty-table">
+                <thead>
+                  <tr><th>Propiedad</th><th>Tipo</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Type</strong></td><td><code>Variant</code></td><td class="ty-muted">Pagination muestra los botones «Anterior»/«Siguiente» y los números de página directamente sobre el fondo de la página, sin tarjeta. Container envuelve los mismos elementos en una tarjeta con fondo propio, para usarse dentro de un panel o tabla. Pagination es el valor por defecto.</td></tr>
+                  <tr><td><strong>Show Badge</strong></td><td><code>Boolean</code></td><td class="ty-muted">Propiedad expuesta a nivel del set, pero al activarla no se observa ningún cambio visual en los botones de paginación: no parece estar conectada a un elemento visible de este componente. Valor por defecto: false.</td></tr>
+                  <tr><td><strong>Badge Count</strong></td><td><code>Text</code></td><td class="ty-muted">Texto asociado a «Show Badge». Como esa propiedad no produce un cambio visual comprobable, no se puede confirmar su efecto real en este componente. Valor por defecto: «1».</td></tr>
+                </tbody>
+              </table>
+            </div>
           </section>
 
         </main>

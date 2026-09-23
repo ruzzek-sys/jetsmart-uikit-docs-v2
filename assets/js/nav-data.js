@@ -49,7 +49,7 @@ window.JETSMART_NAV = {
         { id: "loading-message", label: "Loading Message", href: "components/loading-message.html", figmaNodeId: "5562:111454" },
         { id: "logos-brands", label: "Logos Brands", href: "components/logos-brands.html", figmaNodeId: "5563:111877" },
         { id: "modal", label: "Modal", href: "components/modal.html", figmaNodeId: "6232:173946" },
-        { id: "navbar", label: "Navbar", href: "components/navbar.html", figmaNodeId: "6232:174145" },
+        { id: "navbar", label: "Navbar", href: "components/navbar.html", figmaNodeId: "6232:174145", figmaNodeIds: ["6232:174145","7607:42580","7607:42659","7607:42873"] },
         { id: "newsletter", label: "Newsletter", href: "components/newsletter.html", figmaNodeId: "5563:115388" },
         { id: "notice-panel", label: "Notice Panel", href: "components/notice-panel.html", figmaNodeId: "5563:117055" },
         { id: "notification-item", label: "Notification Item", href: "components/notification-item.html", figmaNodeId: "5563:119762" },

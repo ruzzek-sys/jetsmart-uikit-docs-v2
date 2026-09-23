@@ -18,7 +18,7 @@
           <header class="page-header">
             <p class="page-header__eyebrow">Components</p>
             <h1>Loading Message</h1>
-            <p>Mensaje de carga y estados de espera.</p>
+            <p>Pantalla de espera que avisa que el itinerario se está preparando y pide no cerrar ni retroceder.</p>
           </header>
 
           <section class="figma-preview">
@@ -27,6 +27,7 @@
               <iframe
                 title="Loading Message - Figma preview"
                 src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FdKd6jNGAnng8hIV5MS4Avd%2FJetsmart-UI-Kit-v1.0%3Fnode-id%3D5562-111454"
+                loading="lazy"
                 allowfullscreen>
               </iframe>
             </div>
@@ -34,12 +35,25 @@
 
           <section class="doc-section">
             <h2 id="doc-resumen">Resumen</h2>
-            <p class="coming-soon">Documentación pendiente. Edita esta página para agregar contenido.</p>
+            <p>Loading Message es la tarjeta de espera que aparece mientras se genera el itinerario del viaje: una ilustración con un titular y un texto de apoyo que le pide al usuario no cerrar la ventana ni volver atrás. El titular y el texto son editables.</p>
+            <p>2 variantes = <code>Breakpoint</code> (2), matriz completa. El fondo, la ilustración y el radio de 40 px vienen del componente; la copy está fija en el main.</p>
           </section>
 
           <section class="doc-section">
             <h2 id="doc-propiedades">Propiedades</h2>
-            <p class="coming-soon">Propiedades pendientes de documentar desde Figma.</p>
+            <p>Propiedades configurables del componente Loading Message.</p>
+            <div class="ty-table-wrap">
+              <table class="ty-table">
+                <thead>
+                  <tr><th>Propiedad</th><th>Tipo</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Breakpoint</strong></td><td><code>Variant</code></td><td class="ty-muted">Define el layout de la pantalla de carga. Desktop muestra una tarjeta horizontal ancha con la ilustración y el texto centrados. Mobile muestra una tarjeta vertical angosta con el mismo contenido apilado. Desktop es el valor por defecto.</td></tr>
+                  <tr><td><strong>Title</strong></td><td><code>Text</code></td><td class="ty-muted">Titular principal sobre la ilustración. Texto editable; por defecto dice «¡Tu viaje está casi listo!».</td></tr>
+                  <tr><td><strong>Description</strong></td><td><code>Text</code></td><td class="ty-muted">Texto de apoyo bajo el titular, explica que el itinerario está por estar listo y pide no cerrar ni retroceder. Texto editable; por defecto dice «En unos segundos tendrás tu itinerario listo. No cierres esta ventana ni vuelvas atrás.».</td></tr>
+                </tbody>
+              </table>
+            </div>
           </section>
 
         </main>

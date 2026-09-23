@@ -18,7 +18,7 @@
           <header class="page-header">
             <p class="page-header__eyebrow">Components</p>
             <h1>Logos Brands</h1>
-            <p>Logos de marca y aliados.</p>
+            <p>Logos de JetSMART y de las marcas asociadas, listos para usar dentro de otros componentes.</p>
           </header>
 
           <section class="figma-preview">
@@ -26,6 +26,7 @@
             <div class="figma-preview__frame">
               <iframe
                 title="Logos Brands - Figma preview"
+                loading="lazy"
                 src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FdKd6jNGAnng8hIV5MS4Avd%2FJetsmart-UI-Kit-v1.0%3Fnode-id%3D5563-111877"
                 allowfullscreen>
               </iframe>
@@ -34,12 +35,23 @@
 
           <section class="doc-section">
             <h2 id="doc-resumen">Resumen</h2>
-            <p class="coming-soon">Documentación pendiente. Edita esta página para agregar contenido.</p>
+            <p>El Brand Logo muestra el logo de una marca asociada —bancos, programas de beneficios, aseguradoras— o el de la propia JetSMART, dentro de un contenedor que lo mantiene sin deformar. Se usa dentro de otros componentes, por ejemplo en el encabezado de un Membership Banner.</p>
+            <p>7 variantes = <code>Brand</code> (7), matriz completa en un solo eje. Cada variante es el logo de una marca asociada dentro de un contenedor que lo mantiene sin deformar.</p>
           </section>
 
           <section class="doc-section">
             <h2 id="doc-propiedades">Propiedades</h2>
-            <p class="coming-soon">Propiedades pendientes de documentar desde Figma.</p>
+            <p>Lo que se cambia desde la instancia sin salir de la variante.</p>
+            <div class="ty-table-wrap">
+              <table class="ty-table">
+                <thead>
+                  <tr><th>Propiedad</th><th>Tipo</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Brand</strong></td><td><code>Variant</code></td><td class="ty-muted">Selecciona el logo de marca a mostrar entre las 7 opciones disponibles (Banco Estado, BCI, Lider BCI, Machbank, Travel UP, JetSMART, CHUBB). Cada variante ajusta su ancho al wordmark correspondiente. Banco Estado es el valor por defecto.</td></tr>
+                </tbody>
+              </table>
+            </div>
           </section>
 
         </main>

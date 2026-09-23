@@ -18,7 +18,7 @@
           <header class="page-header">
             <p class="page-header__eyebrow">Components</p>
             <h1>Notice Panel</h1>
-            <p>Panel de aviso informativo.</p>
+            <p>Aviso informativo en línea con ícono, título, descripción y un botón de acción.</p>
           </header>
 
           <section class="figma-preview">
@@ -27,6 +27,7 @@
               <iframe
                 title="Notice Panel - Figma preview"
                 src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FdKd6jNGAnng8hIV5MS4Avd%2FJetsmart-UI-Kit-v1.0%3Fnode-id%3D5563-117055"
+                loading="lazy"
                 allowfullscreen>
               </iframe>
             </div>
@@ -34,12 +35,26 @@
 
           <section class="doc-section">
             <h2 id="doc-resumen">Resumen</h2>
-            <p class="coming-soon">Documentación pendiente. Edita esta página para agregar contenido.</p>
+            <p>Notice Panel es un aviso informativo en línea que destaca un mensaje dentro de la página, con ícono circular, título, descripción y un botón de acción. Cada una de esas partes, salvo el título, se puede ocultar desde sus propiedades.</p>
+            <p>2 variantes = <code>Breakpoint</code> (2), matriz completa. Aviso informativo con ícono, título, descripción y botón de acción; el layout pasa de fila a columna según el breakpoint.</p>
           </section>
 
           <section class="doc-section">
             <h2 id="doc-propiedades">Propiedades</h2>
-            <p class="coming-soon">Propiedades pendientes de documentar desde Figma.</p>
+            <p>Propiedades configurables del componente Notice Panel.</p>
+            <div class="ty-table-wrap">
+              <table class="ty-table">
+                <thead>
+                  <tr><th>Propiedad</th><th>Tipo</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Breakpoint</strong></td><td><code>Variant</code></td><td class="ty-muted">Desktop muestra el ícono, el título y la descripción en una fila, con el botón alineado a la derecha. Mobile apila el encabezado, la descripción y un botón de ancho completo en una columna. Desktop es el valor por defecto.</td></tr>
+                  <tr><td><strong>Show Icon Circle</strong></td><td><code>Boolean</code></td><td class="ty-muted">Activado muestra el ícono circular junto al título. Desactivado lo oculta y el título queda alineado al borde izquierdo del panel. Activado es el valor por defecto.</td></tr>
+                  <tr><td><strong>Show Description</strong></td><td><code>Boolean</code></td><td class="ty-muted">Activado muestra el texto de descripción debajo del título. Desactivado lo oculta y el panel se reduce a una sola línea de contenido. Activado es el valor por defecto.</td></tr>
+                  <tr><td><strong>Show Button Primary</strong></td><td><code>Boolean</code></td><td class="ty-muted">Activado muestra el botón primario a la derecha en Desktop o al final en Mobile. Desactivado lo oculta y el texto ocupa todo el ancho disponible. Activado es el valor por defecto.</td></tr>
+                </tbody>
+              </table>
+            </div>
           </section>
 
         </main>

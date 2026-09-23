@@ -133,7 +133,7 @@ const SECTIONS = [
       { label: "Loading Message", slug: "loading-message", desc: "Mensaje de carga y estados de espera.", nodes: ["5562:111454"], live: true },
       { label: "Logos Brands", slug: "logos-brands", desc: "Logos de marca y aliados.", nodes: ["5563:111877"], live: true },
       { label: "Modal", slug: "modal", desc: "Ventana modal sobre el contenido.", nodes: ["6232:173946"], live: true },
-      { label: "Navbar", slug: "navbar", desc: "Barra de navegación principal.", nodes: ["6232:174145"], live: true },
+      { label: "Navbar", slug: "navbar", desc: "Barra de navegación principal.", nodes: ["6232:174145", "7607:42580", "7607:42659", "7607:42873"], live: true },
       { label: "Newsletter", slug: "newsletter", desc: "Bloque de suscripción al newsletter.", nodes: ["5563:115388"], live: true },
       { label: "Notice Panel", slug: "notice-panel", desc: "Panel de aviso informativo.", nodes: ["5563:117055"], live: true },
       { label: "Notification Item", slug: "notification-item", desc: "Ítem de la lista de notificaciones.", nodes: ["5563:119762"], live: true },
