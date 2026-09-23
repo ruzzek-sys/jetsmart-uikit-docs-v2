@@ -18,28 +18,85 @@
           <header class="page-header">
             <p class="page-header__eyebrow">Product Components</p>
             <h1>Summary Bar</h1>
-            <p>Barra de resumen y total de la compra.</p>
+            <p>Barra que resume la búsqueda en curso —ruta, fechas y pasajeros— con acceso directo para editarla. Viene en dos componentes: uno para escritorio y otro para móvil.</p>
           </header>
 
-          <section class="figma-preview">
-            <p class="figma-preview__label">Live Preview</p>
-            <div class="figma-preview__frame">
-              <iframe
-                title="Summary Bar - Figma preview"
-                src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FdKd6jNGAnng8hIV5MS4Avd%2FJetsmart-UI-Kit-v1.0%3Fnode-id%3D6229-172143"
-                allowfullscreen>
-              </iframe>
+          <section class="doc-section">
+            <h2 id="doc-summary-bar-desktop">Summary Bar Desktop</h2>
+            <p>Barra horizontal de una sola línea que muestra la ruta, las fechas y los pasajeros del viaje, con el botón «Editar» al final. Se usa en la parte superior de los pasos del booking en escritorio.</p>
+
+            <div class="figma-preview">
+              <p class="figma-preview__label">Live Preview</p>
+              <div class="figma-preview__frame">
+                <iframe
+                  title="Summary Bar Desktop - Figma preview"
+                  src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FdKd6jNGAnng8hIV5MS4Avd%2FJetsmart-UI-Kit-v1.0%3Fnode-id%3D6229-172143"
+                  loading="lazy"
+                  allowfullscreen>
+                </iframe>
+              </div>
+            </div>
+
+            <h3 id="doc-summary-bar-desktop-resumen">Resumen</h3>
+            <p>Encadena los datos de la búsqueda en una sola fila, separados por divisores: la ruta con sus ciudades de origen y destino, las fechas del viaje y la cantidad de pasajeros, y cierra con el botón «Editar». El segundo y el tercer dato, y el botón, se pueden apagar desde la instancia.</p>
+            <p>La matriz reúne 6 variantes en 2 componentes. En escritorio cruza <code>Size</code> (Large, Small) en las filas con <code>Style</code> (Solid, Transparent) en las columnas: Solid lleva fondo blanco y borde, Transparent se apoya directo sobre la superficie que tenga debajo.</p>
+
+            <h3 id="doc-summary-bar-desktop-propiedades">Propiedades</h3>
+            <p>Propiedades del componente Summary Bar Desktop.</p>
+            <div class="ty-table-wrap">
+              <table class="ty-table">
+                <thead>
+                  <tr><th>Propiedad</th><th>Tipo</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Size</strong></td><td><code>Variant</code></td><td class="ty-muted">Large muestra la barra con más altura y espaciado entre los ítems (ruta, fecha, pasajeros). Small es una versión más compacta con menor padding y tipografía más ajustada. Large es el valor por defecto.</td></tr>
+                  <tr><td><strong>Style</strong></td><td><code>Variant</code></td><td class="ty-muted">Solid aplica fondo blanco con borde sutil, para usarse sobre fondos neutros. Transparent quita el fondo y el borde, para superponerse sobre banners o secciones ya coloreadas. Solid es el valor por defecto.</td></tr>
+                  <tr><td><strong>Show Button Primary</strong></td><td><code>Boolean</code></td><td class="ty-muted">Muestra u oculta el botón «Editar» al final de la barra. Activado (true) es el valor por defecto.</td></tr>
+                  <tr><td><strong>Show Item 2</strong></td><td><code>Boolean</code></td><td class="ty-muted">Muestra u oculta el segundo dato de la barra (fecha del viaje) junto con su separador. Activado (true) es el valor por defecto.</td></tr>
+                  <tr><td><strong>Show Item 3</strong></td><td><code>Boolean</code></td><td class="ty-muted">Muestra u oculta el tercer dato de la barra (cantidad de pasajeros) junto con su separador. Activado (true) es el valor por defecto.</td></tr>
+                </tbody>
+              </table>
             </div>
           </section>
 
           <section class="doc-section">
-            <h2 id="doc-resumen">Resumen</h2>
-            <p class="coming-soon">Documentación pendiente. Edita esta página para agregar contenido.</p>
-          </section>
+            <h2 id="doc-summary-bar-mobile">Summary Bar Mobile</h2>
+            <p>Versión compacta en dos filas: la ruta arriba y los datos secundarios debajo, con el botón «Editar» y un botón de ícono a un costado. Es la que se usa en pantallas angostas y dentro de modales.</p>
 
-          <section class="doc-section">
-            <h2 id="doc-propiedades">Propiedades</h2>
-            <p class="coming-soon">Propiedades pendientes de documentar desde Figma.</p>
+            <div class="figma-preview">
+              <p class="figma-preview__label">Live Preview</p>
+              <div class="figma-preview__frame">
+                <iframe
+                  title="Summary Bar Mobile - Figma preview"
+                  src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FdKd6jNGAnng8hIV5MS4Avd%2FJetsmart-UI-Kit-v1.0%3Fnode-id%3D7607-56561"
+                  loading="lazy"
+                  allowfullscreen>
+                </iframe>
+              </div>
+            </div>
+
+            <h3 id="doc-summary-bar-mobile-resumen">Resumen</h3>
+            <p>Apila la ruta abreviada (ej. «SCL ⇄ BBA») sobre una fila de datos secundarios —fecha, pasajeros, escalas— y suma a la derecha el botón «Editar» y un botón de ícono circular. Cada parte se puede apagar por separado: la ruta, la fila de datos completa o cada dato dentro de ella, y ambos botones.</p>
+            <p>En móvil la matriz tiene un solo eje, <code>Alignment</code>: Left alinea el contenido a la izquierda y deja las acciones a la derecha; Center centra la ruta y los datos, sin acciones visibles.</p>
+
+            <h3 id="doc-summary-bar-mobile-propiedades">Propiedades</h3>
+            <p>Propiedades del componente Summary Bar Mobile.</p>
+            <div class="ty-table-wrap">
+              <table class="ty-table">
+                <thead>
+                  <tr><th>Propiedad</th><th>Tipo</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Alignment</strong></td><td><code>Variant</code></td><td class="ty-muted">Left alinea la ruta, los datos y las acciones a la izquierda de la barra, dejando espacio para el botón «Editar» y el ícono de acción a la derecha. Center centra todo el contenido, para usarse en contextos más angostos sin acciones visibles. Left es el valor por defecto.</td></tr>
+                  <tr><td><strong>Show Button Icon</strong></td><td><code>Boolean</code></td><td class="ty-muted">Muestra u oculta el botón de ícono circular (acción secundaria, ej. «+») al final de la barra. Activado (true) es el valor por defecto.</td></tr>
+                  <tr><td><strong>Show Route</strong></td><td><code>Boolean</code></td><td class="ty-muted">Muestra u oculta la fila con la ruta del viaje (ej. «SCL ⇄ BBA»). Activado (true) es el valor por defecto.</td></tr>
+                  <tr><td><strong>Show Items</strong></td><td><code>Boolean</code></td><td class="ty-muted">Muestra u oculta por completo la fila de datos secundarios (fecha, pasajeros, escalas) debajo de la ruta. Activado (true) es el valor por defecto.</td></tr>
+                  <tr><td><strong>Show Item 2</strong></td><td><code>Boolean</code></td><td class="ty-muted">Dentro de la fila de datos, muestra u oculta el segundo dato (ej. «2 adultos») junto con su separador. Activado (true) es el valor por defecto.</td></tr>
+                  <tr><td><strong>Show Item 3</strong></td><td><code>Boolean</code></td><td class="ty-muted">Dentro de la fila de datos, muestra u oculta el tercer dato (ej. «1 escala») junto con su separador. Activado (true) es el valor por defecto.</td></tr>
+                  <tr><td><strong>Show Primary Button</strong></td><td><code>Boolean</code></td><td class="ty-muted">Muestra u oculta el botón de texto «Editar» en la barra. Activado (true) es el valor por defecto.</td></tr>
+                </tbody>
+              </table>
+            </div>
           </section>
 
         </main>

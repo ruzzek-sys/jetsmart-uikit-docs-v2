@@ -18,7 +18,7 @@
           <header class="page-header">
             <p class="page-header__eyebrow">Product Components</p>
             <h1>Receipt Summary Card</h1>
-            <p>Tarjeta de resumen de compra.</p>
+            <p>Tarjeta que resume los datos de una compra o trámite y cierra con la fila del total.</p>
           </header>
 
           <section class="figma-preview">
@@ -27,6 +27,7 @@
               <iframe
                 title="Receipt Summary Card - Figma preview"
                 src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FdKd6jNGAnng8hIV5MS4Avd%2FJetsmart-UI-Kit-v1.0%3Fnode-id%3D6186-161150"
+                loading="lazy"
                 allowfullscreen>
               </iframe>
             </div>
@@ -34,12 +35,26 @@
 
           <section class="doc-section">
             <h2 id="doc-resumen">Resumen</h2>
-            <p class="coming-soon">Documentación pendiente. Edita esta página para agregar contenido.</p>
+            <p>Tarjeta con un título, un slot de contenido y una fila «Total» con el monto al pie. Se usa para resumir lo que el usuario está por confirmar —datos del comprobante, pasajeros seleccionados— antes de pagar o continuar el flujo.</p>
+            <p>Tres maestros × <code>Breakpoint</code> (2) = 6 variantes: la card base <code>Receipt Summary Card</code>, con el slot <code>Title Card Body Stack</code> vacío, y dos ensamblajes que la consumen y le rellenan el contenido: <code>Receipt Summary Card Voucher</code> (datos del comprobante) y <code>Receipt Summary Card Passenger</code> (lista de pasajeros). Cada uno existe en <code>Desktop</code> (780px) y <code>Mobile</code> (388px).</p>
           </section>
 
           <section class="doc-section">
             <h2 id="doc-propiedades">Propiedades</h2>
-            <p class="coming-soon">Propiedades pendientes de documentar desde Figma.</p>
+            <p>Ajustables desde el panel de la instancia</p>
+            <div class="ty-table-wrap">
+              <table class="ty-table">
+                <thead>
+                  <tr><th>Propiedad</th><th>Tipo</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Breakpoint</strong></td><td><code>Variant</code></td><td class="ty-muted">Desktop: tarjeta de 780px de ancho. Mobile: tarjeta de 388px de ancho. Default: Desktop.</td></tr>
+                  <tr><td><strong>Show Price</strong></td><td><code>Boolean</code></td><td class="ty-muted">Muestra u oculta la fila «Total» con el monto. Default: activado.</td></tr>
+                  <tr><td><strong>Title</strong></td><td><code>Text</code></td><td class="ty-muted">Texto del título de la tarjeta. Default: «Title Card».</td></tr>
+                  <tr><td><strong>Title Card Body Stack</strong></td><td><code>Slot</code></td><td class="ty-muted">Slot de contenido de la tarjeta: acepta el componente y los dos component sets predefinidos (usados por los ensamblajes Voucher y Passanger para rellenarla).</td></tr>
+                </tbody>
+              </table>
+            </div>
           </section>
 
         </main>

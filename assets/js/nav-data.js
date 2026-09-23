@@ -94,16 +94,16 @@ window.JETSMART_NAV = {
         { id: "itinerary-fare-summary", label: "Itinerary Fare Summary", href: "product-components/itinerary-fare-summary.html", figmaNodeId: "6186:156082" },
         { id: "membership-plan-card", label: "Membership Plan Card", href: "product-components/membership-plan-card.html", figmaNodeId: "5636:125790" },
         { id: "passenger-item", label: "Passenger Item", href: "product-components/passenger-item.html", figmaNodeId: "6186:158033" },
-        { id: "passenger-form-accordion", label: "Passenger Form Accordion", href: "product-components/passenger-form-accordion.html", figmaNodeId: "5167:85834" },
+        { id: "passenger-form-accordion", label: "Passenger Form Accordion", href: "product-components/passenger-form-accordion.html", figmaNodeId: "5167:85834", figmaNodeIds: ["5167:85834","7607:88775"] },
         { id: "passenger-stepper", label: "Passenger Stepper", href: "product-components/passenger-stepper.html", figmaNodeId: "5543:70065" },
         { id: "receipt-summary-card", label: "Receipt Summary Card", href: "product-components/receipt-summary-card.html", figmaNodeId: "6186:161150" },
         { id: "profile-summary-card", label: "Profile Summary Card", href: "product-components/profile-summary-card.html", figmaNodeId: "5543:64060" },
         { id: "search-summary", label: "Search Summary", href: "product-components/search-summary.html", figmaNodeId: "5543:35599" },
-        { id: "seat-selector", label: "Seat Selector", href: "product-components/seat-selector.html", figmaNodeId: "6573:156899" },
-        { id: "seat-selection-sidebar", label: "Seat Selection Sidebar", href: "product-components/seat-selection-sidebar.html", figmaNodeId: "6186:161989" },
-        { id: "summary-bar", label: "Summary Bar", href: "product-components/summary-bar.html", figmaNodeId: "6229:172143" },
+        { id: "seat-selector", label: "Seat Selector", href: "product-components/seat-selector.html", figmaNodeId: "7607:70050", figmaNodeIds: ["7607:70050","7607:72085","7607:72120","6573:156899"] },
+        { id: "seat-selection-sidebar", label: "Seat Selection Sidebar", href: "product-components/seat-selection-sidebar.html", figmaNodeId: "6186:161989", figmaNodeIds: ["6186:161989","7607:59618","7607:59909"] },
+        { id: "summary-bar", label: "Summary Bar", href: "product-components/summary-bar.html", figmaNodeId: "6229:172143", figmaNodeIds: ["6229:172143","7607:56561"] },
         { id: "trip-status-card", label: "Trip Status Card", href: "product-components/trip-status-card.html", figmaNodeId: "6186:168687" },
-        { id: "searchbox-widget", label: "Searchbox Widget", href: "product-components/searchbox-widget.html", figmaNodeId: "4802:1399" }
+        { id: "searchbox-widget", label: "Searchbox Widget", href: "product-components/searchbox-widget.html", figmaNodeId: "7170:10048", figmaNodeIds: ["7170:10048","7607:48082"] }
       ]
     },
     {

@@ -18,28 +18,76 @@
           <header class="page-header">
             <p class="page-header__eyebrow">Product Components</p>
             <h1>Searchbox Widget</h1>
-            <p>Widget de búsqueda de vuelos.</p>
+            <p>Buscador principal del sitio: vuelos, gestión de reserva, check-in y hoteles, en versión desktop y mobile.</p>
           </header>
 
-          <section class="figma-preview">
-            <p class="figma-preview__label">Preview · frame provisional</p>
-            <div class="figma-preview__frame">
-              <iframe
-                title="Searchbox Widget - Figma preview"
-                src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FdKd6jNGAnng8hIV5MS4Avd%2FJetsmart-UI-Kit-v1.0%3Fnode-id%3D4802-1399"
-                allowfullscreen>
-              </iframe>
+          <section class="doc-section">
+            <h2 id="doc-searchbox-desktop">Searchbox Desktop</h2>
+            <p>Buscador de escritorio con selector de pestañas: vuelos, gestión de reserva, check-in y hoteles, cada una con su formulario.</p>
+
+            <div class="figma-preview">
+              <p class="figma-preview__label">Live Preview</p>
+              <div class="figma-preview__frame">
+                <iframe
+                  title="Searchbox Desktop - Figma preview"
+                  src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FdKd6jNGAnng8hIV5MS4Avd%2FJetsmart-UI-Kit-v1.0%3Fnode-id%3D7170-10048"
+                  loading="lazy"
+                  allowfullscreen>
+                </iframe>
+              </div>
+            </div>
+
+            <h3 id="doc-searchbox-desktop-resumen">Resumen</h3>
+            <p>Widget de 1090px de ancho que concentra los puntos de entrada del sitio. Las pestañas de arriba cambian el formulario de abajo: origen, destino, fecha y pasajeros para vuelos; apellido, correo y código de reserva para gestionar una reserva o hacer check-in; y destino, fecha, habitaciones y pasajeros para hoteles, gestionado por Booking.com.</p>
+            <p>5 variantes = <code>Tab</code> (5). La versión mobile tiene su propia matriz, con la grilla en horizontal. El estado abierto de la pestaña de vuelos no es un eje aparte: es el valor <code>Flights Expanded</code> de <code>Tab</code>, que suma millas AAdvantage, código promocional y el CTA Ver vuelos.</p>
+
+            <h3 id="doc-searchbox-desktop-propiedades">Propiedades</h3>
+            <p>Propiedades del componente Searchbox Desktop</p>
+            <div class="ty-table-wrap">
+              <table class="ty-table">
+                <thead>
+                  <tr><th>Propiedad</th><th>Tipo</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Tab</strong></td><td><code>Variant</code></td><td class="ty-muted">Controla qué pestaña del buscador está activa y qué formulario se muestra debajo: Flights (buscador de vuelos con origen, destino, fecha y pasajeros), Flights Expanded (agrega millas AAdvantage y código promocional), Hotels (buscador con Booking.com), Manage Flight (formulario para gestionar una reserva) y Check In (formulario de check-in). Flights es el valor por defecto.</td></tr>
+                </tbody>
+              </table>
             </div>
           </section>
 
           <section class="doc-section">
-            <h2 id="doc-resumen">Resumen</h2>
-            <p class="coming-soon">Documentación pendiente. Edita esta página para agregar contenido.</p>
-          </section>
+            <h2 id="doc-searchbox-mobile">Searchbox Mobile</h2>
+            <p>Versión móvil del buscador: las mismas cuatro pestañas, con un formulario que se colapsa y se expande.</p>
 
-          <section class="doc-section">
-            <h2 id="doc-propiedades">Propiedades</h2>
-            <p class="coming-soon">Propiedades pendientes de documentar desde Figma.</p>
+            <div class="figma-preview">
+              <p class="figma-preview__label">Live Preview</p>
+              <div class="figma-preview__frame">
+                <iframe
+                  title="Searchbox Mobile - Figma preview"
+                  src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FdKd6jNGAnng8hIV5MS4Avd%2FJetsmart-UI-Kit-v1.0%3Fnode-id%3D7607-48082"
+                  loading="lazy"
+                  allowfullscreen>
+                </iframe>
+              </div>
+            </div>
+
+            <h3 id="doc-searchbox-mobile-resumen">Resumen</h3>
+            <p>Buscador de 428px de ancho para pantallas angostas. Cada pestaña (vuelos, gestión de reserva, check-in y hoteles) muestra primero solo el encabezado de su formulario y se despliega con un chevron para revelar todos los campos y el botón de acción.</p>
+            <p>8 variantes = <code>Tab</code> (4) × <code>Expansion</code> (2), matriz completa. Grilla en horizontal: cada par de columnas es una pestaña, en estado colapsado y expandido.</p>
+
+            <h3 id="doc-searchbox-mobile-propiedades">Propiedades</h3>
+            <p>Propiedades del componente Searchbox Mobile</p>
+            <div class="ty-table-wrap">
+              <table class="ty-table">
+                <thead>
+                  <tr><th>Propiedad</th><th>Tipo</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Tab</strong></td><td><code>Variant</code></td><td class="ty-muted">Controla qué pestaña está activa y qué formulario se muestra debajo: Flights (buscador de vuelos), Manage Flight (gestión de reserva por apellido y correo), Check In (check-in por apellido y correo) y Hotels (buscador de hoteles). Flights es el valor por defecto.</td></tr>
+                  <tr><td><strong>Expansion</strong></td><td><code>Variant</code></td><td class="ty-muted">Collapsed muestra solo el encabezado del formulario activo con un chevron hacia abajo. Expanded revela todos los campos del formulario (fecha, pasajeros, código promocional, millas AAdvantage) y el botón de acción, con el chevron hacia arriba. Collapsed es el valor por defecto.</td></tr>
+                </tbody>
+              </table>
+            </div>
           </section>
 
         </main>

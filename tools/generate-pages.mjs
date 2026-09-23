@@ -181,16 +181,16 @@ const SECTIONS = [
       { label: "Itinerary Fare Summary", slug: "itinerary-fare-summary", desc: "Resumen de itinerario y tarifas.", nodes: ["6186:156082"], live: true },
       { label: "Membership Plan Card", slug: "membership-plan-card", desc: "Tarjeta de plan de membresía.", nodes: ["5636:125790"], live: true },
       { label: "Passenger Item", slug: "passenger-item", desc: "Ítem de pasajero.", nodes: ["6186:158033"], live: true },
-      { label: "Passenger Form Accordion", slug: "passenger-form-accordion", desc: "Acordeón con el formulario de pasajero.", nodes: ["5167:85834"], live: true },
+      { label: "Passenger Form Accordion", slug: "passenger-form-accordion", desc: "Acordeón con el formulario de pasajero.", nodes: ["5167:85834", "7607:88775"], live: true },
       { label: "Passenger Stepper", slug: "passenger-stepper", desc: "Control de cantidad de pasajeros.", nodes: ["5543:70065"], live: true },
       { label: "Receipt Summary Card", slug: "receipt-summary-card", desc: "Tarjeta de resumen de compra.", nodes: ["6186:161150"], live: true },
       { label: "Profile Summary Card", slug: "profile-summary-card", desc: "Tarjeta de resumen de perfil.", nodes: ["5543:64060"], live: true },
       { label: "Search Summary", slug: "search-summary", desc: "Resumen de la búsqueda de vuelos.", nodes: ["5543:35599"], live: true },
-      { label: "Seat Selector", slug: "seat-selector", desc: "Selector de asientos.", nodes: ["6573:156899"], live: true },
-      { label: "Seat Selection Sidebar", slug: "seat-selection-sidebar", desc: "Panel lateral de selección de asiento.", nodes: ["6186:161989"], live: true },
-      { label: "Summary Bar", slug: "summary-bar", desc: "Barra de resumen y total de la compra.", nodes: ["6229:172143"], live: true },
+      { label: "Seat Selector", slug: "seat-selector", desc: "Selector de asientos.", nodes: ["7607:70050", "7607:72085", "7607:72120", "6573:156899"], live: true },
+      { label: "Seat Selection Sidebar", slug: "seat-selection-sidebar", desc: "Panel lateral de selección de asiento.", nodes: ["6186:161989", "7607:59618", "7607:59909"], live: true },
+      { label: "Summary Bar", slug: "summary-bar", desc: "Barra de resumen y total de la compra.", nodes: ["6229:172143", "7607:56561"], live: true },
       { label: "Trip Status Card", slug: "trip-status-card", desc: "Tarjeta de estado del viaje.", nodes: ["6186:168687"], live: true },
-      { label: "Searchbox Widget", slug: "searchbox-widget", desc: "Widget de búsqueda de vuelos.", nodes: ["4802:1399"], live: false }
+      { label: "Searchbox Widget", slug: "searchbox-widget", desc: "Widget de búsqueda de vuelos.", nodes: ["7170:10048", "7607:48082"], live: true }
     ]
   },
   {

@@ -18,7 +18,7 @@
           <header class="page-header">
             <p class="page-header__eyebrow">Product Components</p>
             <h1>Trip Status Card</h1>
-            <p>Tarjeta de estado del viaje.</p>
+            <p>Tarjeta de un viaje reservado en «Mis viajes», con su itinerario y las acciones para gestionarlo.</p>
           </header>
 
           <section class="figma-preview">
@@ -27,6 +27,7 @@
               <iframe
                 title="Trip Status Card - Figma preview"
                 src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FdKd6jNGAnng8hIV5MS4Avd%2FJetsmart-UI-Kit-v1.0%3Fnode-id%3D6186-168687"
+                loading="lazy"
                 allowfullscreen>
               </iframe>
             </div>
@@ -34,12 +35,24 @@
 
           <section class="doc-section">
             <h2 id="doc-resumen">Resumen</h2>
-            <p class="coming-soon">Documentación pendiente. Edita esta página para agregar contenido.</p>
+            <p>Muestra un viaje reservado —código de reserva, itinerario y, si la hay, la escala— y reúne las acciones para gestionarlo: Ver detalles, Administra tu viaje y Hacer check-in. Se usa en el listado de próximos viajes de «Mis viajes».</p>
+            <p>2 variantes = <code>Breakpoint</code> (2). Grilla en horizontal: una columna por breakpoint.</p>
           </section>
 
           <section class="doc-section">
             <h2 id="doc-propiedades">Propiedades</h2>
-            <p class="coming-soon">Propiedades pendientes de documentar desde Figma.</p>
+            <p>Propiedades del componente Trip Status Card</p>
+            <div class="ty-table-wrap">
+              <table class="ty-table">
+                <thead>
+                  <tr><th>Propiedad</th><th>Tipo</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Breakpoint</strong></td><td><code>Variant</code></td><td class="ty-muted">Desktop muestra la tarjeta en formato horizontal con las acciones (Ver detalles, Administra tu viaje, Hacer check-in) en una sola fila junto al pie. Mobile apila el código de reserva, la escala y las tres acciones en columna, en botones de ancho completo. Desktop es el valor por defecto.</td></tr>
+                  <tr><td><strong>Show Stopover</strong></td><td><code>Boolean</code></td><td class="ty-muted">Muestra u oculta la fila de escala («Escala en [aeropuerto] · Duración de la parada») debajo del itinerario. Activado (true) es el valor por defecto y muestra la escala; desactivado la oculta, dejando solo el itinerario directo.</td></tr>
+                </tbody>
+              </table>
+            </div>
           </section>
 
         </main>
