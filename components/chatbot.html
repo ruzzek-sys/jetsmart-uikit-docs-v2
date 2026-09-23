@@ -18,7 +18,7 @@
           <header class="page-header">
             <p class="page-header__eyebrow">Components</p>
             <h1>Chatbot</h1>
-            <p>Interfaz conversacional de asistencia.</p>
+            <p>Widget flotante que da acceso al asistente virtual con un mensaje de bienvenida.</p>
           </header>
 
           <section class="figma-preview">
@@ -34,12 +34,24 @@
 
           <section class="doc-section">
             <h2 id="doc-resumen">Resumen</h2>
-            <p class="coming-soon">Documentación pendiente. Edita esta página para agregar contenido.</p>
+            <p>Widget flotante de asistencia que invita al usuario a abrir el chat. Combina el avatar del asistente con un globo de mensaje de bienvenida que se puede ocultar.</p>
+            <p>Un solo eje de variante: <code>Breakpoint</code>, con dos valores (Desktop y Mobile). Eje único: no hay combinaciones cruzadas.</p>
           </section>
 
           <section class="doc-section">
             <h2 id="doc-propiedades">Propiedades</h2>
-            <p class="coming-soon">Propiedades pendientes de documentar desde Figma.</p>
+            <p>Propiedades configurables del widget de Chatbot</p>
+            <div class="ty-table-wrap">
+              <table class="ty-table">
+                <thead>
+                  <tr><th>Propiedad</th><th>Tipo</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Breakpoint</strong></td><td><code>Variant</code></td><td class="ty-muted">Desktop muestra el widget en su tamaño completo (327×96) para pantallas grandes. Mobile lo reduce a una versión compacta (245×72) para pantallas pequeñas. Desktop es el valor por defecto.</td></tr>
+                  <tr><td><strong>Show Message</strong></td><td><code>Boolean</code></td><td class="ty-muted">Activado muestra el globo de mensaje de bienvenida junto al avatar. Desactivado lo oculta y deja solo el avatar visible. Activado es el valor por defecto.</td></tr>
+                </tbody>
+              </table>
+            </div>
           </section>
 
         </main>

@@ -18,7 +18,7 @@
           <header class="page-header">
             <p class="page-header__eyebrow">Components</p>
             <h1>Data Item</h1>
-            <p>Par etiqueta-valor para mostrar datos.</p>
+            <p>Dato en línea: dos textos enfrentados por un ícono al centro.</p>
           </header>
 
           <section class="figma-preview">
@@ -27,6 +27,7 @@
               <iframe
                 title="Data Item - Figma preview"
                 src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FdKd6jNGAnng8hIV5MS4Avd%2FJetsmart-UI-Kit-v1.0%3Fnode-id%3D5205-107801"
+                loading="lazy"
                 allowfullscreen>
               </iframe>
             </div>
@@ -34,12 +35,27 @@
 
           <section class="doc-section">
             <h2 id="doc-resumen">Resumen</h2>
-            <p class="coming-soon">Documentación pendiente. Edita esta página para agregar contenido.</p>
+            <p>Data Item muestra un dato en línea: dos textos enfrentados con un ícono al centro. Sirve para rutas (origen → destino) o para destacar un dato relevante con ícono y texto, como en la Summary Bar o la Flight Details Card.</p>
+            <p>Dato en línea: dos textos enfrentados por un ícono al centro. Sin variantes: las cuatro configuraciones se logran con las tres booleanas (<code>Show Text Left</code>, <code>Show Text Right</code> y <code>Show Icon</code>).</p>
           </section>
 
           <section class="doc-section">
             <h2 id="doc-propiedades">Propiedades</h2>
-            <p class="coming-soon">Propiedades pendientes de documentar desde Figma.</p>
+            <p>Sin variantes: el comportamiento se ajusta desde el panel de propiedades de la instancia.</p>
+            <div class="ty-table-wrap">
+              <table class="ty-table">
+                <thead>
+                  <tr><th>Propiedad</th><th>Tipo</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Show Text Left</strong></td><td><code>Boolean</code></td><td class="ty-muted">Oculta el texto izquierdo, dejando solo el ícono y el texto derecho. Encendida por defecto.</td></tr>
+                  <tr><td><strong>Show Text Right</strong></td><td><code>Boolean</code></td><td class="ty-muted">Oculta el texto derecho, dejando el texto izquierdo y el ícono. Encendida por defecto.</td></tr>
+                  <tr><td><strong>Text Left</strong></td><td><code>Text</code></td><td class="ty-muted">Contenido del dato izquierdo. Default: «Dato A».</td></tr>
+                  <tr><td><strong>Text Right</strong></td><td><code>Text</code></td><td class="ty-muted">Contenido del dato derecho. Default: «Dato B».</td></tr>
+                  <tr><td><strong>Show Icon</strong></td><td><code>Boolean</code></td><td class="ty-muted">Oculta el ícono central, dejando los dos datos enfrentados sin separador visual. Encendida por defecto.</td></tr>
+                </tbody>
+              </table>
+            </div>
           </section>
 
         </main>

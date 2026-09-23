@@ -18,28 +18,92 @@
           <header class="page-header">
             <p class="page-header__eyebrow">Components</p>
             <h1>Calendar</h1>
-            <p>Calendario para selección de fechas.</p>
+            <p>Familia de calendarios para elegir fechas de vuelo con su categoría de precio: el desplegable de escritorio, la tarjeta de un mes y el modal móvil.</p>
           </header>
 
-          <section class="figma-preview">
-            <p class="figma-preview__label">Live Preview</p>
-            <div class="figma-preview__frame">
-              <iframe
-                title="Calendar - Figma preview"
-                src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FdKd6jNGAnng8hIV5MS4Avd%2FJetsmart-UI-Kit-v1.0%3Fnode-id%3D5167-80655"
-                allowfullscreen>
-              </iframe>
+          <section class="doc-section">
+            <h2 id="doc-calendar-dropdown">Calendar Dropdown</h2>
+            <p>Calendario desplegable de escritorio que muestra dos meses lado a lado junto al tipo de viaje, el resumen del vuelo y el botón Confirmar. Es el que se abre desde el buscador de vuelos.</p>
+
+            <div class="figma-preview">
+              <p class="figma-preview__label">Live Preview</p>
+              <div class="figma-preview__frame">
+                <iframe
+                  title="Calendar Dropdown - Figma preview"
+                  src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FdKd6jNGAnng8hIV5MS4Avd%2FJetsmart-UI-Kit-v1.0%3Fnode-id%3D5167-80655"
+                  loading="lazy"
+                  allowfullscreen>
+                </iframe>
+              </div>
             </div>
+
+            <h3 id="doc-calendar-dropdown-resumen">Resumen</h3>
+            <p>Panel que agrupa todo lo necesario para elegir fechas en desktop: una fila superior con los radio buttons de tipo de viaje, el resumen del tramo y la acción de confirmar; debajo, dos meses con flechas de navegación y, al pie, la leyenda de categorías de precio. Cada una de esas partes se puede apagar desde la instancia.</p>
+            <p>Es uno de los tres componentes de vista de una familia de 11 maestros en cuatro niveles de composición, donde cada nivel consume al anterior. Se arma con <code>Calendar Two Months</code> —dos <code>Calendar Month</code> de escritorio— más <code>Calendar Flight Summary</code>. Por debajo están las piezas base: <code>Calendar Day</code> (eje <code>Type</code>: día de la semana, disponible, hover, seleccionado, deshabilitado, mes adyacente y los precios low, half y high), <code>Calendar Row</code>, <code>Calendar Price Legend</code> y <code>Calendar Header</code>. <code>Calendar Month</code> recorre <code>Breakpoint</code> (Desktop, Mobile) × <code>Color</code> (con o sin categorías de precio).</p>
+
+            <h3 id="doc-calendar-dropdown-propiedades">Propiedades</h3>
+              <p>Lo que se cambia desde la instancia sin salir de la variante.</p>
+              <div class="ty-table-wrap">
+                <table class="ty-table">
+                  <thead>
+                    <tr><th>Propiedad</th><th>Tipo</th><th>Descripción</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td><strong>Show Price Category</strong></td><td><code>Boolean</code></td><td class="ty-muted">Muestra la leyenda de categorías de precio (Mejor, Conveniente, Estándar) debajo del calendario. Activado por defecto.</td></tr>
+                    <tr><td><strong>Show Header</strong></td><td><code>Boolean</code></td><td class="ty-muted">Muestra la fila superior con el tipo de viaje, el resumen del vuelo y el botón Confirmar. Activado por defecto.</td></tr>
+                    <tr><td><strong>Show Trip Type</strong></td><td><code>Boolean</code></td><td class="ty-muted">Muestra los radio buttons de Ida y vuelta y Solo ida dentro de la fila superior. Activado por defecto.</td></tr>
+                    <tr><td><strong>Show Close Button</strong></td><td><code>Boolean</code></td><td class="ty-muted">Muestra el botón de cierre (X) en la esquina superior derecha del componente. Activado por defecto.</td></tr>
+                  </tbody>
+                </table>
+              </div>
           </section>
 
           <section class="doc-section">
-            <h2 id="doc-resumen">Resumen</h2>
-            <p class="coming-soon">Documentación pendiente. Edita esta página para agregar contenido.</p>
+            <h2 id="doc-calendar-card">Calendar Card</h2>
+            <p>Tarjeta con un solo mes y flechas para pasar de uno a otro. Se usa embebida en el contenido de la pantalla, por ejemplo al cambiar la fecha de un vuelo en mobile.</p>
+
+            <h3 id="doc-calendar-card-resumen">Resumen</h3>
+            <p>Calendario compacto de un mes dentro de una card, con el nombre del mes y las flechas de navegación arriba y la leyenda de categorías de precio abajo. Las flechas y la leyenda se pueden apagar desde la instancia.</p>
+            <p>Se arma con un <code>Calendar Month</code> más las flechas de navegación; comparte con el resto de la familia las piezas base <code>Calendar Day</code>, <code>Calendar Row</code> y <code>Calendar Price Legend</code>.</p>
+
+            <h3 id="doc-calendar-card-propiedades">Propiedades</h3>
+              <p>Lo que se puede activar o desactivar desde la instancia.</p>
+              <div class="ty-table-wrap">
+                <table class="ty-table">
+                  <thead>
+                    <tr><th>Propiedad</th><th>Tipo</th><th>Descripción</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td><strong>Show Price Category</strong></td><td><code>Boolean</code></td><td class="ty-muted">Muestra la leyenda de categorías de precio (Mejor, Conveniente, Estándar) debajo del calendario. Activado por defecto.</td></tr>
+                    <tr><td><strong>Show Arrows</strong></td><td><code>Boolean</code></td><td class="ty-muted">Muestra las flechas de navegación entre meses en el encabezado. Activado por defecto.</td></tr>
+                  </tbody>
+                </table>
+              </div>
           </section>
 
           <section class="doc-section">
-            <h2 id="doc-propiedades">Propiedades</h2>
-            <p class="coming-soon">Propiedades pendientes de documentar desde Figma.</p>
+            <h2 id="doc-calendar-modal">Calendar Modal</h2>
+            <p>Modal de pantalla completa para elegir fechas en mobile: encabezado con título y cierre, meses que se recorren con scroll y una barra inferior con la acción.</p>
+
+            <h3 id="doc-calendar-modal-resumen">Resumen</h3>
+            <p>Vista móvil del calendario. Arriba lleva el título «Seleccionar fechas» con el botón de cierre y el <code>Calendar Header</code> con las fechas de ida y vuelta y la leyenda de precios; al centro, el slot con los meses desplazables; abajo, el botón de acción. Encabezado, cierre y footer se pueden apagar, y el slot admite otro contenido.</p>
+            <p>Se arma con <code>Calendar Scroll</code> —ocho <code>Calendar Month</code> mobile en columna— más <code>Calendar Header</code>, el encabezado del modal y el footer.</p>
+
+            <h3 id="doc-calendar-modal-propiedades">Propiedades</h3>
+              <p>Lo que se puede activar o desactivar desde la instancia.</p>
+              <div class="ty-table-wrap">
+                <table class="ty-table">
+                  <thead>
+                    <tr><th>Propiedad</th><th>Tipo</th><th>Descripción</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td><strong>Show Close Button</strong></td><td><code>Boolean</code></td><td class="ty-muted">Muestra el botón de cierre (X) dentro del encabezado. Solo tiene efecto cuando el encabezado está visible. Activado por defecto.</td></tr>
+                    <tr><td><strong>Show Header</strong></td><td><code>Boolean</code></td><td class="ty-muted">Muestra el encabezado con el título «Seleccionar fechas» y el botón de cierre. Al desactivarse, oculta ambos elementos. Activado por defecto.</td></tr>
+                    <tr><td><strong>Show Footer</strong></td><td><code>Boolean</code></td><td class="ty-muted">Muestra la barra inferior con el botón de acción («Entendido»). Al desactivarse, el contenido del calendario ocupa el espacio restante. Activado por defecto.</td></tr>
+                    <tr><td><strong>Calendar Content</strong></td><td><code>Slot</code></td><td class="ty-muted">Contenedor donde se inserta el calendario desplazable (fechas, leyenda de colores y barra de scroll). Puede reemplazarse por otro contenido.</td></tr>
+                  </tbody>
+                </table>
+              </div>
           </section>
 
         </main>

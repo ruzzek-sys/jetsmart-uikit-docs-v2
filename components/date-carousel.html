@@ -18,7 +18,7 @@
           <header class="page-header">
             <p class="page-header__eyebrow">Components</p>
             <h1>Date Carousel</h1>
-            <p>Carrusel de fechas para comparar tarifas.</p>
+            <p>Tira de fechas con precio para elegir el día de vuelo y comparar tarifas.</p>
           </header>
 
           <section class="figma-preview">
@@ -34,12 +34,25 @@
 
           <section class="doc-section">
             <h2 id="doc-resumen">Resumen</h2>
-            <p class="coming-soon">Documentación pendiente. Edita esta página para agregar contenido.</p>
+            <p>Tira de fechas con precio para elegir el día de vuelo: cada celda muestra la fecha y el precio «desde» de ese día, y la seleccionada se resalta en azul marino. Se usa en la selección de vuelos para comparar tarifas entre días cercanos.</p>
+            <p>Dos maestros: <code>Date Carousel / Day</code>, la celda de día, con su eje <code>Selected</code>, y <code>Date Carousel</code>, el carrusel que la usa siete veces entre dos flechas. En la matriz, las columnas recorren <code>Selected</code> (<code>False</code> y <code>True</code>) y las filas, la celda y el carrusel armado.</p>
           </section>
 
           <section class="doc-section">
             <h2 id="doc-propiedades">Propiedades</h2>
-            <p class="coming-soon">Propiedades pendientes de documentar desde Figma.</p>
+            <p>Propiedades del componente Date Carousel / Day</p>
+            <div class="ty-table-wrap">
+              <table class="ty-table">
+                <thead>
+                  <tr><th>Propiedad</th><th>Tipo</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Selected</strong></td><td><code>Variant</code></td><td class="ty-muted">False muestra la tarjeta con fondo blanco y texto en azul marino. True resalta la tarjeta con fondo azul marino y texto en blanco, indicando el día seleccionado en el carrusel. False es el valor por defecto.</td></tr>
+                  <tr><td><strong>Date</strong></td><td><code>Text</code></td><td class="ty-muted">Etiqueta de fecha mostrada en la parte superior de la tarjeta (p. ej. «Vie 16/01»), en texto destacado.</td></tr>
+                  <tr><td><strong>Price</strong></td><td><code>Text</code></td><td class="ty-muted">Precio desde el cual parte el vuelo para esa fecha, mostrado debajo de «desde» (p. ej. «$30.990»).</td></tr>
+                </tbody>
+              </table>
+            </div>
           </section>
 
         </main>

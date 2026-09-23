@@ -18,7 +18,7 @@
           <header class="page-header">
             <p class="page-header__eyebrow">Components</p>
             <h1>Checkbox</h1>
-            <p>Casilla para selección múltiple.</p>
+            <p>Casilla de verificación con texto de acompañamiento, para aceptar condiciones o marcar opciones.</p>
           </header>
 
           <section class="figma-preview">
@@ -27,6 +27,7 @@
               <iframe
                 title="Checkbox - Figma preview"
                 src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FdKd6jNGAnng8hIV5MS4Avd%2FJetsmart-UI-Kit-v1.0%3Fnode-id%3D5205-90724"
+                loading="lazy"
                 allowfullscreen>
               </iframe>
             </div>
@@ -34,12 +35,25 @@
 
           <section class="doc-section">
             <h2 id="doc-resumen">Resumen</h2>
-            <p class="coming-soon">Documentación pendiente. Edita esta página para agregar contenido.</p>
+            <p>Casilla de verificación que el usuario marca o desmarca, acompañada de un texto editable. Se usa para aceptar términos y condiciones o para seleccionar opciones dentro de formularios y resúmenes de compra.</p>
+            <p>2 variantes = <code>Checked</code> (2). Eje único: no hay combinaciones cruzadas.</p>
           </section>
 
           <section class="doc-section">
             <h2 id="doc-propiedades">Propiedades</h2>
-            <p class="coming-soon">Propiedades pendientes de documentar desde Figma.</p>
+            <p>Ajusta el estado, la visibilidad y el texto del checkbox según el contexto de uso.</p>
+            <div class="ty-table-wrap">
+              <table class="ty-table">
+                <thead>
+                  <tr><th>Propiedad</th><th>Tipo</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Checked</strong></td><td><code>Variant</code></td><td class="ty-muted">False muestra el checkbox vacío, sin marcar. True muestra el checkbox marcado con el ícono de verificación. False es el valor por defecto.</td></tr>
+                  <tr><td><strong>Show Label</strong></td><td><code>Boolean</code></td><td class="ty-muted">True muestra el texto junto al checkbox. False lo oculta y deja solo el cuadro del checkbox, sin texto. True es el valor por defecto.</td></tr>
+                  <tr><td><strong>Label</strong></td><td><code>Text</code></td><td class="ty-muted">Texto que acompaña al checkbox, editable por instancia. Por defecto muestra el texto de términos y condiciones del viaje.</td></tr>
+                </tbody>
+              </table>
+            </div>
           </section>
 
         </main>
