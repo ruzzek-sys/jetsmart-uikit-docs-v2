@@ -18,7 +18,7 @@
           <header class="page-header">
             <p class="page-header__eyebrow">Components</p>
             <h1>Selection Table</h1>
-            <p>Tabla con filas seleccionables.</p>
+            <p>Tabla de opciones por pasajero con selección única (Radio) o múltiple (Checkbox).</p>
           </header>
 
           <section class="figma-preview">
@@ -27,6 +27,7 @@
               <iframe
                 title="Selection Table - Figma preview"
                 src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FdKd6jNGAnng8hIV5MS4Avd%2FJetsmart-UI-Kit-v1.0%3Fnode-id%3D6065-116456"
+                loading="lazy"
                 allowfullscreen>
               </iframe>
             </div>
@@ -34,12 +35,23 @@
 
           <section class="doc-section">
             <h2 id="doc-resumen">Resumen</h2>
-            <p class="coming-soon">Documentación pendiente. Edita esta página para agregar contenido.</p>
+            <p>Selection Table es una tabla compacta que lista pasajeros u opciones en filas y deja elegir en cada una con un control de selección. Se usa dentro de modales y tarjetas —por ejemplo, para asignar un servicio como embarque prioritario a cada pasajero— junto a Toggle Card, Toggle Tab y la fila de total.</p>
+            <p>2 variantes = <code>Type</code> (2), matriz completa: <code>Radio</code> muestra una fila con dos opciones de selección única y <code>Checkbox</code> muestra tres filas con una columna de casillas de selección múltiple. Color, tipografía, radios y espaciados están ligados a variables del kit.</p>
           </section>
 
           <section class="doc-section">
             <h2 id="doc-propiedades">Propiedades</h2>
-            <p class="coming-soon">Propiedades pendientes de documentar desde Figma.</p>
+            <p>Propiedades configurables del componente Selection Table.</p>
+            <div class="ty-table-wrap">
+              <table class="ty-table">
+                <thead>
+                  <tr><th>Propiedad</th><th>Tipo</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Type</strong></td><td><code>Variant</code></td><td class="ty-muted">Define el control de selección de la tabla: Radio muestra una sola columna de opción con círculos (selección única por pasajero) y Checkbox muestra una o más columnas con casillas cuadradas (selección múltiple, ej. embarque prioritario). Radio es el valor por defecto.</td></tr>
+                </tbody>
+              </table>
+            </div>
           </section>
 
         </main>

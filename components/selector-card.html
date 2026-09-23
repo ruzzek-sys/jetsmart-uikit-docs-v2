@@ -18,7 +18,7 @@
           <header class="page-header">
             <p class="page-header__eyebrow">Components</p>
             <h1>Selector Card</h1>
-            <p>Tarjeta selectora de opciones.</p>
+            <p>Tarjeta seleccionable con ícono, título y línea de detalle para elegir entre opciones.</p>
           </header>
 
           <section class="figma-preview">
@@ -27,6 +27,7 @@
               <iframe
                 title="Selector Card - Figma preview"
                 src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FdKd6jNGAnng8hIV5MS4Avd%2FJetsmart-UI-Kit-v1.0%3Fnode-id%3D6065-116556"
+                loading="lazy"
                 allowfullscreen>
               </iframe>
             </div>
@@ -34,12 +35,23 @@
 
           <section class="doc-section">
             <h2 id="doc-resumen">Resumen</h2>
-            <p class="coming-soon">Documentación pendiente. Edita esta página para agregar contenido.</p>
+            <p>El Selector Card es una tarjeta seleccionable con ícono, título y línea de detalle. Se usa para elegir una opción entre varias presentadas lado a lado, como en el paso de Solicitud de devolución del Check-in.</p>
+            <p>Un solo eje, <code>State</code>, con tres valores; los tres comparten estructura y solo cambian el borde y la sombra.</p>
           </section>
 
           <section class="doc-section">
             <h2 id="doc-propiedades">Propiedades</h2>
-            <p class="coming-soon">Propiedades pendientes de documentar desde Figma.</p>
+            <p>Propiedades configurables del componente Selector Card.</p>
+            <div class="ty-table-wrap">
+              <table class="ty-table">
+                <thead>
+                  <tr><th>Propiedad</th><th>Tipo</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>State</strong></td><td><code>Variant</code></td><td class="ty-muted">Controla el estado visual del card. Default muestra el ícono a color y el card interactivo. Selected resalta el card con un borde de color y un halo alrededor, indicando la opción activa. Disabled atenúa el ícono, el título y el subtítulo en gris, indicando que la opción no está disponible. Default es el valor por defecto.</td></tr>
+                </tbody>
+              </table>
+            </div>
           </section>
 
         </main>

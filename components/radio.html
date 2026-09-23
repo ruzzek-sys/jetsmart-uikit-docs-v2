@@ -27,6 +27,7 @@
               <iframe
                 title="Radio - Figma preview"
                 src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FdKd6jNGAnng8hIV5MS4Avd%2FJetsmart-UI-Kit-v1.0%3Fnode-id%3D6065-116033"
+                loading="lazy"
                 allowfullscreen>
               </iframe>
             </div>
@@ -34,12 +35,28 @@
 
           <section class="doc-section">
             <h2 id="doc-resumen">Resumen</h2>
-            <p class="coming-soon">Documentación pendiente. Edita esta página para agregar contenido.</p>
+            <p>Botón de selección única que el usuario marca para elegir una opción dentro de un grupo, acompañado de un label editable. Se usa en formularios y selectores donde solo una alternativa puede quedar activa.</p>
+            <p>4 variantes = <code>Selected</code> (2) × <code>State</code> (2), matriz completa. El círculo es un icono del Icon Pack ligado a variables del kit.</p>
           </section>
 
           <section class="doc-section">
             <h2 id="doc-propiedades">Propiedades</h2>
-            <p class="coming-soon">Propiedades pendientes de documentar desde Figma.</p>
+            <p>Propiedades configurables del componente Radio.</p>
+            <div class="ty-table-wrap">
+              <table class="ty-table">
+                <thead>
+                  <tr><th>Propiedad</th><th>Tipo</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Selected</strong></td><td><code>Variant</code></td><td class="ty-muted">True rellena el ícono del radio en teal y da mayor peso al label. False muestra el ícono vacío. False es el valor por defecto.</td></tr>
+                  <tr><td><strong>State</strong></td><td><code>Variant</code></td><td class="ty-muted">Disabled atenúa el color del ícono y del label. Default es el valor por defecto.</td></tr>
+                  <tr><td><strong>Label</strong></td><td><code>Text</code></td><td class="ty-muted">Texto del label junto al ícono. «Option» es el valor por defecto.</td></tr>
+                  <tr><td><strong>Show Label</strong></td><td><code>Boolean</code></td><td class="ty-muted">Muestra u oculta el texto del label, dejando solo el ícono. Activado es el valor por defecto.</td></tr>
+                  <tr><td><strong>Show Icon</strong></td><td><code>Boolean</code></td><td class="ty-muted">Muestra u oculta el ícono del radio, dejando solo el label. Activado es el valor por defecto.</td></tr>
+                  <tr><td><strong>Show Radio</strong></td><td><code>Boolean</code></td><td class="ty-muted">Muestra u oculta el componente Radio completo. Activado es el valor por defecto.</td></tr>
+                </tbody>
+              </table>
+            </div>
           </section>
 
         </main>

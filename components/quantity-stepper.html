@@ -18,28 +18,116 @@
           <header class="page-header">
             <p class="page-header__eyebrow">Components</p>
             <h1>Quantity Stepper</h1>
-            <p>Control para aumentar o disminuir cantidades.</p>
+            <p>Familia de controles para aumentar o disminuir cantidades: el stepper suelto, la fila con etiqueta y descripción, y el popover armado para elegir pasajeros.</p>
           </header>
 
-          <section class="figma-preview">
-            <p class="figma-preview__label">Live Preview</p>
-            <div class="figma-preview__frame">
-              <iframe
-                title="Quantity Stepper - Figma preview"
-                src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FdKd6jNGAnng8hIV5MS4Avd%2FJetsmart-UI-Kit-v1.0%3Fnode-id%3D5356-16037"
-                allowfullscreen>
-              </iframe>
+          <section class="doc-section">
+            <h2 id="doc-quantity-stepper">Quantity Stepper</h2>
+            <p>El control base: botón −, contador y botón +. Sirve para ajustar una cantidad entera paso a paso.</p>
+
+            <div class="figma-preview">
+              <p class="figma-preview__label">Live Preview</p>
+              <div class="figma-preview__frame">
+                <iframe
+                  title="Quantity Stepper - Figma preview"
+                  src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FdKd6jNGAnng8hIV5MS4Avd%2FJetsmart-UI-Kit-v1.0%3Fnode-id%3D7538-131357"
+                  loading="lazy"
+                  allowfullscreen>
+                </iframe>
+              </div>
+            </div>
+
+            <h3 id="doc-quantity-stepper-resumen">Resumen</h3>
+            <p>Stepper compacto con dos botones circulares de decremento e incremento a los lados de un valor numérico. Es la pieza que usan la fila de Modal Content y el popover de pasajeros.</p>
+            <p>La familia completa suma 4 variantes en dos sets: <code>Size</code> (2) + <code>Breakpoint</code> (2), más <code>Popover / Increment</code> sin variantes; va del control suelto al popover armado. En este componente el eje es <code>Size</code>: Small (108 × 36) y Medium (144 × 52).</p>
+
+            <h3 id="doc-quantity-stepper-propiedades">Propiedades</h3>
+            <p>Propiedades configurables del componente Quantity Stepper.</p>
+            <div class="ty-table-wrap">
+              <table class="ty-table">
+                <thead>
+                  <tr><th>Propiedad</th><th>Tipo</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Size</strong></td><td><code>Variant</code></td><td class="ty-muted">Medium usa botones e input más grandes; Small los reduce para layouts compactos. Small es el valor por defecto.</td></tr>
+                  <tr><td><strong>Number</strong></td><td><code>Text</code></td><td class="ty-muted">Valor numérico mostrado entre los botones de incremento/decremento. «1» es el valor por defecto.</td></tr>
+                </tbody>
+              </table>
             </div>
           </section>
 
           <section class="doc-section">
-            <h2 id="doc-resumen">Resumen</h2>
-            <p class="coming-soon">Documentación pendiente. Edita esta página para agregar contenido.</p>
+            <h2 id="doc-quantity-stepper-modal-content">Quantity Stepper Modal Content</h2>
+            <p>Fila con etiqueta y descripción a la izquierda y el stepper a la derecha. Es la unidad con la que se arman los selectores de pasajeros en modales y popovers.</p>
+
+            <div class="figma-preview">
+              <p class="figma-preview__label">Live Preview</p>
+              <div class="figma-preview__frame">
+                <iframe
+                  title="Quantity Stepper Modal Content - Figma preview"
+                  src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FdKd6jNGAnng8hIV5MS4Avd%2FJetsmart-UI-Kit-v1.0%3Fnode-id%3D7538-131725"
+                  loading="lazy"
+                  allowfullscreen>
+                </iframe>
+              </div>
+            </div>
+
+            <h3 id="doc-quantity-stepper-modal-content-resumen">Resumen</h3>
+            <p>Combina un título (p. ej. el tipo de pasajero), un texto secundario debajo y un <code>Quantity Stepper</code>. Se apila con divisores para formar listas, como en el modal «Seleccionar Pasajeros».</p>
+            <p>Un solo eje de variante: <code>Breakpoint</code>. Desktop (350 × 52) usa la fila más ancha y el stepper grande; Mobile (230 × 44) reduce el ancho del row y el stepper.</p>
+
+            <h3 id="doc-quantity-stepper-modal-content-propiedades">Propiedades</h3>
+            <p>Propiedades configurables del componente Quantity Stepper Modal Content.</p>
+            <div class="ty-table-wrap">
+              <table class="ty-table">
+                <thead>
+                  <tr><th>Propiedad</th><th>Tipo</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Breakpoint</strong></td><td><code>Variant</code></td><td class="ty-muted">Desktop muestra el label, la descripción y el stepper en una fila más ancha. Mobile reduce el ancho total del row. Desktop es el valor por defecto.</td></tr>
+                  <tr><td><strong>Label</strong></td><td><code>Text</code></td><td class="ty-muted">Título de la fila (p. ej. el tipo de pasajero). «Adultos» es el valor por defecto.</td></tr>
+                  <tr><td><strong>Description</strong></td><td><code>Text</code></td><td class="ty-muted">Texto secundario debajo del label. «18 o más años» es el valor por defecto.</td></tr>
+                </tbody>
+              </table>
+            </div>
           </section>
 
           <section class="doc-section">
-            <h2 id="doc-propiedades">Propiedades</h2>
-            <p class="coming-soon">Propiedades pendientes de documentar desde Figma.</p>
+            <h2 id="doc-popover-increment">Popover / Increment</h2>
+            <p>El popover armado: varias filas de pasajeros con su stepper y un botón Confirmar al final.</p>
+
+            <div class="figma-preview">
+              <p class="figma-preview__label">Live Preview</p>
+              <div class="figma-preview__frame">
+                <iframe
+                  title="Popover / Increment - Figma preview"
+                  src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FdKd6jNGAnng8hIV5MS4Avd%2FJetsmart-UI-Kit-v1.0%3Fnode-id%3D5356-16037"
+                  loading="lazy"
+                  allowfullscreen>
+                </iframe>
+              </div>
+            </div>
+
+            <h3 id="doc-popover-increment-resumen">Resumen</h3>
+            <p>Panel flotante que agrupa cuatro filas de <code>Quantity Stepper Modal Content</code> —Adultos, Adolescentes, Niños y Bebés— separadas por divisores, con el botón «Confirmar» para cerrar la selección.</p>
+            <p>No tiene variantes (279 × 355). Todo lo que se ajusta viene de sus componentes anidados: <code>Quantity Stepper Modal Content</code> en cada fila y <code>Quantity Stepper</code> dentro de ella.</p>
+
+            <h3 id="doc-popover-increment-propiedades">Propiedades</h3>
+            <p>Popover / Increment no define propiedades propias: hereda las de sus componentes anidados.</p>
+            <div class="ty-table-wrap">
+              <table class="ty-table">
+                <thead>
+                  <tr><th>Propiedad</th><th>Tipo</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Breakpoint</strong></td><td><code>Heredada</code></td><td class="ty-muted">Heredada de Quantity Stepper Modal Content (cada fila del popover). Desktop muestra la fila más ancha; Mobile la reduce. Desktop es el valor por defecto.</td></tr>
+                  <tr><td><strong>Label</strong></td><td><code>Heredada</code></td><td class="ty-muted">Heredada de Quantity Stepper Modal Content. Título de cada fila (p. ej. el tipo de pasajero). «Adultos» es el valor por defecto.</td></tr>
+                  <tr><td><strong>Description</strong></td><td><code>Heredada</code></td><td class="ty-muted">Heredada de Quantity Stepper Modal Content. Texto secundario debajo del label de cada fila. «18 o más años» es el valor por defecto.</td></tr>
+                  <tr><td><strong>Size</strong></td><td><code>Heredada</code></td><td class="ty-muted">Heredada de Quantity Stepper (dentro de cada fila). Medium agranda botones e input; Small los reduce. Small es el valor por defecto.</td></tr>
+                  <tr><td><strong>Number</strong></td><td><code>Heredada</code></td><td class="ty-muted">Heredada de Quantity Stepper. Valor numérico mostrado entre los botones de incremento/decremento de cada fila. «1» es el valor por defecto.</td></tr>
+                </tbody>
+              </table>
+            </div>
           </section>
 
         </main>

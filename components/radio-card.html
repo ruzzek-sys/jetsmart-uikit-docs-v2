@@ -27,6 +27,7 @@
               <iframe
                 title="Radio Card - Figma preview"
                 src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FdKd6jNGAnng8hIV5MS4Avd%2FJetsmart-UI-Kit-v1.0%3Fnode-id%3D6065-116271"
+                loading="lazy"
                 allowfullscreen>
               </iframe>
             </div>
@@ -34,12 +35,25 @@
 
           <section class="doc-section">
             <h2 id="doc-resumen">Resumen</h2>
-            <p class="coming-soon">Documentación pendiente. Edita esta página para agregar contenido.</p>
+            <p>Tarjeta seleccionable que presenta una opción dentro de un grupo de elección única, con título y una línea de descripción opcional. Señala con el borde y el ícono radio si la opción está disponible, elegida, bloqueada o con error.</p>
+            <p>8 variantes = <code>State</code> (4) × <code>Size</code> (2), matriz completa. <code>Show Description</code> es propiedad de instancia y no abre una tercera dimensión de variantes.</p>
           </section>
 
           <section class="doc-section">
             <h2 id="doc-propiedades">Propiedades</h2>
-            <p class="coming-soon">Propiedades pendientes de documentar desde Figma.</p>
+            <p>Propiedades configurables del componente Radio Card.</p>
+            <div class="ty-table-wrap">
+              <table class="ty-table">
+                <thead>
+                  <tr><th>Propiedad</th><th>Tipo</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>State</strong></td><td><code>Variant</code></td><td class="ty-muted">Controla el color del borde y del ícono radio. Default usa un borde neutro; Selected resalta el borde en teal con el ícono relleno; Error marca el borde en rojo; Disabled atenúa los colores de texto e ícono. Default es el valor por defecto.</td></tr>
+                  <tr><td><strong>Size</strong></td><td><code>Variant</code></td><td class="ty-muted">Large usa el ancho completo de la card, con mayor padding. Small reduce el ancho y el padding para layouts más compactos. Large es el valor por defecto.</td></tr>
+                  <tr><td><strong>Show Description</strong></td><td><code>Boolean</code></td><td class="ty-muted">Muestra u oculta la línea de descripción debajo del título. Activado es el valor por defecto.</td></tr>
+                </tbody>
+              </table>
+            </div>
           </section>
 
         </main>

@@ -18,7 +18,7 @@
           <header class="page-header">
             <p class="page-header__eyebrow">Components</p>
             <h1>Scroll Bar</h1>
-            <p>Barra de desplazamiento personalizada.</p>
+            <p>Barra de desplazamiento vertical del kit, para contenedores con scroll propio como el cuerpo de un modal.</p>
           </header>
 
           <section class="figma-preview">
@@ -27,6 +27,7 @@
               <iframe
                 title="Scroll Bar - Figma preview"
                 src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FdKd6jNGAnng8hIV5MS4Avd%2FJetsmart-UI-Kit-v1.0%3Fnode-id%3D6065-116375"
+                loading="lazy"
                 allowfullscreen>
               </iframe>
             </div>
@@ -34,12 +35,23 @@
 
           <section class="doc-section">
             <h2 id="doc-resumen">Resumen</h2>
-            <p class="coming-soon">Documentación pendiente. Edita esta página para agregar contenido.</p>
+            <p>El Scroll Bar es la barra de desplazamiento vertical del kit, con su track y su thumb. Indica que un contenedor tiene más contenido del que se ve y cuánto se ha avanzado en él; se usa, por ejemplo, en el cuerpo de un modal con una lista larga de vuelos.</p>
+            <p>2 variantes = <code>Breakpoint</code> (2), matriz completa. Solo cambia el ancho de la barra: 8 px en desktop, pensada para arrastre con puntero, y 4 px en mobile, pensada para scroll táctil.</p>
           </section>
 
           <section class="doc-section">
             <h2 id="doc-propiedades">Propiedades</h2>
-            <p class="coming-soon">Propiedades pendientes de documentar desde Figma.</p>
+            <p>Propiedades configurables del componente Scroll Bar.</p>
+            <div class="ty-table-wrap">
+              <table class="ty-table">
+                <thead>
+                  <tr><th>Propiedad</th><th>Tipo</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Breakpoint</strong></td><td><code>Variant</code></td><td class="ty-muted">Desktop muestra la barra con 8px de ancho. Mobile reduce el ancho a 4px, manteniendo la proporción entre track y thumb. Desktop es el valor por defecto.</td></tr>
+                </tbody>
+              </table>
+            </div>
           </section>
 
         </main>

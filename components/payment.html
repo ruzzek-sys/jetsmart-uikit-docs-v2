@@ -18,35 +18,151 @@
           <header class="page-header">
             <p class="page-header__eyebrow">Components</p>
             <h1>Payment</h1>
-            <p>Métodos y formularios de pago.</p>
+            <p>Las piezas del paso de pago: el formulario de medios de pago, los paneles seleccionables que lo componen, la fila de tarjeta guardada y la miniatura de tarjeta.</p>
           </header>
 
-          <section class="figma-preview">
-            <p class="figma-preview__label">Live Preview</p>
-            <div class="figma-preview__frame">
-              <iframe
-                title="Payment - Figma preview 1"
-                src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FdKd6jNGAnng8hIV5MS4Avd%2FJetsmart-UI-Kit-v1.0%3Fnode-id%3D6567-76337"
-                allowfullscreen>
-              </iframe>
+          <section class="doc-section">
+            <h2 id="doc-payment-form">Payment Form</h2>
+            <p>Bloque «Medios de pago» del checkout: título, la lista de métodos de pago, el bloque de factura, la aceptación de términos y el botón para continuar.</p>
+
+            <div class="figma-preview">
+              <p class="figma-preview__label">Live Preview</p>
+              <div class="figma-preview__frame">
+                <iframe
+                  title="Payment Form - Figma preview"
+                  src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FdKd6jNGAnng8hIV5MS4Avd%2FJetsmart-UI-Kit-v1.0%3Fnode-id%3D6567-76337"
+                  loading="lazy"
+                  allowfullscreen>
+                </iframe>
+              </div>
             </div>
-            <div class="figma-preview__frame">
-              <iframe
-                title="Payment - Figma preview 2"
-                src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FdKd6jNGAnng8hIV5MS4Avd%2FJetsmart-UI-Kit-v1.0%3Fnode-id%3D6567-77547"
-                allowfullscreen>
-              </iframe>
+
+            <h3 id="doc-payment-form-resumen">Resumen</h3>
+            <p>Formulario completo donde el usuario elige cómo pagar. Arriba va el título «Medios de pago» y debajo el slot <code>Panels</code>, que recibe la lista de paneles seleccionables (Gift Card, tarjeta de crédito o débito, pago desde el banco, etc.); cierran el bloque de factura, el checkbox de términos y la acción principal.</p>
+            <p>Son tres bloques: <code>Payment Form</code> en sus dos breakpoints —<code>Form Desktop</code>, la lista completa de medios de pago, y <code>Form Mobile</code>, la misma lista apilada y colapsada— y <code>Saved Card Prompt</code>, la fila de una tarjeta ya guardada. Los medios de pago de la lista son instancias de <code>Selectable Panel</code>.</p>
+
+            <h3 id="doc-payment-form-propiedades">Propiedades</h3>
+            <p>Propiedades configurables del componente Payment Form (Medios de pago).</p>
+            <div class="ty-table-wrap">
+              <table class="ty-table">
+                <thead>
+                  <tr><th>Propiedad</th><th>Tipo</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Breakpoint</strong></td><td><code>Variant</code></td><td class="ty-muted">Cambia el layout del formulario de pago. Desktop muestra el panel seleccionado siempre expandido con sus campos visibles. Mobile muestra todos los paneles colapsados como una lista de opciones. Desktop es el valor por defecto.</td></tr>
+                  <tr><td><strong>Show Invoice</strong></td><td><code>Boolean</code></td><td class="ty-muted">Muestra u oculta el bloque «Obtener factura» (el toggle y su mensaje de advertencia) debajo de los paneles de pago. True es el valor por defecto y despliega el bloque; False lo elimina por completo del formulario.</td></tr>
+                  <tr><td><strong>Panels</strong></td><td><code>Slot</code></td><td class="ty-muted">Espacio reservado para la lista de paneles de método de pago (Gift Card, Tarjeta de crédito o débito, Paga desde tu banco, MACHBANK y App Bci, Click to Pay). Permite intercambiar o reordenar los paneles disponibles según el mercado o flujo.</td></tr>
+                </tbody>
+              </table>
             </div>
           </section>
 
           <section class="doc-section">
-            <h2 id="doc-resumen">Resumen</h2>
-            <p class="coming-soon">Documentación pendiente. Edita esta página para agregar contenido.</p>
+            <h2 id="doc-selectable-panel">Selectable Panel</h2>
+            <p>Panel de un método de pago con radio button: colapsado muestra solo el título, expandido revela los campos del formulario.</p>
+
+            <div class="figma-preview">
+              <p class="figma-preview__label">Live Preview</p>
+              <div class="figma-preview__frame">
+                <iframe
+                  title="Selectable Panel - Figma preview"
+                  src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FdKd6jNGAnng8hIV5MS4Avd%2FJetsmart-UI-Kit-v1.0%3Fnode-id%3D7576-8365"
+                  loading="lazy"
+                  allowfullscreen>
+                </iframe>
+              </div>
+            </div>
+
+            <h3 id="doc-selectable-panel-resumen">Resumen</h3>
+            <p>Cada medio de pago de la lista es uno de estos paneles. Lleva un radio button y el título del método; al elegirlo se expande y muestra, dentro del slot <code>Input Fields Row</code>, los campos que ese método necesita.</p>
+            <p>La matriz recorre <code>Expansion</code>: colapsado hasta que el usuario lo elige, expandido con sus campos dentro. Cada estado existe en <code>Breakpoint</code> Desktop y Mobile; en Mobile los campos se apilan en columna y se suman los datos del titular.</p>
+
+            <h3 id="doc-selectable-panel-propiedades">Propiedades</h3>
+            <p>Lo que se cambia desde la instancia sin salir de la variante.</p>
+            <div class="ty-table-wrap">
+              <table class="ty-table">
+                <thead>
+                  <tr><th>Propiedad</th><th>Tipo</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Expansion</strong></td><td><code>Variant</code></td><td class="ty-muted">Collapsed muestra solo el radio button y el título del método de pago. Expanded revela el formulario con los campos de la tarjeta (Número de tarjeta, Fecha de expiración, Código de seguridad, entre otros) debajo del título. Collapsed es el valor por defecto.</td></tr>
+                  <tr><td><strong>Breakpoint</strong></td><td><code>Variant</code></td><td class="ty-muted">Desktop organiza los campos de la tarjeta en una fila horizontal de 3 columnas (Número de tarjeta, Fecha de expiración, Código de seguridad). Mobile los apila en columna y agrega campos adicionales (Nombre del titular, Documento, Correo electrónico). Desktop es el valor por defecto.</td></tr>
+                  <tr><td><strong>Title</strong></td><td><code>Text</code></td><td class="ty-muted">Texto del método de pago, mostrado junto al radio button y como encabezado del formulario expandido. Valor por defecto: «Tarjeta de crédito o débito».</td></tr>
+                  <tr><td><strong>Input Fields Row</strong></td><td><code>Slot</code></td><td class="ty-muted">Espacio reservado dentro del panel expandido para insertar el bloque de campos del formulario, permitiendo intercambiar el contenido según el método de pago.</td></tr>
+                </tbody>
+              </table>
+            </div>
           </section>
 
           <section class="doc-section">
-            <h2 id="doc-propiedades">Propiedades</h2>
-            <p class="coming-soon">Propiedades pendientes de documentar desde Figma.</p>
+            <h2 id="doc-payment-method-item">Payment Method Item</h2>
+            <p>Fila de una tarjeta ya guardada dentro de la lista de medios de pago del usuario, con sus acciones.</p>
+
+            <div class="figma-preview">
+              <p class="figma-preview__label">Live Preview</p>
+              <div class="figma-preview__frame">
+                <iframe
+                  title="Payment Method Item - Figma preview"
+                  src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FdKd6jNGAnng8hIV5MS4Avd%2FJetsmart-UI-Kit-v1.0%3Fnode-id%3D6567-77547"
+                  loading="lazy"
+                  allowfullscreen>
+                </iframe>
+              </div>
+            </div>
+
+            <h3 id="doc-payment-method-item-resumen">Resumen</h3>
+            <p>Representa una tarjeta asociada a la cuenta: la miniatura de la tarjeta, el número enmascarado con una etiqueta opcional y las acciones para marcarla como predeterminada o eliminarla. Se usa en pantallas como «Mis tarjetas asociadas».</p>
+            <p>Un solo eje de variante: <code>Breakpoint</code> (2), matriz completa. Desktop es una fila horizontal compacta con las acciones a la derecha; Mobile apila el contenido en columna con el botón a todo el ancho.</p>
+
+            <h3 id="doc-payment-method-item-propiedades">Propiedades</h3>
+            <p>Lo que se cambia desde la instancia sin salir de la variante.</p>
+            <div class="ty-table-wrap">
+              <table class="ty-table">
+                <thead>
+                  <tr><th>Propiedad</th><th>Tipo</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Breakpoint</strong></td><td><code>Variant</code></td><td class="ty-muted">Desktop: fila horizontal compacta con las acciones alineadas a la derecha. Mobile: contenido apilado en columna con el botón de acción a todo el ancho. Desktop es el valor por defecto.</td></tr>
+                  <tr><td><strong>Show Badge</strong></td><td><code>Boolean</code></td><td class="ty-muted">Muestra una etiqueta junto al número enmascarado de la tarjeta (por ejemplo, para marcar el método predeterminado). Activado por defecto.</td></tr>
+                  <tr><td><strong>Show Button Tertiary</strong></td><td><code>Boolean</code></td><td class="ty-muted">Muestra la acción «Seleccionar como predeterminada» junto al ícono de eliminar. Desactivado, solo queda el ícono de eliminar. Activado por defecto.</td></tr>
+                  <tr><td><strong>Slot Trailing</strong></td><td><code>Slot</code></td><td class="ty-muted">Espacio reservado al extremo derecho de la fila para insertar contenido personalizado, como acciones o controles adicionales del contexto donde se use el componente.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="doc-section">
+            <h2 id="doc-credit-card">Credit Card</h2>
+            <p>Miniatura de tarjeta que acompaña a los medios de pago: la tarjeta bancaria vinculada o la tarjeta de saldo JetSMART.</p>
+
+            <div class="figma-preview">
+              <p class="figma-preview__label">Live Preview</p>
+              <div class="figma-preview__frame">
+                <iframe
+                  title="Credit Card - Figma preview"
+                  src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FdKd6jNGAnng8hIV5MS4Avd%2FJetsmart-UI-Kit-v1.0%3Fnode-id%3D7576-8246"
+                  loading="lazy"
+                  allowfullscreen>
+                </iframe>
+              </div>
+            </div>
+
+            <h3 id="doc-credit-card-resumen">Resumen</h3>
+            <p>Representación gráfica de una tarjeta. En los tamaños chicos es la tarjeta bancaria vinculada, con chip, marca y número enmascarado; en el grande pasa a ser la tarjeta de saldo JetSMART, con el logo, la etiqueta «Wallet» y el saldo disponible.</p>
+            <p>Un solo eje de variante: <code>Size</code>, con Small, Medium y Large. Small y Medium son la misma tarjeta bancaria a distinta escala; Large cambia de contenido a la tarjeta de saldo.</p>
+
+            <h3 id="doc-credit-card-propiedades">Propiedades</h3>
+            <p>Propiedades configurables del componente Credit Card.</p>
+            <div class="ty-table-wrap">
+              <table class="ty-table">
+                <thead>
+                  <tr><th>Propiedad</th><th>Tipo</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Size</strong></td><td><code>Variant</code></td><td class="ty-muted">Controla el tamaño y el contenido de la tarjeta. Small y Medium muestran la misma tarjeta bancaria vinculada (chip, tag «Visa» y número enmascarado), solo que Medium es más grande. Large cambia a la tarjeta de saldo JetSMART: agrega el logo de la marca, la etiqueta «Wallet», el saldo disponible en CLP y su descripción. Small es el valor por defecto.</td></tr>
+                </tbody>
+              </table>
+            </div>
           </section>
 
         </main>
