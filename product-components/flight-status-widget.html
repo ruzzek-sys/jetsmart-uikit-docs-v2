@@ -18,7 +18,7 @@
           <header class="page-header">
             <p class="page-header__eyebrow">Product Components</p>
             <h1>Flight Status Widget</h1>
-            <p>Widget de estado de vuelo.</p>
+            <p>Widget para consultar el estado de un vuelo por número de vuelo o por ruta.</p>
           </header>
 
           <section class="figma-preview">
@@ -27,6 +27,7 @@
               <iframe
                 title="Flight Status Widget - Figma preview"
                 src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FdKd6jNGAnng8hIV5MS4Avd%2FJetsmart-UI-Kit-v1.0%3Fnode-id%3D6186-148344"
+                loading="lazy"
                 allowfullscreen>
               </iframe>
             </div>
@@ -34,12 +35,24 @@
 
           <section class="doc-section">
             <h2 id="doc-resumen">Resumen</h2>
-            <p class="coming-soon">Documentación pendiente. Edita esta página para agregar contenido.</p>
+            <p>Formulario compacto para consultar el estado de un vuelo. El usuario busca por número de vuelo y fecha, o por origen, destino y fecha; una vez hecha la consulta, el widget puede mostrar en su lugar el resumen de la búsqueda activa con un botón para modificarla.</p>
+            <p>6 variantes = <code>Breakpoint</code> (2) × <code>State</code> (3). En el panel de propiedades el eje de estado se llama <code>Search Mode</code>: Flight Number, Route y Current Search.</p>
           </section>
 
           <section class="doc-section">
             <h2 id="doc-propiedades">Propiedades</h2>
-            <p class="coming-soon">Propiedades pendientes de documentar desde Figma.</p>
+            <p>Propiedades configurables del componente Flight Status Widget</p>
+            <div class="ty-table-wrap">
+              <table class="ty-table">
+                <thead>
+                  <tr><th>Propiedad</th><th>Tipo</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Breakpoint</strong></td><td><code>Variant</code></td><td class="ty-muted">Ajusta el layout al ancho de pantalla. Desktop muestra las opciones de búsqueda como tarjetas con texto de ayuda y ubica Origen/Destino en fila. Mobile condensa la selección en un toggle simple sin texto de ayuda y apila los campos en columna. Desktop es el valor por defecto.</td></tr>
+                  <tr><td><strong>Search Mode</strong></td><td><code>Variant</code></td><td class="ty-muted">Define el formulario visible. Flight Number pide número de vuelo y fecha. Route pide origen, destino y fecha. Current Search reemplaza el formulario por el resumen de la búsqueda activa (origen → destino, fecha) con un botón para modificarla. Flight Number es el valor por defecto.</td></tr>
+                </tbody>
+              </table>
+            </div>
           </section>
 
         </main>

@@ -18,7 +18,7 @@
           <header class="page-header">
             <p class="page-header__eyebrow">Product Components</p>
             <h1>Frequent Traveler Item</h1>
-            <p>Ítem de viajero frecuente.</p>
+            <p>Tarjeta con los datos de un pasajero frecuente guardado en la cuenta, con acciones de ícono para gestionarlo.</p>
           </header>
 
           <section class="figma-preview">
@@ -27,6 +27,7 @@
               <iframe
                 title="Frequent Traveler Item - Figma preview"
                 src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FdKd6jNGAnng8hIV5MS4Avd%2FJetsmart-UI-Kit-v1.0%3Fnode-id%3D6186-153087"
+                loading="lazy"
                 allowfullscreen>
               </iframe>
             </div>
@@ -34,12 +35,24 @@
 
           <section class="doc-section">
             <h2 id="doc-resumen">Resumen</h2>
-            <p class="coming-soon">Documentación pendiente. Edita esta página para agregar contenido.</p>
+            <p>Frequent Traveler Item muestra los datos de un pasajero guardado como viajero frecuente, con uno o dos botones de ícono en la esquina superior derecha para actuar sobre él. Se repite en lista en la sección de viajeros frecuentes de la cuenta del usuario.</p>
+            <p>2 variantes = <code>Breakpoint</code> (2), matriz completa. <code>Desktop</code> es una sola fila con los datos en línea (872 × 88); <code>Mobile</code> es una tarjeta apilada con los datos en dos filas (388 × 180). El botón secundario se activa por propiedad de instancia, no por variante.</p>
           </section>
 
           <section class="doc-section">
             <h2 id="doc-propiedades">Propiedades</h2>
-            <p class="coming-soon">Propiedades pendientes de documentar desde Figma.</p>
+            <p>Propiedades del componente Frequent Traveler Item</p>
+            <div class="ty-table-wrap">
+              <table class="ty-table">
+                <thead>
+                  <tr><th>Propiedad</th><th>Tipo</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Breakpoint</strong></td><td><code>Variant</code></td><td class="ty-muted">Define el diseño de la tarjeta según el ancho de pantalla. Desktop muestra los datos del pasajero en una sola fila horizontal; Mobile apila el encabezado y los datos en bloques verticales más compactos. Desktop es el valor por defecto.</td></tr>
+                  <tr><td><strong>Show Button Secondary</strong></td><td><code>Boolean</code></td><td class="ty-muted">Agrega un segundo botón de ícono junto al principal, en la esquina superior derecha. Activado muestra dos botones de acción en línea; desactivado muestra solo uno. Desactivado es el valor por defecto.</td></tr>
+                </tbody>
+              </table>
+            </div>
           </section>
 
         </main>

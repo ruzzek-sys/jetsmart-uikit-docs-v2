@@ -18,7 +18,7 @@
           <header class="page-header">
             <p class="page-header__eyebrow">Product Components</p>
             <h1>Flight Leg Selection</h1>
-            <p>Selección de tramos del vuelo.</p>
+            <p>Tarjeta seleccionable para elegir un tramo del vuelo (ida o vuelta) con su ruta, fecha, hora y el cargo que implica.</p>
           </header>
 
           <section class="figma-preview">
@@ -27,6 +27,7 @@
               <iframe
                 title="Flight Leg Selection - Figma preview"
                 src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FdKd6jNGAnng8hIV5MS4Avd%2FJetsmart-UI-Kit-v1.0%3Fnode-id%3D6186-149903"
+                loading="lazy"
                 allowfullscreen>
               </iframe>
             </div>
@@ -34,12 +35,25 @@
 
           <section class="doc-section">
             <h2 id="doc-resumen">Resumen</h2>
-            <p class="coming-soon">Documentación pendiente. Edita esta página para agregar contenido.</p>
+            <p>Flight Leg Selection es la tarjeta con la que el usuario elige qué tramo de su reserva quiere modificar, por ejemplo al cambiar la fecha de un vuelo. Muestra un checkbox con la ruta, la fecha y la hora del tramo, una nota con el cargo del cambio y un badge que indica si es la ida o la vuelta.</p>
+            <p>Tarjeta seleccionable de tramo: checkbox con la ruta, fecha y hora, nota de cargo y badge. Un solo eje, <code>Breakpoint</code>, con dos valores: <code>Desktop</code> y <code>Mobile</code>.</p>
           </section>
 
           <section class="doc-section">
             <h2 id="doc-propiedades">Propiedades</h2>
-            <p class="coming-soon">Propiedades pendientes de documentar desde Figma.</p>
+            <p>Propiedades configurables del componente Flight Leg Selection.</p>
+            <div class="ty-table-wrap">
+              <table class="ty-table">
+                <thead>
+                  <tr><th>Propiedad</th><th>Tipo</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Breakpoint</strong></td><td><code>Variant</code></td><td class="ty-muted">Desktop muestra la tarjeta con un ancho fijo mayor y el aviso de cargo en una sola línea. Mobile reduce el ancho de la tarjeta y ese mismo aviso se ajusta en dos líneas. Desktop es el valor por defecto.</td></tr>
+                  <tr><td><strong>Date</strong></td><td><code>Text</code></td><td class="ty-muted">Texto libre que muestra la fecha del tramo junto al ícono de calendario. Valor por defecto: «Fecha: Lunes 24 marzo, 2026».</td></tr>
+                  <tr><td><strong>Time</strong></td><td><code>Text</code></td><td class="ty-muted">Texto libre que muestra la hora del tramo junto al ícono de reloj. Valor por defecto: «Hora: 07:40 AM».</td></tr>
+                </tbody>
+              </table>
+            </div>
           </section>
 
         </main>

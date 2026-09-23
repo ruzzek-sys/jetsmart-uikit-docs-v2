@@ -18,7 +18,7 @@
           <header class="page-header">
             <p class="page-header__eyebrow">Product Components</p>
             <h1>Flight Details Card</h1>
-            <p>Tarjeta con el detalle del vuelo.</p>
+            <p>Tarjeta que resume los datos de un vuelo reservado —ruta, ida, vuelta y código de reserva— junto a sus acciones.</p>
           </header>
 
           <section class="figma-preview">
@@ -27,6 +27,7 @@
               <iframe
                 title="Flight Details Card - Figma preview"
                 src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FdKd6jNGAnng8hIV5MS4Avd%2FJetsmart-UI-Kit-v1.0%3Fnode-id%3D6186-145649"
+                loading="lazy"
                 allowfullscreen>
               </iframe>
             </div>
@@ -34,12 +35,23 @@
 
           <section class="doc-section">
             <h2 id="doc-resumen">Resumen</h2>
-            <p class="coming-soon">Documentación pendiente. Edita esta página para agregar contenido.</p>
+            <p>Flight Details Card muestra el detalle de un vuelo ya reservado: la ruta, los tramos de ida y vuelta y el código de reserva, acompañados de los botones de acción para gestionarlo.</p>
+            <p>2 variantes = <code>Breakpoint</code> (2), matriz completa. Cada valor es un layout distinto de la misma tarjeta de voucher, no un reescalado del otro: <code>Desktop</code> es una tarjeta horizontal de ancho fijo 1131 px y <code>Mobile</code> una tarjeta apilada de ancho fijo 388 px.</p>
           </section>
 
           <section class="doc-section">
             <h2 id="doc-propiedades">Propiedades</h2>
-            <p class="coming-soon">Propiedades pendientes de documentar desde Figma.</p>
+            <p>Propiedades configurables de la tarjeta de detalles de vuelo.</p>
+            <div class="ty-table-wrap">
+              <table class="ty-table">
+                <thead>
+                  <tr><th>Propiedad</th><th>Tipo</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Breakpoint</strong></td><td><code>Variant</code></td><td class="ty-muted">Desktop organiza los datos del vuelo (ruta, ida, vuelta, código de reserva) en una sola fila horizontal, con los botones de acción alineados a la derecha. Mobile apila la misma información en una tarjeta vertical y convierte las acciones en botones de ancho completo al final. Desktop es el valor por defecto.</td></tr>
+                </tbody>
+              </table>
+            </div>
           </section>
 
         </main>
