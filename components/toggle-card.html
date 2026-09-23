@@ -18,7 +18,7 @@
           <header class="page-header">
             <p class="page-header__eyebrow">Components</p>
             <h1>Toggle Card</h1>
-            <p>Tarjeta con interruptor integrado.</p>
+            <p>Tarjeta con interruptor para activar un servicio opcional, con su pregunta, monto y texto de apoyo.</p>
           </header>
 
           <section class="figma-preview">
@@ -27,6 +27,7 @@
               <iframe
                 title="Toggle Card - Figma preview"
                 src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FdKd6jNGAnng8hIV5MS4Avd%2FJetsmart-UI-Kit-v1.0%3Fnode-id%3D6077-118393"
+                loading="lazy"
                 allowfullscreen>
               </iframe>
             </div>
@@ -34,12 +35,28 @@
 
           <section class="doc-section">
             <h2 id="doc-resumen">Resumen</h2>
-            <p class="coming-soon">Documentación pendiente. Edita esta página para agregar contenido.</p>
+            <p>Tarjeta con un interruptor para activar un servicio opcional dentro de un flujo, como pedir factura. Reúne una pregunta en negrita, la etiqueta del toggle con su monto en «CLP» y un texto de apoyo debajo.</p>
+            <p>Sin propiedades de variante: es un componente único. Las tres propiedades booleanas de instancia —<code>Show Label</code>, <code>Show Price</code> y <code>Show Caption</code>— dan 8 configuraciones posibles. La matriz anota el componente original y los bloques que cada booleana muestra u oculta.</p>
           </section>
 
           <section class="doc-section">
             <h2 id="doc-propiedades">Propiedades</h2>
-            <p class="coming-soon">Propiedades pendientes de documentar desde Figma.</p>
+            <p>Lo que puedes ajustar en cada instancia del Toggle Card sin tocar el componente principal.</p>
+            <div class="ty-table-wrap">
+              <table class="ty-table">
+                <thead>
+                  <tr><th>Propiedad</th><th>Tipo</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Show Label</strong></td><td><code>Boolean</code></td><td class="ty-muted">Activado muestra la pregunta en negrita de la parte superior (capa Title). Desactivado la oculta. Activado por defecto.</td></tr>
+                  <tr><td><strong>Show Caption</strong></td><td><code>Boolean</code></td><td class="ty-muted">Activado muestra el texto de apoyo inferior (capa Caption, que toma su contenido de la propiedad Description). Activado por defecto.</td></tr>
+                  <tr><td><strong>Show Price</strong></td><td><code>Boolean</code></td><td class="ty-muted">Activado muestra el monto junto al toggle, con el prefijo de moneda «CLP» fijo. Activado por defecto.</td></tr>
+                  <tr><td><strong>Title</strong></td><td><code>Text</code></td><td class="ty-muted">Texto en negrita de la parte superior de la tarjeta; su visibilidad depende de Show Label.</td></tr>
+                  <tr><td><strong>Price</strong></td><td><code>Text</code></td><td class="ty-muted">Monto que se muestra junto al toggle; su visibilidad depende de Show Price.</td></tr>
+                  <tr><td><strong>Description</strong></td><td><code>Text</code></td><td class="ty-muted">Texto de apoyo inferior (capa Caption); su visibilidad depende de Show Caption.</td></tr>
+                </tbody>
+              </table>
+            </div>
           </section>
 
         </main>

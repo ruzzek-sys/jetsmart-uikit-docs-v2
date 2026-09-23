@@ -67,7 +67,7 @@ window.JETSMART_NAV = {
         { id: "sidebar", label: "Sidebar", href: "components/sidebar.html", figmaNodeId: "6567:79655", figmaNodeIds: ["6567:79655","7503:122547","7503:122778","7503:122805"] },
         { id: "step-bar", label: "Step Bar", href: "components/step-bar.html", figmaNodeId: "6065:116934" },
         { id: "stepper", label: "Stepper", href: "components/stepper.html", figmaNodeId: "6567:81598" },
-        { id: "table", label: "Table", href: "components/table.html", figmaNodeId: "6567:84339" },
+        { id: "table", label: "Table", href: "components/table.html", figmaNodeId: "6567:84339", figmaNodeIds: ["6567:84339","7479:111930","7479:112155","7479:112159"] },
         { id: "tabs", label: "Tabs", href: "components/tabs.html", figmaNodeId: "7350:106944", figmaNodeIds: ["7350:106944","6617:86190","7350:106892","6617:87408","6617:87480"] },
         { id: "timeline", label: "Timeline", href: "components/timeline.html", figmaNodeId: "6065:117652" },
         { id: "toggle", label: "Toggle", href: "components/toggle.html", figmaNodeId: "6065:117797" },
@@ -80,7 +80,7 @@ window.JETSMART_NAV = {
       id: "product-components",
       label: "Product Components",
       items: [
-        { id: "action-panel", label: "Action Panel", href: "product-components/action-panel.html", figmaNodeId: "6187:2321" },
+        { id: "action-panel", label: "Action Panel", href: "product-components/action-panel.html", figmaNodeId: "6187:2321", figmaNodeIds: ["6187:2321","6190:2321","6190:2359","6192:2321"] },
         { id: "add-baggage-card", label: "Add Baggage Card", href: "product-components/add-baggage-card.html", figmaNodeId: "6186:135425" },
         { id: "add-on-selector", label: "Add-on Selector", href: "product-components/add-on-selector.html", figmaNodeId: "5469:12321" },
         { id: "boarding-pass-card", label: "Boarding Pass Card", href: "product-components/boarding-pass-card.html", figmaNodeId: "6186:138537" },

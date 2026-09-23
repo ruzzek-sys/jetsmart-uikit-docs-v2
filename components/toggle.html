@@ -27,6 +27,7 @@
               <iframe
                 title="Toggle - Figma preview"
                 src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FdKd6jNGAnng8hIV5MS4Avd%2FJetsmart-UI-Kit-v1.0%3Fnode-id%3D6065-117797"
+                loading="lazy"
                 allowfullscreen>
               </iframe>
             </div>
@@ -34,12 +35,26 @@
 
           <section class="doc-section">
             <h2 id="doc-resumen">Resumen</h2>
-            <p class="coming-soon">Documentación pendiente. Edita esta página para agregar contenido.</p>
+            <p>El Toggle es un interruptor de encendido y apagado para activar o desactivar una opción al instante, con un texto opcional al lado que explica qué controla.</p>
+            <p>6 variantes = <code>State</code> (2) × <code>Type</code> (3), matriz completa. <code>Type</code> mezcla apariencia (<code>Default</code>, <code>Outline</code>) y estado (<code>Disabled</code>).</p>
           </section>
 
           <section class="doc-section">
             <h2 id="doc-propiedades">Propiedades</h2>
-            <p class="coming-soon">Propiedades pendientes de documentar desde Figma.</p>
+            <p>Lo que puedes ajustar en cada instancia del Toggle sin salir de la variante.</p>
+            <div class="ty-table-wrap">
+              <table class="ty-table">
+                <thead>
+                  <tr><th>Propiedad</th><th>Tipo</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>State</strong></td><td><code>Variant</code></td><td class="ty-muted">Off apaga el switch con el indicador a la izquierda. On lo enciende, mueve el indicador a la derecha y aplica el color de acento. Off es el valor por defecto.</td></tr>
+                  <tr><td><strong>Type</strong></td><td><code>Variant</code></td><td class="ty-muted">Default no tiene fondo propio (transparente), mide 88×24. Outline envuelve el switch y su label en una píldora de 104×40 con fondo color/background/tertiary. Disabled atenúa los colores del switch y del texto para señalar que no es interactivo. Default es el valor por defecto.</td></tr>
+                  <tr><td><strong>Show Label</strong></td><td><code>Boolean</code></td><td class="ty-muted">Activado muestra el texto junto al switch (capa Label). Desactivado deja solo el control. Activado por defecto.</td></tr>
+                  <tr><td><strong>Label</strong></td><td><code>Text</code></td><td class="ty-muted">Texto que acompaña al switch; su visibilidad depende de Show Label.</td></tr>
+                </tbody>
+              </table>
+            </div>
           </section>
 
         </main>

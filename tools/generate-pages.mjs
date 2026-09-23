@@ -151,7 +151,7 @@ const SECTIONS = [
       { label: "Sidebar", slug: "sidebar", desc: "Panel lateral de navegación o contenido.", nodes: ["6567:79655", "7503:122547", "7503:122778", "7503:122805"], live: true },
       { label: "Step Bar", slug: "step-bar", desc: "Barra de pasos de un flujo.", nodes: ["6065:116934"], live: true },
       { label: "Stepper", slug: "stepper", desc: "Indicador de avance por etapas.", nodes: ["6567:81598"], live: true },
-      { label: "Table", slug: "table", desc: "Tabla de datos.", nodes: ["6567:84339"], live: true },
+      { label: "Table", slug: "table", desc: "Tabla de datos.", nodes: ["6567:84339", "7479:111930", "7479:112155", "7479:112159"], live: true },
       { label: "Tabs", slug: "tabs", desc: "Chips y barras de pestañas para alternar entre vistas.", nodes: ["7350:106944", "6617:86190", "7350:106892", "6617:87408", "6617:87480"], live: true },
       { label: "Timeline", slug: "timeline", desc: "Línea de tiempo de eventos.", nodes: ["6065:117652"], live: true },
       { label: "Toggle", slug: "toggle", desc: "Interruptor de encendido y apagado.", nodes: ["6065:117797"], live: true },
@@ -167,7 +167,7 @@ const SECTIONS = [
     preview: true,
     docs: COMPONENT_DOCS,
     items: [
-      { label: "Action Panel", slug: "action-panel", desc: "Panel de acciones contextuales del producto.", nodes: ["6187:2321"], live: false },
+      { label: "Action Panel", slug: "action-panel", desc: "Panel de acciones contextuales del producto.", nodes: ["6187:2321", "6190:2321", "6190:2359", "6192:2321"], live: false },
       { label: "Add Baggage Card", slug: "add-baggage-card", desc: "Tarjeta para agregar equipaje.", nodes: ["6186:135425"], live: true },
       { label: "Add-on Selector", slug: "add-on-selector", desc: "Selector de servicios adicionales.", nodes: ["5469:12321"], live: true },
       { label: "Boarding Pass Card", slug: "boarding-pass-card", desc: "Tarjeta de pase de abordar.", nodes: ["6186:138537"], live: true },

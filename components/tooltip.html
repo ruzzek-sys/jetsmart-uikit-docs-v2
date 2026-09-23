@@ -18,7 +18,7 @@
           <header class="page-header">
             <p class="page-header__eyebrow">Components</p>
             <h1>Tooltip</h1>
-            <p>Mensaje flotante de ayuda.</p>
+            <p>Burbuja flotante con una flecha que da contexto sobre el elemento que la dispara.</p>
           </header>
 
           <section class="figma-preview">
@@ -27,6 +27,7 @@
               <iframe
                 title="Tooltip - Figma preview"
                 src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FdKd6jNGAnng8hIV5MS4Avd%2FJetsmart-UI-Kit-v1.0%3Fnode-id%3D6077-123603"
+                loading="lazy"
                 allowfullscreen>
               </iframe>
             </div>
@@ -34,12 +35,25 @@
 
           <section class="doc-section">
             <h2 id="doc-resumen">Resumen</h2>
-            <p class="coming-soon">Documentación pendiente. Edita esta página para agregar contenido.</p>
+            <p>Burbuja flotante que aparece junto a un elemento para darle contexto o una explicación breve, con una flecha que apunta al elemento que la dispara. Viene en una versión compacta de un solo valor y otra más amplia con título y párrafo.</p>
+            <p>16 variantes que salen de dos ejes: <code>Position</code> (8) × <code>Size</code> (2). <code>Position</code> ubica la burbuja arriba, abajo o a los costados del disparador, y <code>Size</code> alterna entre <code>Small</code> y <code>Large</code>.</p>
           </section>
 
           <section class="doc-section">
             <h2 id="doc-propiedades">Propiedades</h2>
-            <p class="coming-soon">Propiedades pendientes de documentar desde Figma.</p>
+            <p>Lo que puedes ajustar en cada instancia del Tooltip sin salir de la variante.</p>
+            <div class="ty-table-wrap">
+              <table class="ty-table">
+                <thead>
+                  <tr><th>Propiedad</th><th>Tipo</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Position</strong></td><td><code>Variant</code></td><td class="ty-muted">Top left, Top center, Top right, Bottom left, Bottom center, Bottom right, Left o Right: ubica la burbuja y gira la flecha para que siempre apunte al elemento disparador. Top left es el valor por defecto.</td></tr>
+                  <tr><td><strong>Size</strong></td><td><code>Variant</code></td><td class="ty-muted">Small es una burbuja compacta de un solo valor en negrita con una línea de apoyo (ancho hug, radio 8, texto 14/20). Large agrega un título y un párrafo descriptivo completo (295px fijo, radio 16, texto 16/24, con sombra y sin borde). Small es el valor por defecto.</td></tr>
+                  <tr><td><strong>Show Title</strong></td><td><code>Boolean</code></td><td class="ty-muted">Activado muestra la línea superior en negrita (el valor en Small, el título en Large). Desactivado deja visible solo el texto de apoyo (Description). Activado por defecto.</td></tr>
+                </tbody>
+              </table>
+            </div>
           </section>
 
         </main>

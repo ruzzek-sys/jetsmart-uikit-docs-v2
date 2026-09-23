@@ -18,7 +18,7 @@
           <header class="page-header">
             <p class="page-header__eyebrow">Components</p>
             <h1>Stepper</h1>
-            <p>Indicador de avance por etapas.</p>
+            <p>Indicador de avance por etapas para flujos de varios pasos.</p>
           </header>
 
           <section class="figma-preview">
@@ -27,6 +27,7 @@
               <iframe
                 title="Stepper - Figma preview"
                 src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FdKd6jNGAnng8hIV5MS4Avd%2FJetsmart-UI-Kit-v1.0%3Fnode-id%3D6567-81598"
+                loading="lazy"
                 allowfullscreen>
               </iframe>
             </div>
@@ -34,12 +35,25 @@
 
           <section class="doc-section">
             <h2 id="doc-resumen">Resumen</h2>
-            <p class="coming-soon">Documentación pendiente. Edita esta página para agregar contenido.</p>
+            <p>Indicador horizontal de avance que muestra en qué etapa de un flujo de varios pasos está el usuario, por ejemplo en el cambio de fecha de una reserva o el check-in. Marca los pasos completados, el paso activo y los que faltan.</p>
+            <p>36 variantes = <code>Breakpoint</code> (2) × <code>Step Count</code> (4) × <code>Active Step</code> (hasta 6, sin exceder <code>Step Count</code>).</p>
           </section>
 
           <section class="doc-section">
             <h2 id="doc-propiedades">Propiedades</h2>
-            <p class="coming-soon">Propiedades pendientes de documentar desde Figma.</p>
+            <p>Propiedades configurables del componente Stepper.</p>
+            <div class="ty-table-wrap">
+              <table class="ty-table">
+                <thead>
+                  <tr><th>Propiedad</th><th>Tipo</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Breakpoint</strong></td><td><code>Variant</code></td><td class="ty-muted">Adapta el layout del stepper a Mobile o Desktop. En Mobile los pasos se comprimen (círculos más pequeños, sin espacio extra), en Desktop se expanden con mayor separación entre pasos. Mobile es el valor por defecto.</td></tr>
+                  <tr><td><strong>Step Count</strong></td><td><code>Variant</code></td><td class="ty-muted">Define cuántos pasos muestra el stepper: 6, 5, 4 o 3. El ancho total del componente crece o se reduce según la cantidad de pasos. 6 es el valor por defecto.</td></tr>
+                  <tr><td><strong>Active Step</strong></td><td><code>Variant</code></td><td class="ty-muted">Marca cuál paso está activo (1 a 6, según Step Count). Los pasos anteriores al activo se muestran en azul oscuro relleno, el activo resaltado, y los siguientes en gris claro sin completar. El último paso completado muestra un check. 1 es el valor por defecto.</td></tr>
+                </tbody>
+              </table>
+            </div>
           </section>
 
         </main>
