@@ -2,10 +2,9 @@
  * Screenshots y chequeo de desborde horizontal con el Edge instalado (puppeteer-core).
  *
  *   npm run preview   (en otra terminal)
- *   node tools/verify/screens.mjs --out <dir> [--pages a,b] [--widths 360,1400] [--old <dir>] [--overflow]
+ *   node tools/verify/screens.mjs --out <dir> [--pages a,b] [--widths 360,1400] [--overflow]
  *
  * --pages   rutas del sitio nuevo («/components/accordion/»); por defecto, todas las de dist/.
- * --old     carpeta del sitio HTML viejo: saca también la captura equivalente para comparar.
  * --base    URL del preview (por defecto http://localhost:4321).
  * --overflow no saca capturas; solo reporta las páginas con scroll horizontal a 360 px.
  *
@@ -13,17 +12,15 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath, pathToFileURL } from 'node:url';
+import { fileURLToPath } from 'node:url';
 import puppeteer from 'puppeteer-core';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const EDGE = 'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe';
 
-
 const args = process.argv.slice(2);
 const opt = (name) => (args.includes(name) ? args[args.indexOf(name) + 1] : undefined);
 const OUT = path.resolve(opt('--out') ?? path.join(ROOT, '.screens'));
-const OLD = opt('--old') && path.resolve(opt('--old'));
 const WIDTHS = (opt('--widths') ?? '390,1400').split(',').map(Number);
 const OVERFLOW = args.includes('--overflow');
 const DIST = path.resolve(opt('--dist') ?? path.join(ROOT, 'dist'));
@@ -44,14 +41,6 @@ function allPages() {
 
 const pages = opt('--pages')?.split(',') ?? allPages();
 
-/** /components/accordion/ → components/accordion.html del sitio viejo. */
-function oldFile(route) {
-  const clean = route.replace(/^\/|\/$/g, '');
-  if (!clean) return path.join(OLD, 'index.html');
-  if (clean === 'patterns') return path.join(OLD, 'patterns/index.html');
-  return path.join(OLD, `${clean}.html`);
-}
-
 const name = (route) => route.replace(/^\/|\/$/g, '').replace(/\//g, '__') || 'home';
 
 const browser = await puppeteer.launch({ executablePath: EDGE, headless: true });
@@ -66,19 +55,15 @@ for (const route of pages) {
   for (const width of OVERFLOW ? [360] : WIDTHS) {
     const mobile = width < 1024;
     await page.setViewport({ width, height: mobile ? 800 : 1000, isMobile: mobile, hasTouch: mobile });
-    const targets = [['new', BASE + route]];
-    if (OLD && !OVERFLOW) targets.push(['old', pathToFileURL(oldFile(route)).href]);
-    for (const [side, url] of targets) {
-      await page.goto(url, { waitUntil: 'load', timeout: 30000 }).catch(() => {});
-      await new Promise((r) => setTimeout(r, OVERFLOW ? 150 : 600));
-      await page.evaluate(() => document.fonts.ready).catch(() => {});
-      if (OVERFLOW) {
-        const { sw, vw } = await page.evaluate(() => ({ sw: document.documentElement.scrollWidth, vw: window.innerWidth }));
-        if (sw > vw) overflowing.push(`${route} (${sw}px > ${vw}px)`);
-        continue;
-      }
-      await page.screenshot({ path: path.join(OUT, `${name(route)}.${width}.${side}.png`), fullPage: true });
+    await page.goto(BASE + route, { waitUntil: 'load', timeout: 30000 }).catch(() => {});
+    await new Promise((r) => setTimeout(r, OVERFLOW ? 150 : 600));
+    await page.evaluate(() => document.fonts.ready).catch(() => {});
+    if (OVERFLOW) {
+      const { sw, vw } = await page.evaluate(() => ({ sw: document.documentElement.scrollWidth, vw: window.innerWidth }));
+      if (sw > vw) overflowing.push(`${route} (${sw}px > ${vw}px)`);
+      continue;
     }
+    await page.screenshot({ path: path.join(OUT, `${name(route)}.${width}.png`), fullPage: true });
   }
 }
 

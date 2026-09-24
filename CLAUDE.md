@@ -65,7 +65,7 @@ src/
   lib/                     figma.ts (URLs de embeds), heading-ids.ts, inline-md.ts, sections.ts, docs.ts
   styles/global.css        Tailwind, tokens (@theme), base y prosa (.doc-prose)
 tools/new-page.mjs         scaffold de páginas
-tools/verify/              text-diff.mjs (comparación con el sitio viejo) y screens.mjs
+tools/verify/screens.mjs   capturas desktop/móvil y chequeo de desborde (puppeteer-core + Edge)
 ```
 
 ### Páginas de componente (`.mdx`)
