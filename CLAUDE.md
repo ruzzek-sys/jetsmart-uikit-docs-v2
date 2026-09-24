@@ -4,11 +4,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Qué es esto
 
-Sitio de documentación estático del **JetSmart UI Kit v1.0**. No hay build, ni bundler, ni dependencias:
-HTML plano + un CSS + JS vanilla en IIFEs. Se abre con `file://` directamente.
+Sitio de documentación del **JetSmart UI Kit v1.0**, hecho con **Astro 7 + Vite + Tailwind v4 + MDX**.
+Genera un sitio estático; se trabaja con el servidor local de Astro.
 
 El contenido se extrae del archivo de Figma `dKd6jNGAnng8hIV5MS4Avd` (`Jetsmart-UI-Kit-v1.0`), que es la
-fuente de verdad. Casi todo el trabajo acá es: leer una página de Figma → escribir la página HTML.
+fuente de verdad. Casi todo el trabajo acá es: leer una página de Figma → escribir o actualizar un `.mdx`.
 
 Idioma: **todo en español** (títulos, prosa, comentarios, mensajes de commit). Las únicas excepciones son
 los nombres de propiedades de componentes y los paths de tokens, que van en inglés tal como aparecen en
@@ -17,85 +17,113 @@ Figma, porque tienen que calzar con lo que ve el diseñador en el panel.
 ## Comandos
 
 ```bash
-# Crea solo las páginas que faltan y regenera assets/js/nav-data.js
-node tools/generate-pages.mjs
+npm install
+npm run dev        # http://localhost:4321, recarga al editar un .mdx
+npm run build      # genera dist/ y valida el frontmatter de todas las páginas (zod)
+npm run preview    # sirve dist/
+npm run check      # astro check (tipos)
 
-# Reescribe TODAS las páginas desde la plantilla — destruye la documentación escrita a mano
-node tools/generate-pages.mjs --force
+# Página nueva de componente (no pisa archivos existentes)
+npm run new -- components date-picker "Date Picker" "Selector de fechas." 1234:5678
 
-# Extrae props de una página de Figma (el JSON de metadata lo baja el MCP de Figma)
-python .claude/skills/extraer-docs/scripts/parse_docs.py <ruta-metadata.json>          # JSON
-python .claude/skills/extraer-docs/scripts/parse_docs.py <ruta-metadata.json> --html   # tabla lista para pegar
+# Props de una página de Figma → bloque `props:` del frontmatter (el JSON lo baja el MCP de Figma)
+python .claude/skills/extraer-docs/scripts/parse_docs.py <ruta-metadata.json> --yaml
 ```
 
-No hay tests ni linter. La verificación es visual, con Edge headless:
+No hay tests ni linter. La verificación es `npm run build` + visual con el Edge instalado
+(puppeteer-core), con `npm run preview` corriendo:
 
 ```bash
-"/c/Program Files (x86)/Microsoft/Edge/Application/msedge.exe" --headless=new \
-  --disable-gpu --hide-scrollbars --window-size=1400,1800 \
-  --screenshot=<scratchpad>/check.png --virtual-time-budget=5000 \
-  "file:///D:/Rohkea%20Studio/Dev/uikit-jetsmart/components/<slug>.html"
+MSYS_NO_PATHCONV=1 node tools/verify/screens.mjs --out <scratchpad>/shots --pages /components/tabs/
+MSYS_NO_PATHCONV=1 node tools/verify/screens.mjs --overflow     # scroll horizontal a 360 px, todas las páginas
 ```
 
-Recorta el PNG con PIL y míralo. Los iframes de Figma salen en blanco en headless (necesitan GPU): es
-normal, no es un error.
+En Git Bash, `MSYS_NO_PATHCONV=1` evita que `/components/...` se convierta en una ruta de Windows. Las
+capturas salen a pantalla completa en desktop (1400) y móvil (390); los iframes de Figma salen en blanco
+en headless: es normal. No instales paquetes con `npm run preview`/`dev` corriendo: en Windows el binario
+nativo queda bloqueado y npm deja `node_modules` a medias.
 
-## Arquitectura
+## Estructura
 
-### El shell de la página lo arma el JS, no el HTML
+```
+src/
+  content.config.ts        schema zod de las colecciones (components, product-components, flows, patterns)
+  content/<colección>/*.mdx  una página por archivo; el nombre del archivo es el slug de la URL
+  pages/
+    [section]/[slug].astro   plantilla de components, product-components y flows
+    patterns/index.astro     Patterns (content/patterns/index.mdx)
+    foundations/*.astro      las 6 foundations, escritas a mano
+    index.astro              home
+  data/nav.ts              sidebar, anterior/siguiente, eyebrow de cada página
+  data/foundations/*.ts    datos tipados de cada foundation (tokens, tablas, reglas)
+  components/
+    layout/                Sidebar (+ buscador), Topbar (drawer móvil), Toc, PrevNext, PageHeader
+    doc/                   FigmaEmbed, PropsTable, DocTable, CardGrid, LinkCard, Section, mdx-components.ts
+    ui/                    vocabulario visual compartido: Table, Badge, Token, Stats, Chain, Note, Caption,
+                           Rules, Pair/PairCol, InfoGrid, Items, Tabs/TabPanel
+    foundations/<nombre>/  piezas propias de cada foundation
+  lib/                     figma.ts (URLs de embeds), heading-ids.ts, inline-md.ts, sections.ts, docs.ts
+  styles/global.css        Tailwind, tokens (@theme), base y prosa (.doc-prose)
+tools/new-page.mjs         scaffold de páginas
+tools/verify/              text-diff.mjs (comparación con el sitio viejo) y screens.mjs
+```
 
-Cada página es un esqueleto con contenedores vacíos (`#sidebar`, `#topbar`, `#page-toc`) que
-`assets/js/layout.js` rellena en `DOMContentLoaded`. Una página nueva necesita, sí o sí:
+### Páginas de componente (`.mdx`)
 
-- `<body data-page-id="...">` — con eso `layout.js` marca el link activo en el sidebar.
-- `<script>window.JETSMART_BASE = "../";</script>` antes de los demás scripts — resuelve las rutas
-  relativas según la profundidad de la carpeta.
-- Los tres scripts en orden: `nav-data.js`, `layout.js`, `main.js`.
+- **Frontmatter** = datos. `title`, `description`, `figma` (node-ids de los embeds, en el orden del
+  cuerpo), `props` (tablas Propiedades, una clave por componente) y `tables` (otras tablas de 3
+  columnas, p. ej. Guía de uso). Validado por zod: un tipo de prop fuera del enum, un node-id mal
+  escrito o una clave que no existe hacen fallar el build con el nombre del archivo.
+- **Cuerpo** = prosa en Markdown + componentes, sin imports: `<FigmaEmbed node="…" />`,
+  `<PropsTable block="…" />`, `<DocTable id="…" />`, `<CardGrid>`/`<LinkCard>`. Los componentes leen
+  el frontmatter validado desde `Astro.locals.doc`, que la ruta setea antes de renderizar.
+- Página de un componente: `FigmaEmbed` + `## Resumen` + `## Propiedades` (+ `## Guía de uso`).
+  Página de **varios componentes**: un `## <Componente>` por cada uno con su descripción, su
+  `FigmaEmbed`, `### Resumen` y `### Propiedades`. Ver `src/content/components/tabs.mdx`. Al mapear los
+  frames «Live Preview» a su componente, hazlo por **la instancia que llevan dentro**: todos los frames
+  se llaman igual y la posición en el canvas engaña.
+- Los ids de los headings los pone `src/lib/heading-ids.ts` (no se escriben a mano): `##` → `doc-<slug>`,
+  `###` bajo un componente → `doc-<componente>-<slug>`. El índice lateral sale de esos headings en build.
+- En el YAML, textos entre comillas dobles; son Markdown inline (`` `código` ``, `**negrita**`, links).
+- El sidebar se arma solo desde las colecciones, en orden alfabético: crear el `.mdx` basta.
 
-`assets/js/nav-data.js` es **derivado**: `generate-pages.mjs` lo reescribe siempre. Si editas el nav a
-mano, sincroniza también el manifiesto `SECTIONS` del generador o el cambio se pierde.
+### Foundations (`src/pages/foundations/*.astro`)
 
-### El índice lateral se arma desde los ids
+Páginas largas y a medida. Todas siguen la misma progresión: Resumen (stats + cadena Tier 1 → Tier 2 →
+aplicación) → Tokens primitivos → Tokens semánticos → Cómo usar en Figma → Buenas y malas prácticas.
+Los valores no van en la página: viven en `src/data/foundations/<nombre>.ts` y se pintan en build con los
+componentes de `ui/` y de `components/foundations/<nombre>/`. Los h2 se declaran una vez con
+`sections()` de `lib/sections.ts` (da los ids y el índice lateral). Copia el patrón de `elevations.astro`.
 
-`renderInPageNav` recoge `main [id^='doc-']`. Un heading sin id que empiece con `doc-` no aparece en el
-índice. Cada `<li>` lleva `page-toc__item--h2` o `--h3` según el nivel, y el CSS indenta los h3 solo
-cuando la lista tiene alguno (regla con `:has()`), así que las páginas de un componente no cambian.
+El único JS de cliente es: copiar un token al hacer click (`Token`), las pestañas (`Tabs`), el drawer,
+el buscador (Ctrl+K o «/») y el resaltado del índice.
 
-### Tres tipos de página
+### Pattern / Flow
 
-**Componente** (`components/`, `product-components/`) — `Resumen` + `Propiedades`, y `Guía de uso`
-cuando la página de Figma trae un section `Guía de uso · <Componente>`. Nada más.
-Cuando la página de Figma trae **varios componentes**, se repite el bloque completo por cada uno: `h2`
-con el nombre del componente, descripción, su propio Live Preview, y `h3` Resumen + `h3` Propiedades.
-Ver `components/tabs.html`. Al mapear los frames «Live Preview» a su componente, hazlo por **la instancia
-que llevan dentro**: todos los frames se llaman igual y la posición en el canvas engaña.
+`patterns/index.mdx` (preview + tarjetas a Figma) y `flows/*.mdx` (solo el Live Preview). El orden de
+los flows está en `FLOW_ORDER` de `data/nav.ts`; el de las foundations, en `FOUNDATIONS`.
 
-**Foundation** (`foundations/`) — páginas largas y a medida, con secciones propias. Todas siguen la misma
-progresión: Resumen (stats + cadena Tier 1 → Tier 2 → aplicación) → Tokens primitivos → Tokens semánticos
-→ Cómo usar en Figma → Buenas y malas prácticas. Los datos no van en el HTML: cada foundation tiene un
-módulo en `assets/js/<nombre>.js` con los valores como arrays y funciones que renderizan sobre
-contenedores `<div data-<prefijo>="...">`. Copia el patrón de `radius-width.js` o `elevations.js`.
+### CSS
 
-**Pattern / Flow** — todavía placeholders generados.
-
-### CSS: un vocabulario compartido y un namespace por página
-
-`assets/css/custom.css` es el único stylesheet. El prefijo **`ty-` es compartido** y lo usa todo el sitio:
-`ty-table-wrap` / `ty-table`, `ty-badge`, `ty-note`, `ty-stats`, `ty-chain`, `ty-token`, `ty-pair`,
-`ty-rules`, `ty-item`. Úsalos antes de inventar clases nuevas.
-
-Cada foundation agrega su bloque al final del archivo con su propio prefijo: `cl-` colors, `sp-` spacing,
-`rw-` radius & width, `ic-` icons, `el-` elevations. Los colores y fuentes salen de las variables
-`--js-*` definidas en `:root`.
-
-Tailwind entra por CDN pero casi no se usa: el estilo real está en `custom.css`.
+- Tokens en `@theme` de `global.css`: `brand`, `brand-dark`, `brand-light`, `ink`, `muted`, `line`,
+  `surface`, `subtle`, `ok`, `info`… Se usan como utilidades (`text-brand`) o como variables
+  (`var(--color-brand)`). Fuentes: Lato (`--font-sans`) y Encode Sans Variable (`--font-display`), vía
+  @fontsource.
+- Layout con utilidades de Tailwind; la piel de cada componente en su `<style>` scoped.
+- **El CSS scoped no está en capas y le gana a las utilidades**: no mezcles una utilidad de `display`
+  (`hidden`, `lg:hidden`…) con una clase que tenga CSS scoped en el mismo elemento; pon el media query
+  en el `<style>`.
+- En un `<style>` scoped no prefijes con `.doc-prose` (Astro scopea también el ancestro y la regla no
+  aplica). Para markup que llega por `set:html` o por slot desde otro componente, usa `:global(...)`.
+- **Mobile-first y sin scroll horizontal a 360 px.** Las tablas scrollean dentro de su wrapper; con
+  `stack` (las de documentación) se apilan en tarjetas bajo 640 px. Targets táctiles de 44 px.
 
 ### Embeds de Figma
 
-`embedUrl()` en el generador produce el link del iframe. Ojo con dos cosas que ya costaron tiempo:
-los iframes llevan `loading="lazy"` (si no, Figma devuelve 403 de CloudFront cuando cargan varios a la
-vez), y cuando un embed muestra el frame equivocado suele ser **caché del navegador**, no el node-id —
-verifica en incógnito antes de tocar la URL.
+Siempre con `<FigmaEmbed>`; la URL sale de `embedUrl()` en `src/lib/figma.ts`. Dos cosas que ya
+costaron tiempo: los iframes llevan `loading="lazy"` (si no, Figma devuelve 403 de CloudFront cuando
+cargan varios a la vez; el componente lo fuerza), y cuando un embed muestra el frame equivocado suele ser
+**caché del navegador**, no el node-id — verifica en incógnito antes de tocar la URL.
 
 ## Flujo de trabajo típico
 
@@ -104,16 +132,16 @@ verifica en incógnito antes de tocar la URL.
    texto de cada capa viaja en su atributo `name`**, así que no hace falta `get_design_context`. En
    algunas páginas de foundation las capas están nombradas por rol (`title`, `desc`) y ahí sí hay que
    leer el contenido desde un screenshot.
-3. Parsear con `parse_docs.py` o transcribir a mano.
-4. Escribir la página y verificar con el screenshot headless.
+3. Parsear con `parse_docs.py --yaml` o transcribir a mano.
+4. Escribir el `.mdx`, `npm run build`, y verificar con las capturas.
 
 El skill `extraer-docs` (`.claude/skills/extraer-docs/SKILL.md`) tiene el procedimiento detallado para
 páginas de componente y es el que hay que mantener actualizado cuando la convención cambie.
 
 ## Cuidados
 
-- `generate-pages.mjs` **no** sobrescribe páginas existentes; solo `--force` lo hace, y borraría toda la
-  documentación escrita a mano. No lo corras con `--force` salvo que el usuario lo pida explícitamente.
-- `STALE_FILES` en el generador borra archivos en cada corrida. Agregar algo ahí elimina el archivo.
-- Antes de documentar una página, revisa si ya tiene contenido real (`grep -c 'coming-soon'`). Si lo
-  tiene, pregunta antes de pisarlo.
+- Antes de documentar una página, revisa si ya tiene contenido real. Si lo tiene, pregunta antes de
+  pisarlo.
+- `figma:` del frontmatter tiene que listar los mismos nodos que los `<FigmaEmbed>` del cuerpo; el build
+  lo comprueba.
+- Un `<PropsTable block>` o `<DocTable id>` sin su clave en el frontmatter rompe el build: es a propósito.

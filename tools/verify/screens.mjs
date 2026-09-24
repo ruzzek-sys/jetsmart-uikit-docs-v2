@@ -56,6 +56,9 @@ const name = (route) => route.replace(/^\/|\/$/g, '').replace(/\//g, '__') || 'h
 
 const browser = await puppeteer.launch({ executablePath: EDGE, headless: true });
 const page = await browser.newPage();
+// Los embeds de Figma no aportan al layout (salen en blanco en headless) y demoran cada carga.
+await page.setRequestInterception(true);
+page.on('request', (req) => (req.url().includes('figma.com') ? req.abort() : req.continue()));
 fs.mkdirSync(OUT, { recursive: true });
 const overflowing = [];
 
@@ -66,9 +69,8 @@ for (const route of pages) {
     const targets = [['new', BASE + route]];
     if (OLD && !OVERFLOW) targets.push(['old', pathToFileURL(oldFile(route)).href]);
     for (const [side, url] of targets) {
-      // Los embeds de Figma nunca quedan «idle»: se espera el load y un respiro para las fuentes.
       await page.goto(url, { waitUntil: 'load', timeout: 30000 }).catch(() => {});
-      await new Promise((r) => setTimeout(r, 800));
+      await new Promise((r) => setTimeout(r, OVERFLOW ? 150 : 600));
       await page.evaluate(() => document.fonts.ready).catch(() => {});
       if (OVERFLOW) {
         const { sw, vw } = await page.evaluate(() => ({ sw: document.documentElement.scrollWidth, vw: window.innerWidth }));
