@@ -1,0 +1,26 @@
+---
+import { flagSrc } from '../../../data/foundations/icons';
+
+/** Bandera circular de 40 px (antes .ic-flag__img). */
+interface Props {
+  iso: string;
+  alt: string;
+  lazy?: boolean;
+}
+
+const { iso, alt, lazy = false } = Astro.props;
+---
+
+<img class="flag" src={flagSrc(iso)} alt={alt} width="40" height="40" loading={lazy ? 'lazy' : undefined} />
+
+<style>
+  .flag {
+    display: block;
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgb(30 42 58 / 0.12);
+    border-radius: 999px;
+    object-fit: cover;
+  }
+</style>

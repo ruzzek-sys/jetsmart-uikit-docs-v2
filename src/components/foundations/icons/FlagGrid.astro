@@ -1,0 +1,49 @@
+---
+import Caption from '../../ui/Caption.astro';
+import FlagImg from './FlagImg.astro';
+import { FLAG_SAMPLES } from '../../../data/foundations/icons';
+
+/** Muestra de Round World Flags (antes .ic-flag-grid). */
+---
+
+<div class="grid">
+  {FLAG_SAMPLES.map((f) => (
+    <div class="flag" title={f.label}>
+      <FlagImg iso={f.iso} alt={f.label} lazy />
+      <span>{f.name}</span>
+    </div>
+  ))}
+</div>
+<Caption>
+  Muestra de 24 banderas. En Figma el set Round World Flags supera las 250 instancias (países, territorios y
+  organizaciones).
+</Caption>
+
+<style>
+  .grid {
+    display: grid;
+    /* 92 px: ocho columnas en el ancho de contenido de desktop, tres a 360 px. */
+    grid-template-columns: repeat(auto-fill, minmax(92px, 1fr));
+    gap: 10px;
+    margin-top: 8px;
+  }
+
+  .flag {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 8px;
+    border: 1px solid var(--color-line);
+    border-radius: 10px;
+    background: var(--color-subtle);
+  }
+
+  .flag span {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    line-height: 1.3;
+    text-align: center;
+    color: var(--color-muted);
+  }
+</style>

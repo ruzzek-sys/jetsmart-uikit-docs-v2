@@ -1,0 +1,85 @@
+---
+import Caption from '../../ui/Caption.astro';
+import { SAMPLE_ICONS, faClass } from '../../../data/foundations/icons';
+
+/**
+ * Muestra de icon-name frecuentes (antes .ic-sample-grid). Click copia el icon-name.
+ * No usa <Token>: el botón lleva el glifo además del nombre y solo se reemplaza la etiqueta.
+ */
+---
+
+<div class="grid">
+  {SAMPLE_ICONS.map((i) => (
+    <button type="button" class="sample" data-icon-name={i.name} title="Copiar icon-name">
+      <i class={faClass(i.style, i.glyph)} style="font-size:22px" aria-hidden="true"></i>
+      <span>{i.name}</span>
+    </button>
+  ))}
+</div>
+<Caption>Ejemplos frecuentes en producto. Clic copia el icon-name. Catálogo completo: fontawesome.com/search.</Caption>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('button[data-icon-name]').forEach((chip) => {
+    chip.addEventListener('click', () => {
+      const label = chip.querySelector('span');
+      if (!label || !navigator.clipboard || chip.dataset.copied) return;
+      navigator.clipboard.writeText(chip.dataset.iconName ?? '').then(() => {
+        const original = label.textContent;
+        chip.dataset.copied = 'true';
+        label.textContent = 'copiado';
+        setTimeout(() => {
+          label.textContent = original;
+          delete chip.dataset.copied;
+        }, 900);
+      });
+    });
+  });
+</script>
+
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 10px;
+    margin-top: 8px;
+  }
+
+  .sample {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 14px 8px;
+    border: 1px solid var(--color-line);
+    border-radius: 10px;
+    background: var(--color-subtle);
+    font: inherit;
+    color: var(--color-ink);
+    cursor: pointer;
+  }
+
+  .sample:hover,
+  .sample[data-copied] {
+    border-color: var(--color-brand);
+    background: var(--color-brand-light);
+  }
+
+  .sample i {
+    color: var(--color-brand);
+  }
+
+  .sample span {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-muted);
+    overflow-wrap: anywhere;
+  }
+
+  @media (max-width: 639px) {
+    .grid {
+      grid-template-columns: repeat(auto-fill, minmax(92px, 1fr));
+      gap: 8px;
+    }
+  }
+</style>

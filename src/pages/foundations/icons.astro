@@ -1,0 +1,266 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Section from '../../components/doc/Section.astro';
+import Stats from '../../components/ui/Stats.astro';
+import Note from '../../components/ui/Note.astro';
+import Table from '../../components/ui/Table.astro';
+import Items from '../../components/ui/Items.astro';
+import InfoGrid from '../../components/ui/InfoGrid.astro';
+import Rules from '../../components/ui/Rules.astro';
+import Pair from '../../components/ui/Pair.astro';
+import PairCol from '../../components/ui/PairCol.astro';
+import LibraryLinks from '../../components/foundations/icons/LibraryLinks.astro';
+import CorePacks from '../../components/foundations/icons/CorePacks.astro';
+import ProPlusGrid from '../../components/foundations/icons/ProPlusGrid.astro';
+import IconSamples from '../../components/foundations/icons/IconSamples.astro';
+import FlagGrid from '../../components/foundations/icons/FlagGrid.astro';
+import FlagImg from '../../components/foundations/icons/FlagImg.astro';
+import { sections } from '../../lib/sections';
+import { FA_RULES, FLAG_RULES, PROPERTIES, PROPERTY_NOTES, STEPS } from '../../data/foundations/icons';
+
+const S = sections({
+  resumen: 'Resumen',
+  'font-awesome': 'Font Awesome 7',
+  'fa-figma': 'Cómo usar Font Awesome en Figma',
+  flags: 'Round World Flags',
+  practicas: 'Buenas y malas prácticas',
+});
+---
+
+<BaseLayout
+  title="Icons"
+  description="Dos librerías enlazadas en Figma: Font Awesome 7 para íconos de interfaz y Round World Flags para banderas circulares."
+  headings={S.headings}
+>
+  <!-- Los glifos de muestra usan Font Awesome 6.5.2: misma versión que el sitio viejo, mismos nombres. -->
+  <link
+    slot="head"
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+
+  <Section {...S.resumen}>
+    <p>
+      El kit no dibuja un set propio de glifos: consume dos librerías publicadas y enlazadas al archivo
+      <code>Jetsmart UI Kit v1.0</code>. <strong>Font Awesome 7</strong> cubre acciones, navegación y
+      estados de producto. <strong>Round World Flags</strong> cubre países y territorios en formato
+      circular. Cada librería se inserta desde Assets; no se importa un SVG suelto ni se redibuja el
+      pictograma a mano.
+    </p>
+
+    <Stats
+      items={[
+        { value: 2, label: 'Librerías enlazadas' },
+        { value: 3, label: 'Packs Core FA' },
+        { value: 12, label: 'Packs Pro+' },
+        { value: '~260', label: 'Banderas en Figma' },
+      ]}
+    />
+
+    <LibraryLinks />
+
+    <Note>
+      <strong>En Figma:</strong> ambas librerías se abren desde el botón de enlace de cada sección o desde
+      el panel Assets. El componente se instancia; el glifo se elige por nombre o por variante de bandera,
+      no se edita el path.
+    </Note>
+  </Section>
+
+  <Section {...S['font-awesome']}>
+    <p>
+      Sistema principal de íconos de interfaz. Requiere instalar los archivos OTF de escritorio de los
+      paquetes contratados para que el componente renderice en Figma.
+    </p>
+
+    <h3>Core</h3>
+    <CorePacks />
+
+    <h3>Pro+ Icon Packs</h3>
+    <p>
+      Doce packs de estilo adicionales sobre la misma familia de glifos. Se usan cuando el contexto pide
+      una lectura más gráfica; el pack por defecto del producto debe seguir siendo Core.
+    </p>
+    <ProPlusGrid />
+
+    <h3>Muestra de icon-name</h3>
+    <IconSamples />
+  </Section>
+
+  <Section {...S['fa-figma']}>
+    <Items items={STEPS.map((s) => ({ title: s.title, badge: s.n, text: s.text }))} />
+
+    <h3>Propiedades del componente</h3>
+    <p>
+      El componente <code>Font Awesome Icon</code> expone el control en la barra lateral. Mono usa un solo
+      <code>icon-name</code>; Duo 1 y Duo 2 usan dos capas.
+    </p>
+    <Table columns={['Propiedad', 'Qué controla']} roles>
+      {PROPERTIES.map((p) => (
+        <tr>
+          <td><code>{p.name}</code></td>
+          <td class="muted">{p.controls}</td>
+        </tr>
+      ))}
+    </Table>
+
+    <div class="info-gap"><InfoGrid items={PROPERTY_NOTES} /></div>
+
+    <Note tone="warn">
+      <strong>Atención · Duotone:</strong> al cambiar hacia o desde una variante Duotone, las elecciones de
+      <code>icon-name</code> no se conservan. Hay que volver a escribirlas.
+    </Note>
+    <Note tone="warn">
+      <strong>Atención · Slab y Notdog:</strong> hay un error de renderizado de fuentes en Figma que afecta
+      estos packs en escalas <code>.75x</code> y <code>1.25x</code>. Usarlos con precaución.
+    </Note>
+
+    <Rules items={FA_RULES} />
+  </Section>
+
+  <Section {...S.flags}>
+    <p>
+      Librería de banderas circulares para selectores de país, idiomas y contextos de ruta. En el kit se
+      documentan más de 250 instancias (países, territorios y organizaciones). El componente se elige por
+      nombre de país, no por código ISO escrito a mano en un texto.
+    </p>
+    <FlagGrid />
+
+    <Rules items={FLAG_RULES} />
+  </Section>
+
+  <Section {...S.practicas}>
+    <p>
+      Tres pares que contrastan el uso correcto de las librerías con el error equivalente. El impacto
+      aparece al actualizar la librería, al auditar Assets o al pasar a desarrollo.
+    </p>
+
+    <Pair eyebrow="01 · Componente de librería" title="Instanciar desde Assets, no pegar un SVG">
+      <p>
+        El ícono del kit es una instancia del componente Font Awesome. Un SVG suelto se ve igual en la
+        primera revisión y se desconecta de actualizaciones, nombres y estilos del pack.
+      </p>
+      <PairCol slot="do" kind="do" label="Instancia Font Awesome Icon" styles="Assets → Font Awesome Icon · icon-name plane"
+        note="Familia, estilo y escala siguen al componente. Un cambio de pack se propaga.">
+        <div class="practice">
+          <i class="fas fa-plane" aria-hidden="true"></i>
+          <span>icon-name: plane</span>
+        </div>
+      </PairCol>
+      <PairCol slot="dont" kind="dont" label="SVG pegado en el frame" styles="Path local · sin icon-name · sin pack"
+        note="Visualmente similar. No hereda updates de la librería ni el contrato de nombre para desarrollo.">
+        <div class="practice practice--flat">
+          <i class="fas fa-plane" aria-hidden="true"></i>
+          <span>vector suelto</span>
+        </div>
+      </PairCol>
+    </Pair>
+
+    <Pair eyebrow="02 · Duotone completo" title="Las dos capas llevan el mismo icon-name">
+      <p>
+        En Duo, la capa principal usa <code>#</code> y la secundaria <code>##</code>. Dejar una vacía o
+        con otro nombre rompe el glifo.
+      </p>
+      <PairCol slot="do" kind="do" label="Ambas capas con house" styles="Family: Classic Duotone · Style: Solid"
+        note="Las dos capas resuelven el mismo glifo con opacidades distintas.">
+        <div class="practice">
+          <i class="fas fa-house" aria-hidden="true"></i>
+          <div class="practice__meta">
+            <code>icon-name# · house</code>
+            <code>icon-name## · house</code>
+          </div>
+        </div>
+      </PairCol>
+      <PairCol slot="dont" kind="dont" label="Solo la capa principal" styles="Duotone incompleto"
+        note="El render queda a medias o desaparece una capa. Tras cambiar de Mono a Duo hay que reescribir ambos campos.">
+        <div class="practice practice--broken">
+          <i class="fas fa-house" aria-hidden="true"></i>
+          <div class="practice__meta">
+            <code>icon-name# · house</code>
+            <code>icon-name## · (vacío)</code>
+          </div>
+        </div>
+      </PairCol>
+    </Pair>
+
+    <Pair eyebrow="03 · Bandera no es Brands" title="País → Round World Flags; marca → Font Awesome Brands">
+      <p>
+        Un selector de país usa la bandera circular. El logo de una red social o marca usa el pack Brands.
+        Mezclarlos confunde el dato.
+      </p>
+      <PairCol slot="do" kind="do" label="Chile con Round World Flags" styles="Round World Flags · chile"
+        note="Formato circular, nombre de país, listo para Flag Selector.">
+        <div class="practice">
+          <FlagImg iso="cl" alt="Chile" />
+          <span>chile</span>
+        </div>
+      </PairCol>
+      <PairCol slot="dont" kind="dont" label="País con Brands o emoji" styles="Texto emoji o glifo Brands"
+        note="Pierde el contrato de la librería, el recorte circular y la consistencia entre plataformas.">
+        <div class="practice practice--flat">
+          <span class="practice__emoji" aria-hidden="true">🇨🇱</span>
+          <span>emoji / Brands</span>
+        </div>
+      </PairCol>
+    </Pair>
+  </Section>
+</BaseLayout>
+
+<style>
+  .muted {
+    color: var(--color-muted);
+  }
+
+  /* El bloque de notas iba con 28 px de aire sobre la tabla (InfoGrid trae 24). */
+  .info-gap {
+    padding-top: 4px;
+  }
+
+  /* Demos de prácticas */
+  .practice {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    width: 100%;
+    min-width: 0;
+    padding: 16px;
+    border: 1px solid var(--color-line);
+    border-radius: 10px;
+    background: var(--color-surface);
+    font-size: 28px;
+    color: var(--color-brand);
+  }
+
+  .practice > span,
+  .practice__meta code {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-muted);
+    overflow-wrap: anywhere;
+  }
+
+  .practice__meta {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+  }
+
+  .practice--flat {
+    border-style: dashed;
+    opacity: 0.85;
+  }
+
+  .practice--broken {
+    border-color: rgb(181 18 27 / 0.35);
+    background: #fff8f8;
+  }
+
+  /* El emoji hereda el tamaño de etiqueta (12 px), igual que en el sitio viejo. */
+  .practice__emoji {
+    line-height: 1;
+  }
+</style>

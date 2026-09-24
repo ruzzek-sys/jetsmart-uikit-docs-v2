@@ -1,0 +1,61 @@
+---
+import { figmaUrl } from '../../../lib/figma';
+import { LIBRARIES } from '../../../data/foundations/icons';
+
+/** Accesos directos a las dos librerías dentro del archivo de Figma (antes .ic-lib-links). */
+---
+
+<div class="links">
+  {LIBRARIES.map((l) => (
+    <a class="link" href={figmaUrl(l.nodeId)} target="_blank" rel="noopener noreferrer">
+      <i class={`fas fa-${l.icon} link__icon`} aria-hidden="true"></i>
+      <span>{l.label}</span>
+    </a>
+  ))}
+</div>
+
+<style>
+  .links {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+    gap: 12px;
+    margin: 24px 0;
+  }
+
+  .link {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-height: 44px;
+    padding: 18px 20px;
+    border: 1.5px solid var(--color-line);
+    border-radius: 12px;
+    background: var(--color-surface);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--color-ink);
+    text-decoration: none;
+    transition:
+      border-color 0.15s ease,
+      background 0.15s ease;
+  }
+
+  .link:hover {
+    border-color: var(--color-brand);
+    background: var(--color-brand-light);
+    color: var(--color-brand-dark);
+  }
+
+  .link__icon {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: var(--color-brand-light);
+    font-size: 18px;
+    color: var(--color-brand);
+  }
+</style>
