@@ -1,0 +1,66 @@
+---
+import Token from '../../ui/Token.astro';
+import ShadowSwatch from './ShadowSwatch.astro';
+import { LEVELS } from '../../../data/foundations/elevations';
+
+/** «Qué resuelve cada nivel»: una tarjeta por nivel con su sombra, valores y uso. */
+---
+
+<div class="grid">
+  {LEVELS.map((l) => (
+    <article class="card">
+      <div class="card__demo"><ShadowSwatch level={l} size={64} /></div>
+      <div>
+        <h4><Token name={`Elevation-${l.level}`} /></h4>
+        <p class="card__meta">y {l.offsetY} · blur {l.blur} · spread {l.spread} · {l.alpha}%</p>
+        <p class="card__desc">{l.use}</p>
+      </div>
+    </article>
+  ))}
+</div>
+
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(230px, 100%), 1fr));
+    gap: 16px;
+    margin-top: 20px;
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    padding: 18px;
+    border: 1px solid var(--color-line);
+    border-radius: 12px;
+    background: var(--color-surface);
+  }
+
+  .card__demo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: var(--color-subtle);
+  }
+
+  .card h4 {
+    margin: 14px 0 6px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .card__meta {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-muted);
+  }
+
+  .card__desc {
+    margin: 10px 0 0;
+    font-size: 13px;
+    line-height: 1.45;
+    color: var(--color-muted);
+  }
+</style>

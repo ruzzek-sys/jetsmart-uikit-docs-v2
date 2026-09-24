@@ -1,0 +1,33 @@
+---
+import { shadow, type Level } from '../../../data/foundations/elevations';
+
+/**
+ * Cuadrado blanco con la sombra real de un nivel. El padding es fijo para los cinco niveles:
+ * xl (blur 64, offset 24) es el que más espacio necesita, y así todas las muestras miden igual.
+ */
+interface Props {
+  level: Level;
+  size?: number;
+}
+
+const { level, size = 88 } = Astro.props;
+---
+
+<span class="wrap"><span class="swatch" style={`width:${size}px;height:${size}px;box-shadow:${shadow(level)}`}></span></span>
+
+<style>
+  .wrap {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 48px 56px;
+    line-height: 0;
+  }
+
+  .swatch {
+    display: inline-block;
+    border: 1px solid rgb(152 170 192 / 0.25);
+    border-radius: 12px;
+    background: #fff;
+  }
+</style>

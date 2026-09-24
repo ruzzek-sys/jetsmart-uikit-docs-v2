@@ -10,15 +10,19 @@
 interface Props {
   columns: string[];
   stack?: boolean;
+  /** Última columna con ancho mínimo de 300 px (descripciones largas; antes .cl-table--last-wide). */
+  wideLast?: boolean;
+  /** Tercera columna con ancho mínimo de 320 px (antes .ty-table--roles). */
+  roles?: boolean;
   /** Clases extra para la <table> (modificadores de cada foundation). */
   class?: string;
 }
 
-const { columns, stack = false, class: className } = Astro.props;
+const { columns, stack = false, wideLast = false, roles = false, class: className } = Astro.props;
 ---
 
 <div class:list={['table-wrap', { 'is-stack': stack }]}>
-  <table class:list={['table', className]}>
+  <table class:list={['table', { 'wide-last': wideLast, roles }, className]}>
     <thead>
       <tr>{columns.map((c) => <th set:html={c} />)}</tr>
     </thead>
@@ -86,6 +90,14 @@ const { columns, stack = false, class: className } = Astro.props;
   .table :global(code) {
     font-family: var(--font-mono);
     font-size: 12px;
+  }
+
+  .wide-last :global(td:last-child) {
+    min-width: 300px;
+  }
+
+  .roles :global(td:nth-child(3)) {
+    min-width: 320px;
   }
 
   .table :global(td ol),

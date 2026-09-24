@@ -1,0 +1,62 @@
+---
+import Badge, { type BadgeTone } from './Badge.astro';
+
+/** Lista de tarjetas con título, badge y texto (antes .ty-items > .ty-item). `title` y `text` aceptan HTML. */
+interface Props {
+  items: { title: string; badge?: string; tone?: BadgeTone; text: string }[];
+}
+
+const { items } = Astro.props;
+---
+
+<div class="items">
+  {items.map((i) => (
+    <div class="item">
+      <div class="item__head">
+        <h4 set:html={i.title} />
+        {i.badge && <Badge tone={i.tone ?? 'neutral'}>{i.badge}</Badge>}
+      </div>
+      <p set:html={i.text} />
+    </div>
+  ))}
+</div>
+
+<style>
+  .items {
+    display: grid;
+    gap: 12px;
+    margin-top: 24px;
+  }
+
+  .item {
+    padding: 16px;
+    border: 1px solid var(--color-line);
+    border-radius: 12px;
+  }
+
+  .item__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px 12px;
+    margin-bottom: 6px;
+  }
+
+  .item__head h4 {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  .item p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .item :global(code) {
+    font-family: var(--font-mono);
+    font-size: 12px;
+  }
+</style>

@@ -1,0 +1,55 @@
+---
+/** Fila de cifras del Resumen de una foundation (antes .ty-stats). */
+interface Props {
+  items: { value: string | number; label: string }[];
+}
+
+const { items } = Astro.props;
+---
+
+<div class="stats">
+  {items.map((s) => (
+    <div class="stat">
+      <span class="stat__value">{s.value}</span>
+      <span class="stat__label">{s.label}</span>
+    </div>
+  ))}
+</div>
+
+<style>
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    margin-top: 24px;
+  }
+
+  @media (max-width: 639px) {
+    .stats {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  .stat {
+    padding: 16px;
+    border: 1px solid var(--color-line);
+    border-radius: 12px;
+    background: var(--color-subtle);
+  }
+
+  .stat__value {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--color-brand);
+  }
+
+  .stat__label {
+    display: block;
+    margin-top: 4px;
+    font-size: 13px;
+    color: var(--color-muted);
+  }
+</style>

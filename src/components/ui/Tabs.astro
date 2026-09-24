@@ -1,0 +1,90 @@
+---
+/**
+ * Pestañas (antes .ty-tabs / .ty-tab). Cada panel es un <TabPanel key> en el slot.
+ * El primer tab arranca activo. En móvil la fila de tabs hace scroll horizontal.
+ */
+interface Props {
+  tabs: { key: string; label: string; count?: number | string }[];
+}
+
+const { tabs } = Astro.props;
+---
+
+<div class="tabs-root" data-tabs>
+  <div class="tabs" role="tablist">
+    {tabs.map((t, i) => (
+      <button type="button" role="tab" class="tab" aria-selected={i === 0 ? 'true' : 'false'} data-tab={t.key}>
+        {t.label}
+        {t.count !== undefined && <span class="tab__count">{t.count}</span>}
+      </button>
+    ))}
+  </div>
+  <slot />
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-tabs]').forEach((root) => {
+    const tabs = [...root.querySelectorAll<HTMLButtonElement>(':scope > .tabs > [data-tab]')];
+    const panels = [...root.querySelectorAll<HTMLElement>(':scope > [data-panel]')];
+    const select = (key: string) => {
+      tabs.forEach((t) => t.setAttribute('aria-selected', String(t.dataset.tab === key)));
+      panels.forEach((p) => (p.hidden = p.dataset.panel !== key));
+    };
+    tabs.forEach((t) => t.addEventListener('click', () => select(t.dataset.tab!)));
+    if (tabs[0]) select(tabs[0].dataset.tab!);
+  });
+</script>
+
+<style>
+  .tabs {
+    display: flex;
+    gap: 6px;
+    margin-top: 24px;
+    padding-bottom: 4px;
+    overflow-x: auto;
+    scrollbar-width: thin;
+  }
+
+  .tab {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: 6px;
+    min-height: 40px;
+    padding: 8px 14px;
+    border: 1px solid var(--color-line);
+    border-radius: 999px;
+    background: var(--color-surface);
+    font-family: inherit;
+    font-size: 14px;
+    color: var(--color-ink);
+    white-space: nowrap;
+    cursor: pointer;
+  }
+
+  .tab:hover {
+    background: var(--color-subtle);
+  }
+
+  .tab[aria-selected='true'] {
+    border-color: var(--color-brand);
+    background: var(--color-brand-light);
+    color: var(--color-brand-dark);
+    font-weight: 700;
+  }
+
+  .tab__count {
+    font-size: 11px;
+    color: var(--color-muted);
+  }
+
+  .tab[aria-selected='true'] .tab__count {
+    color: var(--color-brand-dark);
+  }
+
+  @media (pointer: coarse) {
+    .tab {
+      min-height: 44px;
+    }
+  }
+</style>

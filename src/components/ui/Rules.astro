@@ -1,0 +1,65 @@
+---
+/** Lista de reglas ✓ / ✕ (antes .ty-rules). `title` va en negrita seguido de punto. `text` acepta HTML. */
+interface Props {
+  items: { ok: boolean; title?: string; text: string }[];
+}
+
+const { items } = Astro.props;
+---
+
+<ul class="rules">
+  {items.map((r) => (
+    <li class={r.ok ? 'do' : 'dont'}>
+      {r.title && <strong set:html={`${r.title}.`} />}
+      {r.title && ' '}
+      <Fragment set:html={r.text} />
+    </li>
+  ))}
+</ul>
+
+<style>
+  .rules {
+    display: grid;
+    gap: 8px;
+    margin: 20px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .rules li {
+    position: relative;
+    margin: 0;
+    padding: 12px 16px 12px 44px;
+    border: 1px solid var(--color-line);
+    border-radius: 10px;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .rules li::before {
+    position: absolute;
+    top: 11px;
+    left: 16px;
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  .rules .do::before {
+    content: '✓';
+    color: var(--color-ok);
+  }
+
+  .rules .dont::before {
+    content: '✕';
+    color: var(--color-brand);
+  }
+
+  .rules :global(code) {
+    padding: 2px 6px;
+    border-radius: 5px;
+    background: var(--color-subtle);
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--color-ink);
+  }
+</style>

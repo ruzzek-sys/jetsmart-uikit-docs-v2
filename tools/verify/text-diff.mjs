@@ -1,7 +1,7 @@
 /**
  * Verificación de la migración: compara cada página HTML vieja con su versión en dist/.
  *
- *   npm run build && node tools/verify/text-diff.mjs [--old <dir>] [--only <ruta>]
+ *   npm run build && node tools/verify/text-diff.mjs [--old <dir>] [--only <ruta>] [--dist <dir>]
  *
  * Por página revisa: texto de <main> (normalizado), secuencia de iframes de Figma (y que todos
  * lleven loading="lazy"), cantidad de tablas y filas, y la secuencia de headings.
@@ -18,7 +18,7 @@ const args = process.argv.slice(2);
 const opt = (name) => (args.includes(name) ? args[args.indexOf(name) + 1] : undefined);
 const OLD = path.resolve(opt('--old') ?? ROOT);
 const ONLY = opt('--only');
-const DIST = path.join(ROOT, 'dist');
+const DIST = path.resolve(opt('--dist') ?? path.join(ROOT, 'dist'));
 
 const norm = (s) => s.replace(/[\s ]+/g, ' ').trim();
 

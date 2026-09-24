@@ -1,0 +1,47 @@
+---
+/** Nota destacada (antes .ty-note). `accent` = verde, `warn` = rojo de marca. */
+interface Props {
+  tone?: 'default' | 'accent' | 'warn';
+}
+
+const { tone = 'default' } = Astro.props;
+---
+
+<div class:list={['note', tone]}><slot /></div>
+
+<style>
+  .note {
+    margin-top: 20px;
+    padding: 14px 18px;
+    border: 1px solid var(--color-line);
+    border-radius: 8px;
+    background: var(--color-subtle);
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--color-muted);
+  }
+
+  .note :global(strong) {
+    color: var(--color-ink);
+  }
+
+  .note :global(code) {
+    padding: 2px 6px;
+    border-radius: 5px;
+    background: rgb(0 0 0 / 0.04);
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--color-ink);
+    overflow-wrap: anywhere;
+  }
+
+  .accent {
+    border-color: rgb(15 123 63 / 0.25);
+    background: var(--color-ok-light);
+  }
+
+  .warn {
+    border-color: rgb(181 18 27 / 0.2);
+    background: var(--color-brand-light);
+  }
+</style>

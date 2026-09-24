@@ -1,0 +1,35 @@
+---
+/**
+ * Panel de un <Tabs>. `intro` y `meta` son las dos líneas de cabecera del panel (antes
+ * .ty-panel__intro y .ty-panel__meta); aceptan HTML. Los paneles que no son el primero se
+ * renderizan ocultos para que no parpadeen antes de que corra el script.
+ */
+interface Props {
+  key: string;
+  intro?: string;
+  meta?: string;
+  hidden?: boolean;
+}
+
+const { key, intro, meta, hidden = false } = Astro.props;
+---
+
+<div class="panel" data-panel={key} hidden={hidden}>
+  {intro && <p class="panel__intro" set:html={intro} />}
+  {meta && <p class="panel__meta" set:html={meta} />}
+  <slot />
+</div>
+
+<style>
+  .panel__intro {
+    margin: 20px 0 4px;
+    font-size: 15px;
+  }
+
+  .panel__meta {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-muted);
+  }
+</style>

@@ -1,0 +1,64 @@
+---
+/**
+ * Chip de token que se copia al portapapeles con un click (antes .ty-token).
+ * `copy` permite copiar un texto distinto al que se muestra.
+ */
+interface Props {
+  name: string;
+  copy?: string;
+  title?: string;
+}
+
+const { name, copy, title = 'Copiar token' } = Astro.props;
+---
+
+<button type="button" class="token" title={title} data-copy={copy ?? name}>{name}</button>
+
+<script>
+  // Un solo listener delegado para todos los chips de la página.
+  document.addEventListener('click', (event) => {
+    const chip = (event.target as HTMLElement).closest<HTMLButtonElement>('button[data-copy]');
+    if (!chip || !navigator.clipboard || chip.dataset.copied) return;
+    const original = chip.textContent ?? '';
+    navigator.clipboard.writeText(chip.dataset.copy ?? original).then(() => {
+      chip.dataset.copied = 'true';
+      chip.textContent = 'copiado';
+      setTimeout(() => {
+        chip.textContent = original;
+        delete chip.dataset.copied;
+      }, 900);
+    });
+  });
+</script>
+
+<style>
+  .token {
+    padding: 3px 8px;
+    border: 1px solid var(--color-line);
+    border-radius: 6px;
+    background: var(--color-subtle);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-ink);
+    white-space: nowrap;
+    cursor: pointer;
+  }
+
+  .token:hover {
+    border-color: var(--color-brand);
+    color: var(--color-brand-dark);
+  }
+
+  .token[data-copied] {
+    border-color: var(--color-ok);
+    background: var(--color-ok-light);
+    color: var(--color-ok);
+  }
+
+  @media (pointer: coarse) {
+    .token {
+      min-height: 32px;
+      padding: 6px 10px;
+    }
+  }
+</style>

@@ -1,0 +1,14 @@
+---
+/** Sección h2 de una página escrita a mano. Usar con sections() de lib/sections.ts. */
+interface Props {
+  id: string;
+  title: string;
+}
+
+const { id, title } = Astro.props;
+---
+
+<section class="doc-section">
+  <h2 id={id} set:html={title} />
+  <slot />
+</section>

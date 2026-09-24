@@ -1,0 +1,73 @@
+---
+import { shadowOf } from '../../../data/foundations/elevations';
+
+/** Demo de scrim: contenido de fondo, velo translúcido (con o sin blur) y un bottom sheet encima. */
+interface Props {
+  blur: boolean;
+}
+
+const { blur } = Astro.props;
+const veil = blur
+  ? 'background:rgba(11,22,36,0.6);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)'
+  : 'background:rgba(11,22,36,0.6)';
+const lines = [60, 100, 88, 94, 70];
+---
+
+<div class="scrim">
+  <div class="scrim__bg" aria-hidden="true">
+    {lines.map((w, i) => <span class:list={['scrim__line', { 'scrim__line--title': i === 0 }]} style={`width:${w}%`}></span>)}
+  </div>
+  <span class="scrim__veil" style={veil}></span>
+  <div class="scrim__sheet" style={`box-shadow:${shadowOf('lg')}`}>Bottom sheet</div>
+</div>
+
+<style>
+  .scrim {
+    position: relative;
+    width: 100%;
+    max-width: 300px;
+    height: 160px;
+    overflow: hidden;
+    border-radius: 12px;
+    background: #fff;
+  }
+
+  .scrim__bg {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 16px;
+  }
+
+  .scrim__line {
+    display: block;
+    height: 10px;
+    border-radius: 999px;
+    background: #33465f;
+  }
+
+  .scrim__line--title {
+    height: 16px;
+    margin-bottom: 4px;
+    background: var(--color-brand);
+  }
+
+  .scrim__veil {
+    position: absolute;
+    inset: 0;
+  }
+
+  .scrim__sheet {
+    position: absolute;
+    right: 24px;
+    bottom: 18px;
+    left: 24px;
+    padding: 14px 16px;
+    border-radius: 12px;
+    background: #fff;
+    font-size: 12px;
+    font-weight: 600;
+  }
+</style>

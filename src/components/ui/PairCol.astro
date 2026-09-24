@@ -1,0 +1,84 @@
+---
+/**
+ * Columna de un <Pair>. El slot es la demo visual; `styles` es la línea monoespaciada con lo
+ * aplicado en Figma y `note` la explicación. Ambos aceptan HTML.
+ * Uso: <PairCol slot="do" kind="do" label="…" styles="…" note="…">demo</PairCol>
+ */
+interface Props {
+  kind: 'do' | 'dont';
+  label: string;
+  styles?: string;
+  note?: string;
+  /** Sin el recuadro blanco alrededor de la demo (cuando la demo trae su propio contenedor). */
+  bare?: boolean;
+}
+
+const { kind, label, styles, note, bare = false } = Astro.props;
+---
+
+<div class:list={['col', kind]}>
+  <p class="col__label" set:html={label} />
+  {bare ? <slot /> : <div class="col__demo"><slot /></div>}
+  {styles && <p class="col__styles" set:html={styles} />}
+  {note && <p class="col__note" set:html={note} />}
+</div>
+
+<style>
+  .col {
+    min-width: 0;
+    padding: 16px;
+    border: 1px solid var(--color-line);
+    border-radius: 10px;
+    background: var(--color-subtle);
+  }
+
+  .col__label {
+    margin: 0 0 12px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--color-ink);
+  }
+
+  .do .col__label::before {
+    content: '✓ Hazlo — ';
+    color: var(--color-ok);
+  }
+
+  .dont .col__label::before {
+    content: '✕ Evítalo — ';
+    color: var(--color-brand);
+  }
+
+  .col__demo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 16px;
+    border: 1px solid var(--color-line);
+    border-radius: 8px;
+    background: var(--color-surface);
+    color: var(--color-ink);
+    overflow: hidden;
+  }
+
+  .col__demo > :global(div) {
+    max-width: 100%;
+    overflow-wrap: break-word;
+  }
+
+  .col__styles {
+    margin: 12px 0 0;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    line-height: 1.5;
+    color: var(--color-muted);
+    overflow-wrap: anywhere;
+  }
+
+  .col__note {
+    margin: 10px 0 0;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+</style>

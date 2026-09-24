@@ -1,0 +1,401 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Section from '../../components/doc/Section.astro';
+import Stats from '../../components/ui/Stats.astro';
+import Chain from '../../components/ui/Chain.astro';
+import Note from '../../components/ui/Note.astro';
+import Caption from '../../components/ui/Caption.astro';
+import Table from '../../components/ui/Table.astro';
+import Token from '../../components/ui/Token.astro';
+import Badge from '../../components/ui/Badge.astro';
+import Rules from '../../components/ui/Rules.astro';
+import Pair from '../../components/ui/Pair.astro';
+import PairCol from '../../components/ui/PairCol.astro';
+import ShadowSwatch from '../../components/foundations/elevations/ShadowSwatch.astro';
+import LevelCards from '../../components/foundations/elevations/LevelCards.astro';
+import ScrimDemo from '../../components/foundations/elevations/ScrimDemo.astro';
+import { sections } from '../../lib/sections';
+import {
+  ANATOMY,
+  APPLY,
+  COLLECTIONS,
+  LEVELS,
+  PRIMITIVES,
+  RAMP,
+  SCRIM_PRIMITIVES,
+  SCRIM_SEMANTIC,
+  shadowOf,
+} from '../../data/foundations/elevations';
+
+const S = sections({
+  resumen: 'Resumen',
+  primitivos: 'Tokens primitivos · Tier 1',
+  semanticos: 'Tokens semánticos · Tier 2',
+  scrim: 'Scrim',
+  figma: 'Cómo usar en Figma',
+  practicas: 'Buenas y malas prácticas',
+});
+---
+
+<BaseLayout
+  title="Elevations"
+  description="20 primitivos de sombra, 21 tokens semánticos, 5 estilos de efecto y 4 tokens de scrim que definen la altura del kit."
+  headings={S.headings}
+>
+  <Section {...S.resumen}>
+    <p>
+      Una sombra no puede ser un token único: Figma vincula variables campo por campo. Por eso cada nivel
+      de elevación se arma en tres capas. Los <strong>primitivos de Tier 1</strong> son los valores crudos,
+      repartidos en cuatro dimensiones independientes (color, offset-y, blur y spread). Los
+      <strong>tokens semánticos de Tier 2</strong> agrupan esos valores por nivel: cuatro tokens por cada
+      uno, más el offset-x que comparten los cinco. Y el <strong>estilo de efecto</strong> es el envoltorio
+      que reúne los cinco campos y es lo único que se aplica sobre un nodo.
+    </p>
+
+    <Stats
+      items={[
+        { value: 5, label: 'Niveles de elevation' },
+        { value: 20, label: 'Primitivos Tier 1' },
+        { value: 21, label: 'Tokens semánticos' },
+        { value: 4, label: 'Tokens de scrim' },
+      ]}
+    />
+
+    <Chain
+      steps={[
+        { tier: 'Tier 1 · Primitivo', code: 'shadow/blur/32', note: '32 px · valor crudo, scope vacío' },
+        { tier: 'Tier 2 · Semántico', code: 'elevation/md/blur', note: 'aquí vive el nivel', focus: true },
+        { tier: 'Estilo de efecto', code: 'Elevation-md', note: 'los 5 campos en un solo envoltorio' },
+        { tier: 'Producto', code: 'Todos los componentes que lo usan', note: 'se actualizan solos' },
+      ]}
+    />
+
+    <Note>
+      <strong>Dos colecciones para un mismo nivel:</strong> el color de la sombra vive en
+      <code>Tier 2: Color</code>, junto a los demás colores, para poder rematizarse por mode. La geometría
+      (offset-y, blur y spread) vive en <code>Tier 2: Spatial &amp; Shape</code>. El estilo de efecto es el
+      que vuelve a juntarlas.
+    </Note>
+  </Section>
+
+  <Section {...S.primitivos}>
+    <p>
+      20 primitivos: cuatro dimensiones por cinco pasos. Son los valores crudos de la rampa de sombras.
+      Ninguno se aplica de forma directa: cada uno alimenta un único token semántico de Tier 2.
+    </p>
+    <Table columns={['Primitivo', 'Valor', 'Grupo', 'Consumido por']}>
+      {PRIMITIVES.map((p) => (
+        <tr>
+          <td><Token name={p.token} /></td>
+          <td class="num">{p.value}</td>
+          <td><Badge tone="neutral">{p.group}</Badge></td>
+          <td><code>{p.consumedBy}</code></td>
+        </tr>
+      ))}
+    </Table>
+    <Caption>
+      Los 20 primitivos tienen scope vacío: no aparecen en ningún picker de Figma. Cada uno alimenta exactamente
+      un token semántico de Tier 2, nunca un nodo ni un estilo.
+    </Caption>
+
+    <h3>Cómo se lee la rampa</h3>
+    <p>
+      La rampa no escala de forma proporcional. Una superficie más elevada no solo se desplaza más:
+      proyecta una sombra más difusa y más opaca, así que las cuatro dimensiones suben a ritmos distintos.
+    </p>
+    <Table columns={['Dimensión', 'Rango', 'Qué controla', 'Cómo se lee']} wideLast>
+      {RAMP.map((r) => (
+        <tr>
+          <td><strong>{r.dimension}</strong></td>
+          <td class="num">{r.range}</td>
+          <td><Badge tone="neutral">{r.controls}</Badge></td>
+          <td class="muted">{r.reading}</td>
+        </tr>
+      ))}
+    </Table>
+    <Caption>
+      Las cuatro dimensiones son variables independientes: se pueden recombinar sin tocar Tier 2, pero hoy
+      cada primitivo tiene exactamente un consumidor.
+    </Caption>
+  </Section>
+
+  <Section {...S.semanticos}>
+    <p>
+      Los cinco niveles del kit, de menor a mayor altura. Cada nivel combina offset vertical, blur y
+      spread; el color es siempre <code>#98AAC0</code> con el alpha que corresponde al escalón.
+    </p>
+    <Table columns={['Token', 'Sombra — real, sin escalar', 'Offset · Blur · Spread', 'Opacidad', 'Tokens Tier 2']}>
+      {LEVELS.map((l) => (
+        <tr>
+          <td><Token name={`Elevation-${l.level}`} /></td>
+          <td class="cell-swatch"><ShadowSwatch level={l} /></td>
+          <td class="num">y {l.offsetY} · blur {l.blur} · spread {l.spread}</td>
+          <td class="num">{l.alpha}%</td>
+          <td><code>elevation/{l.level}/*</code><br /><code>color/effect/elevation-{l.level}</code></td>
+        </tr>
+      ))}
+    </Table>
+    <Caption>
+      Las sombras se muestran a tamaño real sobre un cuadrado blanco. La opacidad crece con la altura y el tono
+      base es siempre #98AAC0. Cada nivel resuelve cuatro tokens de Tier 2: offset-y, blur y spread en Spatial
+      &amp; Shape, y el color en Tier 2: Color.
+    </Caption>
+
+    <h3>Qué resuelve cada nivel</h3>
+    <p>
+      La elevación comunica distancia respecto del fondo, y esa distancia tiene que corresponder a cuánto
+      interrumpe el elemento. Si hay duda entre dos niveles consecutivos, conviene elegir el menor: subir
+      de escalón después es cambiar un estilo, bajar toda una pantalla saturada de sombras es rehacerla.
+    </p>
+    <LevelCards />
+  </Section>
+
+  <Section {...S.scrim}>
+    <p>
+      El scrim es el fondo oscuro que separa un overlay del contenido que tapa. Combina un color
+      translúcido y un blur de fondo. Cada intensidad (<code>scrim</code> y <code>scrim-subtle</code>)
+      tiene su propio par de primitivas: alpha para el color, píxeles para el desenfoque.
+    </p>
+    <Table columns={['Token', 'Tipo', 'Valor', 'Muestra']}>
+      {SCRIM_PRIMITIVES.map((s) => (
+        <tr>
+          <td><Token name={s.token} /></td>
+          <td><Badge tone="neutral">{s.kind}</Badge></td>
+          <td class="num">{s.value}</td>
+          <td>{s.sample ? <span class="scrim-chip" style={`background:${s.sample}`}></span> : <span class="muted">—</span>}</td>
+        </tr>
+      ))}
+    </Table>
+
+    <h3>Tokens semánticos de scrim</h3>
+    <Table columns={['Token semántico', 'Alias a primitivo', 'Uso']} wideLast>
+      {SCRIM_SEMANTIC.map((s) => (
+        <tr>
+          <td><Token name={s.token} /></td>
+          <td><code>{s.alias}</code></td>
+          <td class="muted">{s.use}</td>
+        </tr>
+      ))}
+    </Table>
+    <Caption>
+      blur/background/scrim y blur/background/scrim-subtle todavía no tienen una propiedad compuesta con su
+      color: aplica ambos tokens por separado sobre el mismo elemento.
+    </Caption>
+  </Section>
+
+  <Section {...S.figma}>
+    <h3>1 · Dónde están</h3>
+    <p>
+      Lo que se aplica en un componente es el estilo de efecto. Detrás, los valores viven repartidos en
+      tres colecciones de variables: los primitivos en Tier 1 y los semánticos separados entre color y
+      geometría.
+    </p>
+    <Table columns={['Dónde', 'Tipo', 'Qué contiene']} wideLast>
+      {COLLECTIONS.map((c) => (
+        <tr>
+          <td><strong set:html={c.where} /></td>
+          <td><Badge tone="neutral">{c.kind}</Badge></td>
+          <td class="muted" set:html={c.contains} />
+        </tr>
+      ))}
+    </Table>
+    <Caption>
+      Los estilos se consumen por librería desde los archivos de producto, igual que el resto de los
+      tokens del kit.
+    </Caption>
+
+    <h3>2 · Anatomía de la sombra</h3>
+    <p>
+      Un estilo <code>Elevation-*</code> son cinco campos vinculados a variables. Cuatro cambian por
+      nivel; el quinto, el offset en X, es el mismo para los cinco.
+    </p>
+    <Table columns={['Campo del efecto', 'Scope', 'Token vinculado', 'Qué hace']} wideLast>
+      {ANATOMY.map((a) => (
+        <tr>
+          <td><strong>{a.field}</strong></td>
+          <td><Badge tone="var">{a.scope}</Badge></td>
+          <td><code>{a.token}</code></td>
+          <td class="muted">{a.does}</td>
+        </tr>
+      ))}
+    </Table>
+
+    <Note>
+      <strong>La luz del sistema es cenital:</strong> el offset en X es siempre 0. Una sombra desplazada
+      hacia un costado no pertenece a la rampa, aunque se vea bien en la pantalla donde se dibujó.
+    </Note>
+
+    <h3>3 · Cómo se aplican</h3>
+    <p>
+      Los cinco campos de cada estilo están vinculados a variables. Editar un valor directamente en el
+      estilo lo desvincula del token y rompe la cadena Tier 1 → Tier 2 → estilo.
+    </p>
+    <Rules items={APPLY} />
+
+    <Note tone="warn">
+      <strong>Lo que interrumpe la cadena:</strong> escribir un número en Blur, Spread o Position, o
+      cambiar el color del efecto a mano, desenlaza la variable. El componente se mantiene visualmente
+      igual y pasa la revisión, pero deja de heredar.
+    </Note>
+  </Section>
+
+  <Section {...S.practicas}>
+    <p>
+      Cuatro pares que contrastan el uso correcto de las elevations con el error equivalente. Casi todos
+      los errores se ven idénticos al original. El impacto aparece al cambiar la rampa, al rematizar por
+      mode o al auditar los bindings.
+    </p>
+
+    <Pair eyebrow="01 · Siempre el estilo, nunca el valor" title="Aplicar Elevation-md, no escribir 0 · 12 · 32 · -3">
+      <p>
+        La sombra escrita a mano es indistinguible de la del estilo. La diferencia aparece cuando la rampa
+        cambia: el estilo se actualiza solo, el valor literal queda congelado y hay que buscarlo nodo por
+        nodo.
+      </p>
+      <PairCol slot="do" kind="do" label="Estilo de efecto aplicado" styles="Effects: Elevation-md"
+        note="El nodo apunta al estilo. Cambiar la altura del nivel de panel es editar cuatro tokens.">
+        <div class="demo"><div class="surface" style={`box-shadow:${shadowOf('md')}`}>Dropdown</div></div>
+      </PairCol>
+      <PairCol slot="dont" kind="dont" label="Drop shadow escrita a mano" styles="Drop shadow: X 0 · Y 12 · Blur 32 · Spread -3"
+        note="El resultado es idéntico. Cuando la rampa se ajuste, este dropdown seguirá en 32 px de blur y no habrá forma de encontrarlo por búsqueda de estilo.">
+        <div class="demo"><div class="surface" style={`box-shadow:${shadowOf('md')}`}>Dropdown</div></div>
+      </PairCol>
+    </Pair>
+
+    <Pair eyebrow="02 · Un nivel por capa" title="No apilar dos elevaciones en padre e hijo directos">
+      <p>
+        Dos sombras superpuestas no suman altura: suman ruido. El contenido interno de una superficie ya
+        elevada se separa con fondo, borde o espaciado, no con otra sombra.
+      </p>
+      <PairCol slot="do" kind="do" label="Elevación solo en el contenedor" styles="Modal: Elevation-lg · interior: sin efecto"
+        note="Una sola sombra define el plano. El interior se distingue por su fondo, no por altura propia.">
+        <div class="demo">
+          <div class="nest" style={`box-shadow:${shadowOf('lg')}`}>
+            <span class="nest__label">Modal</span>
+            <div class="nest__inner" style="background:#f7f7f7">Contenido interno</div>
+          </div>
+        </div>
+      </PairCol>
+      <PairCol slot="dont" kind="dont" label="Elevación en el padre y en el hijo" styles="Modal: Elevation-lg · interior: Elevation-md"
+        note="El bloque interno parece flotar dentro del modal. La jerarquía deja de leerse y el borde de la sombra interior ensucia la superficie.">
+        <div class="demo">
+          <div class="nest" style={`box-shadow:${shadowOf('lg')}`}>
+            <span class="nest__label">Modal</span>
+            <div class="nest__inner" style={`box-shadow:${shadowOf('md')}`}>Contenido interno</div>
+          </div>
+        </div>
+      </PairCol>
+    </Pair>
+
+    <Pair eyebrow="03 · El nivel dice cuánto interrumpe" title="La altura corresponde al rol, no al énfasis que se quiere dar">
+      <p>
+        <code>Elevation-xl</code> es el techo de la rampa y está reservado para el overlay que ocupa la
+        pantalla. Usarlo en una card en reposo deja el resto de la interfaz sin escalones disponibles
+        hacia arriba.
+      </p>
+      <PairCol slot="do" kind="do" label="xs en la card, xl en el overlay" styles="Card: Elevation-xs · Overlay: Elevation-xl"
+        note="La distancia entre ambos comunica cuál de los dos bloquea la interacción.">
+        <div class="demo">
+          <div class="surface surface--muted" style={`box-shadow:${shadowOf('xs')}`}>Card</div>
+          <div class="surface" style={`box-shadow:${shadowOf('xl')}`}>Overlay</div>
+        </div>
+      </PairCol>
+      <PairCol slot="dont" kind="dont" label="xl en todo" styles="Card: Elevation-xl · Overlay: Elevation-xl"
+        note="Con todo en el mismo plano la rampa deja de significar algo y no queda nivel para destacar lo que de verdad interrumpe.">
+        <div class="demo">
+          <div class="surface surface--muted" style={`box-shadow:${shadowOf('xl')}`}>Card</div>
+          <div class="surface" style={`box-shadow:${shadowOf('xl')}`}>Overlay</div>
+        </div>
+      </PairCol>
+    </Pair>
+
+    <Pair eyebrow="04 · Scrim: color y blur van juntos" title="Los dos tokens se aplican sobre el mismo elemento">
+      <p>
+        <code>blur/background/scrim</code> todavía no tiene una propiedad compuesta con su color, así que
+        es fácil aplicar uno y olvidar el otro. Sin el desenfoque, el contenido de atrás sigue compitiendo
+        por la atención.
+      </p>
+      <PairCol slot="do" kind="do" label="Color translúcido + blur de fondo" styles="color/background/scrim + blur/background/scrim"
+        note="El fondo se apaga y se desenfoca. El overlay queda como único plano legible.">
+        <div class="demo"><ScrimDemo blur /></div>
+      </PairCol>
+      <PairCol slot="dont" kind="dont" label="Solo el color, sin blur" styles="color/background/scrim, sin blur/background/scrim"
+        note="El scrim queda a medio aplicar: el contenido de atrás se sigue leyendo a través del velo y la separación entre planos se pierde.">
+        <div class="demo"><ScrimDemo blur={false} /></div>
+      </PairCol>
+    </Pair>
+  </Section>
+</BaseLayout>
+
+<style>
+  td.cell-swatch {
+    padding: 0 14px;
+    text-align: center;
+  }
+
+  .scrim-chip {
+    display: inline-block;
+    width: 74px;
+    height: 20px;
+    border-radius: 6px;
+    vertical-align: middle;
+  }
+
+  .muted {
+    color: var(--color-muted);
+  }
+
+  /* Demos de prácticas */
+  .demo {
+    display: flex;
+    flex-wrap: wrap;
+    align-self: stretch;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    min-height: 180px;
+    padding: 24px;
+    border-radius: 10px;
+    background: var(--color-subtle);
+  }
+
+  .surface {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 20px;
+    border-radius: 12px;
+    background: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  .surface--muted {
+    font-weight: 400;
+    color: var(--color-muted);
+  }
+
+  .nest {
+    width: 100%;
+    max-width: 280px;
+    padding: 20px;
+    border-radius: 14px;
+    background: #fff;
+  }
+
+  .nest__inner {
+    padding: 12px 14px;
+    border-radius: 10px;
+    background: #fff;
+    font-size: 12px;
+    color: var(--color-muted);
+  }
+
+  .nest__label {
+    display: block;
+    margin-bottom: 12px;
+    font-size: 13px;
+    font-weight: 600;
+  }
+</style>
