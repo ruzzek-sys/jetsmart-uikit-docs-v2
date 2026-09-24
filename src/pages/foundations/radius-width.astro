@@ -1,0 +1,438 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Section from '../../components/doc/Section.astro';
+import Stats from '../../components/ui/Stats.astro';
+import Chain from '../../components/ui/Chain.astro';
+import Note from '../../components/ui/Note.astro';
+import Caption from '../../components/ui/Caption.astro';
+import Table from '../../components/ui/Table.astro';
+import Token from '../../components/ui/Token.astro';
+import Badge from '../../components/ui/Badge.astro';
+import Rules from '../../components/ui/Rules.astro';
+import Items from '../../components/ui/Items.astro';
+import InfoGrid from '../../components/ui/InfoGrid.astro';
+import Pair from '../../components/ui/Pair.astro';
+import PairCol from '../../components/ui/PairCol.astro';
+import RadiusSwatch from '../../components/foundations/radius-width/RadiusSwatch.astro';
+import WidthSwatch from '../../components/foundations/radius-width/WidthSwatch.astro';
+import RadiusCards from '../../components/foundations/radius-width/RadiusCards.astro';
+import AliasBadge from '../../components/foundations/radius-width/AliasBadge.astro';
+import { sections } from '../../lib/sections';
+import {
+  APPLY,
+  APPLY_RULES,
+  COLLECTIONS,
+  RADIUS_PRIMITIVES,
+  RADIUS_ZONES,
+  UPDATES,
+  WIDTH_PRIMITIVES,
+  WIDTH_SEMANTIC,
+  WIDTH_ZONES,
+  pxLabel,
+  radiusZone,
+  rem,
+} from '../../data/foundations/radius-width';
+
+const S = sections({
+  resumen: 'Resumen',
+  'radius-primitivos': 'Radius · Tokens primitivos',
+  'radius-semanticos': 'Radius · Tokens semánticos',
+  'width-primitivos': 'Border width · Tokens primitivos',
+  'width-semanticos': 'Border width · Tokens semánticos',
+  figma: 'Cómo usar en Figma',
+  practicas: 'Buenas y malas prácticas',
+});
+---
+
+<BaseLayout
+  title="Radius & Width"
+  description="21 primitivos de radio, 8 roles semánticos, 9 grosores de borde y 7 tokens de stroke que definen la forma del kit."
+  headings={S.headings}
+>
+  <Section {...S.resumen}>
+    <p>
+      Radius y border width se organizan en dos niveles. Los <strong>primitivos de Tier 1</strong> son la
+      rampa cruda: 21 pasos de radio (0–160 px más el centinela full) y 9 grosores (0–5 px), sin rol. Los
+      <strong>tokens semánticos de Tier 2</strong> hacen alias a un primitivo y definen el uso: none,
+      small, large, full para radios; hairline, base, medium, heavy para grosores. Un valor aplicado en un
+      componente no guarda un número: guarda una referencia.
+    </p>
+
+    <Stats
+      items={[
+        { value: 21, label: 'Primitivos de radius' },
+        { value: 8, label: 'Roles de radius' },
+        { value: 9, label: 'Primitivos de width' },
+        { value: 7, label: 'Roles de width' },
+      ]}
+    />
+
+    <Chain
+      steps={[
+        { tier: 'Tier 1 · Primitivo', code: 'border/radius/6', note: '16 px · valor crudo, sin rol' },
+        { tier: 'Tier 2 · Semántico', code: 'border/radius/medium', note: 'aquí vive el rol', focus: true },
+        { tier: 'Aplicación', code: 'Corner radius / Stroke', note: 'nunca el primitivo, nunca un número' },
+        { tier: 'Producto', code: 'Todos los componentes que lo usan', note: 'se actualizan solos' },
+      ]}
+    />
+
+    <Note>
+      <strong>Scopes distintos:</strong> radius usa <code>CORNER_RADIUS</code>; border width usa
+      <code>STROKE_FLOAT</code>. El picker de Figma filtra por propiedad: un token de grosor no aparece en
+      Corner radius, y un token de radio no aparece en Stroke.
+    </Note>
+  </Section>
+
+  <Section {...S['radius-primitivos']}>
+    <p>
+      Rampa de 0 a 160 px más el valor centinela full (999). No crece de forma lineal: los saltos aumentan
+      con el tamaño del componente. La columna de alias indica cuántos tokens semánticos apuntan a cada paso.
+    </p>
+    <Table columns={['Token', 'Muestra', 'Px', 'Rem', 'Zona', 'Alias Tier 2']}>
+      {RADIUS_PRIMITIVES.map((p) => (
+        <tr>
+          <td><Token name={`border/radius/${p.step}`} /></td>
+          <td><RadiusSwatch px={p.px} corner /></td>
+          <td class="num">{pxLabel(p.px)}</td>
+          <td class="num">{rem(p.px)}</td>
+          <td><Badge tone="neutral">{radiusZone(p.px)}</Badge></td>
+          <td><AliasBadge path={`border/radius/${p.step}`} /></td>
+        </tr>
+      ))}
+    </Table>
+    <Caption>
+      13 de los 21 primitivos no tienen alias en Tier 2: son reserva para necesidades futuras, no un error de
+      escala. Un primitivo nunca se aplica de forma directa a un componente.
+    </Caption>
+
+    <h3>Cómo se lee la rampa</h3>
+    <Table columns={['Pasos', 'Zona', 'Para qué sirve']} roles>
+      {RADIUS_ZONES.map((z) => (
+        <tr>
+          <td class="num">{z.steps}</td>
+          <td><Badge tone="neutral">{z.zone}</Badge></td>
+          <td class="muted">{z.purpose}</td>
+        </tr>
+      ))}
+    </Table>
+  </Section>
+
+  <Section {...S['radius-semanticos']}>
+    <p>
+      Ocho roles, de menor a mayor curvatura. Cada uno resuelve un tipo de componente distinto. Si hay duda
+      entre dos pasos consecutivos, conviene elegir el menor: es más sencillo aumentar la curvatura después
+      que corregir un componente excesivamente redondeado.
+    </p>
+    <RadiusCards />
+
+    <div class="info-gap">
+      <InfoGrid
+        items={[
+          { tag: 'large-increased', title: 'Escala', text: 'Es un número real: 32 px. Sobre un elemento grande se percibe como esquina curva, no como círculo.' },
+          { tag: 'full', title: 'Comportamiento', text: 'Siempre alcanza el límite matemático de Figma. Sobre cualquier elemento cuadrado es un círculo.' },
+          { tag: 'Ambigüedad', title: 'Botón pequeño', text: 'En 32×32, large-increased y full se ven casi iguales. La diferencia aparece al redimensionar.' },
+          { tag: 'Criterio', title: 'Decidir por comportamiento', text: 'Si al agrandar debe seguir siendo esquina curva, es large-increased. Si debe seguir siendo círculo, es full.' },
+        ]}
+      />
+    </div>
+  </Section>
+
+  <Section {...S['width-primitivos']}>
+    <p>
+      Nueve pasos de 0 a 5 px. Arranca en incrementos de 0,25 px en la zona fina y pasa a 1 px en la zona
+      gruesa: bajo 1 px cada cuarto de píxel se percibe; sobre 2 px, no.
+    </p>
+    <Table columns={['Token', 'Muestra', 'Px', 'Alias Tier 2']}>
+      {WIDTH_PRIMITIVES.map((p) => (
+        <tr>
+          <td><Token name={`border/width/${p.step}`} /></td>
+          <td><WidthSwatch px={p.px} /></td>
+          <td class="num">{pxLabel(p.px)}</td>
+          <td><AliasBadge path={`border/width/${p.step}`} /></td>
+        </tr>
+      ))}
+    </Table>
+    <Caption>
+      border/width/4 (1,5 px) y border/width/8 (5 px) existen en Tier 1 sin rol semántico en Tier 2: son
+      reserva de la rampa, no tokens de uso directo.
+    </Caption>
+
+    <h3>Cómo se lee la rampa</h3>
+    <Table columns={['Pasos', 'Zona', 'Para qué sirve']} roles>
+      {WIDTH_ZONES.map((z) => (
+        <tr>
+          <td class="num">{z.steps}</td>
+          <td><Badge tone="neutral">{z.zone}</Badge></td>
+          <td class="muted">{z.purpose}</td>
+        </tr>
+      ))}
+    </Table>
+    <Note tone="accent">
+      <strong>Rampa cerrada:</strong> si un diseño requiere 2,5 px, se corrige el diseño. No se agrega un
+      paso nuevo a la rampa.
+    </Note>
+  </Section>
+
+  <Section {...S['width-semanticos']}>
+    <p>
+      Siete roles de grosor, de menor a mayor. Cada uno resuelve un tipo de línea: divisor, borde de
+      control, estado o acento gráfico.
+    </p>
+    <Table columns={['Token', 'Muestra', 'Primitivo Tier 1', 'Px', 'Rol', 'Uso']} wideLast>
+      {WIDTH_SEMANTIC.map((t) => (
+        <tr>
+          <td><Token name={`border/width/${t.role}`} /></td>
+          <td><WidthSwatch px={t.px} /></td>
+          <td><code>{t.alias}</code></td>
+          <td class="num">{pxLabel(t.px)}</td>
+          <td><Badge tone="neutral">{t.label}</Badge></td>
+          <td class="muted">{t.use}</td>
+        </tr>
+      ))}
+    </Table>
+    <Caption>Las muestras muestran el grosor real, sin escalar. none no dibuja borde.</Caption>
+  </Section>
+
+  <Section {...S.figma}>
+    <h3>1 · Dónde están las variables</h3>
+    <p>
+      Radius y border width viven en las mismas dos colecciones que spacing, dentro del archivo
+      <code>Jetsmart UI Kit v1.0</code>, y se consumen por librería desde los archivos de producto.
+    </p>
+    <Table columns={['Colección', 'Modo', 'Radius', 'Width', 'Rol']} wideLast>
+      {COLLECTIONS.map((c) => (
+        <tr>
+          <td><strong set:html={c.name} /></td>
+          <td><Badge tone="neutral">{c.mode}</Badge></td>
+          <td class="num">{c.radius}</td>
+          <td class="num">{c.width}</td>
+          <td class="muted">{c.role}</td>
+        </tr>
+      ))}
+    </Table>
+    <Caption>
+      Nomenclatura: <code>border/radius/large</code> y <code>border/width/base</code>. Tier 2: Spatial
+      &amp; Shape tiene un solo modo (Theme 1).
+    </Caption>
+
+    <h3>2 · Cómo se aplican</h3>
+    <Table columns={['Propiedad en edición', 'Familia', 'Cómo se aplica']} roles>
+      {APPLY.map((a) => (
+        <tr>
+          <td><strong>{a.property}</strong></td>
+          <td><code>{a.family}</code></td>
+          <td class="muted">{a.how}</td>
+        </tr>
+      ))}
+    </Table>
+
+    <Rules items={APPLY_RULES} />
+
+    <h3>3 · Cómo se actualizan</h3>
+    <Items items={UPDATES} />
+
+    <Note tone="warn">
+      <strong>Lo que interrumpe la cadena:</strong> escribir un número directamente en Corner radius o
+      Stroke desenlaza la variable. El componente se mantiene visualmente igual y pasa la revisión, pero
+      deja de heredar.
+    </Note>
+  </Section>
+
+  <Section {...S.practicas}>
+    <p>
+      Cuatro pares que contrastan el uso correcto de radius y border width con el error equivalente. La
+      mayoría de los errores pasa una revisión visual. El impacto aparece al redimensionar el componente, al
+      cambiar la marca o al auditar los bindings.
+    </p>
+
+    <Pair eyebrow="01 · Full no es large-increased" title="Decidir por comportamiento, no por el aspecto actual">
+      <p>
+        En un control pequeño ambos pueden verse iguales. La diferencia aparece al cambiar el tamaño del
+        componente: full sigue siendo círculo; large-increased sigue siendo esquina curva.
+      </p>
+      <PairCol slot="do" kind="do" label="Avatar y chip con full; panel con large-increased"
+        styles="full en circular · large-increased en overlay"
+        note="El avatar y el chip deben permanecer circulares al escalar. El overlay debe conservar esquinas curvas fijas de 32 px.">
+        <div class="practice">
+          <span class="practice__circle"></span>
+          <span class="practice__chip">Chip</span>
+          <span class="practice__panel">Overlay · 32 px</span>
+        </div>
+      </PairCol>
+      <PairCol slot="dont" kind="dont" label="Overlay con full"
+        styles="border/radius/full en un panel rectangular"
+        note="Al ampliar el panel, las esquinas tienden a una forma de píldora. No es el comportamiento de un contenedor de overlay.">
+        <div class="practice">
+          <span class="practice__panel practice__panel--full">Overlay · full</span>
+        </div>
+      </PairCol>
+    </Pair>
+
+    <Pair eyebrow="02 · Tier 1 no se aplica" title="Un primitivo nunca se aplica a un componente">
+      <p>
+        Tier 1 es la rampa cruda. Tier 2 asigna el rol. Aplicar <code>border/radius/7</code> de forma
+        directa funciona en la primera revisión y desvincula el componente del sistema en la siguiente.
+      </p>
+      <PairCol slot="do" kind="do" label="Tarjeta con token semántico"
+        styles="Corner radius: border/radius/large"
+        note="El componente apunta a Tier 2. Cambiar el radio estándar de contenedores es editar un alias.">
+        <div class="fare">
+          <strong>Tarifa Zero</strong>
+          <span>border/radius/large → radius/7</span>
+        </div>
+      </PairCol>
+      <PairCol slot="dont" kind="dont" label="Tarjeta con primitivo directo"
+        styles="Corner radius: border/radius/7"
+        note="El resultado es visualmente idéntico. Cuando large cambie de alias, esta tarjeta permanecerá en 24 px y deberá localizarse de forma manual.">
+        <div class="fare">
+          <strong>Tarifa Zero</strong>
+          <span>border/radius/7 · 24 px</span>
+        </div>
+      </PairCol>
+    </Pair>
+
+    <Pair eyebrow="03 · Anidamiento de radios" title="El radio interior debe ser menor o igual al exterior">
+      <p>
+        Cuando un bloque redondeado vive dentro de otro, el radio interior excesivo hace que el contenido
+        no se perciba contenido por el contenedor.
+      </p>
+      <PairCol slot="do" kind="do" label="Exterior large, interior small"
+        styles="outer: large · inner: small"
+        note="La diferencia de radio mantiene la jerarquía visual entre contenedor y contenido.">
+        <div class="nest" style="border-radius:24px">
+          <div class="nest__inner" style="border-radius:8px"></div>
+        </div>
+      </PairCol>
+      <PairCol slot="dont" kind="dont" label="Interior mayor que el exterior"
+        styles="outer: small · inner: large"
+        note="El bloque interior parece escapar del contenedor. El anidamiento deja de leerse como una sola superficie.">
+        <div class="nest" style="border-radius:8px">
+          <div class="nest__inner" style="border-radius:24px"></div>
+        </div>
+      </PairCol>
+    </Pair>
+
+    <Pair eyebrow="04 · Grosor de estado no es decoración" title="medium refuerza foco y error; heavy no va en formularios">
+      <p>
+        La zona de estado (2 px) existe para que el borde se lea sin depender solo del color. La zona
+        gráfica (3–4 px) es para acentos visuales, no para controles.
+      </p>
+      <PairCol slot="do" kind="do" label="Input en error con width/medium"
+        styles="stroke: border/width/medium · 2 px"
+        note="Duplica el grosor base. El estado se percibe además del color del borde.">
+        <div class="field" style="border-width:2px">Número de tarjeta</div>
+      </PairCol>
+      <PairCol slot="dont" kind="dont" label="Input con width/heavy"
+        styles="stroke: border/width/heavy · 4 px"
+        note="heavy está pensado para barras de acento y piezas promocionales. En un input el control pierde proporción y se confunde con un elemento gráfico.">
+        <div class="field" style="border-width:4px">Número de tarjeta</div>
+      </PairCol>
+    </Pair>
+  </Section>
+</BaseLayout>
+
+<style>
+  /* El viejo separaba la grilla 28 px de las tarjetas; <InfoGrid> trae 24. */
+  .info-gap {
+    padding-top: 4px;
+  }
+
+  /* Demos de prácticas */
+  .practice {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .practice__circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 999px;
+    background: var(--color-brand);
+  }
+
+  .practice__chip {
+    display: inline-flex;
+    align-items: center;
+    height: 28px;
+    padding: 0 14px;
+    border-radius: 999px;
+    background: var(--color-brand-light);
+    color: var(--color-brand-dark);
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .practice__panel {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 120px;
+    height: 56px;
+    padding: 0 16px;
+    border: 1.5px solid var(--color-brand);
+    border-radius: 32px;
+    background: var(--color-surface);
+    color: var(--color-brand-dark);
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .practice__panel--full {
+    min-width: 160px;
+    border-radius: 999px;
+  }
+
+  .fare {
+    width: 100%;
+    padding: 16px 18px;
+    border: 1px solid rgb(181 18 27 / 0.2);
+    border-radius: 24px;
+    background: var(--color-brand-light);
+    color: var(--color-brand-dark);
+  }
+
+  .fare strong,
+  .fare span {
+    display: block;
+  }
+
+  .fare strong {
+    font-size: 15px;
+  }
+
+  .fare span {
+    margin-top: 4px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    opacity: 0.85;
+  }
+
+  .nest {
+    width: 100%;
+    max-width: 220px;
+    padding: 14px;
+    border: 1.5px solid var(--color-brand);
+    background: var(--color-brand-light);
+  }
+
+  .nest__inner {
+    height: 56px;
+    border: 1px solid rgb(181 18 27 / 0.35);
+    background: var(--color-surface);
+  }
+
+  .field {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 12px 14px;
+    border-style: solid;
+    border-color: #dc2626;
+    border-radius: 8px;
+    background: var(--color-surface);
+    color: var(--color-muted);
+    font-size: 14px;
+  }
+</style>

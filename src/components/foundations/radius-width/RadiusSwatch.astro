@@ -1,0 +1,36 @@
+---
+import { FULL } from '../../../data/foundations/radius-width';
+
+/**
+ * Muestra de un radio. `corner` (tabla de primitivos) curva una sola esquina, como en Figma, para
+ * que los pasos 9–19 no se lean como círculo; la caja crece con el radio hasta un tope. Sin
+ * `corner` (tarjetas de roles) es un cuadrado de 110 px con el radio en las cuatro esquinas.
+ */
+interface Props {
+  px: number;
+  corner?: boolean;
+}
+
+const { px, corner = false } = Astro.props;
+const isFull = px === FULL;
+const size = corner ? (isFull ? 80 : Math.max(56, Math.min(px + 20, 96))) : 110;
+const radius = `${isFull ? 999 : px}px`;
+const style = `width:${size}px;height:${size}px;${corner ? 'border-top-left-radius' : 'border-radius'}:${radius}`;
+---
+
+<span class:list={['radius', { 'radius--full': isFull && !corner }]} style={style}></span>
+
+<style>
+  .radius {
+    display: inline-block;
+    flex-shrink: 0;
+    border: 1.5px solid var(--color-brand);
+    background: var(--color-brand-light);
+    vertical-align: middle;
+  }
+
+  .radius--full {
+    border-color: var(--color-brand-dark);
+    background: var(--color-brand);
+  }
+</style>

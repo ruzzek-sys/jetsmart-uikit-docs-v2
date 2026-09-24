@@ -1,0 +1,21 @@
+---
+import Badge from '../../ui/Badge.astro';
+import { aliasCount } from '../../../data/foundations/radius-width';
+
+/** Columna «Alias Tier 2» de las tablas de primitivos: cuántos roles apuntan a este paso, o «—». */
+interface Props {
+  path: string;
+}
+
+const count = aliasCount(Astro.props.path);
+---
+
+{count
+  ? <Badge tone="on">{`${count} ${count === 1 ? 'token' : 'tokens'}`}</Badge>
+  : <span class="none">—</span>}
+
+<style>
+  .none {
+    color: var(--color-muted);
+  }
+</style>

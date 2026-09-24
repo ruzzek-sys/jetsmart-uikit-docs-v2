@@ -1,0 +1,39 @@
+---
+import { pxLabel } from '../../../data/foundations/radius-width';
+
+/** Muestra de un grosor de borde a tamaño real. 0 px se dibuja como caja rayada sin borde. */
+interface Props {
+  px: number;
+}
+
+const { px } = Astro.props;
+---
+
+{px === 0
+  ? <span class="width width--none" title="Sin borde"></span>
+  : <span class="width" style={`border-width:${px}px`} title={pxLabel(px)}></span>}
+
+<style>
+  .width {
+    display: inline-block;
+    box-sizing: border-box;
+    width: 56px;
+    height: 36px;
+    border-style: solid;
+    border-color: var(--color-brand);
+    border-radius: 6px;
+    background: var(--color-surface);
+    vertical-align: middle;
+  }
+
+  .width--none {
+    border: 1px dashed var(--color-line);
+    background: repeating-linear-gradient(
+      -45deg,
+      var(--color-surface),
+      var(--color-surface) 4px,
+      var(--color-subtle) 4px,
+      var(--color-subtle) 8px
+    );
+  }
+</style>

@@ -1,0 +1,71 @@
+---
+import Token from '../../ui/Token.astro';
+import Badge from '../../ui/Badge.astro';
+import RadiusSwatch from './RadiusSwatch.astro';
+import { RADIUS_SEMANTIC, pxLabel } from '../../../data/foundations/radius-width';
+
+/** «Radius · Tokens semánticos»: una tarjeta por rol con su muestra, alias, valor y uso. */
+---
+
+<div class="grid">
+  {RADIUS_SEMANTIC.map((t) => (
+    <article class="card">
+      <RadiusSwatch px={t.px} />
+      <div>
+        <h4><Token name={`border/radius/${t.role}`} /></h4>
+        <p class="card__meta"><code>{t.alias}</code> · {pxLabel(t.px)}</p>
+        <Badge tone="neutral">{t.label}</Badge>
+        <p class="card__desc">{t.use}</p>
+      </div>
+    </article>
+  ))}
+</div>
+
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(240px, 100%), 1fr));
+    gap: 16px;
+    margin-top: 8px;
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 18px;
+    border: 1px solid var(--color-line);
+    border-radius: 12px;
+    background: var(--color-subtle);
+  }
+
+  .card h4 {
+    margin: 0 0 6px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  /* En el sitio viejo la prosa (.doc-section p) le ganaba a .rw-card__*: meta y descripción iban a 16 px. */
+  .card__meta {
+    margin: 0 0 8px;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--color-muted);
+  }
+
+  .card__meta code {
+    padding: 2px 6px;
+    border-radius: 5px;
+    background: var(--color-subtle);
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--color-ink);
+  }
+
+  .card__desc {
+    margin: 10px 0 0;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--color-muted);
+  }
+</style>
