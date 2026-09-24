@@ -2,16 +2,17 @@
 """Extrae las propiedades del section `Docs · <Componente>` de un dump de get_metadata.
 
 Uso:
-    python parse_docs.py <archivo-metadata> [--html]
+    python parse_docs.py <archivo-metadata> [--yaml]
 
 <archivo-metadata> puede ser:
   - el JSON que persiste la herramienta get_metadata cuando la salida es grande, o
   - un .txt con el XML pegado tal cual.
 
-Sin --html imprime JSON con {componente, subtitulo, props:[{nombre,tipo,descripcion}]}.
-Con --html imprime el bloque <div class="ty-table-wrap">...</div> listo para pegar.
+Sin --yaml imprime JSON con {componente, slug, subtitulo, props:[{nombre,tipo,descripcion}]}.
+Con --yaml imprime el bloque `props:` listo para pegar en el frontmatter del .mdx, con una
+clave por componente (su slug, que es lo que va en <PropsTable block="...">).
 """
-import sys, os, re, json, html
+import sys, os, re, json, html, unicodedata
 
 # Windows: la consola suele ser cp1252 y rompe las tildes al imprimir
 if hasattr(sys.stdout, 'reconfigure'):
@@ -28,6 +29,8 @@ TIPOS = {
     'SLOT': 'Slot',
 }
 # Un tipo no listado cae al fallback .title(), que resuelve bien los de una palabra.
+# El schema del sitio (src/content.config.ts) solo acepta Variant, Boolean, Text, Instance,
+# Slot y Heredada: cualquier otro tipo hace fallar el build y va en una tabla `tables:`.
 
 
 def cargar(path):
@@ -98,34 +101,37 @@ def _extraer_seccion(componente, cuerpo):
         raise SystemExit(
             f'El section «Docs · {componente}» no lista ninguna propiedad. Revisa la estructura.'
         )
-    return {'componente': componente, 'subtitulo': subtitulo, 'props': props}
+    return {'componente': componente, 'slug': slugify(componente), 'subtitulo': subtitulo, 'props': props}
 
 
-def a_html(d, con_titulo=False):
-    filas = '\n'.join(
-        '                  <tr><td><strong>{n}</strong></td><td><code>{t}</code></td>'
-        '<td class="ty-muted">{d}</td></tr>'.format(
-            n=html.escape(p['nombre']), t=html.escape(p['tipo']), d=html.escape(p['descripcion'])
-        )
-        for p in d['props']
-    )
-    # con varios componentes en la página, cada tabla se rotula con su nombre
-    encabezado = (
-        '            <h3>{c}</h3>\n'.format(c=html.escape(d['componente'])) if con_titulo else ''
-    )
-    return (
-        encabezado
-        + '            <p>{sub}</p>\n'
-        '            <div class="ty-table-wrap">\n'
-        '              <table class="ty-table">\n'
-        '                <thead>\n'
-        '                  <tr><th>Propiedad</th><th>Tipo</th><th>Descripción</th></tr>\n'
-        '                </thead>\n'
-        '                <tbody>\n{filas}\n'
-        '                </tbody>\n'
-        '              </table>\n'
-        '            </div>'
-    ).format(sub=html.escape(d['subtitulo']), filas=filas)
+def slugify(texto):
+    """Mismo slug que usa el sitio para los ids: «Guía de uso» → guia-de-uso."""
+    t = unicodedata.normalize('NFD', texto)
+    t = ''.join(c for c in t if unicodedata.category(c) != 'Mn').lower().replace('&', ' ')
+    return re.sub(r'[^a-z0-9]+', '-', t).strip('-')
+
+
+def escapar_md(s):
+    """Los textos se pintan como Markdown inline: escapa lo que cambiaría el render."""
+    return re.sub(r'([\\`*_\[\]<{}])', r'\\\1', s)
+
+
+def q(s):
+    """Escalar YAML entre comillas dobles (el JSON es YAML válido)."""
+    return json.dumps(s, ensure_ascii=False)
+
+
+def a_yaml(docs):
+    lineas = ['props:']
+    for d in docs:
+        if d['subtitulo']:
+            lineas.append(f"  # {d['componente']} — subtítulo de la tabla: {d['subtitulo']}")
+        lineas.append(f"  {d['slug']}:")
+        for p in d['props']:
+            lineas.append(f"    - name: {q(escapar_md(p['nombre']))}")
+            lineas.append(f"      type: {p['tipo']}")
+            lineas.append(f"      desc: {q(escapar_md(p['descripcion']))}")
+    return '\n'.join(lineas)
 
 
 if __name__ == '__main__':
@@ -135,7 +141,7 @@ if __name__ == '__main__':
     if not os.path.exists(args[0]):
         raise SystemExit(f'No existe el archivo: {args[0]}')
     d = extraer(cargar(args[0]))
-    if '--html' in sys.argv:
-        print('\n'.join(a_html(x, con_titulo=len(d) > 1) for x in d))
+    if '--yaml' in sys.argv:
+        print(a_yaml(d))
     else:
         print(json.dumps(d, ensure_ascii=False, indent=2))
