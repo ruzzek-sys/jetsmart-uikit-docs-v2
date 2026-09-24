@@ -1,0 +1,93 @@
+---
+/**
+ * Lista de especímenes (antes .ty-specimens > .ty-specimen): una etiqueta chica y la muestra.
+ * Por defecto la muestra va en una línea y se corta con «…»; con `block` hace salto de línea
+ * y, bajo 640 px, la etiqueta sube encima de la muestra para dejarle todo el ancho.
+ * `class` y `style` de cada item van sobre la muestra (p. ej. una clase .ts-*).
+ */
+interface Props {
+  items: { meta: string; sample: string; class?: string; style?: string }[];
+  block?: boolean;
+}
+
+const { items, block = false } = Astro.props;
+---
+
+<div class="specimens">
+  {items.map((i) => (
+    <div class:list={['specimen', { 'specimen--block': block }]}>
+      <span class="specimen__meta">{i.meta}</span>
+      <span class:list={['specimen__sample', i.class]} style={i.style}>{i.sample}</span>
+    </div>
+  ))}
+</div>
+
+<style>
+  .specimens {
+    margin-top: 20px;
+    border-top: 1px solid var(--color-line);
+  }
+
+  .specimen {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    padding: 10px 0;
+    border-bottom: 1px dashed var(--color-line);
+  }
+
+  .specimen__meta {
+    flex: 0 0 96px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+
+  .specimen__sample {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    color: var(--color-ink);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .specimen--block {
+    align-items: flex-start;
+  }
+
+  .specimen--block .specimen__meta {
+    padding-top: 4px;
+  }
+
+  .specimen--block .specimen__sample {
+    white-space: normal;
+    overflow-wrap: break-word;
+  }
+
+  @media (max-width: 639px) {
+    .specimen {
+      gap: 12px;
+    }
+
+    .specimen__meta {
+      flex-basis: 72px;
+    }
+
+    .specimen--block {
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .specimen--block .specimen__meta {
+      flex-basis: auto;
+      padding-top: 0;
+    }
+
+    .specimen--block .specimen__sample {
+      width: 100%;
+    }
+  }
+</style>

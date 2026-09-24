@@ -1,0 +1,533 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Section from '../../components/doc/Section.astro';
+import Stats from '../../components/ui/Stats.astro';
+import Chain from '../../components/ui/Chain.astro';
+import Note from '../../components/ui/Note.astro';
+import Caption from '../../components/ui/Caption.astro';
+import Table from '../../components/ui/Table.astro';
+import Token from '../../components/ui/Token.astro';
+import Badge from '../../components/ui/Badge.astro';
+import Rules from '../../components/ui/Rules.astro';
+import Pair from '../../components/ui/Pair.astro';
+import PairCol from '../../components/ui/PairCol.astro';
+import InfoGrid from '../../components/ui/InfoGrid.astro';
+import Items from '../../components/ui/Items.astro';
+import FamilyCard from '../../components/foundations/typography/FamilyCard.astro';
+import Bar from '../../components/foundations/typography/Bar.astro';
+import Specimens from '../../components/foundations/typography/Specimens.astro';
+import ScaleTabs from '../../components/foundations/typography/ScaleTabs.astro';
+import { sections } from '../../lib/sections';
+import {
+  ANATOMY,
+  APPLY,
+  BREAKERS,
+  FAMILIES,
+  FONT_SIZES,
+  FONT_WEIGHTS,
+  LETTER_SPACING,
+  LINE_HEIGHTS,
+  NAME_PARTS,
+  RATIO_INFO,
+  ROLES,
+  STYLE_INVENTORY,
+  UPDATES,
+  signed,
+  textStyleCss,
+} from '../../data/foundations/typography';
+
+const S = sections({
+  resumen: 'Resumen',
+  familias: 'Familias tipográficas',
+  primitivos: 'Tokens primitivos · Tier 1',
+  semanticas: 'Escalas semánticas · Tier 2',
+  roles: 'El rol de cada escala',
+  ratio: 'Ratio de interlineado',
+  figma: 'Cómo usar en Figma',
+  practicas: 'Buenas y malas prácticas',
+  errores: 'Los cinco errores que rompen la cadena',
+});
+
+const maxSize = FONT_SIZES[FONT_SIZES.length - 1].px;
+const maxLh = LINE_HEIGHTS[LINE_HEIGHTS.length - 1].px;
+const css = textStyleCss();
+---
+
+<BaseLayout
+  title="Typography"
+  description="Dos familias, una escala de 15 pasos y 8 escalas semánticas que resuelven todo el texto del kit."
+  headings={S.headings}
+>
+  <style is:inline slot="head" set:html={css} />
+
+  <Section {...S.resumen}>
+    <p>
+      La tipografía del kit se organiza en tres niveles. Las <strong>primitivas de Tier 1</strong>
+      son la escala base —tamaños, pesos, interlineados y tracking— y nunca se aplican directamente
+      sobre un componente. Los <strong>tokens semánticos de Tier 2</strong> combinan esas primitivas
+      en un rol concreto (display, heading, body, label…) y son el único punto donde entra un cambio.
+      Los <strong>estilos de texto</strong> publicados enlazan sus cinco propiedades a esas variables,
+      y los nodos de texto sólo aplican el estilo.
+    </p>
+
+    <Stats
+      items={[
+        { value: 2, label: 'Familias tipográficas' },
+        { value: 15, label: 'Pasos de font-size' },
+        { value: 53, label: 'Estilos publicados' },
+        { value: 8, label: 'Escalas semánticas' },
+      ]}
+    />
+
+    <Chain
+      steps={[
+        { tier: 'Tier 1 · Primitiva', code: 'typography/font-size/xl', note: '20 · valor fijo, no se edita' },
+        { tier: 'Tier 2 · Semántica', code: 'typography/body/regular/xl/font-size', note: 'aquí se cambia el enlace', focus: true },
+        { tier: 'Estilo de texto', code: 'Body/Regular/xl', note: 'hereda 20 / 28' },
+        { tier: 'Nodos de texto', code: 'Todos los textos con ese estilo', note: 'se actualizan solos' },
+      ]}
+    />
+  </Section>
+
+  <Section {...S.familias}>
+    <p>
+      Las familias se declaran como variables de tipo string y se referencian desde los tokens
+      semánticos. Nunca se escribe el nombre de la fuente directamente en un componente.
+    </p>
+    <div class="families">
+      {FAMILIES.map((f) => <FamilyCard family={f} />)}
+    </div>
+  </Section>
+
+  <Section {...S.primitivos}>
+    <p>
+      La escala base del sistema. Son valores fijos: editar una primitiva no ajusta un estilo, mueve ese
+      paso en todas las familias que lo usan.
+    </p>
+
+    <h3>Font size · 15 pasos</h3>
+    <p>
+      Escala de 10 px a 128 px con base en 16 px (1 rem). La progresión no es lineal: crece de forma suave
+      en los tamaños de interfaz (razón 1,11–1,14) y se acelera en los de display (razón 1,25–1,33).
+    </p>
+    <Table columns={['Token', 'px', 'rem', 'Razón', 'Proporción']}>
+      {FONT_SIZES.map((s) => (
+        <tr>
+          <td><Token name={`font-size/${s.token}`} /></td>
+          <td class="num">{s.px}px</td>
+          <td>{s.rem}</td>
+          <td class="muted">{s.ratio}</td>
+          <td><Bar value={s.px} max={maxSize} /></td>
+        </tr>
+      ))}
+    </Table>
+    <Caption>Especimen a tamaño real · Lato Regular</Caption>
+    <Specimens
+      items={FONT_SIZES.map((s) => ({
+        meta: `${s.token} · ${s.px}`,
+        sample: 'Vuela alto Aa',
+        style: `font-family:var(--font-sans);font-size:${s.px}px;line-height:1.2`,
+      }))}
+    />
+    <Note>
+      <strong>Regla de uso:</strong> los primitivos de font-size no se aplican nunca de forma directa sobre
+      un componente. Se consumen desde los tokens semánticos de Tier 2, que son los que definen la
+      combinación final de familia, peso, tamaño, line-height y letter-spacing.
+    </Note>
+
+    <h3>Font weight · 9 pasos</h3>
+    <p>
+      Escala numérica CSS de 100 a 900. En Figma cada peso corresponde a un estilo con nombre propio, así
+      que el token numérico debe traducirse al nombre del estilo de la familia.
+    </p>
+    <Table columns={['Token', 'CSS', 'Estilo Figma', 'Especimen']}>
+      {FONT_WEIGHTS.map((w) => (
+        <tr>
+          <td><Token name={`font-weight/${w.token}`} /></td>
+          <td class="num">{w.css}</td>
+          <td>{w.figma}</td>
+          <td><span class="sample" style={`font-weight:${w.css};font-size:20px`}>Jetsmart 1234</span></td>
+        </tr>
+      ))}
+    </Table>
+
+    <h3>Line height · 22 pasos</h3>
+    <p>
+      El interlineado se define en píxeles absolutos, no en múltiplos relativos. Todos los valores son
+      múltiplos de 2 y, desde lh-16, múltiplos de 4: así cualquier bloque de texto sigue cayendo en la
+      grilla base de 4 px que comparten spacing y radius. Desde lh-48 la escala avanza de 8 en 8.
+    </p>
+    <Table columns={['Token', 'px', 'Estado', 'Proporción']}>
+      {LINE_HEIGHTS.map((lh) => (
+        <tr>
+          <td><Token name={`line-height/lh-${lh.px}`} /></td>
+          <td class="num">{lh.px}px</td>
+          <td>{lh.used ? <Badge tone="on">en uso</Badge> : <Badge tone="off">sin uso</Badge>}</td>
+          <td><Bar value={lh.px} max={maxLh} /></td>
+        </tr>
+      ))}
+    </Table>
+    <Caption>
+      lh-12, lh-72, lh-88, lh-112 y lh-128 existen como primitivos pero hoy ningún token semántico los
+      referencia: quedan disponibles como reserva de la escala.
+    </Caption>
+
+    <h3>Letter spacing · 6 pasos</h3>
+    <p>
+      Valores absolutos en píxeles, simétricos alrededor de 0 y en múltiplos de 0,4 px. El tracking
+      negativo compensa el exceso de aire de los tamaños grandes; el positivo abre el texto en mayúsculas
+      de pretitles y labels pequeños.
+    </p>
+    <Table columns={['Token', 'px', 'em @16px', 'Especimen']}>
+      {LETTER_SPACING.map((ls) => (
+        <tr>
+          <td><Token name={`letter-spacing/${ls.token}`} /></td>
+          <td class="num">{signed(ls.px)}px</td>
+          <td class="muted">{ls.em}</td>
+          <td><span class="sample sample--caps" style={`letter-spacing:${ls.px}px`}>BOARDING PASS</span></td>
+        </tr>
+      ))}
+    </Table>
+  </Section>
+
+  <Section {...S.semanticas}>
+    <p>
+      Ocho escalas, una por rol de texto. Cada una fija familia, peso y tracking, y define sus pasos como
+      una combinación de tamaño e interlineado. La columna de usos indica cuántas veces se aplica ese paso
+      en el archivo de Figma: es el mejor indicador de qué está realmente en producción.
+    </p>
+    <ScaleTabs />
+  </Section>
+
+  <Section {...S.roles}>
+    <p>
+      Elegir bien es elegir el rol. Esta es la pregunta que resuelve cada familia y el límite que no
+      conviene cruzar.
+    </p>
+    <Table columns={['Escala', 'Rol', 'Cuándo se usa']} roles>
+      {ROLES.map((r) => (
+        <tr>
+          <td><span class="role">{r.label}</span></td>
+          <td><Badge tone="neutral">{r.role}</Badge></td>
+          <td class="muted">{r.desc}</td>
+        </tr>
+      ))}
+    </Table>
+  </Section>
+
+  <Section {...S.ratio}>
+    <p>
+      El ratio es el resultado de dividir el line-height entre el tamaño de fuente. Cuanto más alto, más
+      aire respira cada línea de texto.
+    </p>
+    <InfoGrid items={RATIO_INFO} />
+    <Note tone="accent">
+      <strong>Mínimo de accesibilidad · WCAG 1.4.8 y 1.4.12:</strong> el interlineado dentro de un párrafo
+      debe alcanzar al menos 1,5 veces el tamaño de fuente (1.4.8, nivel AAA), y el contenido debe seguir
+      funcionando si el usuario fuerza ese valor (1.4.12, nivel AA).
+    </Note>
+  </Section>
+
+  <Section {...S.figma}>
+    <h3>1 · Anatomía de un estilo</h3>
+    <p>
+      Un estilo de texto no guarda valores propios. Sus cinco propiedades están enlazadas, una por una, a
+      variables de la colección Tier 2: Typography. El ejemplo es el estilo <code>Body/Regular/xl</code>.
+    </p>
+    <Table columns={['Propiedad del estilo', 'Variable enlazada · Tier 2', 'Valor']}>
+      {ANATOMY.map((a) => (
+        <tr>
+          <td><strong>{a.prop}</strong></td>
+          <td><Token name={a.variable} /></td>
+          <td class="num">{a.value}</td>
+        </tr>
+      ))}
+    </Table>
+    <Caption>
+      En el panel Edit text style, el icono de variable a la izquierda de cada campo indica que la
+      propiedad está enlazada: los valores 28 y 0 que se ven escritos son la resolución de la variable, no
+      un número editado a mano.
+    </Caption>
+
+    <h3>2 · Dónde están los estilos</h3>
+    <p>
+      Los estilos viven en el panel de estilos del archivo, agrupados por familia semántica. Cada familia
+      es una escala completa y el sufijo del nombre indica el paso dentro de ella. Es el único punto desde
+      donde se aplica tipografía: no se copian propiedades de un texto a otro.
+    </p>
+    <Table columns={['Familia', 'Estilos', 'Rol en el kit']}>
+      {STYLE_INVENTORY.map((s) => (
+        <tr>
+          <td><strong>{s.family}</strong></td>
+          <td class="num">{s.count}</td>
+          <td class="muted">{s.role}</td>
+        </tr>
+      ))}
+    </Table>
+    <Caption>
+      53 estilos en 8 familias. El archivo publica además los 6 pasos de Label/Strong-Underline para
+      enlaces, con lo que el total llega a 59.
+    </Caption>
+
+    <h3>3 · Cómo se aplican a los textos</h3>
+    <p>
+      Se selecciona el nodo de texto y se le aplica el estilo desde el panel de estilos. El estilo trae las
+      cinco propiedades juntas, así que no se escribe ningún valor a mano en el nodo.
+    </p>
+    <Table columns={['Parte del nombre', 'Ejemplo', 'Qué indica']}>
+      {NAME_PARTS.map((n) => (
+        <tr>
+          <td><strong>{n.part}</strong></td>
+          <td><code>{n.example}</code></td>
+          <td class="muted">{n.means}</td>
+        </tr>
+      ))}
+    </Table>
+    <Rules items={APPLY} />
+
+    <h3>4 · Cómo se actualizan</h3>
+    <p>
+      La variable semántica de Tier 2 se re-apunta a otra primitiva de la escala: eso es todo el cambio.
+      El estilo hereda el nuevo enlace y todos los textos que lo usan se actualizan solos, sin reaplicar ni
+      republicar nada.
+    </p>
+    <Table columns={['Qué se quiere ajustar', 'Variable que se edita · Tier 2', 'Se re-apunta a · Tier 1']}>
+      {UPDATES.map((u) => (
+        <tr>
+          <td><strong>{u.goal}</strong></td>
+          <td><Token name={u.variable} /></td>
+          <td class="muted">{u.target}</td>
+        </tr>
+      ))}
+    </Table>
+
+    <Note tone="warn">
+      <strong>Lo que rompe la cadena:</strong> escribir un número directamente en el panel Edit text style
+      desenlaza esa propiedad de su variable. El estilo sigue funcionando y a la vista nada cambia, pero
+      deja de heredar: el próximo cambio en Tier 2 ya no lo alcanza. Lo mismo pasa al sobrescribir tamaño,
+      peso o interlineado en un nodo de texto suelto.
+    </Note>
+
+    <Note tone="warn">
+      <strong>Editar una primitiva mueve la escala completa:</strong> cambiar el valor de una variable de
+      Tier 1 —por ejemplo font-size/xl de 20 a 21— no ajusta un estilo: mueve ese paso en toda la escala y
+      alcanza a cualquier familia que lo use, incluidas las que nadie quería tocar. Se reserva para un
+      rediseño deliberado de la escala base.
+    </Note>
+  </Section>
+
+  <Section {...S.practicas}>
+    <p>
+      Ocho pares de ejemplos que contrastan el uso correcto de las escalas semánticas con el error
+      equivalente. Cada par muestra el mismo contenido resuelto de las dos maneras: a la izquierda con el
+      estilo que le corresponde, a la derecha con el atajo que rompe el sistema. La regla de fondo es
+      siempre la misma: el rol del texto decide la familia, el paso decide el tamaño y el peso decide el
+      énfasis. Ninguna de las tres decisiones se toma escribiendo valores a mano en el nodo.
+    </p>
+
+    <Pair eyebrow="01 · El rol decide la familia" title="Elegir la escala por el rol del texto, no por el tamaño que se quiere ver">
+      <p>
+        Cada familia semántica tiene un rol declarado: Heading titula, Body se lee, Label rotula, Featured
+        destaca cifras dentro de una tarjeta. Cuando se elige la escala por el tamaño que uno tiene en
+        mente y no por lo que el texto hace, el resultado se ve grande pero deja de significar lo que debía.
+      </p>
+      <PairCol slot="do" kind="do" label="El precio usa Featured, el título usa Heading"
+        styles="Pretitle/md · Heading/md · Featured/lg · Body/Regular/sm"
+        note="Featured es la escala de énfasis numérico: Lato Bold con interlineado ajustado, pensada para precios, horarios y códigos dentro de una tarjeta. El título de la opción se mantiene en Heading, así que las dos cosas se distinguen sin pelearse.">
+        <div class="ts-pretitle-md">Tarifa Zero</div>
+        <div class="ts-heading-md">Vuelo directo a Lima</div>
+        <div class="ts-featured-lg">CLP 39.990</div>
+        <div class="ts-body-regular-sm">Incluye equipaje de mano</div>
+      </PairCol>
+      <PairCol slot="dont" kind="dont" label="El precio se puso en Heading para verse grande"
+        styles="Pretitle/md · Body/Regular/lg · Heading/lg · Body/Regular/sm"
+        note="El precio quedó en Encode Sans Medium, la familia de los títulos, y sin el peso Bold que un dato necesita para leerse de un golpe. Peor todavía: al bajar el título a Body/Regular/lg la tarjeta ya no tiene título, tiene dos párrafos y una cifra.">
+        <div class="ts-pretitle-md">Tarifa Zero</div>
+        <div class="ts-body-regular-lg">Vuelo directo a Lima</div>
+        <div class="ts-heading-lg">CLP 39.990</div>
+        <div class="ts-body-regular-sm">Incluye equipaje de mano</div>
+      </PairCol>
+    </Pair>
+
+    <Pair eyebrow="02 · Un nivel, un escalón" title="Cada nivel de jerarquía baja de escala, no de paso dentro de la misma escala">
+      <p>
+        Un bloque de portada se resuelve con tres escalas distintas —Display para el titular, Subheading
+        para la bajada, Body para el párrafo—. Encadenar dos pasos de la misma familia produce dos títulos
+        del mismo rango compitiendo, y el lector no sabe cuál manda.
+      </p>
+      <PairCol slot="do" kind="do" label="Display titula, Subheading baja, Body explica"
+        styles="Display/md 36/48 · Subheading/lg 20/28 · Body/Regular/md 16/24"
+        note="Los tres niveles cambian de familia y de peso a la vez: Encode Sans Medium, Lato Medium y Lato Regular. La jerarquía se sostiene incluso si mañana Tier 2 mueve un paso, porque no depende de la diferencia exacta de píxeles.">
+        <div class="ts-display-md">Vuela por Sudamérica</div>
+        <div class="ts-subheading-lg">Nuevas rutas desde Santiago</div>
+        <div class="ts-body-regular-md">Reserva desde la app y elige tu asiento sin costo adicional hasta 24 horas antes del vuelo.</div>
+      </PairCol>
+      <PairCol slot="dont" kind="dont" label="Dos pasos de Display seguidos aplanan la jerarquía"
+        styles="Display/md 36/48 · Display/sm 30/40 · Body/Regular/md 16/24"
+        note="Seis píxeles de diferencia no alcanzan para crear un nivel: las dos líneas se leen como un titular partido en dos. Y después el salto a 16 px es brusco, porque el escalón intermedio —Subheading— quedó sin usar.">
+        <div class="ts-display-md">Vuela por Sudamérica</div>
+        <div class="ts-display-sm">Nuevas rutas desde Santiago</div>
+        <div class="ts-body-regular-md">Reserva desde la app y elige tu asiento sin costo adicional hasta 24 horas antes del vuelo.</div>
+      </PairCol>
+    </Pair>
+
+    <Pair eyebrow="03 · Énfasis con el peso" title="Destacar cambiando Regular por Strong en el mismo paso, no subiendo de tamaño">
+      <p>
+        Body y Label son las dos únicas familias con dos pesos, y existen justamente para esto: dar énfasis
+        sin salir del paso. Subir un escalón para destacar cambia el interlineado además del cuerpo, y con
+        eso se desalinea la fila completa.
+      </p>
+      <PairCol slot="do" kind="do" label="Mismo paso, peso Strong"
+        styles="Body/Strong/md 16/24 + Body/Regular/md 16/24"
+        note="Las dos líneas comparten cuerpo e interlineado, así que el bloque mantiene su ritmo vertical y el énfasis se lee igual de claro. Es también el único cambio que sobrevive a un ajuste de escala en Tier 2.">
+        <div class="ts-body-strong-md">Equipaje de mano incluido</div>
+        <div class="ts-body-regular-md">Un bolso de hasta 10 kg que viaja contigo en cabina, sin costo adicional.</div>
+      </PairCol>
+      <PairCol slot="dont" kind="dont" label="Se subió de paso para destacar"
+        styles="Body/Regular/xl 20/28 + Body/Regular/md 16/24"
+        note="La primera línea es más grande pero igual de liviana: gana tamaño y pierde énfasis. Y el interlineado pasa de 24 a 28 px, así que el bloque deja de calzar con la grilla de 8 y con cualquier otra fila de la misma tarjeta.">
+        <div class="ts-body-regular-xl">Equipaje de mano incluido</div>
+        <div class="ts-body-regular-md">Un bolso de hasta 10 kg que viaja contigo en cabina, sin costo adicional.</div>
+      </PairCol>
+    </Pair>
+
+    <Pair eyebrow="04 · Label rotula, Body se lee" title="Los párrafos van en Body: Label tiene el interlineado calculado para una sola línea">
+      <p>
+        Label existe para rótulos de interfaz —botones, campos, chips, tabs, contadores— y por eso comprime
+        el interlineado: Label/Regular/sm es 14/16, ratio 1,14. Body/Regular/sm es el mismo cuerpo con 20 px
+        de interlineado, ratio 1,43. En una línea la diferencia no se nota; en cuatro, decide si el texto se
+        puede leer.
+      </p>
+      <PairCol slot="do" kind="do" label="Body/Regular/sm — ratio 1,43"
+        styles="Body/Regular/sm · 14 px de cuerpo, 20 px de interlineado"
+        note="Los 6 px de aire entre líneas son los que permiten que el ojo vuelva al inicio del renglón siguiente sin perderse. Es la escala de lectura del kit y la más usada del archivo.">
+        <div class="ts-body-regular-sm">Los cambios de fecha se pueden solicitar hasta cuatro horas antes de la salida programada, siempre sujetos a disponibilidad y al pago de la diferencia de tarifa vigente al momento del cambio. La solicitud se realiza desde Mis viajes y no aplica a tramos ya volados.</div>
+      </PairCol>
+      <PairCol slot="dont" kind="dont" label="Label/Regular/sm — ratio 1,14"
+        styles="Label/Regular/sm · 14 px de cuerpo, 16 px de interlineado"
+        note="Mismo cuerpo, mismo color, mismo texto: sólo cambian 4 px de interlineado y el párrafo se cierra sobre sí mismo. Label es correcta en el rótulo de un campo o en un chip; nunca en más de una línea de lectura.">
+        <div class="ts-label-regular-sm">Los cambios de fecha se pueden solicitar hasta cuatro horas antes de la salida programada, siempre sujetos a disponibilidad y al pago de la diferencia de tarifa vigente al momento del cambio. La solicitud se realiza desde Mis viajes y no aplica a tramos ya volados.</div>
+      </PairCol>
+    </Pair>
+
+    <Pair eyebrow="05 · Caption es letra pequeña" title="Caption se reserva para notas, legales y leyendas: no reemplaza al cuerpo de texto">
+      <p>
+        Caption baja hasta 10 px porque su contenido es accesorio: condiciones, notas al pie, etiquetas de
+        eje de un gráfico. Usarla para el contenido principal no ahorra espacio, sólo traslada el problema
+        al usuario, que en mobile queda leyendo por debajo del mínimo cómodo.
+      </p>
+      <PairCol slot="do" kind="do" label="Body para el contenido, Caption para la condición"
+        styles="Body/Regular/md 16/24 + Caption/sm 12/16"
+        note="La diferencia de escala hace el trabajo de jerarquía sin necesidad de un separador ni de otro color: se entiende de inmediato qué es la información y qué es la condición.">
+        <div class="ts-body-regular-md">Elige tu asiento sin costo adicional hasta 24 horas antes del vuelo desde Mis viajes.</div>
+        <div class="ts-caption-sm">Sujeto a disponibilidad en la aeronave asignada. No aplica a tarifas promocionales.</div>
+      </PairCol>
+      <PairCol slot="dont" kind="dont" label="Todo el bloque en Caption para que quepa"
+        styles="Caption/sm 12/16 + Caption/sm 12/16"
+        note="Con las dos líneas en la misma escala se pierde la jerarquía: la condición legal pesa lo mismo que la información que el usuario vino a buscar. Si el bloque no cabe, se recorta el texto o se rediseña el contenedor, no se baja la escala.">
+        <div class="ts-caption-sm">Elige tu asiento sin costo adicional hasta 24 horas antes del vuelo desde Mis viajes.</div>
+        <div class="ts-caption-sm">Sujeto a disponibilidad en la aeronave asignada. No aplica a tarifas promocionales.</div>
+      </PairCol>
+    </Pair>
+
+    <Pair eyebrow="06 · Las mayúsculas son de Pretitle" title="El antetítulo en mayúsculas es Pretitle, que ya trae el tracking abierto">
+      <p>
+        Pretitle es la única escala del kit pensada para caja alta: Lato SemiBold con letter-spacing +0,8 px
+        y textCase UPPER aplicado desde el estilo publicado. Escribir mayúsculas a mano sobre un Heading
+        arrastra el tracking tight de −0,4 px, que está calculado para caja baja y en mayúsculas apiña las
+        letras.
+      </p>
+      <PairCol slot="do" kind="do" label="Pretitle/md — tracking +0,8 px"
+        styles="Pretitle/md 14/20 · ls +0,8 + Heading/md 24/32 · ls −0,4"
+        note="El tracking abierto separa las mayúsculas lo justo para que se lean como una etiqueta y no como una palabra apretada. Además el estilo aplica el textCase, así que el texto se escribe normal y no hay que reescribirlo si mañana deja de ir en caja alta.">
+        <div class="ts-pretitle-md">Oferta por tiempo limitado</div>
+        <div class="ts-heading-md">Vuelos desde CLP 19.990</div>
+      </PairCol>
+      <PairCol slot="dont" kind="dont" label="Heading en mayúsculas escritas a mano"
+        styles="Heading/2xs 16/20 · ls −0,4 + Heading/md 24/32 · ls −0,4"
+        note="Las letras se pegan y el antetítulo compite en familia y en peso con el título que viene abajo. Como las mayúsculas están escritas en el contenido, tampoco se pueden revertir sin volver a editar cada texto.">
+        <div class="ts-heading-2xs">OFERTA POR TIEMPO LIMITADO</div>
+        <div class="ts-heading-md">Vuelos desde CLP 19.990</div>
+      </PairCol>
+    </Pair>
+
+    <Pair eyebrow="07 · Interlineado en píxeles" title="El interlineado llega en píxeles desde la variable: nunca AUTO ni porcentaje">
+      <p>
+        Las cinco propiedades de un estilo están enlazadas a variables de Tier 2, y line-height es una de
+        ellas. Con AUTO el valor lo decide la métrica de la fuente, distinta entre Lato y Encode Sans, y
+        deja de responder a cualquier ajuste posterior de la escala.
+      </p>
+      <PairCol slot="do" kind="do" label="Body/Regular/md — 24 px desde la variable"
+        styles="Body/Regular/md · line-height 24 px · ratio 1,50"
+        note="El valor viene de typography/body/regular/md/line-height. Si mañana ese enlace se re-apunta a otro paso de la escala, todos los párrafos del archivo se actualizan solos.">
+        <div class="ts-body-regular-md">Reserva desde la app y elige tu asiento sin costo adicional hasta 24 horas antes del vuelo. El cambio queda confirmado al instante y puedes revisarlo en Mis viajes cuando quieras.</div>
+      </PairCol>
+      <PairCol slot="dont" kind="dont" label="Interlineado en AUTO"
+        styles="Sin estilo aplicado · Lato Regular 16 px · line-height AUTO"
+        note="Las líneas quedan más apretadas de lo que define la escala y el valor cambia si el texto pasa a Encode Sans. El nodo tampoco tiene estilo, así que queda fuera del sistema: ningún cambio en Tier 2 lo alcanza.">
+        <div style="font-family:var(--font-sans);font-size:16px;line-height:normal">Reserva desde la app y elige tu asiento sin costo adicional hasta 24 horas antes del vuelo. El cambio queda confirmado al instante y puedes revisarlo en Mis viajes cuando quieras.</div>
+      </PairCol>
+    </Pair>
+
+    <Pair eyebrow="08 · El estilo completo, sin retoques" title="Si falta un paso se crea la variable en Tier 2, no se escribe el número en el nodo">
+      <p>
+        Escribir un valor a mano sobre un nodo con estilo lo desprende: a la vista casi no cambia nada, y
+        ahí está el problema. El texto sigue pareciendo parte del sistema pero dejó de heredar, así que el
+        próximo ajuste de escala lo salta sin avisar.
+      </p>
+      <PairCol slot="do" kind="do" label="Heading/md aplicado tal cual"
+        styles="Heading/md · 24/32 · ls −0,4"
+        note="Las cinco propiedades llegan juntas desde el estilo y ninguna está sobrescrita. Es el estado en que un texto puede seguir cambios de escala sin que nadie lo toque de nuevo.">
+        <div class="ts-heading-md">Selecciona tu asiento</div>
+        <span class="wrap-badge"><Badge tone="on">Estilo vinculado · 24 / 32 · hereda de Tier 2</Badge></span>
+      </PairCol>
+      <PairCol slot="dont" kind="dont" label="Se escribieron 26 px encima del estilo"
+        styles="Heading/md + override · 26/30 · ls 0"
+        note="26 px no existe en la escala, el interlineado quedó en 30 y el tracking se perdió. La diferencia con el ejemplo de la izquierda es de 2 px, imposible de detectar en una revisión visual: sólo aparece cuando el estilo cambia y este texto se queda atrás.">
+        <div style="font-family:var(--font-display);font-weight:500;font-size:26px;line-height:30px;letter-spacing:0">Selecciona tu asiento</div>
+        <span class="wrap-badge"><Badge tone="off">Estilo desprendido · 26 / 30 · ya no hereda</Badge></span>
+      </PairCol>
+    </Pair>
+  </Section>
+
+  <Section {...S.errores}>
+    <p>
+      Todos comparten el mismo síntoma: a la vista nada se ve mal, y por eso pasan la revisión. El daño
+      aparece después, cuando la escala cambia y esos textos se quedan atrás.
+    </p>
+    <Items items={BREAKERS} />
+  </Section>
+</BaseLayout>
+
+<style>
+  .families {
+    display: grid;
+    gap: 16px;
+    margin-top: 24px;
+  }
+
+  .sample {
+    font-family: var(--font-sans);
+    color: var(--color-ink);
+    white-space: nowrap;
+  }
+
+  .sample--caps {
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .role {
+    font-weight: 700;
+  }
+
+  /* Los badges largos de la práctica 08 hacen salto de línea en móvil en vez de desbordar. */
+  .wrap-badge {
+    display: block;
+    max-width: 100%;
+  }
+
+  .wrap-badge :global(.badge) {
+    white-space: normal;
+  }
+</style>

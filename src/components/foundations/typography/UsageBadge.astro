@@ -1,0 +1,19 @@
+---
+import Badge from '../../ui/Badge.astro';
+import { formatCount } from '../../../data/foundations/typography';
+
+/** Usos de un paso en el archivo: null = solo variable, 0 = sin uso, n = «n usos». */
+interface Props {
+  usos: number | null;
+}
+
+const { usos } = Astro.props;
+---
+
+{usos === null ? (
+  <Badge tone="var">solo variable</Badge>
+) : usos === 0 ? (
+  <Badge tone="off">sin uso</Badge>
+) : (
+  <Badge tone="on">{formatCount(usos)} usos</Badge>
+)}

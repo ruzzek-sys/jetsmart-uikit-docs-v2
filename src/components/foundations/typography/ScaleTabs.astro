@@ -1,0 +1,41 @@
+---
+import Tabs from '../../ui/Tabs.astro';
+import TabPanel from '../../ui/TabPanel.astro';
+import Table from '../../ui/Table.astro';
+import Token from '../../ui/Token.astro';
+import Caption from '../../ui/Caption.astro';
+import Specimens from './Specimens.astro';
+import UsageBadge from './UsageBadge.astro';
+import { SCALES, scaleMeta, stepClass, stepToken } from '../../../data/foundations/typography';
+
+/**
+ * Escalas semánticas de Tier 2: una pestaña por escala con su tabla de pasos y los especímenes
+ * pintados con la clase .ts-* de cada paso (la hoja la emite la página).
+ */
+---
+
+<Tabs tabs={SCALES.map((s) => ({ key: s.key, label: s.label, count: s.steps.length }))}>
+  {SCALES.map((scale, i) => (
+    <TabPanel key={scale.key} intro={scale.intro} meta={scaleMeta(scale)} hidden={i > 0}>
+      <Table columns={['Token', 'px/LH', 'Ratio', 'Usos en el archivo']}>
+        {scale.steps.map((step) => (
+          <tr>
+            <td><Token name={stepToken(scale, step)} /></td>
+            <td class="num">{step.size}/{step.lh}</td>
+            <td class="muted">{step.ratio}</td>
+            <td><UsageBadge usos={step.usos} /></td>
+          </tr>
+        ))}
+      </Table>
+      {scale.note && <Caption>{scale.note}</Caption>}
+      <Specimens
+        block
+        items={scale.steps.map((step) => ({
+          meta: `${step.variant ? `${step.variant} · ` : ''}${step.step} · ${step.size}/${step.lh}`,
+          sample: scale.sample,
+          class: stepClass(scale, step),
+        }))}
+      />
+    </TabPanel>
+  ))}
+</Tabs>

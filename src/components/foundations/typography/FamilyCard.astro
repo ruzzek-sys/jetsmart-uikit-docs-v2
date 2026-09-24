@@ -1,0 +1,110 @@
+---
+import Badge from '../../ui/Badge.astro';
+import Caption from '../../ui/Caption.astro';
+import { FAMILY_CSS, FAMILY_NAME, type Family } from '../../../data/foundations/typography';
+
+/** Tarjeta de una familia tipográfica (antes .ty-family): «Aa», nombre, token, uso y charset. */
+interface Props {
+  family: Family;
+}
+
+const { family } = Astro.props;
+const font = `font-family:${FAMILY_CSS[family.key]}`;
+---
+
+<article class="family">
+  <div class="family__aa" style={font}>Aa</div>
+  <div class="family__body">
+    <div class="family__head">
+      <h3>{FAMILY_NAME[family.key]}</h3>
+      <Badge tone={family.tone}>{family.badge}</Badge>
+    </div>
+    <code class="family__token">{family.token}</code>
+    <p class="family__desc">{family.description}</p>
+    <p class="family__charset" style={font}>
+      ABCDEFGHIJKLMNOPQRSTUVWXYZ<br />
+      abcdefghijklmnopqrstuvwxyz<br />
+      0123456789 $ % &amp; @ ? ! ( )
+    </p>
+    <Caption>
+      Pesos disponibles: Thin 100 · ExtraLight 200 · Light 300 · Regular 400 · Medium 500 ·
+      SemiBold 600 · Bold 700 · ExtraBold 800 · Black 900
+    </Caption>
+  </div>
+</article>
+
+<style>
+  .family {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    border: 1px solid var(--color-line);
+    border-radius: 12px;
+  }
+
+  .family__aa {
+    display: flex;
+    flex: 0 0 96px;
+    align-items: center;
+    justify-content: center;
+    height: 96px;
+    border-radius: 10px;
+    background: var(--color-subtle);
+    font-size: 52px;
+    font-weight: 500;
+    line-height: 1;
+    color: var(--color-ink);
+  }
+
+  .family__body {
+    min-width: 0;
+  }
+
+  .family__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .family__head h3 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  .family__token {
+    display: inline-block;
+    margin: 8px 0 4px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-muted);
+    overflow-wrap: anywhere;
+  }
+
+  .family__desc {
+    margin: 8px 0 0;
+    font-size: 14px;
+    line-height: 1.65;
+  }
+
+  .family__charset {
+    margin: 12px 0 0;
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--color-ink);
+    overflow-wrap: anywhere;
+  }
+
+  @media (max-width: 860px) {
+    .family {
+      flex-direction: column;
+      padding: 16px;
+    }
+
+    .family__aa {
+      flex: 0 0 auto;
+      width: 96px;
+    }
+  }
+</style>
