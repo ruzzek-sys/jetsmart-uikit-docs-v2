@@ -326,6 +326,13 @@ main {
   color: var(--js-text-muted);
 }
 
+.home-cover {
+  display: block;
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 32px;
+}
+
 .js-btn {
   display: inline-flex;
   align-items: center;
