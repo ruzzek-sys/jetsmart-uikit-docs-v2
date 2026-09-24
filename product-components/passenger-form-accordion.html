@@ -64,6 +64,14 @@
                 </tbody>
               </table>
             </div>
+
+            <h3 id="doc-passenger-form-accordion-doble-slot">Cómo agregar campos: doble slot anidado</h3>
+            <p>El slot central del acordeón (<code>Slot Mobile</code> / <code>Slot Desktop</code>) solo acepta instancias de <code>Section Form</code>. Los inputs no se agregan ahí directamente: cada <code>Section Form</code> tiene su propio slot interno donde sí se aceptan los inputs.</p>
+            <ol>
+              <li><strong>Selecciona el Section Form.</strong> Dentro del cuerpo del Passenger Form Accordion (<code>Slot Mobile</code> o <code>Slot Desktop</code>, según el breakpoint), haz clic en la instancia de Section Form que quieras editar.</li>
+              <li><strong>Entra a su slot interno.</strong> Con el Section Form seleccionado, selecciona su propio slot «Inputs» (ver Docs · Section Form) — es un nivel de anidamiento distinto al slot del acordeón.</li>
+              <li><strong>Agrega los inputs.</strong> Arrastra o reemplaza con las instancias de input que necesites dentro de ese slot interno. El acordeón nunca recibe inputs directamente, siempre pasan por el Section Form.</li>
+            </ol>
           </section>
 
           <section class="doc-section">

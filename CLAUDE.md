@@ -63,7 +63,8 @@ cuando la lista tiene alguno (regla con `:has()`), así que las páginas de un c
 
 ### Tres tipos de página
 
-**Componente** (`components/`, `product-components/`) — `Resumen` + `Propiedades`, nada más.
+**Componente** (`components/`, `product-components/`) — `Resumen` + `Propiedades`, y `Guía de uso`
+cuando la página de Figma trae un section `Guía de uso · <Componente>`. Nada más.
 Cuando la página de Figma trae **varios componentes**, se repite el bloque completo por cada uno: `h2`
 con el nombre del componente, descripción, su propio Live Preview, y `h3` Resumen + `h3` Propiedades.
 Ver `components/tabs.html`. Al mapear los frames «Live Preview» a su componente, hazlo por **la instancia

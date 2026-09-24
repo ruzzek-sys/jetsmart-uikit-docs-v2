@@ -18,29 +18,30 @@
           <header class="page-header">
             <p class="page-header__eyebrow">Components</p>
             <h1>Dropdown Menu</h1>
-            <p>Paneles desplegables de opciones, armados con filas <code>Dropdown Option</code>.</p>
+            <p>Paneles desplegables de opciones, armados con filas <code>Dropdown Option</code> y <code>Dropdown Search Item</code>.</p>
           </header>
 
-          <section class="figma-preview">
-            <p class="figma-preview__label">Live Preview</p>
-            <div class="figma-preview__frame">
-              <iframe
-                title="Dropdown Menu - Figma preview"
-                src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FdKd6jNGAnng8hIV5MS4Avd%2FJetsmart-UI-Kit-v1.0%3Fnode-id%3D5230-109302"
-                loading="lazy"
-                allowfullscreen>
-              </iframe>
+          <section class="doc-section">
+            <h2 id="doc-dropdown-option">Dropdown Option</h2>
+            <p>La fila base de un menú desplegable: una opción con texto, un elemento leading (ícono o bandera) y, opcionalmente, número de orden, código, badge contador y chevron. Es el átomo con que se arman todos los paneles de Dropdown Menu.</p>
+
+            <div class="figma-preview">
+              <p class="figma-preview__label">Live Preview</p>
+              <div class="figma-preview__frame">
+                <iframe
+                  title="Dropdown Option - Figma preview"
+                  src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FdKd6jNGAnng8hIV5MS4Avd%2FJetsmart-UI-Kit-v1.0%3Fnode-id%3D5230-109302"
+                  loading="lazy"
+                  allowfullscreen>
+                </iframe>
+              </div>
             </div>
-          </section>
 
-          <section class="doc-section">
-            <h2 id="doc-resumen">Resumen</h2>
-            <p><code>Dropdown Option</code> es la fila de un menú desplegable: una opción con texto, un elemento leading (ícono o bandera) y, opcionalmente, número de orden, código, badge contador y chevron. Es el átomo con que se arman todos los paneles de Dropdown Menu —<code>Dropdown Panel</code>, <code>Dropdown Step Selector</code>, <code>Dropdown Account Menu</code>, <code>Dropdown Flag Selector</code>, <code>Dropdown Destination Selector</code>, <code>Dropdown Notification</code>, <code>Dropdown Shopping Cart</code> y <code>Dropdown Search</code>—, que no tienen variantes propias y heredan sus estados y props.</p>
+            <h3 id="doc-dropdown-option-resumen">Resumen</h3>
+            <p><code>Dropdown Option</code> es la fila de un menú desplegable: una opción con texto, un elemento leading (ícono o bandera) y, opcionalmente, número de orden, código, badge contador y chevron. Es el átomo con que se arman todos los paneles de Dropdown Menu.</p>
             <p>12 variantes = <code>State</code> (3) × <code>Leading</code> (2) × <code>Weight</code> (2), matriz completa. Es el átomo que componen todos los paneles de Dropdown Menu.</p>
-          </section>
 
-          <section class="doc-section">
-            <h2 id="doc-propiedades">Propiedades</h2>
+            <h3 id="doc-dropdown-option-propiedades">Propiedades</h3>
             <p>Propiedades configurables del componente Dropdown Option.</p>
             <div class="ty-table-wrap">
               <table class="ty-table">
@@ -59,6 +60,43 @@
                   <tr><td><strong>Number</strong></td><td><code>Text</code></td><td class="ty-muted">Valor del número de orden mostrado cuando Show Number está activo. Por defecto «1.».</td></tr>
                   <tr><td><strong>Code</strong></td><td><code>Text</code></td><td class="ty-muted">Valor del código mostrado cuando Show Code está activo. Por defecto «SCL».</td></tr>
                   <tr><td><strong>Show Badge</strong></td><td><code>Boolean</code></td><td class="ty-muted">Muestra un badge circular rojo con contador (ej. «+3») junto al chevron. Desactivado por defecto.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="doc-section">
+            <h2 id="doc-dropdown-search-menu">Dropdown Search Menu</h2>
+            <p>El panel de resultados de un buscador tipo autocomplete: una lista de filas <code>Dropdown Search Item</code> (título, descripción y esquinas redondeadas según su posición en la lista) con scroll opcional.</p>
+
+            <div class="figma-preview">
+              <p class="figma-preview__label">Live Preview</p>
+              <div class="figma-preview__frame">
+                <iframe
+                  title="Dropdown Search Menu - Figma preview"
+                  src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FdKd6jNGAnng8hIV5MS4Avd%2FJetsmart-UI-Kit-v1.0%3Fnode-id%3D7772-115213"
+                  loading="lazy"
+                  allowfullscreen>
+                </iframe>
+              </div>
+            </div>
+
+            <h3 id="doc-dropdown-search-menu-resumen">Resumen</h3>
+            <p><code>Dropdown Search Menu</code> es el panel de resultados de un buscador tipo autocomplete: una lista de filas <code>Dropdown Search Item</code> (título, descripción y esquinas redondeadas según su posición en la lista) con scroll opcional.</p>
+            <p>El propio panel expone <code>Scroll</code>, que muestra u oculta la barra de scroll a la derecha. El resto de las propiedades pertenecen a la instancia anidada <code>Dropdown Search Item</code> y se ajustan desde el panel de esa instancia: <code>Position</code> controla el radio de esquinas según el lugar en la lista (Top, Middle, Bottom o Center para un ítem solo), mientras <code>Title</code> y <code>Description</code> son el texto principal y secundario de cada fila.</p>
+
+            <h3 id="doc-dropdown-search-menu-propiedades">Propiedades</h3>
+            <p>Propiedades de Dropdown Search Item (instancia anidada) · ajustables desde el panel de la instancia</p>
+            <div class="ty-table-wrap">
+              <table class="ty-table">
+                <thead>
+                  <tr><th>Propiedad</th><th>Tipo</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Scroll</strong></td><td><code>Boolean</code></td><td class="ty-muted">Muestra u oculta la barra de scroll a la derecha del menú. Default: activado.</td></tr>
+                  <tr><td><strong>Position</strong></td><td><code>Variant</code></td><td class="ty-muted">Top: esquinas superiores redondeadas, para el primer ítem de la lista. Middle: sin radio, para ítems intermedios. Bottom: esquinas inferiores redondeadas, para el último ítem. Center: las cuatro esquinas redondeadas, para cuando el ítem está solo en la lista. Default: Top.</td></tr>
+                  <tr><td><strong>Title</strong></td><td><code>Text</code></td><td class="ty-muted">Texto principal de la fila (p. ej. ciudad y código IATA). Default: «Santiago de Chile, SCL - Chile».</td></tr>
+                  <tr><td><strong>Description</strong></td><td><code>Text</code></td><td class="ty-muted">Texto secundario debajo del título (p. ej. nombre del aeropuerto). Default: «Comodoro Arturo Merino Benítez Int.».</td></tr>
                 </tbody>
               </table>
             </div>

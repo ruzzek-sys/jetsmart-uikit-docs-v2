@@ -119,13 +119,13 @@ const SECTIONS = [
       { label: "Date Carousel", slug: "date-carousel", desc: "Carrusel de fechas para comparar tarifas.", nodes: ["5205:106790"], live: true },
       { label: "Data Item", slug: "data-item", desc: "Par etiqueta-valor para mostrar datos.", nodes: ["5205:107801"], live: true },
       { label: "Divider", slug: "divider", desc: "Separador visual entre bloques.", nodes: ["5230:108660"], live: true },
-      { label: "Dropdown Menu", slug: "dropdown-menu", desc: "Menú desplegable de opciones.", nodes: ["5230:109302"], live: true },
+      { label: "Dropdown Menu", slug: "dropdown-menu", desc: "Menú desplegable de opciones.", nodes: ["5230:109302", "7772:115213"], live: true },
       { label: "FAQ Panel", slug: "faq-panel", desc: "Panel de preguntas frecuentes.", nodes: ["5279:112230"], live: true },
       { label: "File Upload Card", slug: "file-upload-card", desc: "Tarjeta para carga de archivos.", nodes: ["5279:113127"], live: true },
       { label: "Feature Item", slug: "feature-item", desc: "Ítem para destacar características o beneficios.", nodes: ["5279:113872"], live: true },
       { label: "Flag Selector", slug: "flag-selector", desc: "Selector de país e idioma.", nodes: ["5300:118764"], live: true },
       { label: "Footer", slug: "footer", desc: "Pie de página del sitio.", nodes: ["5550:103925"], live: true },
-      { label: "Hero Banner", slug: "hero-banner", desc: "Banner principal de cabecera.", nodes: ["5300:119080"], live: true },
+      { label: "Hero Banner", slug: "hero-banner", desc: "Banner principal de cabecera.", nodes: ["5300:119080", "7930:151854", "7930:151498", "4329:2653", "4342:2780"], live: true },
       { label: "Icon Circle", slug: "icon-circle", desc: "Icono contenido en un círculo.", nodes: ["5300:119897"], live: true },
       { label: "Inline Message", slug: "inline-message", desc: "Mensaje contextual dentro del contenido.", nodes: ["5550:107797"], live: true },
       { label: "Info Cards", slug: "info-cards", desc: "Tarjetas informativas breves.", nodes: ["5561:109438"], live: true },
@@ -171,8 +171,8 @@ const SECTIONS = [
       { label: "Add Baggage Card", slug: "add-baggage-card", desc: "Tarjeta para agregar equipaje.", nodes: ["6186:135425"], live: true },
       { label: "Add-on Selector", slug: "add-on-selector", desc: "Selector de servicios adicionales.", nodes: ["5469:12321"], live: true },
       { label: "Boarding Pass Card", slug: "boarding-pass-card", desc: "Tarjeta de pase de abordar.", nodes: ["6186:138537"], live: true },
-      { label: "Bundle Card", slug: "bundle-card", desc: "Tarjeta de paquete de servicios.", nodes: ["6186:139756"], live: true },
-      { label: "Flight Card", slug: "flight-card", desc: "Tarjeta de vuelo con horarios y tarifas.", nodes: ["6186:142603"], live: true },
+      { label: "Bundle Card", slug: "bundle-card", desc: "Tarjeta de paquete de servicios.", nodes: ["6186:139756", "7834:118776", "7834:119172"], live: true },
+      { label: "Flight Card", slug: "flight-card", desc: "Tarjeta de vuelo con horarios y tarifas.", nodes: ["6186:142603", "7797:115810", "7797:115989"], live: true },
       { label: "Flight Details Card", slug: "flight-details-card", desc: "Tarjeta con el detalle del vuelo.", nodes: ["6186:145649"], live: true },
       { label: "Flight Status Widget", slug: "flight-status-widget", desc: "Widget de estado de vuelo.", nodes: ["6186:148344"], live: true },
       { label: "Flight Leg Selection", slug: "flight-leg-selection", desc: "Selección de tramos del vuelo.", nodes: ["6186:149903"], live: true },
@@ -205,8 +205,8 @@ const SECTIONS = [
         slug: "index",
         id: "patterns-overview",
         desc: "Combinaciones de componentes para flujos y experiencias completas.",
-        nodes: ["3072:78207"],
-        live: false
+        nodes: ["723:2761"],
+        live: true
       }
     ]
   },
@@ -217,23 +217,23 @@ const SECTIONS = [
     preview: true,
     docs: FLOW_DOCS,
     items: [
-      { label: "Home", slug: "home", id: "flows-home", desc: "Pantallas de la home en desktop y mobile.", nodes: ["3496:11099"], live: false },
-      { label: "Booking", slug: "booking", id: "flows-booking", desc: "Flujo completo de reserva de vuelos.", nodes: ["2742:58106"], live: false },
+      { label: "Home", slug: "home", id: "flows-home", desc: "Pantallas de la home en desktop y mobile.", nodes: ["7903:145534"], live: true },
+      { label: "Booking", slug: "booking", id: "flows-booking", desc: "Flujo completo de reserva de vuelos.", nodes: ["2742:58106"], live: true },
       {
         label: "Administra tu vuelo",
         slug: "administra-tu-vuelo",
         id: "flows-administra-tu-vuelo",
         desc: "Flujo de gestión de una reserva existente.",
-        nodes: ["1368:13480"],
-        live: false
+        nodes: ["7903:145533"],
+        live: true
       },
       {
         label: "Administración de Usuario",
         slug: "administracion-de-usuario",
         id: "flows-administracion-de-usuario",
         desc: "Pantallas de cuenta y perfil de usuario.",
-        nodes: ["2370:21781"],
-        live: false
+        nodes: ["7903:151497"],
+        live: true
       }
     ]
   }

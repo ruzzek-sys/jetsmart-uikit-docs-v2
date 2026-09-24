@@ -35,7 +35,7 @@
           <section class="doc-section">
             <h2 id="doc-resumen">Resumen</h2>
             <p>Etiqueta compacta que marca un estado, una categoría o un conteo. No se usa suelta: vive dentro de otros componentes —cards de vuelo, filas de selección, tablas del listado de vuelos— para calificar el elemento que la contiene.</p>
-            <p>54 variantes = <code>Style</code> (3) × <code>Type</code> (9) × <code>Size</code> (2). Los nueve colores se dividen en cinco de marca (Primary, Secondary, Accent, Tertiary, Neutral) y cuatro utilitarios (Success, Warning, Info, Error).</p>
+            <p>54 variantes = <code>Style</code> (3) × <code>Type</code> (9) × <code>Size</code> (2). Los nueve colores se dividen en cuatro de marca (Primary, Secondary, Accent, Tertiary), cuatro utilitarios (Success, Warning, Info, Error) y Neutral, que queda aparte de ambas familias.</p>
           </section>
 
           <section class="doc-section">
@@ -53,6 +53,22 @@
                   <tr><td><strong>Show Icon Left</strong></td><td><code>Boolean</code></td><td class="ty-muted">Agrega un ícono antes del texto. Desactivado por defecto.</td></tr>
                   <tr><td><strong>Show Icon Right</strong></td><td><code>Boolean</code></td><td class="ty-muted">Agrega un ícono después del texto. Desactivado por defecto.</td></tr>
                   <tr><td><strong>Label</strong></td><td><code>Text</code></td><td class="ty-muted">Texto que muestra el badge. «Badge» por defecto.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="doc-section">
+            <h2 id="doc-guia-de-uso">Guía de uso</h2>
+            <h3>Uso del color y estados</h3>
+            <p>Cómo comunica color el Badge y qué grupos existen.</p>
+            <div class="ty-table-wrap">
+              <table class="ty-table">
+                <thead>
+                  <tr><th>Aspecto</th><th>Categoría</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Dos familias de color</strong></td><td><span class="ty-badge ty-badge--var">Grupo</span></td><td class="ty-muted">Se agrupan en dos familias de color: Brand Colors (Primary, Secondary, Accent, Tertiary) — identidad y jerarquía de marca, con tokens color/*/brand-* — y Utility Colors (Success, Warning, Info, Error) — comunican el estado de un elemento (éxito, advertencia, información, error), con tokens color/*/utility-*. Neutral queda aparte de ambas familias: usa tokens genéricos (border/secondary, content/brand-primary) para los casos donde se necesita un badge sin carga semántica de marca ni de estado.</td></tr>
                 </tbody>
               </table>
             </div>

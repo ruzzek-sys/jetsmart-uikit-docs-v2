@@ -99,6 +99,38 @@
             </div>
           </section>
 
+          <section class="doc-section">
+            <h2 id="doc-formato-fechas-rutas">Formato de Fechas y Rutas</h2>
+            <p>Guía de formatos de fecha y de rutas/destinos según el espacio disponible en cada componente.</p>
+
+            <h3 id="doc-formato-fechas-rutas-fechas">Formato de Fechas</h3>
+            <div class="ty-table-wrap">
+              <table class="ty-table">
+                <thead>
+                  <tr><th>Formato</th><th>Contexto</th><th>Uso y componentes</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>sáb 16 may 2026</strong></td><td><code>Espacios amplios</code></td><td class="ty-muted">Uso: cuando hay espacio disponible y se requiere máximo detalle. Componentes: headers, detalles de vuelo, confirmaciones.</td></tr>
+                  <tr><td><strong>vie 25 ene</strong></td><td><code>Espacios intermedios</code></td><td class="ty-muted">Uso: cuando el espacio es moderado. Componentes: cards medianas, searchbox.</td></tr>
+                  <tr><td><strong>16 ene</strong></td><td><code>Espacios reducidos</code></td><td class="ty-muted">Uso: cuando el espacio es limitado o no se requiere tanto detalle. Componentes: cards pequeñas, widget de información.</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3 id="doc-formato-fechas-rutas-rutas">Formato de Rutas y Destinos</h3>
+            <div class="ty-table-wrap">
+              <table class="ty-table">
+                <thead>
+                  <tr><th>Formato</th><th>Contexto</th><th>Uso y componentes</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Rio de Janeiro (BBA)</strong></td><td><code>Desktop</code></td><td class="ty-muted">Estructura: nombre de ciudad + código IATA entre paréntesis. Uso: cuando hay espacio suficiente para mostrar contexto completo. Componentes: búsqueda, resultados, detalles de itinerario.</td></tr>
+                  <tr><td><strong>BBA</strong></td><td><code>Mobile</code></td><td class="ty-muted">Uso: solo código IATA, siempre en mobile, para garantizar consistencia —el tamaño es predecible y evita saltos de layout—. Casos especiales: ciudades con nombres largos (San Martín de los Andes → CPC, Comodoro Rivadavia → CRD) previenen ruptura de elementos por overflow de texto.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
         </main>
         <aside id="page-toc"></aside>
       </div>

@@ -21,25 +21,27 @@
             <p>Contenedor colapsable para agrupar contenido extenso.</p>
           </header>
 
-          <section class="figma-preview">
-            <p class="figma-preview__label">Live Preview</p>
-            <div class="figma-preview__frame">
-              <iframe
-                title="Accordion - Figma preview"
-                src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FdKd6jNGAnng8hIV5MS4Avd%2FJetsmart-UI-Kit-v1.0%3Fnode-id%3D5167-54214"
-                allowfullscreen>
-              </iframe>
+          <section class="doc-section">
+            <h2 id="doc-accordion">Accordion</h2>
+            <p>El compuesto: encabezado, contenido central y pie de acciones en una sola pieza. Es el único que se instancia para armar acordeones; los otros dos componentes de la página son sus partes y ya vienen dentro.</p>
+
+            <div class="figma-preview">
+              <p class="figma-preview__label">Live Preview</p>
+              <div class="figma-preview__frame">
+                <iframe
+                  title="Accordion - Figma preview"
+                  src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FdKd6jNGAnng8hIV5MS4Avd%2FJetsmart-UI-Kit-v1.0%3Fnode-id%3D5167-54214"
+                  loading="lazy"
+                  allowfullscreen>
+                </iframe>
+              </div>
             </div>
-          </section>
 
-          <section class="doc-section">
-            <h2 id="doc-resumen">Resumen</h2>
+            <h3 id="doc-accordion-resumen">Resumen</h3>
             <p>Panel plegable que agrupa contenido bajo un encabezado con resumen. Colapsado muestra solo ese encabezado; expandido revela el contenido central y, opcionalmente, un pie con el resumen de la selección y los botones de acción. El contenido central es un slot, así que puede alojar cualquier capa o instancia sin salir de la variante.</p>
-            <p>Familia de cuatro maestros: el compuesto <code>Accordion</code> y sus partes —<code>Accordion Header Desktop</code>, <code>Accordion Header Mobile</code> y <code>Action Bar Footer</code>— en el orden en que se ensamblan. En la matriz, las columnas recorren <code>Breakpoint</code> y las filas <code>Expansion</code> dentro de cada banda.</p>
-          </section>
+            <p>Familia de maestros en el orden en que se ensamblan: el compuesto <code>Accordion</code> (header + <code>Content</code> + footer), que es el que hay que instanciar, y sus partes <code>Accordion Header</code> —Desktop y Mobile en el mismo set— y <code>Action Bar Footer</code>. En la matriz, las columnas recorren <code>Breakpoint</code> y las filas <code>Expansion</code> dentro de cada banda.</p>
 
-          <section class="doc-section">
-            <h2 id="doc-propiedades">Propiedades</h2>
+            <h3 id="doc-accordion-propiedades">Propiedades</h3>
             <p>Lo que se puede ajustar en cada instancia del accordion.</p>
             <div class="ty-table-wrap">
               <table class="ty-table">
@@ -51,6 +53,96 @@
                   <tr><td><strong>Expansion</strong></td><td><code>Variant</code></td><td class="ty-muted">Collapsed muestra solo el encabezado con el resumen y la flecha cerrada. Expanded revela el contenido central y el pie con la selección y las acciones. Collapsed es el valor por defecto.</td></tr>
                   <tr><td><strong>Show Footer</strong></td><td><code>Boolean</code></td><td class="ty-muted">Muestra el pie con el resumen de la selección y los botones de acción cuando el accordion está expandido. Activado por defecto.</td></tr>
                   <tr><td><strong>Content</strong></td><td><code>Slot</code></td><td class="ty-muted">Reemplaza el contenido central del accordion por cualquier capa o instancia, sin salir de la variante ni del breakpoint. Vacío por defecto.</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3 id="doc-accordion-guia-de-uso">Guía de uso</h3>
+            <h4>Detalle del Accordion</h4>
+            <p>Cómo se comporta el detalle de ítems agregados, y por qué existe como slot.</p>
+            <div class="ty-table-wrap">
+              <table class="ty-table">
+                <thead>
+                  <tr><th>Aspecto</th><th>Categoría</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Detalle del accordion — Desktop</strong></td><td><span class="ty-badge ty-badge--var">Comportamiento</span></td><td class="ty-muted">El detalle se completa hacia la derecha a medida que se agregan ítems; el precio aparece al final de la fila, no ítem por ítem.</td></tr>
+                  <tr><td><strong>Detalle del accordion — Mobile</strong></td><td><span class="ty-badge ty-badge--var">Comportamiento</span></td><td class="ty-muted">Al expandir el acordeón, el detalle de cada ítem agregado se muestra en filas separadas, una debajo de la otra.</td></tr>
+                  <tr><td><strong>Details Content (slot)</strong></td><td><span class="ty-badge ty-badge--var">Intención</span></td><td class="ty-muted">Es slot, no una fila fija, para que el footer pueda mostrar cualquier cantidad de ítems agregados sin quedar limitado a uno solo.</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <h4>Slots — qué va dentro</h4>
+            <p>Un slot reserva un hueco con su layout ya definido, pero no fija el contenido: en la instancia se arrastra dentro lo que corresponda y el resto del componente se reacomoda. Hay 3 slots en la familia, marcados 1 · 2 · 3 sobre el canvas.</p>
+            <div class="ty-table-wrap">
+              <table class="ty-table">
+                <thead>
+                  <tr><th>Aspecto</th><th>Categoría</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>1 · Content</strong></td><td><span class="ty-badge ty-badge--var">Accordion · cuerpo</span></td><td class="ty-muted">Va vacío en el master: es donde se arrastra el contenido del servicio (cards de equipaje, mapa de asientos, tabla de tarifas). Ancho fill, alto hug. No le pongas padding propio — el Content Wrapper ya aporta 24 px laterales y 28 px verticales. Solo se ve con Expansion=Expanded.</td></tr>
+                  <tr><td><strong>2 · Slot (header)</strong></td><td><span class="ty-badge ty-badge--var">Header · subtítulo</span></td><td class="ty-muted">Línea de apoyo bajo el título, dentro del Accordion Header. Contenido esperado: 1–2 Feature Item + un Button Tertiary / Small tipo «Ver detalles». Existe en las 4 variantes del header (Desktop · Mobile × Collapsed · Expanded), así que lo que cambies hay que replicarlo en las cuatro. En Mobile solo caben 170 px en una línea: si no alcanza, saca el Feature Item antes que el botón.</td></tr>
+                  <tr><td><strong>3 · Slot 2 (footer)</strong></td><td><span class="ty-badge ty-badge--var">Footer · resumen</span></td><td class="ty-muted">Resumen de lo elegido dentro del Action Bar, bajo el label «Selección». Patrón: nombre de la opción · separador « | » · precio formateado, los tres alineados a baseline. Solo texto, sin instancias. Si todavía no hay selección, deja el slot vacío. Solo existe en Desktop.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="doc-section">
+            <h2 id="doc-accordion-header">Accordion Header</h2>
+            <p>El encabezado del accordion: número de paso, título, línea de apoyo, badges y la flecha que abre o cierra el panel. Ya viene dentro del <code>Accordion</code>.</p>
+
+            <h3 id="doc-accordion-header-resumen">Resumen</h3>
+            <p>Fila de encabezado con un círculo numerado, el título, una línea de descripción con enlace «Ver detalles», badges a cada lado y un botón opcional. Sus dos slots permiten cambiar lo que va bajo el título según el panel esté abierto o cerrado.</p>
+            <p>6 variantes = <code>State</code> (3: Collapsed, Expanded, Disabled) × <code>Breakpoint</code> (2), matriz completa.</p>
+
+            <h3 id="doc-accordion-header-propiedades">Propiedades</h3>
+            <p>Lo que se puede ajustar en cada instancia del encabezado del accordion.</p>
+            <div class="ty-table-wrap">
+              <table class="ty-table">
+                <thead>
+                  <tr><th>Propiedad</th><th>Tipo</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>State</strong></td><td><code>Variant</code></td><td class="ty-muted">Cambia el aspecto del encabezado según el estado del accordion. Collapsed muestra la flecha hacia abajo, Expanded la voltea hacia arriba, y Disabled atenúa todos los textos e íconos y desactiva «Ver detalles». Collapsed es el valor por defecto.</td></tr>
+                  <tr><td><strong>Breakpoint</strong></td><td><code>Variant</code></td><td class="ty-muted">Adapta el layout del encabezado y las acciones al ancho de pantalla. Desktop alinea los botones en fila; Mobile los apila en columna. Desktop es el valor por defecto.</td></tr>
+                  <tr><td><strong>Show Badge Left</strong></td><td><code>Boolean</code></td><td class="ty-muted">Agrega una etiqueta tipo badge junto al título (por ejemplo, una categoría o estado). Oculto por defecto.</td></tr>
+                  <tr><td><strong>Show Badge Right</strong></td><td><code>Boolean</code></td><td class="ty-muted">Muestra el badge de conteo (ej. «1/2») en el extremo derecho, antes de la flecha. Activado por defecto.</td></tr>
+                  <tr><td><strong>Show Number</strong></td><td><code>Boolean</code></td><td class="ty-muted">Muestra el círculo numerado que antecede al título, usado para ordenar los pasos del accordion. Activado por defecto.</td></tr>
+                  <tr><td><strong>Show Button Right</strong></td><td><code>Boolean</code></td><td class="ty-muted">Agrega un botón secundario (ej. «Check-in» con fecha) entre el contenido y el badge derecho. Oculto por defecto.</td></tr>
+                  <tr><td><strong>Show Content</strong></td><td><code>Boolean</code></td><td class="ty-muted">Muestra la línea de descripción bajo el título (ícono de check, texto y enlace «Ver detalles»). Activado por defecto.</td></tr>
+                  <tr><td><strong>Collapsed Content</strong></td><td><code>Slot</code></td><td class="ty-muted">Reemplaza el contenido bajo el título cuando el estado es Collapsed; admite un Button o un Feature Item. Trae un Feature Item con «Descripción · Ver detalles» por defecto.</td></tr>
+                  <tr><td><strong>Expanded Content</strong></td><td><code>Slot</code></td><td class="ty-muted">Reemplaza el contenido bajo el título cuando el estado es Expanded; admite un Feature Item o un Button. Mismo contenido por defecto que en Collapsed.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="doc-section">
+            <h2 id="doc-action-bar-footer">Action Bar Footer</h2>
+            <p>El pie de acciones del accordion expandido: resume lo elegido bajo el label «Selección» y ofrece los botones para avanzar. Ya viene dentro del <code>Accordion</code>.</p>
+
+            <h3 id="doc-action-bar-footer-resumen">Resumen</h3>
+            <p>Barra con el detalle de la selección —nombre del servicio y precio— a la izquierda y los botones de acción a la derecha. En Mobile apila el resumen de precio sobre la acción y puede desplegarse para ver el desglose por servicio.</p>
+            <p>3 variantes en un set unificado para Desktop y Mobile: <code>Breakpoint</code>=Desktop con <code>State</code>=Collapsed, y <code>Breakpoint</code>=Mobile con <code>State</code> Collapsed y Expanded. Desktop no tiene variante Expanded.</p>
+
+            <h3 id="doc-action-bar-footer-propiedades">Propiedades</h3>
+            <p>Propiedades configurables del componente Action Bar Footer</p>
+            <div class="ty-table-wrap">
+              <table class="ty-table">
+                <thead>
+                  <tr><th>Propiedad</th><th>Tipo</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Breakpoint</strong></td><td><code>Variant</code></td><td class="ty-muted">Desktop muestra la barra en un solo bloque horizontal, con el detalle a la izquierda y los botones a la derecha. Mobile apila el resumen de precio arriba y la acción abajo, ocupando el ancho de pantalla completo. Desktop es el valor por defecto.</td></tr>
+                  <tr><td><strong>State</strong></td><td><code>Variant</code></td><td class="ty-muted">Collapsed muestra solo el total de la selección con una flecha para desplegar. Expanded revela el desglose completo de servicios seleccionados, cada uno con su propio precio. Solo aplica variantes publicadas en Mobile. Collapsed es el valor por defecto.</td></tr>
+                  <tr><td><strong>Show Details Label</strong></td><td><code>Boolean</code></td><td class="ty-muted">Muestra la etiqueta «Selección» sobre el detalle del servicio. Al desactivarlo, la etiqueta desaparece y solo queda el nombre y precio del servicio. Activado es el valor por defecto.</td></tr>
+                  <tr><td><strong>Show Button Primary</strong></td><td><code>Boolean</code></td><td class="ty-muted">Muestra el botón de acción principal, de fondo relleno («Ir al siguiente servicio»). Activado es el valor por defecto.</td></tr>
+                  <tr><td><strong>Show Button Secondary</strong></td><td><code>Boolean</code></td><td class="ty-muted">Muestra el botón de acción secundario, de contorno, junto al principal (visible en la variante Desktop). Activado es el valor por defecto.</td></tr>
+                  <tr><td><strong>Show Details Content</strong></td><td><code>Boolean</code></td><td class="ty-muted">Muestra la fila con el nombre del servicio y su precio. Al desactivarlo solo queda visible la etiqueta «Selección», sin el detalle del ítem. Activado es el valor por defecto.</td></tr>
+                  <tr><td><strong>Show Details</strong></td><td><code>Boolean</code></td><td class="ty-muted">Controla la columna izquierda completa (etiqueta + contenido de detalle). Al desactivarlo la barra solo muestra los botones de acción. Activado es el valor por defecto.</td></tr>
+                  <tr><td><strong>Show Button Tertiary</strong></td><td><code>Boolean</code></td><td class="ty-muted">Reservado para un tercer botón de acción. En las tres variantes publicadas (Desktop/Collapsed, Mobile/Collapsed, Mobile/Expanded), activarlo no agrega ningún botón visible: aún no tiene implementación visual en este componente. Desactivado es el valor por defecto.</td></tr>
+                  <tr><td><strong>Details Content</strong></td><td><code>Slot</code></td><td class="ty-muted">Slot que aloja el contenido del detalle: en Desktop, una fila con nombre y precio de un solo servicio; en Mobile Expanded, una o más filas (una por servicio o cargo), cada una dentro de su propio panel de detalle.</td></tr>
                 </tbody>
               </table>
             </div>

@@ -93,7 +93,7 @@
     var homeLink = document.createElement("a");
     homeLink.className = "sidebar-home" + (currentPageId === "home" ? " sidebar-link--active" : "");
     homeLink.href = base + "index.html";
-    homeLink.textContent = "Getting started";
+    homeLink.textContent = "Introducción";
     inner.appendChild(homeLink);
 
     var navEl = document.createElement("nav");
@@ -198,7 +198,7 @@
       list.appendChild(li);
     });
 
-    container.innerHTML = "<p class=\"page-toc__title\">On this page</p>";
+    container.innerHTML = "<p class=\"page-toc__title\">En esta página</p>";
     container.appendChild(list);
   }
 

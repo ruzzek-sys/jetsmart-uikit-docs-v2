@@ -56,6 +56,23 @@
                 </tbody>
               </table>
             </div>
+
+            <h3 id="doc-navbar-guia-de-uso">Guía de uso</h3>
+            <h4>Casos de uso</h4>
+            <p>Cuándo usar cada tipo del Navbar.</p>
+            <div class="ty-table-wrap">
+              <table class="ty-table">
+                <thead>
+                  <tr><th>Aspecto</th><th>Categoría</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Default</strong></td><td><span class="ty-badge ty-badge--var">Visitante</span></td><td class="ty-muted">Header para visitantes no autenticados en el sitio público: navegación completa (Ofertas y Destinos, Mi viaje, Beneficios JetSMART, Ayuda, Estado de vuelo) más el CTA «Iniciar sesión». En mobile colapsa a logo + botón de login + menú hamburguesa.</td></tr>
+                  <tr><td><strong>Login</strong></td><td><span class="ty-badge ty-badge--var">Usuario autenticado</span></td><td class="ty-muted">Las mismas páginas públicas que Default, pero con sesión iniciada: conserva la navegación completa y agrega carrito + selector de país, reemplazando el botón de login por el selector con avatar y nombre. En mobile mantiene el avatar junto al menú hamburguesa.</td></tr>
+                  <tr><td><strong>Administración</strong></td><td><span class="ty-badge ty-badge--var">Área de cuenta</span></td><td class="ty-muted">Para secciones de cuenta o administración (gestión de viaje, reservas) donde las notificaciones importan más que cambiar de país: cambia el selector de país por el ícono de notificaciones.</td></tr>
+                  <tr><td><strong>Standard</strong></td><td><span class="ty-badge ty-badge--var">Flujo enfocado</span></td><td class="ty-muted">Header minimalista sin enlaces de navegación, para flujos donde no se quiere que el usuario se distraiga (p. ej. antes de una reserva o una landing de registro): sólo logo, botones «Inscríbete»/«Iniciar Sesión» y selector de país. El slot Left Content queda vacío, listo para insertar otro elemento (como el Step Bar de Navbar Booking).</td></tr>
+                </tbody>
+              </table>
+            </div>
           </section>
 
           <section class="doc-section">
@@ -160,6 +177,23 @@
                 <tbody>
                   <tr><td><strong>Type</strong></td><td><code>Variant</code></td><td class="ty-muted">Default muestra el menú de navegación principal (Ofertas y Destinos, Mi viaje, Beneficios JetSMART, Ayuda, Estado de vuelo). Flags muestra el selector de país expandido con la lista de banderas disponibles. Default es el valor por defecto.</td></tr>
                   <tr><td><strong>Links</strong></td><td><code>Slot</code></td><td class="ty-muted">Contenedor de contenido libre compartido entre ambas variantes: acepta la lista de ítems que se inserte dentro del menú, ya sean enlaces de navegación o la lista de banderas de país.</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3 id="doc-menu-mobile-guia-de-uso">Guía de uso</h3>
+            <h4>Cómo usarlo</h4>
+            <p>Reglas de uso del panel de menú mobile.</p>
+            <div class="ty-table-wrap">
+              <table class="ty-table">
+                <thead>
+                  <tr><th>Aspecto</th><th>Categoría</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Alto</strong></td><td><span class="ty-badge ty-badge--var">Se estira</span></td><td class="ty-muted">El panel cubre la pantalla completa. Los 931 px son la referencia de diseño: ponlo en Fill container en el eje vertical.</td></tr>
+                  <tr><td><strong>Apertura</strong></td><td><span class="ty-badge ty-badge--var">Instancias</span></td><td class="ty-muted">Se abre desde el menú hamburguesa de Navbar en Breakpoint=Mobile. No lo uses en Desktop.</td></tr>
+                  <tr><td><strong>Aperturas</strong></td><td><span class="ty-badge ty-badge--var">No mezclar</span></td><td class="ty-muted">Flags y Expanded son dos aperturas distintas: no muestres el listado de países y el submenú a la vez.</td></tr>
+                  <tr><td><strong>Enlaces</strong></td><td><span class="ty-badge ty-badge--var">Instancias</span></td><td class="ty-muted">Los ítems de navegación deben ser instancias de Nav Link, no texto suelto; el orden y los textos se editan ahí.</td></tr>
                 </tbody>
               </table>
             </div>

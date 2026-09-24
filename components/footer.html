@@ -78,6 +78,23 @@
             </div>
           </section>
 
+          <section class="doc-section">
+            <h2 id="doc-guia-de-uso">Guía de uso</h2>
+            <h3>Notas de uso</h3>
+            <p>Contexto y flexibilidad de las variantes del Footer.</p>
+            <div class="ty-table-wrap">
+              <table class="ty-table">
+                <thead>
+                  <tr><th>Aspecto</th><th>Categoría</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Uso de Footer Summary</strong></td><td><span class="ty-badge ty-badge--var">Contexto de uso</span></td><td class="ty-muted">Se usa solo en pantallas de escritorio de flujos transaccionales de varios pasos. Reduce el footer a una sola cinta (1440×99 vs. 1440×461 del Desktop completo) con solo lo esencial: logo, texto legal/copyright, dos enlaces (Términos y condiciones, Políticas de privacidad) y los sellos de certificación. Para caso mobile, se aplica directamente desde las propiedades del componente desactivando las opciones Menu y RRSS.</td></tr>
+                  <tr><td><strong>Item independiente</strong></td><td><span class="ty-badge ty-badge--var">Flexibilidad</span></td><td class="ty-muted">Existe como componente propio, no anidado dentro de Desktop/Mobile, con auto-layout vertical en Hug en ambos ejes: su tamaño depende solo del título y de los enlaces insertados en su slot Menu Items. Esto permite agregar, quitar o editar una columna del footer sin tocar el layout del Desktop o Mobile que lo contiene.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
         </main>
         <aside id="page-toc"></aside>
       </div>

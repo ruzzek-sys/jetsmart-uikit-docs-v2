@@ -106,6 +106,25 @@
               </div>
           </section>
 
+          <section class="doc-section">
+            <h2 id="doc-guia-de-uso">Guía de uso</h2>
+            <h3>Color en Calendar Day</h3>
+            <p>Cómo se comunica el estado de selección y el nivel de precio mediante color.</p>
+            <div class="ty-table-wrap">
+              <table class="ty-table">
+                <thead>
+                  <tr><th>Aspecto</th><th>Categoría</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Días seleccionados</strong></td><td><span class="ty-badge ty-badge--var">Estado</span></td><td class="ty-muted">Al seleccionar uno o más días, el número de cada día seleccionado se completa con el tono cyan (brand-tertiary #14AEC7) y texto blanco — un color exclusivo de este estado, distinto de hover, disponible o disabled, para que la selección se lea con claridad sin importar cuántas fechas abarque.</td></tr>
+                  <tr><td><strong>Precio bajo</strong></td><td><span class="ty-badge ty-badge--var">Mejor</span></td><td class="ty-muted">El contorno del día se pinta en verde (utility-success #16A34A), señalando las fechas con la tarifa más baja del rango — para que el usuario identifique de un vistazo las opciones más económicas.</td></tr>
+                  <tr><td><strong>Precio medio</strong></td><td><span class="ty-badge ty-badge--var">Conveniente</span></td><td class="ty-muted">El contorno del día se pinta en amarillo (utility-warning #EAB308), indicando una tarifa intermedia: ni la más económica ni la más alta del rango mostrado.</td></tr>
+                  <tr><td><strong>Precio alto</strong></td><td><span class="ty-badge ty-badge--var">Estándar</span></td><td class="ty-muted">El contorno del día se pinta en rojo (utility-error #DC2626), marcando las fechas con la tarifa más alta del rango, para diferenciarlas visualmente de las opciones más convenientes.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
         </main>
         <aside id="page-toc"></aside>
       </div>

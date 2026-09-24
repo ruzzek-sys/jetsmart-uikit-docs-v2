@@ -55,6 +55,22 @@
                 </tbody>
               </table>
             </div>
+
+            <h3 id="doc-title-card-body-stack-componente-vs-texto">Title Card Body Stack · qué es componente y qué no</h3>
+            <p>El slot acepta Badge, Divider y Checkbox como instancias reales de componente. Las filas de etiqueta/valor que los envuelven (label + texto, o label + Badge/Checkbox) son frames armados a mano por caso de uso —no son componentes reutilizables, solo su tipografía está enlazada a variables.</p>
+            <div class="ty-table-wrap">
+              <table class="ty-table">
+                <thead>
+                  <tr><th>Fila</th><th>¿Es componente?</th><th>Detalle</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Fila texto/texto</strong></td><td><span class="ty-badge ty-badge--off">No es componente</span></td><td class="ty-muted">Frame con dos capas «Heading»: label (ej. «N° de solicitud») y valor (ej. «#MED-20260514-3312»). Solo la tipografía está enlazada a variables; el contenido se escribe manualmente en cada caso.</td></tr>
+                  <tr><td><strong>Fila con Badge</strong></td><td><span class="ty-badge ty-badge--on">Badge sí es componente</span></td><td class="ty-muted">Frame con «Heading» de label (ej. «Estado») + instancia real del componente Badge (ej. «Aprobado»). El Badge es swap-able; la fila que lo envuelve no lo es.</td></tr>
+                  <tr><td><strong>Fila con Checkbox</strong></td><td><span class="ty-badge ty-badge--on">Checkbox sí es componente</span></td><td class="ty-muted">Instancia real del componente Checkbox (ícono Font Awesome + label, ej. «Ignacio Andrés Barrios Arriola») + «Heading» de contexto (ej. «Titular de la reserva»). El Checkbox es swap-able; la fila que lo envuelve no lo es.</td></tr>
+                  <tr><td><strong>Divider</strong></td><td><span class="ty-badge ty-badge--on">Sí es componente</span></td><td class="ty-muted">Instancia real del componente Divider, colocada entre cada fila dentro del slot para separar los bloques de contenido.</td></tr>
+                </tbody>
+              </table>
+            </div>
           </section>
 
         </main>

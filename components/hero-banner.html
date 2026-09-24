@@ -28,7 +28,7 @@
               <p class="figma-preview__label">Live Preview</p>
               <div class="figma-preview__frame">
                 <iframe
-                  title="Hero Banner Split y Overlay - Figma preview"
+                  title="Hero Banner Split - Figma preview"
                   src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FdKd6jNGAnng8hIV5MS4Avd%2FJetsmart-UI-Kit-v1.0%3Fnode-id%3D5300-119080"
                   loading="lazy"
                   allowfullscreen>
@@ -71,6 +71,17 @@
           <section class="doc-section">
             <h2 id="doc-hero-banner-overlay">Hero Banner Overlay</h2>
             <p>Hero con la fotografía a pantalla completa y el contenido superpuesto sobre ella, con una capa clara u oscura que asegura la lectura de los textos.</p>
+            <div class="figma-preview">
+              <p class="figma-preview__label">Live Preview</p>
+              <div class="figma-preview__frame">
+                <iframe
+                  title="Hero Banner Overlay - Figma preview"
+                  src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FdKd6jNGAnng8hIV5MS4Avd%2FJetsmart-UI-Kit-v1.0%3Fnode-id%3D7930-151854"
+                  loading="lazy"
+                  allowfullscreen>
+                </iframe>
+              </div>
+            </div>
 
             <h3 id="doc-hero-banner-overlay-resumen">Resumen</h3>
             <p>Comparte con Hero Banner Split las mismas partes y las mismas doce booleanas, pero cambia la composición: la imagen es el fondo y el texto, el precio, los botones y el buscador van encima. El paginador se pega al borde derecho o pasa a una fila horizontal según la alineación.</p>
@@ -106,6 +117,17 @@
           <section class="doc-section">
             <h2 id="doc-hero-home">Hero Home</h2>
             <p>Hero de la página de inicio: imagen a pantalla completa, banner promocional, navegación superior y el buscador de vuelos.</p>
+            <div class="figma-preview">
+              <p class="figma-preview__label">Live Preview</p>
+              <div class="figma-preview__frame">
+                <iframe
+                  title="Hero Home - Figma preview"
+                  src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FdKd6jNGAnng8hIV5MS4Avd%2FJetsmart-UI-Kit-v1.0%3Fnode-id%3D7930-151498"
+                  loading="lazy"
+                  allowfullscreen>
+                </iframe>
+              </div>
+            </div>
 
             <h3 id="doc-hero-home-resumen">Resumen</h3>
             <p>Es la primera pantalla del sitio y su pieza central es el buscador de vuelos, con los campos de origen, destino, fecha y pasajeros. Tiene una sola propiedad: el estado del buscador.</p>
@@ -120,6 +142,65 @@
                 </thead>
                 <tbody>
                   <tr><td><strong>State</strong></td><td><code>Variant</code></td><td class="ty-muted">Default presenta el buscador de vuelos en su estado inicial sobre el hero completo, con imagen, banner promocional y navegación superior visibles. Isolate expande el buscador con las opciones de millas AAdvantage, código promocional y el botón «Ver vuelos», difuminando el fondo para enfocar la atención en la búsqueda. Default es el valor por defecto.</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3 id="doc-hero-home-tratamiento-de-imagen">Tratamiento de Imagen</h3>
+            <p>La fotografía a pantalla completa es la primera impresión del producto y convive con elementos de interfaz superpuestos (tabs/topbar, searchbox, paginador y chatbot), por lo que debe respetar las áreas seguras definidas abajo. La composición mobile no es un recorte de la desktop: el sujeto, el lockup y los textos gráficos deben reubicarse dentro de su propia área segura.</p>
+
+            <p><strong>Desktop — 1440 × 728 px</strong></p>
+            <div class="figma-preview">
+              <p class="figma-preview__label">Live Preview</p>
+              <div class="figma-preview__frame">
+                <iframe
+                  title="Hero Home Desktop - Áreas seguras - Figma preview"
+                  src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FdKd6jNGAnng8hIV5MS4Avd%2FJetsmart-UI-Kit-v1.0%3Fnode-id%3D4329-2653"
+                  loading="lazy"
+                  allowfullscreen>
+                </iframe>
+              </div>
+            </div>
+            <div class="ty-table-wrap">
+              <table class="ty-table">
+                <thead>
+                  <tr><th>Zona</th><th>Medidas</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>1 · Márgenes de seguridad</strong></td><td class="ty-muted">64 px laterales · 28 px superior (bajo el topbar) · 28 px inferior</td><td class="ty-muted">Zona susceptible de recortarse al redimensionar. No sitúes aquí rostros, logos ni elementos narrativos que no se puedan perder. Área segura resultante: 1312 × 624 px.</td></tr>
+                  <tr><td><strong>2 · Punto focal / área relevante</strong></td><td class="ty-muted">1312 × 364 px · x 64–1376 · y 336–700</td><td class="ty-muted">Aquí debe caer el sujeto principal de la fotografía. Es la única zona que permanece visible en todos los tamaños de viewport.</td></tr>
+                  <tr><td><strong>3 · Topbar / Banner promocional</strong></td><td class="ty-muted">1440 × 48 px · a sangre completa, anclado al borde superior</td><td class="ty-muted">Franja sólida que se superpone sobre la imagen: los primeros 48 px quedan siempre ocultos. No la consideres parte de la composición fotográfica.</td></tr>
+                  <tr><td><strong>4 · Searchbox</strong></td><td class="ty-muted">Componente 1090 × 260 px · zona reservada 1312 × 260 px (111 px de holgura lateral) · y 76–336</td><td class="ty-muted">Es el elemento más importante de la página. En esta franja la fotografía queda tapada: no ubiques aquí nada que necesites que se vea. Lo que se asoma alrededor del widget debe ser fondo sutil —tonos parejos, sin patrones ni líneas finas— para que el searchbox se lea con claridad y mantenga el contraste.</td></tr>
+                  <tr><td><strong>5 · Paginador</strong></td><td class="ty-muted">28 × 116 px · a 64 px del borde derecho · y 463–579 · zona reservada 68 × 156 px (20 px de holgura)</td><td class="ty-muted">Anclado al viewport, apoyado en el límite del área segura. Los puntos son blancos: evita zonas claras o saturadas detrás.</td></tr>
+                  <tr><td><strong>6 · Chatbot</strong></td><td class="ty-muted">283 × 92 px · a 64 px del borde derecho · a 23 px del borde inferior · zona reservada 300 × 116 px</td><td class="ty-muted">Incluye el globo de mensaje además del avatar. Mantén la esquina inferior derecha despejada y con contraste suficiente.</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p><strong>Mobile — 428 × 823 px</strong></p>
+            <div class="figma-preview">
+              <p class="figma-preview__label">Live Preview</p>
+              <div class="figma-preview__frame">
+                <iframe
+                  title="Hero Home Mobile - Áreas seguras - Figma preview"
+                  src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FdKd6jNGAnng8hIV5MS4Avd%2FJetsmart-UI-Kit-v1.0%3Fnode-id%3D4342-2780"
+                  loading="lazy"
+                  allowfullscreen>
+                </iframe>
+              </div>
+            </div>
+            <div class="ty-table-wrap">
+              <table class="ty-table">
+                <thead>
+                  <tr><th>Zona</th><th>Medidas</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>1 · Márgenes de seguridad</strong></td><td class="ty-muted">20 px laterales · 28 px superior (bajo el searchbox) · 28 px inferior (bajo el paginador)</td><td class="ty-muted">Zona susceptible de recortarse en pantallas más angostas o más altas. La fotografía no debe llevar aquí rostros, logos ni textos de la pieza. Área segura resultante: 388 × 423 px.</td></tr>
+                  <tr><td><strong>2 · Punto focal / área relevante</strong></td><td class="ty-muted">388 × 311 px · x 20–408 · y 372–683</td><td class="ty-muted">Franja libre de interfaz, entre el searchbox y el chatbot. Aquí debe caer el sujeto principal y el lockup gráfico: es lo único que se ve sin nada encima.</td></tr>
+                  <tr><td><strong>3 · Tabs / selector de producto</strong></td><td class="ty-muted">428 × 88 px · a sangre completa · anclado al borde superior</td><td class="ty-muted">Los primeros 88 px de la imagen quedan cubiertos. La tira de chips scrollea en horizontal y desborda el ancho del viewport, así que la franja completa necesita fondo parejo.</td></tr>
+                  <tr><td><strong>4 · Searchbox</strong></td><td class="ty-muted">Card 388 × 236 px con 20 px a cada lado · zona reservada 428 × 256 px · y 88–344</td><td class="ty-muted">Es el elemento más importante de la página y siempre va por encima de la imagen. En esta franja la fotografía queda tapada: no ubiques aquí nada que necesites que se vea. Lo que se asoma alrededor del card debe ser fondo tranquilo —tonos parejos, sin patrones ni líneas finas—.</td></tr>
+                  <tr><td><strong>5 · Chatbot</strong></td><td class="ty-muted">252 × 72 px · x 156–408 · y 683–755 · a 20 px del borde derecho</td><td class="ty-muted">Se apoya sobre el paginador, alineado al margen derecho. Incluye el globo de mensaje: si la foto tiene contenido en el cuadrante inferior derecho, queda tapado.</td></tr>
+                  <tr><td><strong>6 · Paginador</strong></td><td class="ty-muted">116 × 28 px · centrado · a 28 px del borde inferior · y 767–795</td><td class="ty-muted">Anclado al borde inferior. Los puntos son claros: la fotografía debe tener detrás una zona sin brillos ni saturación alta.</td></tr>
                 </tbody>
               </table>
             </div>

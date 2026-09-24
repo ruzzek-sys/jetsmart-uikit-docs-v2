@@ -376,6 +376,14 @@ main {
   font-weight: 600;
 }
 
+/* Título de cada card de la Guía de uso dentro del bloque de un componente */
+.doc-section h4 {
+  margin: 20px 0 6px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--js-text);
+}
+
 .doc-section p,
 .doc-section li {
   font-size: 16px;
@@ -383,9 +391,22 @@ main {
   color: var(--js-text-muted);
 }
 
-.doc-section ul {
+.doc-section ul,
+.doc-section ol {
   margin: 0 0 16px;
   padding-left: 20px;
+}
+
+.doc-section ul {
+  list-style: disc;
+}
+
+.doc-section ol {
+  list-style: decimal;
+}
+
+.doc-section li + li {
+  margin-top: 8px;
 }
 
 .figma-preview {

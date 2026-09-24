@@ -9,8 +9,9 @@ argument-hint: "[pagina.html] [link-figma]"
 Rellena **Resumen** y **Propiedades** de una página del kit con la información del
 section `Docs · <Componente>` que vive en la página de Figma del componente.
 
-Una página de **un solo componente** tiene exactamente dos secciones: **Resumen** y
-**Propiedades**. No agregues ninguna otra.
+Una página de **un solo componente** tiene dos secciones: **Resumen** y
+**Propiedades**, más **Guía de uso** cuando Figma trae un section `Guía de uso ·`
+(paso 5b). No agregues ninguna otra.
 
 Cuando la página de Figma trae **varios componentes** —varios frames `Live Preview` y
 varios sections `Docs ·`— van **separados, uno por componente**, cada uno con su propio
@@ -238,6 +239,24 @@ diseñador en el panel; si los ves distintos, avísale al usuario.
 Los nombres de las propiedades van **en inglés**, tal como aparecen en Figma
 (`Show Button Secondary`, no «Mostrar botón secundario»): tienen que calzar con el
 panel que ve el diseñador. Las descripciones van en español, copiadas textualmente.
+
+### 5b. Guía de uso (si la página la trae)
+
+Algunas páginas de Figma traen, además del `Docs ·`, un section `Guía de uso · <Componente>`
+con una o más `legend card`. Cada card tiene título + bajada y filas `Frame · <Aspecto>`
+con tres textos: aspecto, categoría (en mayúsculas, ej. `COMPORTAMIENTO`) y descripción.
+Transcríbela textualmente, con las comillas pasadas a `«»`.
+
+- Página de un componente: `<section class="doc-section">` + `<h2 id="doc-guia-de-uso">`,
+  y cada card como `<h3>` sin id + `<p>` bajada + tabla.
+- Página de varios: al final del bloque de su componente, `<h3 id="doc-<slug>-guia-de-uso">`
+  y cada card como `<h4>`. Si la guía no corresponde a ningún bloque documentado
+  (ej. `Calendar Day`, `Footer`), va como `h2 id="doc-guia-de-uso"` al final de la página.
+- Tabla con cabecera `Aspecto · Categoría · Descripción`; la categoría va en
+  `<span class="ty-badge ty-badge--var">` en tipo oración (el CSS la pasa a mayúsculas).
+
+Referencias: `components/badge.html` (un componente), `components/buttons.html` (varios, con
+dos cards) y `components/calendar.html` (guía a nivel de página).
 
 ### 6. Verifica en el navegador
 

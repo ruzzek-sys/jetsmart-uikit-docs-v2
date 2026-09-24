@@ -35,13 +35,13 @@ window.JETSMART_NAV = {
         { id: "date-carousel", label: "Date Carousel", href: "components/date-carousel.html", figmaNodeId: "5205:106790" },
         { id: "data-item", label: "Data Item", href: "components/data-item.html", figmaNodeId: "5205:107801" },
         { id: "divider", label: "Divider", href: "components/divider.html", figmaNodeId: "5230:108660" },
-        { id: "dropdown-menu", label: "Dropdown Menu", href: "components/dropdown-menu.html", figmaNodeId: "5230:109302" },
+        { id: "dropdown-menu", label: "Dropdown Menu", href: "components/dropdown-menu.html", figmaNodeId: "5230:109302", figmaNodeIds: ["5230:109302","7772:115213"] },
         { id: "faq-panel", label: "FAQ Panel", href: "components/faq-panel.html", figmaNodeId: "5279:112230" },
         { id: "file-upload-card", label: "File Upload Card", href: "components/file-upload-card.html", figmaNodeId: "5279:113127" },
         { id: "feature-item", label: "Feature Item", href: "components/feature-item.html", figmaNodeId: "5279:113872" },
         { id: "flag-selector", label: "Flag Selector", href: "components/flag-selector.html", figmaNodeId: "5300:118764" },
         { id: "footer", label: "Footer", href: "components/footer.html", figmaNodeId: "5550:103925" },
-        { id: "hero-banner", label: "Hero Banner", href: "components/hero-banner.html", figmaNodeId: "5300:119080" },
+        { id: "hero-banner", label: "Hero Banner", href: "components/hero-banner.html", figmaNodeId: "5300:119080", figmaNodeIds: ["5300:119080","7930:151854","7930:151498","4329:2653","4342:2780"] },
         { id: "icon-circle", label: "Icon Circle", href: "components/icon-circle.html", figmaNodeId: "5300:119897" },
         { id: "inline-message", label: "Inline Message", href: "components/inline-message.html", figmaNodeId: "5550:107797" },
         { id: "info-cards", label: "Info Cards", href: "components/info-cards.html", figmaNodeId: "5561:109438" },
@@ -84,8 +84,8 @@ window.JETSMART_NAV = {
         { id: "add-baggage-card", label: "Add Baggage Card", href: "product-components/add-baggage-card.html", figmaNodeId: "6186:135425" },
         { id: "add-on-selector", label: "Add-on Selector", href: "product-components/add-on-selector.html", figmaNodeId: "5469:12321" },
         { id: "boarding-pass-card", label: "Boarding Pass Card", href: "product-components/boarding-pass-card.html", figmaNodeId: "6186:138537" },
-        { id: "bundle-card", label: "Bundle Card", href: "product-components/bundle-card.html", figmaNodeId: "6186:139756" },
-        { id: "flight-card", label: "Flight Card", href: "product-components/flight-card.html", figmaNodeId: "6186:142603" },
+        { id: "bundle-card", label: "Bundle Card", href: "product-components/bundle-card.html", figmaNodeId: "6186:139756", figmaNodeIds: ["6186:139756","7834:118776","7834:119172"] },
+        { id: "flight-card", label: "Flight Card", href: "product-components/flight-card.html", figmaNodeId: "6186:142603", figmaNodeIds: ["6186:142603","7797:115810","7797:115989"] },
         { id: "flight-details-card", label: "Flight Details Card", href: "product-components/flight-details-card.html", figmaNodeId: "6186:145649" },
         { id: "flight-status-widget", label: "Flight Status Widget", href: "product-components/flight-status-widget.html", figmaNodeId: "6186:148344" },
         { id: "flight-leg-selection", label: "Flight Leg Selection", href: "product-components/flight-leg-selection.html", figmaNodeId: "6186:149903" },
@@ -110,17 +110,17 @@ window.JETSMART_NAV = {
       id: "patterns",
       label: "Patterns",
       items: [
-        { id: "patterns-overview", label: "Overview", href: "patterns/index.html", figmaNodeId: "3072:78207" }
+        { id: "patterns-overview", label: "Overview", href: "patterns/index.html", figmaNodeId: "723:2761" }
       ]
     },
     {
       id: "flows",
       label: "Flows",
       items: [
-        { id: "flows-home", label: "Home", href: "flows/home.html", figmaNodeId: "3496:11099" },
+        { id: "flows-home", label: "Home", href: "flows/home.html", figmaNodeId: "7903:145534" },
         { id: "flows-booking", label: "Booking", href: "flows/booking.html", figmaNodeId: "2742:58106" },
-        { id: "flows-administra-tu-vuelo", label: "Administra tu vuelo", href: "flows/administra-tu-vuelo.html", figmaNodeId: "1368:13480" },
-        { id: "flows-administracion-de-usuario", label: "Administración de Usuario", href: "flows/administracion-de-usuario.html", figmaNodeId: "2370:21781" }
+        { id: "flows-administra-tu-vuelo", label: "Administra tu vuelo", href: "flows/administra-tu-vuelo.html", figmaNodeId: "7903:145533" },
+        { id: "flows-administracion-de-usuario", label: "Administración de Usuario", href: "flows/administracion-de-usuario.html", figmaNodeId: "7903:151497" }
       ]
     }
   ]
