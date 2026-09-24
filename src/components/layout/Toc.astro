@@ -1,0 +1,147 @@
+---
+/**
+ * Índice «En esta página». Sale de los h2/h3 del contenido (los del .mdx vía render(),
+ * los de una foundation pasados a mano). Se pinta dos veces:
+ *   - variant="aside": columna lateral sticky, desde 1280 px.
+ *   - variant="inline": desplegable al inicio del contenido, bajo 1280 px.
+ * El script resalta la sección visible (scroll-spy).
+ */
+export interface TocHeading {
+  depth: number;
+  slug: string;
+  text: string;
+}
+
+interface Props {
+  headings: TocHeading[];
+  variant: 'aside' | 'inline';
+}
+
+const { headings, variant } = Astro.props;
+const items = headings.filter((h) => h.depth === 2 || h.depth === 3);
+const nested = items.some((h) => h.depth === 3);
+---
+
+{items.length > 0 && (
+  variant === 'aside' ? (
+    <aside class="sticky top-[calc(var(--spacing-topbar)+24px)] hidden max-h-[calc(100vh-var(--spacing-topbar)-40px)] w-[200px] shrink-0 self-start overflow-y-auto xl:block" aria-label="En esta página">
+      <p class="mb-3 text-xs font-bold tracking-[0.04em] text-muted uppercase">En esta página</p>
+      <ul class:list={['toc-list', { nested }]}>
+        {items.map((h) => (
+          <li class={`toc-h${h.depth}`}><a href={`#${h.slug}`} data-toc-link>{h.text}</a></li>
+        ))}
+      </ul>
+    </aside>
+  ) : (
+    <details class="mb-8 rounded-xl border border-line bg-subtle xl:hidden">
+      <summary class="flex min-h-11 cursor-pointer list-none items-center justify-between px-4 text-sm font-bold [&::-webkit-details-marker]:hidden">
+        En esta página
+        <svg class="size-4 transition-transform in-open:rotate-90" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </summary>
+      <ul class:list={['toc-list border-t border-line px-4 py-2', { nested }]}>
+        {items.map((h) => (
+          <li class={`toc-h${h.depth}`}><a href={`#${h.slug}`} data-toc-link>{h.text}</a></li>
+        ))}
+      </ul>
+    </details>
+  )
+)}
+
+<script>
+  const links = [...document.querySelectorAll<HTMLAnchorElement>('[data-toc-link]')];
+  const targets = [...new Set(links.map((a) => decodeURIComponent(a.hash.slice(1))))]
+    .map((id) => document.getElementById(id))
+    .filter((el): el is HTMLElement => !!el);
+
+  function mark(id: string) {
+    links.forEach((a) => {
+      if (decodeURIComponent(a.hash.slice(1)) === id) a.setAttribute('aria-current', 'true');
+      else a.removeAttribute('aria-current');
+    });
+  }
+
+  // La sección activa es el último heading que ya pasó bajo el topbar.
+  function update() {
+    const offset = 96;
+    let current = targets[0];
+    for (const el of targets) {
+      if (el.getBoundingClientRect().top - offset <= 0) current = el;
+      else break;
+    }
+    const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+    if (atBottom) current = targets[targets.length - 1];
+    if (current) mark(current.id);
+  }
+
+  if (targets.length) {
+    let ticking = false;
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        update();
+        ticking = false;
+      });
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    update();
+  }
+
+  // En móvil, elegir una sección cierra el desplegable.
+  document.querySelectorAll<HTMLAnchorElement>('details [data-toc-link]').forEach((a) =>
+    a.addEventListener('click', () => a.closest('details')?.removeAttribute('open')),
+  );
+</script>
+
+<style>
+  .toc-list a {
+    display: block;
+    padding: 6px 0;
+    font-size: 13px;
+    line-height: 1.4;
+    color: var(--color-muted);
+  }
+
+  .toc-list a:hover,
+  .toc-list a[aria-current] {
+    color: var(--color-brand);
+  }
+
+  .toc-list a[aria-current] {
+    font-weight: 700;
+  }
+
+  /* Índice anidado: páginas con varios componentes (h2 = componente, h3 = subsecciones). */
+  .toc-list.nested .toc-h2 > a {
+    font-weight: 700;
+    color: var(--color-ink);
+  }
+
+  .toc-list.nested .toc-h2 > a[aria-current] {
+    color: var(--color-brand);
+  }
+
+  .toc-list.nested .toc-h2 + .toc-h2 > a,
+  .toc-list .toc-h3 + .toc-h2 > a {
+    margin-top: 8px;
+  }
+
+  .toc-h3 > a {
+    padding: 4px 0 4px 12px;
+    border-left: 1px solid var(--color-line);
+    font-size: 12px;
+  }
+
+  .toc-h3 > a:hover,
+  .toc-h3 > a[aria-current] {
+    border-left-color: var(--color-brand);
+  }
+
+  details .toc-list a {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 14px;
+  }
+</style>

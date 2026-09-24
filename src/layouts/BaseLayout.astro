@@ -1,0 +1,57 @@
+---
+import '../styles/global.css';
+import Sidebar from '../components/layout/Sidebar.astro';
+import Topbar from '../components/layout/Topbar.astro';
+import Toc, { type TocHeading } from '../components/layout/Toc.astro';
+import PageHeader from '../components/layout/PageHeader.astro';
+import PrevNext from '../components/layout/PrevNext.astro';
+import { getSectionOf } from '../data/nav';
+
+/**
+ * Layout de todas las páginas: sidebar + topbar + contenido + índice lateral.
+ * Con `title` pinta el encabezado estándar (eyebrow = sección del sidebar, h1, bajada);
+ * sin `title` el contenido arma el suyo (la home).
+ */
+interface Props {
+  /** <title> y h1. */
+  title: string;
+  description?: string;
+  headings?: TocHeading[];
+  /** Oculta el encabezado estándar. */
+  bare?: boolean;
+}
+
+const { title, description, headings = [], bare = false } = Astro.props;
+const current = Astro.url.pathname.replace(/index\.html$/, '').replace(/\/?$/, '/');
+const section = await getSectionOf(current);
+const pageTitle = current === '/' ? 'JetSmart UI Kit' : `${title} - JetSmart UI Kit`;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{pageTitle}</title>
+    {description && <meta name="description" content={description} />}
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <slot name="head" />
+  </head>
+  <body>
+    <Sidebar current={current} />
+    <div id="sidebar-overlay" class="fixed inset-0 z-30 hidden bg-black/40 lg:hidden! [.drawer-open_&]:block" aria-hidden="true" data-drawer-close></div>
+
+    <div id="main-column" class="flex min-h-screen flex-col lg:ml-sidebar">
+      <Topbar />
+      <div class="flex w-full max-w-[calc(var(--container-content)+248px)] flex-1 gap-12 px-4 pt-6 pb-16 sm:px-6 sm:pt-8">
+        <main class="doc-prose min-w-0 max-w-content flex-1">
+          {!bare && <PageHeader eyebrow={section?.label} title={title} description={description} />}
+          <Toc headings={headings} variant="inline" />
+          <slot />
+          <PrevNext current={current} />
+        </main>
+        <Toc headings={headings} variant="aside" />
+      </div>
+    </div>
+  </body>
+</html>

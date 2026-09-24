@@ -1,0 +1,151 @@
+---
+/**
+ * Tabla del sitio (antes .ty-table-wrap > .ty-table). Las filas van en el slot como <tr>.
+ * Celdas: <td class="muted"> para descripciones, <td class="num"> para valores monoespaciados.
+ *
+ * `stack` (tablas de 3 columnas de la documentación): bajo 640 px cada fila pasa a tarjeta,
+ * con nombre y tipo arriba y la descripción abajo. Sin `stack`, la tabla hace scroll
+ * horizontal y una sombra en el borde avisa que hay más contenido.
+ */
+interface Props {
+  columns: string[];
+  stack?: boolean;
+  /** Clases extra para la <table> (modificadores de cada foundation). */
+  class?: string;
+}
+
+const { columns, stack = false, class: className } = Astro.props;
+---
+
+<div class:list={['table-wrap', { 'is-stack': stack }]}>
+  <table class:list={['table', className]}>
+    <thead>
+      <tr>{columns.map((c) => <th set:html={c} />)}</tr>
+    </thead>
+    <tbody>
+      <slot />
+    </tbody>
+  </table>
+</div>
+
+<style>
+  .table-wrap {
+    margin-top: 20px;
+    overflow-x: auto;
+    border: 1px solid var(--color-line);
+    border-radius: 12px;
+    /* Sombras de scroll: los degradés «local» tapan la sombra cuando no hay más contenido. */
+    background:
+      linear-gradient(to right, var(--color-surface) 30%, transparent) left / 40px 100% no-repeat local,
+      linear-gradient(to left, var(--color-surface) 30%, transparent) right / 40px 100% no-repeat local,
+      radial-gradient(farthest-side at 0 50%, rgb(0 0 0 / 0.12), transparent) left / 12px 100% no-repeat scroll,
+      radial-gradient(farthest-side at 100% 50%, rgb(0 0 0 / 0.12), transparent) right / 12px 100% no-repeat scroll;
+  }
+
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+
+  th {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--color-line);
+    background: var(--color-subtle);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-align: left;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: var(--color-muted);
+  }
+
+  .table :global(td) {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--color-line);
+    vertical-align: middle;
+  }
+
+  .table :global(tbody tr:last-child td) {
+    border-bottom: 0;
+  }
+
+  .table :global(td.num) {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    white-space: nowrap;
+  }
+
+  .table :global(td.muted) {
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--color-muted);
+  }
+
+  .table :global(code) {
+    font-family: var(--font-mono);
+    font-size: 12px;
+  }
+
+  .table :global(td ol),
+  .table :global(td ul) {
+    margin: 0;
+    padding-left: 18px;
+  }
+
+  .table :global(td li) {
+    font-size: inherit;
+    line-height: inherit;
+    color: inherit;
+  }
+
+  .table :global(td a:not([class])) {
+    color: var(--color-brand);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  @media (max-width: 639px) {
+    .is-stack {
+      background: none;
+    }
+
+    .is-stack thead {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+    }
+
+    .is-stack .table,
+    .is-stack .table :global(tbody),
+    .is-stack .table :global(tr) {
+      display: block;
+    }
+
+    .is-stack .table :global(tr) {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px 10px;
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--color-line);
+    }
+
+    .is-stack .table :global(tr:last-child) {
+      border-bottom: 0;
+    }
+
+    .is-stack .table :global(td) {
+      display: block;
+      padding: 0;
+      border: 0;
+    }
+
+    .is-stack .table :global(td:last-child) {
+      flex-basis: 100%;
+    }
+  }
+</style>

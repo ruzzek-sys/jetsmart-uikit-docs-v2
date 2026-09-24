@@ -1,0 +1,30 @@
+---
+import Table from '../ui/Table.astro';
+import { inlineMd } from '../../lib/inline-md';
+
+/**
+ * Tabla «Propiedades» de un componente. Lee las filas de `props.<block>` en el frontmatter
+ * del .mdx que se está renderizando (validadas por zod en content.config.ts).
+ */
+interface Props {
+  /** Clave en `props:` del frontmatter; por convención, el slug del componente. */
+  block: string;
+}
+
+const { block } = Astro.props;
+const doc = Astro.locals.doc;
+const rows = doc?.data.props[block];
+if (!rows) throw new Error(`<PropsTable block="${block}">: falta props.${block} en el frontmatter de ${doc?.id ?? '(sin página)'}`);
+
+const html = await Promise.all(rows.map(async (r) => ({ ...r, name: await inlineMd(r.name), desc: await inlineMd(r.desc) })));
+---
+
+<Table columns={['Propiedad', 'Tipo', 'Descripción']} stack>
+  {html.map((r) => (
+    <tr>
+      <td><strong set:html={r.name} /></td>
+      <td><code>{r.type}</code></td>
+      <td class="muted" set:html={r.desc} />
+    </tr>
+  ))}
+</Table>

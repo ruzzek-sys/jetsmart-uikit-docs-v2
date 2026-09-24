@@ -1,0 +1,34 @@
+---
+title: Feature Item
+description: Ítem de lista con ícono de check y texto para enumerar características o beneficios.
+figma:
+  - "5279:113872"
+props:
+  feature-item:
+    - name: Size
+      type: Variant
+      desc: Small es el valor por defecto. Medium y Large aumentan el tamaño de la tipografía y del ícono en cada paso.
+    - name: Inverse
+      type: Variant
+      desc: "False es el valor por defecto: texto oscuro e ícono a color, pensado para fondos claros. True aclara el texto y atenúa el ícono para usarse sobre fondos oscuros o de color."
+    - name: Show Icon
+      type: Boolean
+      desc: True es el valor por defecto y muestra el ícono de check junto al texto. False lo oculta y deja solo la etiqueta.
+    - name: Label
+      type: Text
+      desc: Texto del ítem de la lista de características. El valor por defecto es «Bolso o mochila pequeña».
+---
+
+<FigmaEmbed node="5279:113872" />
+
+## Resumen
+
+Feature Item es una línea de lista con un ícono de check y una etiqueta, pensada para enumerar lo que incluye un producto o servicio, como los beneficios de una membresía o el equipaje de una tarifa. Se apila en listas dentro de banners y cards.
+
+6 variantes = `Size` (3) × `Inverse` (2), matriz completa. `Inverse`=True pinta texto e ícono en blanco para superficies oscuras: sobre el fondo claro de la matriz su columna se ve vacía, y es lo esperado. Por tamaño, Small usa texto de 14 px e ícono de 12, Medium texto de 16 px e ícono de 16, y Large texto de 18 px e ícono de 16.
+
+## Propiedades
+
+Propiedades configurables del componente Feature Item.
+
+<PropsTable block="feature-item" />

@@ -1,0 +1,54 @@
+---
+title: Topbar
+description: Barra de avisos que va sobre el navbar y muestra un mensaje destacado de una línea.
+figma:
+  - "5268:109894"
+props:
+  topbar:
+    - name: Intent
+      type: Variant
+      desc: Default usa color/background/brand-primary (azul marca). Emphasis usa color/background/brand-secondary (rojo), para mensajes que requieren más urgencia. Default es el valor por defecto.
+    - name: Breakpoint
+      type: Variant
+      desc: Desktop ocupa el ancho completo (1440px fijo, 60px alto) con el mensaje en una sola línea y las flechas de navegación en los extremos. Mobile es una barra angosta (414px fijo, 64px alto) donde el mensaje se parte en dos líneas y las flechas quedan más juntas. Desktop es el valor por defecto.
+    - name: Info
+      type: Text
+      desc: "Texto libre editable por instancia: es el mensaje que muestra la barra. Su valor por defecto es «Web check-in disponible desde 48 horas antes de tu vuelo»."
+tables:
+  topbar-limite-de-lineas:
+    columns:
+      - Aspecto
+      - Categoría
+      - Descripción
+    rows:
+      - name: Líneas permitidas — Desktop
+        meta:
+          - label: Límite
+        desc: El texto del topbar se ajusta a 2 líneas en desktop. El límite evita que la barra crezca en alto y empuje el resto del contenido fuera del primer vistazo.
+      - name: Líneas permitidas — Mobile
+        meta:
+          - label: Límite
+        desc: En mobile el texto se ajusta a 4 líneas, evitando que el topbar ocupe demasiado espacio vertical y desplace otros elementos fuera del primer vistazo.
+---
+
+<FigmaEmbed node="5268:109894" />
+
+## Resumen
+
+Barra angosta que ocupa todo el ancho de la pantalla, por encima del navbar, y muestra un mensaje corto para el pasajero, como avisos de check-in o promociones, con flechas para pasar de un mensaje a otro. El mensaje es texto libre por instancia.
+
+4 variantes = `Intent` (2) × `Breakpoint` (2).
+
+## Propiedades
+
+Lo que se puede ajustar desde la instancia del banner.
+
+<PropsTable block="topbar" />
+
+## Guía de uso
+
+### Límite de líneas
+
+Cuántas líneas del mensaje se debe mostrar.
+
+<DocTable id="topbar-limite-de-lineas" />

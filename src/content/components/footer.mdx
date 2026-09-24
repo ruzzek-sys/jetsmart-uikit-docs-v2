@@ -1,0 +1,75 @@
+---
+title: Footer
+description: "Pie de página del sitio, en versión de escritorio y móvil. La familia se arma con cinco maestros; dos de ellos exponen propiedades: la columna de enlaces y el footer móvil."
+figma:
+  - "5550:103925"
+props:
+  footer-item:
+    - name: Menu Items
+      type: Slot
+      desc: "Reemplaza el listado de enlaces de la columna. La cantidad de ítems no es fija: en el archivo hay instancias con 4, 5, 6 y 7 enlaces. Por defecto trae 5 enlaces de ejemplo (Quiénes somos, Nuestro modelo, Sala de prensa, Blog SMART, Trabaja con nosotros) bajo el título «JetSMART»."
+  footer-mobile:
+    - name: Show Menu
+      type: Boolean
+      desc: Determina si se muestra el acordeón de enlaces de navegación (Quiénes somos, Viaja con JetSMART, Beneficios y alianzas, Centro de ayuda, Información legal y transparencia). True muestra el menú completo; false lo oculta y deja solo los íconos sociales, el copyright y los sellos. True es el valor por defecto.
+    - name: Show Social Media
+      type: Boolean
+      desc: Determina si se muestra la fila de íconos de redes sociales (Instagram, Facebook, LinkedIn, X, TikTok) sobre la línea de copyright. True los muestra; false los oculta y deja solo el menú, el copyright y los sellos. True es el valor por defecto.
+tables:
+  footer-notas-de-uso:
+    columns:
+      - Aspecto
+      - Categoría
+      - Descripción
+    rows:
+      - name: Uso de Footer Summary
+        meta:
+          - label: Contexto de uso
+        desc: "Se usa solo en pantallas de escritorio de flujos transaccionales de varios pasos. Reduce el footer a una sola cinta (1440×99 vs. 1440×461 del Desktop completo) con solo lo esencial: logo, texto legal/copyright, dos enlaces (Términos y condiciones, Políticas de privacidad) y los sellos de certificación. Para caso mobile, se aplica directamente desde las propiedades del componente desactivando las opciones Menu y RRSS."
+      - name: Item independiente
+        meta:
+          - label: Flexibilidad
+        desc: "Existe como componente propio, no anidado dentro de Desktop/Mobile, con auto-layout vertical en Hug en ambos ejes: su tamaño depende solo del título y de los enlaces insertados en su slot Menu Items. Esto permite agregar, quitar o editar una columna del footer sin tocar el layout del Desktop o Mobile que lo contiene."
+---
+
+<FigmaEmbed node="5550:103925" />
+
+## Footer Item
+
+Columna de enlaces del footer de escritorio: un título y la lista de links que va debajo. Es la pieza que se repite dentro de `Footer Desktop`.
+
+### Resumen
+
+Agrupa bajo un título (por defecto «JetSMART») los enlaces de una sección del sitio. El listado vive en un slot, así que cada columna lleva la cantidad de enlaces que necesite.
+
+Es parte de la familia Footer: `Footer Summary` (cinta superior con logo y legales), `Footer Desktop` (footer completo de escritorio) y `Footer Item` (columna de enlaces) cubren el escritorio; `Footer Mobile` y `Accordion Mobile` cubren el móvil. En total son 5 componentes: 4 simples y un set de variantes, 6 nodos en total.
+
+### Propiedades
+
+Propiedades configurables del componente Footer Item.
+
+<PropsTable block="footer-item" />
+
+## Footer Mobile
+
+Footer completo para móvil: menú de enlaces en acordeón, íconos de redes sociales, copyright y sellos.
+
+### Resumen
+
+Reúne en una sola columna de 428 px lo que en escritorio se reparte entre `Footer Desktop` y `Footer Summary`. El menú y la fila de redes sociales se pueden apagar desde la instancia; el copyright y los sellos quedan siempre.
+
+Sus secciones de enlaces se arman con `Accordion Mobile`, la sección plegable del menú móvil, que es el único set de variantes de la familia: en la matriz, el eje `IsExpanded` recorre `true` (panel de enlaces desplegado) y `false` (plegado); en el componente la propiedad se llama `Expansion`, con los valores Expanded y Collapsed.
+
+### Propiedades
+
+Propiedades configurables del componente Footer Mobile.
+
+<PropsTable block="footer-mobile" />
+
+## Guía de uso
+
+### Notas de uso
+
+Contexto y flexibilidad de las variantes del Footer.
+
+<DocTable id="footer-notas-de-uso" />

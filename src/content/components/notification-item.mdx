@@ -1,0 +1,25 @@
+---
+title: Notification Item
+description: Ítem de la lista de notificaciones.
+figma:
+  - "5563:119762"
+props:
+  notification-item:
+    - name: Breakpoint
+      type: Variant
+      desc: Desktop muestra el checkbox, badge, fecha, título y detalle en una sola fila horizontal, con el enlace «Ver más» alineado a la derecha. Mobile apila el mismo contenido verticalmente y convierte «Ver más» en un botón de ancho completo debajo del texto. Desktop es el valor por defecto.
+---
+
+<FigmaEmbed node="5563:119762" />
+
+## Resumen
+
+Ítem de la lista de notificaciones de vuelo: reúne en una sola pieza el selector, la categoría, la fecha, el título, el detalle y la acción «Ver más», para armar bandejas de avisos en el área de usuario.
+
+2 variantes = `Breakpoint` (2), matriz completa. En Desktop todo el contenido va en una sola fila con el enlace a la derecha; en Mobile el contenido se apila y la acción pasa a un botón a todo el ancho.
+
+## Propiedades
+
+Notificación de vuelo con estado, mensaje y acción, en variantes desktop y mobile.
+
+<PropsTable block="notification-item" />

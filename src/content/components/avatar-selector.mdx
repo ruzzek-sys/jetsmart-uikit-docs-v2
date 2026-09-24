@@ -1,0 +1,52 @@
+---
+title: Avatar Selector
+description: Selector de avatar para perfiles de usuario.
+figma:
+  - "5167:54454"
+props:
+  avatar-selector:
+    - name: Type
+      type: Variant
+      desc: "Photo: muestra la foto de perfil de la persona. Initials: muestra un círculo de color con las iniciales del nombre. Photo es el valor por defecto."
+    - name: Size
+      type: Variant
+      desc: Controla el tamaño del avatar, de 36px (Small) a 96px (2XLarge). Small es el valor por defecto.
+    - name: Show Action
+      type: Boolean
+      desc: Muestra un botón de acción (p. ej. «Agregar avatar») debajo del avatar. Desactivado por defecto.
+    - name: Show Status
+      type: Boolean
+      desc: Muestra el indicador de estado en la esquina del avatar. Activado por defecto.
+  avatar-selector-2:
+    - name: Size
+      type: Variant
+      desc: Controla el tamaño del selector, de 44px (Medium) a 52px (Large). Medium es el valor por defecto.
+    - name: Expansion
+      type: Variant
+      desc: "Define la dirección de la flecha: Collapsed la muestra hacia abajo (menú cerrado) y Expanded hacia arriba (menú abierto). Collapsed es el valor por defecto."
+    - name: Show Label
+      type: Boolean
+      desc: Muestra el nombre de la persona junto al avatar. Desactivado deja solo el avatar y la flecha. Activado por defecto.
+---
+
+<FigmaEmbed node="5167:54454" title="Avatar Selector - Figma preview 1" />
+
+## Resumen
+
+Dos componentes relacionados. **Avatar** representa a una persona con su foto o con un círculo de color y sus iniciales, en cinco tamaños. **Avatar Selector** lo envuelve en un control de cuenta: toma el avatar, le suma el nombre y una flecha que indica si el menú está abierto o cerrado. Es el control que aparece en la barra de navegación.
+
+Avatar: 10 variantes = `Size` (5) × `Type` (2). Avatar Selector: 4 variantes = `Size` (2) × `Expansion` (2). Los tamaños del selector (Medium y Large) son un subconjunto de los del avatar.
+
+## Propiedades
+
+### Avatar
+
+Lo que se cambia desde la instancia sin salir de la variante.
+
+<PropsTable block="avatar-selector" />
+
+### Avatar Selector
+
+Lo que se cambia desde la instancia sin salir de la variante.
+
+<PropsTable block="avatar-selector-2" />

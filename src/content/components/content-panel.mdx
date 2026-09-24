@@ -1,0 +1,28 @@
+---
+title: Content Panel
+description: "Contenedor de una vista completa: Header Panel arriba, contenido propio al centro y Footer Panel abajo."
+figma:
+  - "5205:98909"
+props:
+  content-panel:
+    - name: Show Footer Panel
+      type: Boolean
+      desc: Muestra u oculta el Footer Panel (barra de acciones relacionadas o newsletter) en la parte inferior del panel. Al desactivarlo, el espacio queda vacío y el resto del layout no se reacomoda. Activado es el valor por defecto.
+    - name: Content
+      type: Slot
+      desc: Espacio central reservado para el contenido propio de cada vista (tarjetas, banners, formularios, etc.), ubicado entre el Header Panel y el Footer Panel.
+---
+
+<FigmaEmbed node="5205:98909" />
+
+## Resumen
+
+Content Panel es el panel que arma una vista de contenido: une un encabezado con breadcrumb, título, badges y CTA, un espacio central para el contenido propio de cada vista (tarjetas, banners, formularios) y un pie de panel opcional.
+
+Se arma con tres maestros: el compuesto `Content Panel`, con `Header Panel` arriba, un slot en el centro y `Footer Panel` abajo. Header y Footer son maestros propios y sus instancias están expuestas dentro del panel. La matriz muestra en filas el panel armado y cada una de sus partes; en columnas, los dos valores de `Type` del Footer Panel: `Related Actions Bar` y `Newsletter Footer`.
+
+## Propiedades
+
+Content Panel: Header Panel arriba, un slot central y Footer Panel abajo.
+
+<PropsTable block="content-panel" />

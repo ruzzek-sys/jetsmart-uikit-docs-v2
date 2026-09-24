@@ -1,0 +1,25 @@
+---
+title: Selection Table
+description: Tabla de opciones por pasajero con selección única (Radio) o múltiple (Checkbox).
+figma:
+  - "6065:116456"
+props:
+  selection-table:
+    - name: Type
+      type: Variant
+      desc: "Define el control de selección de la tabla: Radio muestra una sola columna de opción con círculos (selección única por pasajero) y Checkbox muestra una o más columnas con casillas cuadradas (selección múltiple, ej. embarque prioritario). Radio es el valor por defecto."
+---
+
+<FigmaEmbed node="6065:116456" />
+
+## Resumen
+
+Selection Table es una tabla compacta que lista pasajeros u opciones en filas y deja elegir en cada una con un control de selección. Se usa dentro de modales y tarjetas —por ejemplo, para asignar un servicio como embarque prioritario a cada pasajero— junto a Toggle Card, Toggle Tab y la fila de total.
+
+2 variantes = `Type` (2), matriz completa: `Radio` muestra una fila con dos opciones de selección única y `Checkbox` muestra tres filas con una columna de casillas de selección múltiple. Color, tipografía, radios y espaciados están ligados a variables del kit.
+
+## Propiedades
+
+Propiedades configurables del componente Selection Table.
+
+<PropsTable block="selection-table" />

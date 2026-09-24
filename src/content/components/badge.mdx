@@ -1,0 +1,59 @@
+---
+title: Badge
+description: Etiqueta compacta para estados y conteos.
+figma:
+  - "5167:54501"
+props:
+  badge:
+    - name: Style
+      type: Variant
+      desc: Solid usa un fondo sólido de color con texto blanco. Subtle usa un fondo tenue del mismo color con texto y borde a juego. Outline deja el fondo transparente y solo dibuja el borde y el texto en color. Solid es el valor por defecto.
+    - name: Type
+      type: Variant
+      desc: "Define la paleta de color del badge: Primary, Secondary, Accent, Tertiary, Neutral, Success, Warning, Info o Error. Primary es el valor por defecto."
+    - name: Size
+      type: Variant
+      desc: Medium usa un padding y una tipografía más grandes. Small los reduce para contextos más compactos. Medium es el valor por defecto.
+    - name: Show Icon Left
+      type: Boolean
+      desc: Agrega un ícono antes del texto. Desactivado por defecto.
+    - name: Show Icon Right
+      type: Boolean
+      desc: Agrega un ícono después del texto. Desactivado por defecto.
+    - name: Label
+      type: Text
+      desc: Texto que muestra el badge. «Badge» por defecto.
+tables:
+  badge-uso-del-color-y-estados:
+    columns:
+      - Aspecto
+      - Categoría
+      - Descripción
+    rows:
+      - name: Dos familias de color
+        meta:
+          - label: Grupo
+        desc: "Se agrupan en dos familias de color: Brand Colors (Primary, Secondary, Accent, Tertiary) — identidad y jerarquía de marca, con tokens color/\\*/brand-\\* — y Utility Colors (Success, Warning, Info, Error) — comunican el estado de un elemento (éxito, advertencia, información, error), con tokens color/\\*/utility-\\*. Neutral queda aparte de ambas familias: usa tokens genéricos (border/secondary, content/brand-primary) para los casos donde se necesita un badge sin carga semántica de marca ni de estado."
+---
+
+<FigmaEmbed node="5167:54501" />
+
+## Resumen
+
+Etiqueta compacta que marca un estado, una categoría o un conteo. No se usa suelta: vive dentro de otros componentes —cards de vuelo, filas de selección, tablas del listado de vuelos— para calificar el elemento que la contiene.
+
+54 variantes = `Style` (3) × `Type` (9) × `Size` (2). Los nueve colores se dividen en cuatro de marca (Primary, Secondary, Accent, Tertiary), cuatro utilitarios (Success, Warning, Info, Error) y Neutral, que queda aparte de ambas familias.
+
+## Propiedades
+
+Lo que se puede ajustar en cada instancia del badge.
+
+<PropsTable block="badge" />
+
+## Guía de uso
+
+### Uso del color y estados
+
+Cómo comunica color el Badge y qué grupos existen.
+
+<DocTable id="badge-uso-del-color-y-estados" />

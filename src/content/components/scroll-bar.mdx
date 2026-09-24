@@ -1,0 +1,25 @@
+---
+title: Scroll Bar
+description: Barra de desplazamiento vertical del kit, para contenedores con scroll propio como el cuerpo de un modal.
+figma:
+  - "6065:116375"
+props:
+  scroll-bar:
+    - name: Breakpoint
+      type: Variant
+      desc: Desktop muestra la barra con 8px de ancho. Mobile reduce el ancho a 4px, manteniendo la proporción entre track y thumb. Desktop es el valor por defecto.
+---
+
+<FigmaEmbed node="6065:116375" />
+
+## Resumen
+
+El Scroll Bar es la barra de desplazamiento vertical del kit, con su track y su thumb. Indica que un contenedor tiene más contenido del que se ve y cuánto se ha avanzado en él; se usa, por ejemplo, en el cuerpo de un modal con una lista larga de vuelos.
+
+2 variantes = `Breakpoint` (2), matriz completa. Solo cambia el ancho de la barra: 8 px en desktop, pensada para arrastre con puntero, y 4 px en mobile, pensada para scroll táctil.
+
+## Propiedades
+
+Propiedades configurables del componente Scroll Bar.
+
+<PropsTable block="scroll-bar" />

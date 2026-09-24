@@ -1,0 +1,103 @@
+---
+title: Banner
+description: "Dos banners con propósitos distintos: el promocional genérico y el del Club. Cada uno tiene sus propios maestros, su matriz de variantes y sus propiedades."
+figma:
+  - "5167:55805"
+  - "5167:55812"
+props:
+  promotional-banner:
+    - name: Image Position
+      type: Variant
+      desc: Right ubica la imagen a la derecha y el bloque de texto a la izquierda. Left invierte la composición, dejando la imagen a la izquierda. Right es el valor por defecto.
+    - name: Size
+      type: Variant
+      desc: Large ocupa el ancho completo con mayor espacio para imagen y texto. Medium y Small reducen el banner a un formato más compacto, con menos espacio para la imagen. Large es el valor por defecto.
+    - name: Show Badge
+      type: Boolean
+      desc: Muestra la etiqueta superior sobre el título. Activado por defecto.
+    - name: Show Button
+      type: Boolean
+      desc: Muestra el botón de acción al final del bloque de texto. Activado por defecto.
+  membership-banner:
+    - name: Size
+      type: Variant
+      desc: Large ocupa el ancho completo de escritorio en dos columnas holgadas. Medium reduce el ancho de la tarjeta, haciendo que los textos ocupen más líneas. Large es el valor por defecto.
+    - name: Image Position
+      type: Variant
+      desc: Left ubica el contenido a la izquierda y la imagen a la derecha. Right invierte la composición, dejando la imagen a la izquierda. Left es el valor por defecto.
+    - name: Show Close Button
+      type: Boolean
+      desc: Muestra el botón de cierre (ícono X) en la esquina superior derecha de la tarjeta. Activado por defecto.
+    - name: Show Logo
+      type: Boolean
+      desc: Muestra el logo de la marca aliada sobre el pretitle. Activado por defecto.
+    - name: Show Info Tertiary
+      type: Boolean
+      desc: Muestra la fila «¿Ya eres miembro?» bajo la selección de membresía, incluyendo su botón terciario. Activado por defecto.
+    - name: Show Pretitle
+      type: Boolean
+      desc: Muestra el texto superior en mayúsculas sobre el título principal. Activado por defecto.
+    - name: Show Badge
+      type: Boolean
+      desc: Muestra la etiqueta «Badge» en la esquina superior izquierda. Activado por defecto.
+    - name: Show Description
+      type: Boolean
+      desc: Muestra el párrafo descriptivo bajo el título principal. Activado por defecto.
+    - name: Show Button Tertiary
+      type: Boolean
+      desc: Muestra el enlace «Iniciar sesión» dentro de la fila «¿Ya eres miembro?». Activado por defecto.
+    - name: Show Membership Options
+      type: Boolean
+      desc: Muestra la sección «Elige tu membresía» completa, con ambas opciones de radio. Activado por defecto.
+    - name: Show Items
+      type: Boolean
+      desc: Muestra la lista de beneficios con check, independiente del contenido del slot «Benefits List». Activado por defecto.
+    - name: Show Button Secondary
+      type: Boolean
+      desc: Muestra el botón secundario de borde «Ser parte del club». Activado por defecto.
+    - name: Show Price
+      type: Boolean
+      desc: Muestra el bloque de precio («Precio desde» + monto). Activado por defecto.
+    - name: Show Button Primary
+      type: Boolean
+      desc: Muestra el botón primario relleno «Ser parte del club». Activado por defecto.
+    - name: Benefits List
+      type: Slot
+      desc: Recibe un set de componentes «Feature Item» para poblar la lista de beneficios. Su visibilidad depende de «Show Items».
+---
+
+## Promotional Banner
+
+Banner promocional genérico de ancho completo: badge, título, descripción, CTA e imagen. Es el que se usa para campañas y ofertas.
+
+<FigmaEmbed node="5167:55805" title="Promotional Banner" />
+
+### Resumen
+
+Bloque destacado que ocupa el ancho del contenedor y combina un texto promocional con una imagen a un costado. Lleva badge, título, descripción y un botón de acción; todo lo que no sea el título y la imagen se puede apagar desde la instancia.
+
+Son dos maestros: `Promotional Banner Desktop` y `Promotional Banner Mobile`. En el de escritorio el eje `Size` cubre los tres anchos (Large, Medium, Small) y `Image Position` decide de qué lado va la imagen. La versión móvil es un componente independiente, equivalente a los tres tamaños de escritorio.
+
+### Propiedades
+
+Lo que se puede ajustar desde la instancia del banner.
+
+<PropsTable block="promotional-banner" />
+
+## Membership Banner
+
+Banner del Club: logo de la marca aliada, lista de beneficios, selector de membresía y precio. Es una pieza de conversión, no un aviso.
+
+<FigmaEmbed node="5167:55812" title="Membership Banner" />
+
+### Resumen
+
+Tarjeta que ofrece la suscripción al Club. Sobre el bloque de texto suma el logo del partner, una lista de beneficios con check, las dos opciones de membresía con su radio, el precio y hasta tres acciones. Casi todas sus partes son opcionales: doce booleanas gobiernan qué se muestra.
+
+Son dos maestros: `Membership Banner Desktop`, horizontal, con los ejes `Size` × `Image Position`; y `Membership Banner Vertical`, para pantallas angostas. Ambos comparten las mismas booleanas y el slot `Benefits List`, que recibe componentes `Feature Item`.
+
+### Propiedades
+
+Lo que se puede ajustar desde la instancia del banner.
+
+<PropsTable block="membership-banner" />

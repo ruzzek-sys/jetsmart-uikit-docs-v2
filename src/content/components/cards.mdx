@@ -1,0 +1,144 @@
+---
+title: Cards
+description: "Tres tarjetas con propósitos distintos: la de ofertas, la de acceso rápido a la cuenta y la de artículos del blog. Cada una tiene su propio maestro, su matriz de variantes y sus propiedades."
+figma:
+  - "5205:89718"
+  - "5205:90295"
+  - "5205:90501"
+props:
+  card-offer:
+    - name: Size
+      type: Variant
+      desc: "Desktop L: tarjeta de mayor tamaño, con el precio y el link «Ver más» en dos líneas. Desktop S: versión compacta con precio y link en una sola línea. Mobile: ancho intermedio para viewports móviles, con el mismo layout que Desktop L. Desktop L es el valor por defecto."
+    - name: Show Overlay Badges
+      type: Boolean
+      desc: Off oculta las etiquetas superpuestas sobre la imagen. On muestra dos badges en la esquina superior izquierda de la media. Off es el valor por defecto.
+    - name: Show Subtitle
+      type: Boolean
+      desc: Off oculta el subtítulo bajo el título. On revela una línea de texto secundario, por ejemplo «2 incluidos». Off es el valor por defecto.
+    - name: Show Badge
+      type: Boolean
+      desc: Off oculta el badge en línea sobre la fila de precio. On muestra una etiqueta destacada junto al subtítulo. Off es el valor por defecto.
+    - name: Show Price Row
+      type: Boolean
+      desc: Off oculta toda la fila de precio, incluyendo etiqueta, monto y link. On la muestra completa. On es el valor por defecto.
+    - name: Show Link
+      type: Boolean
+      desc: Off oculta el link «Ver más» junto al precio. On lo muestra. On es el valor por defecto.
+    - name: Show Action
+      type: Boolean
+      desc: Off oculta el botón de acción principal. On muestra el botón «Agregar». On es el valor por defecto.
+    - name: Show Caption
+      type: Boolean
+      desc: Off oculta el texto de aclaración bajo el botón. On revela una nota legal, por ejemplo sobre impuestos. Off es el valor por defecto.
+    - name: Title
+      type: Text
+      desc: "Texto del título principal de la tarjeta. Valor por defecto: «Titulo»."
+    - name: Subtitle
+      type: Text
+      desc: "Texto del subtítulo, visible solo cuando Show Subtitle está activo. Valor por defecto: «2 incluidos»."
+    - name: Price Label
+      type: Text
+      desc: "Etiqueta que antecede al monto del precio. Valor por defecto: «Precio desde»."
+    - name: Currency
+      type: Text
+      desc: "Código de moneda mostrado junto al monto. Valor por defecto: «CLP»."
+    - name: Amount
+      type: Text
+      desc: "Monto del precio mostrado en la tarjeta. Valor por defecto: «$45.200»."
+    - name: Caption
+      type: Text
+      desc: "Texto de aclaración, visible solo cuando Show Caption está activo. Valor por defecto: «Precio no incluye tasas ni impuestos»."
+  card-account-shortcut:
+    - name: Breakpoint
+      type: Variant
+      desc: Desktop muestra la acción como enlace de texto con flecha y una tarjeta compacta. Mobile agranda la tarjeta y convierte la acción en un botón de ancho completo. Desktop es el valor por defecto.
+    - name: Show Photo
+      type: Boolean
+      desc: Activado reserva una franja de imagen en la parte superior de la tarjeta. Desactivado la oculta y el título sube al borde superior. Activado es el valor por defecto.
+    - name: Show Logo
+      type: Boolean
+      desc: Activado muestra el logo de la marca debajo del título. Desactivado lo oculta. Desactivado es el valor por defecto.
+    - name: Show Description
+      type: Boolean
+      desc: Activado muestra el texto de descripción bajo el título. Desactivado lo oculta. Activado es el valor por defecto.
+    - name: Show Action
+      type: Boolean
+      desc: Activado muestra el enlace o botón «Administrar» al final de la tarjeta. Desactivado lo oculta. Activado es el valor por defecto.
+    - name: Title
+      type: Text
+      desc: "Texto del título principal de la tarjeta. Por defecto: «Mis tarjetas asociadas»."
+    - name: Description
+      type: Text
+      desc: "Texto de la descripción bajo el título. Por defecto: «Compra en segundos con tus tarjetas guardadas»."
+    - name: Show Body Content
+      type: Boolean
+      desc: Activado muestra el bloque central de contenido. Desactivado lo oculta y deja la tarjeta solo con título, descripción y acción. Activado es el valor por defecto.
+    - name: Body Content
+      type: Slot
+      desc: "Componente intercambiable del bloque central: Card muestra una tarjeta guardada con banco y número enmascarado; Wallet muestra el saldo de la billetera. Card es el valor por defecto."
+  card-blog:
+    - name: Breakpoint
+      type: Variant
+      desc: Desktop muestra el link «Ver más» como texto simple. Mobile lo convierte en un botón contorneado de ancho completo, adaptado a pantallas angostas. Desktop es el valor por defecto.
+    - name: Title
+      type: Text
+      desc: "Titular de la card, mostrado en hasta dos líneas sobre el link. Valor por defecto: «Qué visitar en San Telmo: guía completa para recorrer el barrio»."
+    - name: Date
+      type: Text
+      desc: "Fecha de publicación mostrada junto a la etiqueta de categoría. Valor por defecto: «13/05/2026»."
+---
+
+## Card Offer
+
+Tarjeta para ofertas de destino, servicios ancilares y add-ons: imagen, título, precio y un botón para agregar.
+
+<FigmaEmbed node="5205:89718" title="Card Offer" />
+
+### Resumen
+
+Tarjeta vertical con imagen arriba y el contenido comercial debajo: título, subtítulo opcional, un badge, la fila de precio con etiqueta, moneda, monto y link «Ver más», el botón de acción y una nota aclaratoria. Siete booleanas deciden qué partes se muestran y los textos se editan desde la instancia.
+
+Un maestro para ofertas de destino, servicios ancilares y add-ons. Tres tamaños en el eje horizontal (`Size`: Desktop L, Desktop S y Mobile), configuraciones de contenido en el vertical.
+
+### Propiedades
+
+Lo que se cambia desde la instancia sin salir de la variante.
+
+<PropsTable block="card-offer" />
+
+## Card Account Shortcut
+
+Tarjeta de acceso rápido a secciones de la cuenta: programas, tarjetas asociadas, wallet y suscripciones.
+
+<FigmaEmbed node="5205:90295" title="Card Account Shortcut" />
+
+### Resumen
+
+Tarjeta que lleva a una sección de la cuenta del usuario. Tiene una franja de imagen opcional, título, logo y descripción, un bloque central intercambiable y una acción «Administrar» al final. El bloque central es un slot: recibe un `Info Panel` de tipo Card (tarjeta guardada) o Wallet (saldo de la billetera), o una lista de `Feature Item`.
+
+Tarjeta de acceso rápido a secciones de la cuenta: programas, tarjetas asociadas, wallet y suscripciones. Un maestro, dos breakpoints (`Breakpoint`: Desktop y Mobile) y un slot de contenido, `Body Content`. La matriz muestra además el `Info Panel` que va dentro del slot, con sus ejes `Type` × `Breakpoint`.
+
+### Propiedades
+
+Ajusta el contenido y comportamiento de la tarjeta de acceso a cuentas.
+
+<PropsTable block="card-account-shortcut" />
+
+## Card Blog
+
+Tarjeta de artículo de blog: imagen, categoría, fecha, titular y link «Ver más».
+
+<FigmaEmbed node="5205:90501" title="Card Blog" />
+
+### Resumen
+
+Tarjeta que presenta un artículo del blog con su imagen, la etiqueta de categoría junto a la fecha de publicación, el titular en hasta dos líneas y el link para leerlo. No tiene booleanas: solo se editan el titular y la fecha.
+
+Un maestro para tarjetas de artículo de blog. El eje `Breakpoint` entrega la versión de escritorio y la de móvil; el contenido se edita por override en la instancia.
+
+### Propiedades
+
+Lo que se cambia desde la instancia sin salir de la variante.
+
+<PropsTable block="card-blog" />

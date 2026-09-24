@@ -1,0 +1,138 @@
+---
+title: Seat Selector
+description: "Mapa de asientos del avión para elegir ubicación en el flujo de compra. Se arma con cuatro maestros anidados: Seat, Seat Row, Price Badge y Seat Grid."
+figma:
+  - "7607:70050"
+  - "7607:72085"
+  - "7607:72120"
+  - "6573:156899"
+props:
+  seat:
+    - name: Type
+      type: Variant
+      desc: "Controla la categoría visual del asiento: First (azul marino), Emergency (rojo, salida de emergencia), Priority (azul medio), Standard (celeste claro) y Unavailable (gris con ícono de X, no disponible/ocupado). First es el valor por defecto."
+    - name: State
+      type: Variant
+      desc: "Controla el estado de interacción del asiento: Default (celda simple sin marcar), Selected (muestra un check de confirmación) y Hover (muestra un tooltip con la fila/letra, el precio y el nombre del tipo, ej. «10B $12.800 · Primera fila»). Unavailable se ve igual en los tres estados, ya que no es interactivo. Default es el valor por defecto."
+  seat-row:
+    - name: Breakpoint
+      type: Variant
+      desc: Desktop muestra la fila de letras de columna (ej. A, B, C — D, E, F) con mayor espaciado entre celdas y el hueco del pasillo. Mobile usa el mismo layout con celdas y espaciado reducidos para pantallas angostas. Desktop es el valor por defecto.
+  price-badge:
+    - name: Type
+      type: Variant
+      desc: Price muestra un monto con el prefijo «Desde» (ej. «Desde $14.770»), usado sobre las secciones de precio de la grilla. Label muestra un texto informativo en mayúsculas sin monto (ej. «SALIDA DE EMERGENCIA»), usado para etiquetar filas especiales. Price es el valor por defecto.
+  seat-grid:
+    - name: Breakpoint
+      type: Variant
+      desc: Desktop muestra la grilla de asientos con filas y espaciado más amplios. Mobile reduce el tamaño de las celdas y el espaciado para caber en pantallas angostas, manteniendo la misma estructura de secciones y filas. Desktop es el valor por defecto.
+    - name: 1° section
+      type: Boolean
+      desc: Muestra u oculta el badge de precio («Desde $X») sobre la primera sección de la grilla (filas 1 a 19, incluye Salida de Emergencia). Activado (true) es el valor por defecto.
+    - name: 2° section
+      type: Boolean
+      desc: Muestra u oculta el badge de precio («Desde $X») sobre la segunda sección de la grilla (filas 20 a 26). Activado (true) es el valor por defecto.
+    - name: 3° section
+      type: Boolean
+      desc: Muestra u oculta el badge de precio («Desde $X») sobre la tercera sección de la grilla (filas 27 en adelante). Activado (true) es el valor por defecto.
+tables:
+  seat-variables-de-color-del-icono:
+    columns:
+      - Tipo
+      - Variable (Tier 3)
+      - Variable primitiva (Tier 1)
+    rows:
+      - name: First
+        meta: "`checkbox-seat/first-class/icon-color`"
+        desc: "`color/brand/royal-navy-blue/500`"
+      - name: Emergency
+        meta: "`checkbox-seat/emergency-exit/icon-color`"
+        desc: "`color/brand/medium-ruby/500`"
+      - name: Priority
+        meta: "`checkbox-seat/priority-exit/icon-color`"
+        desc: "`color/brand/royal-navy-blue/400`"
+      - name: Standard
+        meta: "`checkbox-seat/standard/icon-color`"
+        desc: "`color/brand/royal-navy-blue/200`"
+      - name: Unavailable
+        meta: "`checkbox-seat/unavailable/icon-color`"
+        desc: "`color/slate/300`"
+---
+
+## Seat
+
+La celda individual del mapa de asientos. Cada una representa un asiento del avión y comunica con su color a qué categoría pertenece y si está disponible.
+
+<FigmaEmbed node="7607:70050" title="Seat" />
+
+### Resumen
+
+Celda de 32 × 32 px que el pasajero toca para elegir su asiento. Su color indica la categoría y, con ella, el precio; al pasar el cursor muestra la fila y letra, el precio y el nombre del tipo, y al seleccionarla aparece un check de confirmación.
+
+Dos ejes de variante: `Type` × `State`, 15 variantes en total (5 × 3). `Type` define la categoría del asiento y su color: First (azul profundo, la de mayor precio), Emergency (rojo, fila de salida de emergencia con restricciones de pasajero), Priority (azul medio, entre First y Standard), Standard (azul claro, el caso más frecuente) y Unavailable (gris con equis, ocupado o bloqueado y no seleccionable). `State` recorre Default, Selected y Hover.
+
+### Propiedades
+
+Propiedades del componente Seat
+
+<PropsTable block="seat" />
+
+### Variables de color del ícono
+
+Cada tipo de asiento vincula el fill del ícono (Font Awesome, v7 Pro) a una variable de color a nivel de componente (Tier 3: Components), independiente entre tipos, que a su vez referencia una variable primitiva (Tier 1: Core Primitives).
+
+<DocTable id="seat-variables-de-color-del-icono" />
+
+## Seat Row
+
+La cabecera del mapa de asientos: la fila de letras de columna que va sobre la grilla y marca el pasillo.
+
+<FigmaEmbed node="7607:72085" title="Seat Row" />
+
+### Resumen
+
+Fila con las letras de columna (A, B, C — D, E, F) separadas por el hueco del pasillo. Se ubica justo encima de Seat Grid para que el pasajero identifique la letra de cada asiento.
+
+Un solo eje de variante: `Breakpoint`. Seat Row y Seat Grid comparten el eje y las mismas medidas de ancho, para que encajen uno dentro del otro: Desktop (374 px) es el valor por defecto de los dos maestros y Mobile (335 px) es la versión angosta para teléfono, que mantiene los seis asientos por fila y comprime los espacios entre columnas.
+
+### Propiedades
+
+Propiedades del componente Seat Row
+
+<PropsTable block="seat-row" />
+
+## Price Badge
+
+La etiqueta que encabeza cada tramo del mapa de asientos, ya sea con el precio desde el que parte la sección o con un rótulo informativo.
+
+<FigmaEmbed node="7607:72120" title="Price Badge" />
+
+### Resumen
+
+Etiqueta que se ubica sobre las secciones de la grilla. Muestra el precio mínimo de la sección («Desde $14.770») o un texto en mayúsculas que marca una fila especial, como «SALIDA DE EMERGENCIA».
+
+Un solo eje de variante: `Type`, con dos valores: Price y Label.
+
+### Propiedades
+
+Propiedades del componente Price Badge
+
+<PropsTable block="price-badge" />
+
+## Seat Grid
+
+El mapa de asientos completo del avión, armado con filas de Seat y dividido en tramos de precio encabezados por Price Badge.
+
+<FigmaEmbed node="6573:156899" title="Seat Grid" />
+
+### Resumen
+
+Grilla vertical con todas las filas del avión, seis asientos por fila con pasillo al centro. Se divide en tres secciones de precio (filas 1 a 19, 20 a 26 y 27 en adelante), cada una con su badge «Desde $X» que se puede mostrar u ocultar. Va debajo de Seat Row.
+
+Un solo eje de variante: `Breakpoint`, compartido con Seat Row y con las mismas medidas de ancho: Desktop (374 px) es el valor por defecto y Mobile (335 px) es la versión angosta para teléfono, con los mismos seis asientos por fila y los espacios entre columnas comprimidos.
+
+### Propiedades
+
+Propiedades del componente Seat Grid
+
+<PropsTable block="seat-grid" />

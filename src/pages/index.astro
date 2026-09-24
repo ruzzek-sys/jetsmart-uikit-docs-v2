@@ -1,0 +1,55 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/layout/PageHeader.astro';
+import CardGrid from '../components/doc/CardGrid.astro';
+import LinkCard from '../components/doc/LinkCard.astro';
+import cover from '../assets/img/cover.png';
+import { getNav } from '../data/nav';
+import { figmaUrl } from '../lib/figma';
+
+const nav = await getNav();
+/** Primera página de cada sección, para que las tarjetas no apunten a un slug fijo. */
+const first = (id: string) => nav.find((s) => s.id === id)?.items[0]?.href ?? '/';
+
+const areas = [
+  { title: 'Foundations', href: first('foundations'), description: 'Tipografía, colores, espaciado, radios, elevaciones e íconos — los building blocks del sistema.' },
+  { title: 'Components', href: first('components'), description: 'Componentes reutilizables del UI Kit: botones, inputs, tabs y más.' },
+  { title: 'Product Components', href: first('product-components'), description: 'Componentes específicos del producto: flight card, searchbox widget.' },
+  { title: 'Patterns', href: first('patterns'), description: 'Combinaciones de componentes para flujos y experiencias completas.' },
+  { title: 'Flows', href: first('flows'), description: 'Pantallas de principio a fin: home, booking, administra tu vuelo y cuenta.' },
+];
+
+const headings = [
+  { depth: 2, slug: 'doc-about', text: 'Sobre este sitio' },
+  { depth: 2, slug: 'doc-structure', text: 'Estructura' },
+];
+---
+
+<BaseLayout title="Introducción" headings={headings} bare>
+  <Image src={cover} alt="JetSmart UI Kit" widths={[640, 960, 1280, 1672]} sizes="(min-width: 1280px) 960px, 100vw" class="mb-8 block h-auto w-full rounded-xl" loading="eager" fetchpriority="high" />
+
+  <PageHeader
+    title="JetSmart UI Kit"
+    description="Documentación del UI Kit de JetSmart. Explora foundations, componentes, product components y patterns documentados desde Figma."
+  >
+    <a
+      href={figmaUrl()}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="mt-5 inline-flex min-h-11 items-center justify-center rounded-lg bg-brand px-5 text-[15px] font-bold text-white hover:bg-brand-dark"
+    >Abrir UI Kit en Figma</a>
+  </PageHeader>
+
+  <h2 id="doc-about">Sobre este sitio</h2>
+  <p>
+    Este sitio es una referencia estática del UI Kit v1.0. Cada página incluye un preview embebido desde Figma y
+    secciones de documentación para guiar diseño e implementación.
+  </p>
+
+  <h2 id="doc-structure">Estructura</h2>
+  <p>La documentación está organizada en cinco áreas principales:</p>
+  <CardGrid>
+    {areas.map((a) => <LinkCard {...a} />)}
+  </CardGrid>
+</BaseLayout>

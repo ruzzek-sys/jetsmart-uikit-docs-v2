@@ -1,0 +1,31 @@
+---
+title: Tooltip
+description: Burbuja flotante con una flecha que da contexto sobre el elemento que la dispara.
+figma:
+  - "6077:123603"
+props:
+  tooltip:
+    - name: Position
+      type: Variant
+      desc: "Top left, Top center, Top right, Bottom left, Bottom center, Bottom right, Left o Right: ubica la burbuja y gira la flecha para que siempre apunte al elemento disparador. Top left es el valor por defecto."
+    - name: Size
+      type: Variant
+      desc: Small es una burbuja compacta de un solo valor en negrita con una línea de apoyo (ancho hug, radio 8, texto 14/20). Large agrega un título y un párrafo descriptivo completo (295px fijo, radio 16, texto 16/24, con sombra y sin borde). Small es el valor por defecto.
+    - name: Show Title
+      type: Boolean
+      desc: Activado muestra la línea superior en negrita (el valor en Small, el título en Large). Desactivado deja visible solo el texto de apoyo (Description). Activado por defecto.
+---
+
+<FigmaEmbed node="6077:123603" />
+
+## Resumen
+
+Burbuja flotante que aparece junto a un elemento para darle contexto o una explicación breve, con una flecha que apunta al elemento que la dispara. Viene en una versión compacta de un solo valor y otra más amplia con título y párrafo.
+
+16 variantes que salen de dos ejes: `Position` (8) × `Size` (2). `Position` ubica la burbuja arriba, abajo o a los costados del disparador, y `Size` alterna entre `Small` y `Large`.
+
+## Propiedades
+
+Lo que puedes ajustar en cada instancia del Tooltip sin salir de la variante.
+
+<PropsTable block="tooltip" />

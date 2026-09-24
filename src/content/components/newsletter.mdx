@@ -1,0 +1,30 @@
+---
+title: Newsletter
+description: Bloque de suscripción al newsletter con campo de correo, botón y aceptación de términos, en versión desktop y mobile.
+figma:
+  - "5563:115388"
+tables:
+  newsletter-propiedades:
+    columns:
+      - Propiedad
+      - Tipo
+      - Descripción
+    rows:
+      - name: Breakpoint
+        meta: "`N/A`"
+        desc: "Newsletter (1440×124) es una barra full-width para desktop/tablet: logo, texto y el bloque de formulario (input + botón) alineados en una sola fila, con el checkbox de términos debajo del formulario. Newsletter Mobile (428×306) apila el contenido en un bloque vertical: texto arriba, input de correo (con ícono de búsqueda), luego el checkbox con el texto en dos líneas, y el botón «Suscribirme» a todo el ancho al final. Son dos componentes independientes, no variantes de un mismo set — no hay un valor por defecto entre ellos."
+---
+
+<FigmaEmbed node="5563:115388" />
+
+## Resumen
+
+Newsletter es el bloque de suscripción que va sobre el footer: un texto de invitación, un input para el correo, el botón «Suscribirme» y el checkbox de aceptación de términos.
+
+2 componentes = `Breakpoint` (2): `Newsletter` (desktop, 1440 px) y `Newsletter Mobile` (428 px). Ninguno declara propiedades de variante ni de instancia.
+
+## Propiedades
+
+Newsletter no declara propiedades de variante ni de instancia; se documenta la única distinción real, el breakpoint Desktop/Mobile.
+
+<DocTable id="newsletter-propiedades" />

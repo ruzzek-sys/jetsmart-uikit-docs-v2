@@ -1,0 +1,34 @@
+---
+title: Toggle
+description: Interruptor de encendido y apagado.
+figma:
+  - "6065:117797"
+props:
+  toggle:
+    - name: State
+      type: Variant
+      desc: Off apaga el switch con el indicador a la izquierda. On lo enciende, mueve el indicador a la derecha y aplica el color de acento. Off es el valor por defecto.
+    - name: Type
+      type: Variant
+      desc: Default no tiene fondo propio (transparente), mide 88×24. Outline envuelve el switch y su label en una píldora de 104×40 con fondo color/background/tertiary. Disabled atenúa los colores del switch y del texto para señalar que no es interactivo. Default es el valor por defecto.
+    - name: Show Label
+      type: Boolean
+      desc: Activado muestra el texto junto al switch (capa Label). Desactivado deja solo el control. Activado por defecto.
+    - name: Label
+      type: Text
+      desc: Texto que acompaña al switch; su visibilidad depende de Show Label.
+---
+
+<FigmaEmbed node="6065:117797" />
+
+## Resumen
+
+El Toggle es un interruptor de encendido y apagado para activar o desactivar una opción al instante, con un texto opcional al lado que explica qué controla.
+
+6 variantes = `State` (2) × `Type` (3), matriz completa. `Type` mezcla apariencia (`Default`, `Outline`) y estado (`Disabled`).
+
+## Propiedades
+
+Lo que puedes ajustar en cada instancia del Toggle sin salir de la variante.
+
+<PropsTable block="toggle" />

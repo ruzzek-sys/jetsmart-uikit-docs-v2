@@ -1,0 +1,34 @@
+---
+title: Notice Panel
+description: Aviso informativo en línea con ícono, título, descripción y un botón de acción.
+figma:
+  - "5563:117055"
+props:
+  notice-panel:
+    - name: Breakpoint
+      type: Variant
+      desc: Desktop muestra el ícono, el título y la descripción en una fila, con el botón alineado a la derecha. Mobile apila el encabezado, la descripción y un botón de ancho completo en una columna. Desktop es el valor por defecto.
+    - name: Show Icon Circle
+      type: Boolean
+      desc: Activado muestra el ícono circular junto al título. Desactivado lo oculta y el título queda alineado al borde izquierdo del panel. Activado es el valor por defecto.
+    - name: Show Description
+      type: Boolean
+      desc: Activado muestra el texto de descripción debajo del título. Desactivado lo oculta y el panel se reduce a una sola línea de contenido. Activado es el valor por defecto.
+    - name: Show Button Primary
+      type: Boolean
+      desc: Activado muestra el botón primario a la derecha en Desktop o al final en Mobile. Desactivado lo oculta y el texto ocupa todo el ancho disponible. Activado es el valor por defecto.
+---
+
+<FigmaEmbed node="5563:117055" />
+
+## Resumen
+
+Notice Panel es un aviso informativo en línea que destaca un mensaje dentro de la página, con ícono circular, título, descripción y un botón de acción. Cada una de esas partes, salvo el título, se puede ocultar desde sus propiedades.
+
+2 variantes = `Breakpoint` (2), matriz completa. Aviso informativo con ícono, título, descripción y botón de acción; el layout pasa de fila a columna según el breakpoint.
+
+## Propiedades
+
+Propiedades configurables del componente Notice Panel.
+
+<PropsTable block="notice-panel" />

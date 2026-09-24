@@ -1,0 +1,57 @@
+---
+title: Inline Message
+description: Mensaje contextual dentro del contenido.
+figma:
+  - "5550:107797"
+props:
+  inline-message:
+    - name: Type
+      type: Variant
+      desc: "Define el color y la semántica del mensaje: Default (neutro), Info (azul), Warning (amarillo), Success (verde) o Error (rojo). Default es el valor por defecto."
+    - name: Layout
+      type: Variant
+      desc: Controla el formato del mensaje. Inline muestra una sola línea compacta con el texto truncado; Block expande el componente y muestra el mensaje completo en varias líneas. Inline es el valor por defecto.
+    - name: Message
+      type: Text
+      desc: Texto del mensaje que se muestra dentro del componente. Es completamente editable y no tiene un límite de caracteres definido por el componente.
+    - name: Icon
+      type: Instance
+      desc: Icono que acompaña al mensaje. Por defecto usa el icono de información (Font Awesome) sin importar el Type seleccionado — no cambia automáticamente según el color, pero puede reemplazarse por cualquier otro icono mediante instance swap.
+tables:
+  inline-message-layout-block-vs-inline:
+    columns:
+      - Aspecto
+      - Categoría
+      - Descripción
+    rows:
+      - name: Layout = Inline (uso)
+        meta:
+          - label: Comportamiento
+        desc: "Es el valor por defecto: úsalo para mensajes cortos de una sola línea. Si el texto no cabe en el ancho disponible, se trunca con puntos suspensivos — no es apto para contenido extenso."
+      - name: Layout = Block (uso)
+        meta:
+          - label: Comportamiento
+        desc: "Úsalo para mensajes largos: el componente se expande en alto y muestra el texto completo en varias líneas, sin truncar, dentro de una superficie con fondo de color."
+---
+
+<FigmaEmbed node="5550:107797" />
+
+## Resumen
+
+Inline Message es un mensaje contextual que vive dentro del contenido, junto al bloque al que se refiere, para informar, advertir, confirmar o señalar un error sin interrumpir el flujo. Se compone de un icono y un texto editable, y puede ir en una sola línea compacta o expandido en varias líneas.
+
+10 variantes = `Type` (5) × `Layout` (2). `Type` recorre las filas y `Layout` las columnas porque el componente mide 642 de ancho: con `Type` en columnas la matriz superaría los 3.800 px.
+
+## Propiedades
+
+Propiedades configurables del componente Inline Message.
+
+<PropsTable block="inline-message" />
+
+## Guía de uso
+
+### Layout: Block vs Inline
+
+Cuándo usar cada variante de layout.
+
+<DocTable id="inline-message-layout-block-vs-inline" />

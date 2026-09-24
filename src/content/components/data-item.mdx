@@ -1,0 +1,54 @@
+---
+title: Data Item
+description: "Dato en línea: dos textos enfrentados por un ícono al centro."
+figma:
+  - "5205:107801"
+props:
+  data-item:
+    - name: Show Text Left
+      type: Boolean
+      desc: Oculta el texto izquierdo, dejando solo el ícono y el texto derecho. Encendida por defecto.
+    - name: Show Text Right
+      type: Boolean
+      desc: Oculta el texto derecho, dejando el texto izquierdo y el ícono. Encendida por defecto.
+    - name: Text Left
+      type: Text
+      desc: "Contenido del dato izquierdo. Default: «Dato A»."
+    - name: Text Right
+      type: Text
+      desc: "Contenido del dato derecho. Default: «Dato B»."
+    - name: Show Icon
+      type: Boolean
+      desc: Oculta el ícono central, dejando los dos datos enfrentados sin separador visual. Encendida por defecto.
+tables:
+  data-item-uso-previsto:
+    columns:
+      - Aspecto
+      - Categoría
+      - Descripción
+    rows:
+      - name: Uso previsto
+        meta:
+          - label: Propósito
+        desc: Combina un ícono con un texto corto para destacar un dato puntual (pasajeros, fechas, tramos, N° de reserva) de forma más visual y jerárquica que un texto plano. Se usa en resúmenes y tarjetas de detalle — como la barra de itinerario o el voucher de vuelo — donde conviene que la información se lea rápido apoyándose en el ícono.
+---
+
+<FigmaEmbed node="5205:107801" />
+
+## Resumen
+
+Data Item muestra un dato en línea: dos textos enfrentados con un ícono al centro. Sirve para rutas (origen → destino) o para destacar un dato relevante con ícono y texto, como en la Summary Bar o la Flight Details Card.
+
+Dato en línea: dos textos enfrentados por un ícono al centro. Sin variantes: las cuatro configuraciones se logran con las tres booleanas (`Show Text Left`, `Show Text Right` y `Show Icon`).
+
+## Propiedades
+
+Sin variantes: el comportamiento se ajusta desde el panel de propiedades de la instancia.
+
+<PropsTable block="data-item" />
+
+## Guía de uso
+
+### Uso previsto
+
+<DocTable id="data-item-uso-previsto" />

@@ -1,0 +1,31 @@
+---
+title: Radio Card
+description: Tarjeta seleccionable de opción única.
+figma:
+  - "6065:116271"
+props:
+  radio-card:
+    - name: State
+      type: Variant
+      desc: Controla el color del borde y del ícono radio. Default usa un borde neutro; Selected resalta el borde en teal con el ícono relleno; Error marca el borde en rojo; Disabled atenúa los colores de texto e ícono. Default es el valor por defecto.
+    - name: Size
+      type: Variant
+      desc: Large usa el ancho completo de la card, con mayor padding. Small reduce el ancho y el padding para layouts más compactos. Large es el valor por defecto.
+    - name: Show Description
+      type: Boolean
+      desc: Muestra u oculta la línea de descripción debajo del título. Activado es el valor por defecto.
+---
+
+<FigmaEmbed node="6065:116271" />
+
+## Resumen
+
+Tarjeta seleccionable que presenta una opción dentro de un grupo de elección única, con título y una línea de descripción opcional. Señala con el borde y el ícono radio si la opción está disponible, elegida, bloqueada o con error.
+
+8 variantes = `State` (4) × `Size` (2), matriz completa. `Show Description` es propiedad de instancia y no abre una tercera dimensión de variantes.
+
+## Propiedades
+
+Propiedades configurables del componente Radio Card.
+
+<PropsTable block="radio-card" />

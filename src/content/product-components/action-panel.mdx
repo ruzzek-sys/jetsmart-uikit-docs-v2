@@ -1,0 +1,100 @@
+---
+title: Action Panel
+description: "Paneles inferiores de acción del flujo de compra en mobile: el detalle de la reserva, la información de un asiento y la selección de asientos, más las piezas que los arman."
+figma:
+  - "8165:85889"
+  - "8165:86206"
+  - "8165:86460"
+  - "8165:86862"
+props:
+  details-of-your-trip-mobile:
+    - name: Expansion
+      type: Variant
+      desc: "Expanded: resumen completo con una tarjeta por tramo, totales y acción principal. Collapsed: fila compacta de un renglón con acción. Expanded es el valor por defecto."
+    - name: Show Item
+      type: Boolean
+      desc: Muestra las tarjetas de detalle por tramo. Activado por defecto.
+    - name: Show Info
+      type: Boolean
+      desc: Agrega la fila informativa complementaria. Desactivado por defecto.
+  seat-selection-mobile:
+    - name: Expansion
+      type: Variant
+      desc: "Expanded: lista de asientos por pasajero con acción para continuar. Collapsed: barra compacta con el total y la acción. Expanded es el valor por defecto."
+    - name: Slot
+      type: Slot
+      desc: "Aloja la lista de asientos por pasajero. Slot acepta dos tipos de componentes: Divider y Passenger Item (Mobile - Transparent)"
+tables:
+  parts-parts:
+    columns:
+      - Pieza
+      - Variantes
+      - Descripción
+    rows:
+      - name: Passenger Seat Row
+        meta: Sin variantes
+        desc: Fila de asiento y precio.
+      - name: Surcharge Detail Pane
+        meta: "`Expansion` · Collapsed, Expanded"
+        desc: Desglose de tasas e impuestos.
+---
+
+## Details Of Your Trip Mobile
+
+Panel con el detalle de la reserva: una tarjeta por tramo, los adicionales, el total y el botón para continuar.
+
+<FigmaEmbed node="8165:85889" title="Details Of Your Trip Mobile" />
+
+### Resumen
+
+Resume lo que el pasajero lleva en la compra —vuelos de ida y vuelta, equipaje y adicionales, asientos, tasas e impuestos— con su precio y el total, y cierra con la acción principal. Plegado queda reducido a una fila con el total y el botón.
+
+1 nodo real. Un eje: `Expansion`. 2 variantes — `Expanded` (por defecto) y `Collapsed`.
+
+### Propiedades
+
+Lo que se cambia desde la instancia sin salir de la variante.
+
+<PropsTable block="details-of-your-trip-mobile" />
+
+## Seat Info Panel Mobile
+
+Panel con el detalle del asiento seleccionado: sus beneficios, el pasajero, el precio y el botón para confirmarlo.
+
+<FigmaEmbed node="8165:86206" title="Seat Info Panel Mobile" />
+
+### Resumen
+
+Se abre al tocar un asiento en el mapa: muestra el tipo de asiento con la lista de sus ventajas, una fila con el asiento, el pasajero y el precio, y la acción para seleccionarlo.
+
+1 nodo real. Componente simple, sin eje de variante: se adapta por contenido, no por variante.
+
+### Propiedades
+
+La página de Figma no trae ficha de propiedades editables para este componente.
+
+## Seat Selection Mobile
+
+Panel con los asientos elegidos por cada pasajero, el total y el botón para pasar al siguiente vuelo.
+
+<FigmaEmbed node="8165:86460" title="Seat Selection Mobile" />
+
+### Resumen
+
+Lista cada pasajero con su asiento asignado o «Sin selección», permite aplicar la elección en ambos tramos y muestra el total antes de continuar. Plegado queda en una barra compacta con el total y la acción.
+
+1 nodo real. Un eje: `Expansion`. 2 variantes — `Expanded` (por defecto) y `Collapsed`.
+
+### Propiedades
+
+Lo que se cambia desde la instancia sin salir de la variante.
+
+<PropsTable block="seat-selection-mobile" />
+
+## Parts
+
+Piezas de apoyo del Action Panel, sin panel propio. 3 nodos reales: `Passenger Seat Row` (1) + `Surcharge Detail Pane` (2).
+
+<FigmaEmbed node="8165:86862" title="Parts" />
+
+<DocTable id="parts-parts" />

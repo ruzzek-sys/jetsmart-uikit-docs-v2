@@ -1,0 +1,50 @@
+---
+title: Stepper
+description: Indicador de avance por etapas para flujos de varios pasos.
+figma:
+  - "6567:81598"
+props:
+  stepper:
+    - name: Breakpoint
+      type: Variant
+      desc: Adapta el layout del stepper a Mobile o Desktop. En Mobile los pasos se comprimen (círculos más pequeños, sin espacio extra), en Desktop se expanden con mayor separación entre pasos. Mobile es el valor por defecto.
+    - name: Step Count
+      type: Variant
+      desc: "Define cuántos pasos muestra el stepper: 6, 5, 4 o 3. El ancho total del componente crece o se reduce según la cantidad de pasos. 6 es el valor por defecto."
+    - name: Active Step
+      type: Variant
+      desc: Marca cuál paso está activo (1 a 6, según Step Count). Los pasos anteriores al activo se muestran en azul oscuro relleno, el activo resaltado, y los siguientes en gris claro sin completar. El último paso completado muestra un check. 1 es el valor por defecto.
+tables:
+  stepper-responsive:
+    columns:
+      - Aspecto
+      - Categoría
+      - Descripción
+    rows:
+      - name: Ancho en Mobile
+        meta:
+          - label: Layout
+        desc: En la versión mobile, el componente debe dejarse en Fill para ajustarse al ancho del contenedor, sin importar la cantidad de pasos (Step Count) configurada.
+---
+
+<FigmaEmbed node="6567:81598" />
+
+## Resumen
+
+Indicador horizontal de avance que muestra en qué etapa de un flujo de varios pasos está el usuario, por ejemplo en el cambio de fecha de una reserva o el check-in. Marca los pasos completados, el paso activo y los que faltan.
+
+36 variantes = `Breakpoint` (2) × `Step Count` (4) × `Active Step` (hasta 6, sin exceder `Step Count`).
+
+## Propiedades
+
+Propiedades configurables del componente Stepper.
+
+<PropsTable block="stepper" />
+
+## Guía de uso
+
+### Responsive
+
+Cómo debe comportarse el ancho del Stepper según el breakpoint.
+
+<DocTable id="stepper-responsive" />

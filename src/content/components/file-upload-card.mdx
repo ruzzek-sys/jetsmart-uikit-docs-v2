@@ -1,0 +1,25 @@
+---
+title: File Upload Card
+description: Tarjeta para que el pasajero suba un documento (PDF, JPG o PNG) y vea el estado de la carga.
+figma:
+  - "5279:113127"
+props:
+  file-upload-card:
+    - name: State
+      type: Variant
+      desc: Default muestra la zona de arrastre para subir un archivo (PDF, JPG o PNG, máx. 5 MB). Complete confirma la carga mostrando el nombre del archivo subido. Error resalta el borde en rojo e indica que el archivo no es válido. Disabled atenúa el componente para bloquear la interacción. Default es el valor por defecto.
+---
+
+<FigmaEmbed node="5279:113127" />
+
+## Resumen
+
+File Upload Card es la tarjeta con la que el pasajero sube un archivo de respaldo, como un certificado. Muestra el nombre del pasajero con una etiqueta de estado y, debajo, una zona de arrastre que pasa a confirmar el archivo cargado o a indicar que fue rechazado.
+
+4 variantes = `State` (4), matriz completa. Un eje: el estado de carga del archivo (`Default`, `Complete`, `Error` y `Disabled`). El componente no expone propiedades de instancia, así que el nombre del pasajero y los textos se editan entrando a las capas de la instancia. Junto a la matriz está `Attached File Chip`, un componente aparte de la tarjeta.
+
+## Propiedades
+
+Propiedades del componente File Upload Card.
+
+<PropsTable block="file-upload-card" />

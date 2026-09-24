@@ -1,0 +1,108 @@
+---
+title: Passenger Form Accordion
+description: "Acordeón con los datos de un pasajero y el formulario que se arma dentro de él. La página documenta dos componentes: el acordeón y la sección de formulario que va en su slot."
+figma:
+  - "5167:85834"
+  - "7607:88775"
+props:
+  passenger-form-accordion:
+    - name: State
+      type: Variant
+      desc: "Pending: encabezado con el badge «Pendiente» y los campos vacíos con placeholder. Complete: encabezado con el badge «Completo» y los campos pre-rellenados con los datos del pasajero. Default: Pending."
+    - name: Breakpoint
+      type: Variant
+      desc: "Desktop: formulario de 1312px con los campos distribuidos en varias columnas. Mobile: formulario de 388px con los campos apilados en una sola columna y el botón a todo el ancho. Default: Desktop."
+    - name: Expansion
+      type: Variant
+      desc: "Expanded: header más el formulario completo y la fila de botones. Collapsed: solo la fila de header (76px en desktop, 60px en mobile), sin el formulario. Default: Expanded."
+    - name: Show Badge
+      type: Boolean
+      desc: "Muestra u oculta el badge de estado («Pendiente»/«Completo») en el header. Default: activado."
+    - name: Title
+      type: Text
+      desc: "Nombre del pasajero mostrado en el header. Default: «Camila Velásquez Mora»."
+    - name: Show Name
+      type: Boolean
+      desc: "Muestra u oculta toda la fila de header (ícono + nombre); al apagarla se ocultan también el badge y el chevron aunque estén activados. Default: activado."
+    - name: Show Button Primary
+      type: Boolean
+      desc: "Muestra u oculta el botón de acción principal (relleno), «Confirmar datos». Default: activado."
+    - name: Show Button Secondary
+      type: Boolean
+      desc: "Muestra u oculta un botón de acción secundario (con borde) junto al primario. Default: apagado — es la única booleana que arranca desactivada."
+    - name: Show Buttons
+      type: Boolean
+      desc: "Muestra u oculta la fila completa de botones al pie del formulario; funciona como interruptor maestro sobre Show Button Primary y Show Button Secondary. Default: activado."
+    - name: Show Chevron
+      type: Boolean
+      desc: "Muestra u oculta la flecha de expandir/colapsar en el header. Default: activado."
+    - name: Slot Desktop
+      type: Slot
+      desc: Slot que aloja el contenido del formulario en la variante Desktop; su preferred value es el component set «Section Form».
+    - name: Slot Mobile
+      type: Slot
+      desc: Slot que aloja el contenido del formulario en la variante Mobile; mismo preferred value «Section Form», adaptado a una columna. Es un slot distinto porque el contenido cambia por breakpoint.
+  section-form:
+    - name: Breakpoint
+      type: Variant
+      desc: "Desktop: formulario de 1119px con los campos organizados en dos filas de columnas. Mobile: formulario de 356px con los campos apilados en una sola columna. Default: Desktop."
+    - name: Show Section
+      type: Boolean
+      desc: "Muestra u oculta el eyebrow con el título de la sección (p. ej. «RESIDENCIA DEL PASAJERO») y su línea divisoria. Default: activado."
+    - name: Show Description
+      type: Boolean
+      desc: "Muestra u oculta el texto explicativo debajo del título de la sección. Default: activado."
+    - name: Show Switch
+      type: Boolean
+      desc: "Muestra u oculta el toggle «Usar datos de reserva del primer pasajero». Default: activado."
+    - name: Show Message
+      type: Boolean
+      desc: "Muestra u oculta el mensaje informativo (p. ej. sobre el número de WhatsApp); su texto cambia por breakpoint. Default: activado."
+    - name: Inputs
+      type: Slot
+      desc: Slot principal con la primera grilla de campos del formulario (p. ej. país de residencia, dirección, nacionalidad, tipo y número de documento). Trae dos component sets como preferred values.
+---
+
+## Passenger Form Accordion
+
+Acordeón que agrupa los datos de un pasajero: un header con su nombre y el estado de la carga, y debajo el formulario y la fila de botones para confirmarlos.
+
+<FigmaEmbed node="5167:85834" />
+
+### Resumen
+
+Contenedor del formulario de cada pasajero en el flujo de reserva. El header muestra el nombre, un badge con el estado (Pendiente o Completo) y el chevron para abrir o cerrar; al expandirse aparece el formulario, que entra por slot, y el botón «Confirmar datos».
+
+8 variantes = `State` (2) × `Breakpoint` (2) × `Expansion` (2), matriz completa. El contenido del formulario entra por slot: `Section Form` es su preferred value.
+
+### Propiedades
+
+Ajustables desde el panel de la instancia.
+
+<PropsTable block="passenger-form-accordion" />
+
+### Cómo agregar campos: doble slot anidado
+
+El slot central del acordeón (`Slot Mobile` / `Slot Desktop`) solo acepta instancias de `Section Form`. Los inputs no se agregan ahí directamente: cada `Section Form` tiene su propio slot interno donde sí se aceptan los inputs.
+
+1. **Selecciona el Section Form.** Dentro del cuerpo del Passenger Form Accordion (`Slot Mobile` o `Slot Desktop`, según el breakpoint), haz clic en la instancia de Section Form que quieras editar.
+2. **Entra a su slot interno.** Con el Section Form seleccionado, selecciona su propio slot «Inputs» (ver Docs · Section Form) — es un nivel de anidamiento distinto al slot del acordeón.
+3. **Agrega los inputs.** Arrastra o reemplaza con las instancias de input que necesites dentro de ese slot interno. El acordeón nunca recibe inputs directamente, siempre pasan por el Section Form.
+
+## Section Form
+
+Bloque de formulario que va dentro del slot del acordeón: título de sección, descripción, un toggle, un mensaje informativo y la grilla de campos.
+
+<FigmaEmbed node="7607:88775" title="Section Form" />
+
+### Resumen
+
+Agrupa una sección de datos del pasajero con su eyebrow, el texto explicativo, el toggle «Usar datos de reserva del primer pasajero» y un mensaje informativo; los campos van en el slot `Inputs`. Es el preferred value de `Slot Desktop` y `Slot Mobile` en el Passenger Form Accordion.
+
+Un solo eje de variante: `Breakpoint`. Desktop reparte los campos en filas de columnas y Mobile los apila en una sola columna.
+
+### Propiedades
+
+Ajustables desde el panel de la instancia.
+
+<PropsTable block="section-form" />

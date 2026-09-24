@@ -1,0 +1,25 @@
+---
+title: Flight Details Card
+description: Tarjeta que resume los datos de un vuelo reservado —ruta, ida, vuelta y código de reserva— junto a sus acciones.
+figma:
+  - "6186:145649"
+props:
+  flight-details-card:
+    - name: Breakpoint
+      type: Variant
+      desc: Desktop organiza los datos del vuelo (ruta, ida, vuelta, código de reserva) en una sola fila horizontal, con los botones de acción alineados a la derecha. Mobile apila la misma información en una tarjeta vertical y convierte las acciones en botones de ancho completo al final. Desktop es el valor por defecto.
+---
+
+<FigmaEmbed node="6186:145649" />
+
+## Resumen
+
+Flight Details Card muestra el detalle de un vuelo ya reservado: la ruta, los tramos de ida y vuelta y el código de reserva, acompañados de los botones de acción para gestionarlo.
+
+2 variantes = `Breakpoint` (2), matriz completa. Cada valor es un layout distinto de la misma tarjeta de voucher, no un reescalado del otro: `Desktop` es una tarjeta horizontal de ancho fijo 1131 px y `Mobile` una tarjeta apilada de ancho fijo 388 px.
+
+## Propiedades
+
+Propiedades configurables de la tarjeta de detalles de vuelo.
+
+<PropsTable block="flight-details-card" />

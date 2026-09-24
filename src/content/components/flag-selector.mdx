@@ -1,0 +1,31 @@
+---
+title: Flag Selector
+description: Disparador del selector de país, con la bandera y el nombre del país seleccionado.
+figma:
+  - "5300:118764"
+props:
+  flag-selector:
+    - name: Style
+      type: Variant
+      desc: Outline muestra un borde y fondo blanco alrededor del selector. Transparent elimina el borde y el fondo, dejando visible solo la bandera, el texto y el ícono. Outline es el valor por defecto.
+    - name: Size
+      type: Variant
+      desc: Ajusta el tamaño del ícono de bandera, el texto y el padding interno del selector, de Small (compacto) a Large (mayor jerarquía visual). Small es el valor por defecto.
+    - name: Label
+      type: Text
+      desc: Texto editable que muestra el nombre del país seleccionado junto al ícono de bandera. «Chile» es el valor por defecto.
+---
+
+<FigmaEmbed node="5300:118764" />
+
+## Resumen
+
+Flag Selector es el disparador del selector de país: muestra la bandera y el nombre del país seleccionado junto a un ícono de despliegue. Se usa en la barra de navegación y en el menú mobile; el panel que abre está documentado en Dropdown Menu.
+
+6 variantes = `Style` (2) × `Size` (3), matriz completa. `Outline` lleva un borde de 1 px con contorno visible y `Transparent` no tiene borde ni fondo propio; `Small`, `Medium` y `Large` miden 36, 44 y 52 px de alto, con texto de 14, 16 y 18.
+
+## Propiedades
+
+Propiedades configurables del componente Flag Selector.
+
+<PropsTable block="flag-selector" />

@@ -1,0 +1,28 @@
+---
+title: Flight Summary Card
+description: Resumen de un tramo del vuelo seleccionado, con su precio y el upsell a la tarifa Smart.
+figma:
+  - "6186:150529"
+props:
+  flight-summary-card:
+    - name: Breakpoint
+      type: Variant
+      desc: "Desktop muestra el resumen en una fila horizontal compacta: ruta, fecha, pasajeros, precio por pasajero y botón para editar la selección. Mobile apila la información en una tarjeta vertical con un badge de tramo, el nombre de la tarifa y la lista de beneficios incluidos. Desktop es el valor por defecto."
+    - name: Title
+      type: Text
+      desc: "Etiqueta del tramo del viaje. Se muestra dentro del encabezado en Desktop («Información vuelo IDA») y como badge superior en Mobile («Ida»). Valor por defecto: «IDA»."
+---
+
+<FigmaEmbed node="6186:150529" />
+
+## Resumen
+
+Tarjeta que resume un tramo del itinerario ya elegido —ruta, fecha, pasajeros y precio— y ofrece el upsell a la tarifa Smart. Se usa en el paso de selección de vuelos para confirmar la ida o la vuelta y permitir editar la selección.
+
+2 variantes = `Breakpoint` (2), matriz completa. Un tramo del itinerario con su precio y el upsell a Smart; entre `Desktop` y `Mobile` cambia el layout completo, no solo el ancho.
+
+## Propiedades
+
+Propiedades configurables del componente Flight Summary Card.
+
+<PropsTable block="flight-summary-card" />

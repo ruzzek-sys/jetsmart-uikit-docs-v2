@@ -1,0 +1,58 @@
+---
+import Table from '../ui/Table.astro';
+import Badge from '../ui/Badge.astro';
+import { inlineMd } from '../../lib/inline-md';
+
+/**
+ * Tabla de 3 columnas que no es de Propiedades (Guía de uso y otras). Lee `tables.<id>`
+ * del frontmatter. La columna del medio es texto (Markdown inline) o una lista de badges.
+ */
+interface Props {
+  id: string;
+}
+
+const { id } = Astro.props;
+const doc = Astro.locals.doc;
+const table = doc?.data.tables[id];
+if (!table) throw new Error(`<DocTable id="${id}">: falta tables.${id} en el frontmatter de ${doc?.id ?? '(sin página)'}`);
+
+const rows = await Promise.all(
+  table.rows.map(async (r) => ({
+    name: await inlineMd(r.name),
+    meta: typeof r.meta === 'string' ? await inlineMd(r.meta) : r.meta,
+    desc: await inlineMd(r.desc),
+  })),
+);
+---
+
+<Table columns={table.columns} stack>
+  {rows.map((r) => (
+    <tr>
+      <td><strong set:html={r.name} /></td>
+      {typeof r.meta === 'string' ? (
+        <td set:html={r.meta} />
+      ) : (
+        <td class="badges">
+          {r.meta.map((b, i) => (
+            <>
+              {i > 0 && <span class="sep" aria-hidden="true">·</span>}
+              <Badge tone={b.tone}>{b.label}</Badge>
+            </>
+          ))}
+        </td>
+      )}
+      <td class="muted" set:html={r.desc} />
+    </tr>
+  ))}
+</Table>
+
+<style>
+  .badges {
+    white-space: nowrap;
+  }
+
+  .sep {
+    margin: 0 4px;
+    color: var(--color-muted);
+  }
+</style>

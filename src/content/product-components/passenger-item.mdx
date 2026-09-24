@@ -1,0 +1,37 @@
+---
+title: Passenger Item
+description: Fila con el nombre del pasajero y el estado de su selección de asiento.
+figma:
+  - "6186:158033"
+props:
+  passenger-item:
+    - name: Breakpoint
+      type: Variant
+      desc: "Desktop: ancho de referencia de 818px, para la fila completa del pasajero. Mobile: ancho de referencia de 355px. Default: Desktop."
+    - name: Style
+      type: Variant
+      desc: "Solid: contenedor blanco con borde 1px, radio pill y padding 8/24. Transparent: el contenido va suelto sobre el fondo, sin caja. Default: Solid."
+    - name: State
+      type: Variant
+      desc: "Complete: check y badge con el asiento asignado. Pending: guion y el texto «Sin selección» a la derecha. Default: Complete."
+    - name: Name
+      type: Text
+      desc: "Nombre del pasajero mostrado en la variante Style = Solid. Default: «José Miguel Barrios Rojas»."
+    - name: Passanger
+      type: Text
+      desc: "Etiqueta del pasajero mostrada en la variante Style = Transparent (p. ej. «Pasajero 1»). Default: «Pasajero 1»."
+---
+
+<FigmaEmbed node="6186:158033" />
+
+## Resumen
+
+Fila que identifica a un pasajero y muestra si ya tiene asiento asignado: con check y badge del asiento cuando está completo, o con un guion y «Sin selección» cuando falta elegir. Se apila en listas de pasajeros, por ejemplo dentro del contenido de un Accordion.
+
+8 variantes = `Breakpoint` (2) × `Style` (2) × `State` (2), matriz completa. `Style` controla el contenedor, `Breakpoint` fija el ancho y `State` el contenido de la derecha. Los anchos de 818 px en Desktop y 355 px en Mobile son de referencia: la instancia va en Fill container y la lista define el ancho.
+
+## Propiedades
+
+Ajustables desde el panel de la instancia
+
+<PropsTable block="passenger-item" />

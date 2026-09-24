@@ -1,0 +1,95 @@
+---
+/**
+ * Filtro instantáneo del sidebar. Ctrl+K (⌘K) o «/» lo enfocan desde cualquier parte;
+ * Enter abre el primer resultado y Esc limpia. Ignora tildes y mayúsculas.
+ */
+---
+
+<div class="relative mb-4">
+  <label for="nav-search" class="sr-only">Buscar en la documentación</label>
+  <svg class="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+    <circle cx="7" cy="7" r="4.5" stroke="currentColor" stroke-width="1.5" />
+    <path d="M10.5 10.5 14 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+  </svg>
+  <input
+    id="nav-search"
+    type="search"
+    autocomplete="off"
+    spellcheck="false"
+    placeholder="Buscar…"
+    class="h-10 w-full rounded-lg border border-line bg-subtle pr-14 pl-9 text-sm placeholder:text-muted focus:border-brand focus:bg-surface focus:outline-none"
+  />
+  <kbd class="pointer-events-none absolute top-1/2 right-2.5 hidden -translate-y-1/2 rounded border border-line bg-surface px-1.5 font-mono text-[11px] text-muted lg:block">Ctrl K</kbd>
+</div>
+
+<script>
+  const input = document.querySelector<HTMLInputElement>('#nav-search')!;
+  const sections = [...document.querySelectorAll<HTMLDetailsElement>('#sidebar details[data-section-id]')];
+  const links = [...document.querySelectorAll<HTMLAnchorElement>('#sidebar [data-nav-link]')];
+  const empty = document.querySelector<HTMLElement>('#sidebar [data-nav-empty]')!;
+  const root = document.documentElement;
+
+  const normalize = (s: string) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().trim();
+  const labels = new Map(links.map((a) => [a, normalize(a.textContent ?? '')]));
+  /** Estado abierto/cerrado de cada sección antes de empezar a filtrar. */
+  let saved: boolean[] | null = null;
+
+  function filter() {
+    const q = normalize(input.value);
+    if (!q) {
+      links.forEach((a) => ((a.closest('li') ?? a).hidden = false));
+      sections.forEach((d, i) => {
+        d.hidden = false;
+        if (saved) d.open = saved[i];
+      });
+      saved = null;
+      empty.classList.add('hidden');
+      root.removeAttribute('data-nav-filtering');
+      return;
+    }
+    root.setAttribute('data-nav-filtering', '');
+    saved ??= sections.map((d) => d.open);
+    let total = 0;
+    links.forEach((a) => {
+      const hit = labels.get(a)!.includes(q);
+      (a.closest('li') ?? a).hidden = !hit;
+      if (hit) total++;
+    });
+    sections.forEach((d) => {
+      const any = [...d.querySelectorAll('li')].some((li) => !li.hidden);
+      d.hidden = !any;
+      d.open = any;
+    });
+    empty.classList.toggle('hidden', total > 0);
+  }
+
+  input.addEventListener('input', filter);
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      const first = links.find((a) => !(a.closest('li') ?? a).hidden && !a.closest('details[hidden]'));
+      if (first) window.location.href = first.href;
+    } else if (e.key === 'Escape') {
+      if (input.value) {
+        e.stopPropagation();
+        input.value = '';
+        filter();
+      } else {
+        input.blur();
+      }
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    const typing = e.target instanceof HTMLElement && e.target.matches('input, textarea, [contenteditable]');
+    const shortcut = (e.key === 'k' && (e.ctrlKey || e.metaKey)) || (e.key === '/' && !typing);
+    if (!shortcut) return;
+    e.preventDefault();
+    window.dispatchEvent(new CustomEvent('drawer:open'));
+    input.focus();
+    input.select();
+  });
+
+  window.addEventListener('search:focus', () => {
+    input.focus();
+  });
+</script>

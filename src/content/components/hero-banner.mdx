@@ -1,0 +1,223 @@
+---
+title: Hero Banner
+description: "Tres cabeceras de página a ancho completo: el hero de contenido con imagen al costado (Split), el que monta el contenido sobre una fotografía (Overlay) y el hero de la Home con el buscador de vuelos."
+figma:
+  - "5300:119080"
+  - "7930:151854"
+  - "7930:151498"
+  - "4329:2653"
+  - "4342:2780"
+props:
+  hero-banner-split:
+    - name: Alignment
+      type: Variant
+      desc: Right ubica el contenido en dos columnas con la imagen a la derecha; Center centra todo el contenido a ancho completo y coloca la imagen debajo, como un carrusel horizontal. Right es el valor por defecto.
+    - name: Theme
+      type: Variant
+      desc: Light usa fondo claro con textos en azul marino y botón secundario de contorno oscuro; Dark invierte a fondo azul marino con textos y botón secundario en blanco. Light es el valor por defecto.
+    - name: Show Breadcrumb
+      type: Boolean
+      desc: Muestra u oculta el breadcrumb de navegación superior (p. ej. Home > Ayuda). Activado por defecto.
+    - name: Show Badge
+      type: Boolean
+      desc: Muestra u oculta el badge superior, sobre el logo. Activado por defecto.
+    - name: Show Logo
+      type: Boolean
+      desc: Muestra u oculta el logo de marca. Activado por defecto.
+    - name: Show Pretitle
+      type: Boolean
+      desc: Muestra u oculta el pretitle ubicado sobre el título principal. Activado por defecto.
+    - name: Show Title
+      type: Boolean
+      desc: Muestra u oculta el título principal. Activado por defecto.
+    - name: Show Description
+      type: Boolean
+      desc: Muestra u oculta el párrafo de descripción. Activado por defecto.
+    - name: Show Price
+      type: Boolean
+      desc: Muestra u oculta el bloque de precio (label, moneda y monto). Activado por defecto.
+    - name: Show Button Primary
+      type: Boolean
+      desc: Muestra u oculta el botón sólido (primario) dentro de la fila de acciones. Activado por defecto.
+    - name: Show Button Secondary
+      type: Boolean
+      desc: Muestra u oculta el botón de contorno (secundario) dentro de la fila de acciones. Activado por defecto.
+    - name: Show Searcher
+      type: Boolean
+      desc: "Muestra u oculta el bloque buscador completo: campo de texto, botón Buscar y chips de búsquedas populares. Activado por defecto."
+    - name: Show Page Indicator
+      type: Boolean
+      desc: "Muestra u oculta los puntos del paginador sobre la imagen: verticales cuando Alignment es Right, horizontales bajo la imagen cuando es Center. Activado por defecto."
+    - name: Show Buttons
+      type: Boolean
+      desc: Muestra u oculta en conjunto toda la fila de botones de acción, además de los toggles individuales de cada botón. Activado por defecto.
+    - name: Actions
+      type: Slot
+      desc: Slot para reemplazar libremente el contenido de la fila de acciones; por defecto contiene los dos botones (primario y secundario).
+  hero-banner-overlay:
+    - name: Alignment
+      type: Variant
+      desc: Right ubica todo el contenido alineado a la izquierda sobre la imagen a pantalla completa, con el paginador como columna vertical pegada al borde derecho; Center centra el contenido y lo apila a ancho completo, trasladando el paginador a una fila horizontal bajo el bloque de texto. Right es el valor por defecto.
+    - name: Theme
+      type: Variant
+      desc: "Light aplica una superposición clara sobre la fotografía con textos en azul marino: el botón primario se ve blanco con borde y texto azul marino, y el secundario aparece sólido en azul marino con texto blanco. Dark invierte la superposición a un tono oscuro con textos blancos: el primario pasa a contorno blanco sobre fondo oscuro y el secundario se vuelve sólido blanco con texto azul marino. Light es el valor por defecto."
+    - name: Show Breadcrumb
+      type: Boolean
+      desc: Muestra u oculta el breadcrumb de navegación superior (p. ej. Home > Ayuda). Activado por defecto.
+    - name: Show Logo
+      type: Boolean
+      desc: Muestra u oculta el logo de marca. Activado por defecto.
+    - name: Show Badge
+      type: Boolean
+      desc: Muestra u oculta el badge superior, sobre el logo. Activado por defecto.
+    - name: Show Pretitle
+      type: Boolean
+      desc: Muestra u oculta el pretitle ubicado sobre el título principal. Activado por defecto.
+    - name: Show Title
+      type: Boolean
+      desc: Muestra u oculta el título principal. Activado por defecto.
+    - name: Show Description
+      type: Boolean
+      desc: Muestra u oculta el párrafo de descripción. Activado por defecto.
+    - name: Show Price
+      type: Boolean
+      desc: Muestra u oculta el bloque de precio (etiqueta, moneda y monto). Activado por defecto.
+    - name: Show Button Primary
+      type: Boolean
+      desc: Muestra u oculta el botón de contorno (primario) dentro de la fila de acciones. Activado por defecto.
+    - name: Show Button Secondary
+      type: Boolean
+      desc: Muestra u oculta el botón sólido (secundario) dentro de la fila de acciones. Activado por defecto.
+    - name: Show Searcher
+      type: Boolean
+      desc: "Muestra u oculta el bloque buscador completo: campo de texto, botón Buscar y chips de búsquedas populares. Activado por defecto."
+    - name: Show Page Indicator
+      type: Boolean
+      desc: "Muestra u oculta los puntos del paginador sobre la imagen: verticales cuando Alignment es Right, horizontales bajo el contenido cuando es Center. Activado por defecto."
+    - name: Show Buttons
+      type: Boolean
+      desc: Muestra u oculta en conjunto toda la fila de botones de acción, además de los toggles individuales de cada botón. Activado por defecto.
+  hero-home:
+    - name: State
+      type: Variant
+      desc: Default presenta el buscador de vuelos en su estado inicial sobre el hero completo, con imagen, banner promocional y navegación superior visibles. Isolate expande el buscador con las opciones de millas AAdvantage, código promocional y el botón «Ver vuelos», difuminando el fondo para enfocar la atención en la búsqueda. Default es el valor por defecto.
+tables:
+  hero-home-tratamiento-de-imagen:
+    columns:
+      - Zona
+      - Medidas
+      - Descripción
+    rows:
+      - name: 1 · Márgenes de seguridad
+        meta: 64 px laterales · 28 px superior (bajo el topbar) · 28 px inferior
+        desc: "Zona susceptible de recortarse al redimensionar. No sitúes aquí rostros, logos ni elementos narrativos que no se puedan perder. Área segura resultante: 1312 × 624 px."
+      - name: 2 · Punto focal / área relevante
+        meta: 1312 × 364 px · x 64–1376 · y 336–700
+        desc: Aquí debe caer el sujeto principal de la fotografía. Es la única zona que permanece visible en todos los tamaños de viewport.
+      - name: 3 · Topbar / Banner promocional
+        meta: 1440 × 48 px · a sangre completa, anclado al borde superior
+        desc: "Franja sólida que se superpone sobre la imagen: los primeros 48 px quedan siempre ocultos. No la consideres parte de la composición fotográfica."
+      - name: 4 · Searchbox
+        meta: Componente 1090 × 260 px · zona reservada 1312 × 260 px (111 px de holgura lateral) · y 76–336
+        desc: "Es el elemento más importante de la página. En esta franja la fotografía queda tapada: no ubiques aquí nada que necesites que se vea. Lo que se asoma alrededor del widget debe ser fondo sutil —tonos parejos, sin patrones ni líneas finas— para que el searchbox se lea con claridad y mantenga el contraste."
+      - name: 5 · Paginador
+        meta: 28 × 116 px · a 64 px del borde derecho · y 463–579 · zona reservada 68 × 156 px (20 px de holgura)
+        desc: "Anclado al viewport, apoyado en el límite del área segura. Los puntos son blancos: evita zonas claras o saturadas detrás."
+      - name: 6 · Chatbot
+        meta: 283 × 92 px · a 64 px del borde derecho · a 23 px del borde inferior · zona reservada 300 × 116 px
+        desc: Incluye el globo de mensaje además del avatar. Mantén la esquina inferior derecha despejada y con contraste suficiente.
+  hero-home-tratamiento-de-imagen-2:
+    columns:
+      - Zona
+      - Medidas
+      - Descripción
+    rows:
+      - name: 1 · Márgenes de seguridad
+        meta: 20 px laterales · 28 px superior (bajo el searchbox) · 28 px inferior (bajo el paginador)
+        desc: "Zona susceptible de recortarse en pantallas más angostas o más altas. La fotografía no debe llevar aquí rostros, logos ni textos de la pieza. Área segura resultante: 388 × 423 px."
+      - name: 2 · Punto focal / área relevante
+        meta: 388 × 311 px · x 20–408 · y 372–683
+        desc: "Franja libre de interfaz, entre el searchbox y el chatbot. Aquí debe caer el sujeto principal y el lockup gráfico: es lo único que se ve sin nada encima."
+      - name: 3 · Tabs / selector de producto
+        meta: 428 × 88 px · a sangre completa · anclado al borde superior
+        desc: Los primeros 88 px de la imagen quedan cubiertos. La tira de chips scrollea en horizontal y desborda el ancho del viewport, así que la franja completa necesita fondo parejo.
+      - name: 4 · Searchbox
+        meta: Card 388 × 236 px con 20 px a cada lado · zona reservada 428 × 256 px · y 88–344
+        desc: "Es el elemento más importante de la página y siempre va por encima de la imagen. En esta franja la fotografía queda tapada: no ubiques aquí nada que necesites que se vea. Lo que se asoma alrededor del card debe ser fondo tranquilo —tonos parejos, sin patrones ni líneas finas—."
+      - name: 5 · Chatbot
+        meta: 252 × 72 px · x 156–408 · y 683–755 · a 20 px del borde derecho
+        desc: "Se apoya sobre el paginador, alineado al margen derecho. Incluye el globo de mensaje: si la foto tiene contenido en el cuadrante inferior derecho, queda tapado."
+      - name: 6 · Paginador
+        meta: 116 × 28 px · centrado · a 28 px del borde inferior · y 767–795
+        desc: "Anclado al borde inferior. Los puntos son claros: la fotografía debe tener detrás una zona sin brillos ni saturación alta."
+---
+
+## Hero Banner Split
+
+Hero de contenido con el texto y la imagen repartidos en bloques separados: breadcrumb, badge, logo, títulos, precio, acciones y buscador en un lado, y la imagen con su paginador en el otro.
+
+<FigmaEmbed node="5300:119080" title="Hero Banner Split" />
+
+### Resumen
+
+Cabecera para páginas de contenido y campañas. Casi todas sus partes son opcionales: doce booleanas deciden qué se muestra, desde el breadcrumb y el badge hasta el precio, los botones y el buscador con chips de búsquedas populares. La fila de acciones es además un slot, `Actions`, para reemplazar los botones por otro contenido.
+
+Son dos maestros: `Hero Banner Split / Desktop` y `Hero Banner Split / Mobile`. En ambos se combinan dos ejes: `Alignment` (Right o Center) y `Theme` (Light o Dark), lo que da cuatro variantes por maestro. Las doce propiedades booleanas son las mismas que las de Hero Banner Overlay.
+
+### Propiedades
+
+Propiedades del componente Hero Banner Split (Desktop).
+
+<PropsTable block="hero-banner-split" />
+
+## Hero Banner Overlay
+
+Hero con la fotografía a pantalla completa y el contenido superpuesto sobre ella, con una capa clara u oscura que asegura la lectura de los textos.
+
+<FigmaEmbed node="7930:151854" title="Hero Banner Overlay" />
+
+### Resumen
+
+Comparte con Hero Banner Split las mismas partes y las mismas doce booleanas, pero cambia la composición: la imagen es el fondo y el texto, el precio, los botones y el buscador van encima. El paginador se pega al borde derecho o pasa a una fila horizontal según la alineación.
+
+Son dos maestros: `Hero Banner Overlay / Desktop` y `Hero Banner Overlay / Mobile`, con los ejes `Alignment` (Right o Center) y `Theme` (Light o Dark). Junto con Split suman cuatro componentes por cuatro variantes: dieciséis combinaciones en la matriz.
+
+### Propiedades
+
+Propiedades del componente Hero Banner Overlay (Desktop).
+
+<PropsTable block="hero-banner-overlay" />
+
+## Hero Home
+
+Hero de la página de inicio: imagen a pantalla completa, banner promocional, navegación superior y el buscador de vuelos.
+
+<FigmaEmbed node="7930:151498" title="Hero Home" />
+
+### Resumen
+
+Es la primera pantalla del sitio y su pieza central es el buscador de vuelos, con los campos de origen, destino, fecha y pasajeros. Tiene una sola propiedad: el estado del buscador.
+
+Son dos maestros: `Hero Home / Desktop` y `Hero Home / Mobile`, con un eje `State` de dos valores: Default, en reposo, e Isolate, con el buscador desplegado y el fondo difuminado. La matriz suma además instancias de ejemplo de cada campo del buscador: Origen y Destino con `Dropdown Destinations`, Fecha con `Calendar Dropdown` y Pasajeros con `Popover / Increment`.
+
+### Propiedades
+
+Propiedades del componente Hero Home (Desktop).
+
+<PropsTable block="hero-home" />
+
+### Tratamiento de Imagen
+
+La fotografía a pantalla completa es la primera impresión del producto y convive con elementos de interfaz superpuestos (tabs/topbar, searchbox, paginador y chatbot), por lo que debe respetar las áreas seguras definidas abajo. La composición mobile no es un recorte de la desktop: el sujeto, el lockup y los textos gráficos deben reubicarse dentro de su propia área segura.
+
+**Desktop — 1440 × 728 px**
+
+<FigmaEmbed node="4329:2653" title="Hero Home Desktop - Áreas seguras" />
+
+<DocTable id="hero-home-tratamiento-de-imagen" />
+
+**Mobile — 428 × 823 px**
+
+<FigmaEmbed node="4342:2780" title="Hero Home Mobile - Áreas seguras" />
+
+<DocTable id="hero-home-tratamiento-de-imagen-2" />

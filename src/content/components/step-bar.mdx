@@ -1,0 +1,25 @@
+---
+title: Step Bar
+description: Indicador compacto del paso actual en el flujo de compra, con contador, ícono, etiqueta y barra de progreso.
+figma:
+  - "6065:116934"
+props:
+  step-bar:
+    - name: Step
+      type: Variant
+      desc: "Define qué paso del flujo de compra muestra la barra: Trip, Services, Seats, Details o Payment. Cambia el texto «Paso N de 5», el ícono y la etiqueta del paso, y avanza la barra de progreso proporcionalmente. Trip es el valor por defecto (paso 1 de 5)."
+---
+
+<FigmaEmbed node="6065:116934" />
+
+## Resumen
+
+Step Bar indica en qué paso del flujo de compra está el usuario: muestra el contador «Paso N de 5», el ícono y la etiqueta del paso, y una barra de progreso que avanza con cada etapa. Se usa en el navbar de booking, junto a la acción principal.
+
+5 variantes = `Step` (5), matriz completa. Un solo eje: cada paso avanza la barra un 20% y fija el ícono, la etiqueta y el contador «Paso N de 5».
+
+## Propiedades
+
+Propiedades configurables del componente Step Bar.
+
+<PropsTable block="step-bar" />

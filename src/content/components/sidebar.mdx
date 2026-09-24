@@ -1,0 +1,131 @@
+---
+title: Sidebar
+description: "Menú lateral de la reserva y las piezas con que se arma: la fila de opción, el widget de usuario y la sección que agrupa las filas."
+figma:
+  - "6567:79655"
+  - "7503:122547"
+  - "7503:122778"
+  - "7503:122805"
+props:
+  sidebar:
+    - name: Show Avatar
+      type: Boolean
+      desc: Muestra u oculta el widget de usuario (avatar, nombre y correo) en la parte superior del sidebar. Activado por defecto.
+    - name: Show Section 1
+      type: Boolean
+      desc: Muestra u oculta la primera sección de opciones («Tu reserva») junto con su título. Activado por defecto.
+    - name: Show Section 2
+      type: Boolean
+      desc: Muestra u oculta la segunda sección de opciones («Adicionales») junto con su título. Activado por defecto.
+    - name: Show Section 3
+      type: Boolean
+      desc: Muestra u oculta la tercera sección de opciones («Cambios y devoluciones») junto con su título. Activado por defecto.
+  option-navbar:
+    - name: State
+      type: Variant
+      desc: "Controla el estado visual de la fila: Default (fondo neutro), Hover (fondo ligeramente resaltado al pasar el cursor) o Selected (fondo destacado de forma persistente). Default es el valor por defecto."
+    - name: Content
+      type: Variant
+      desc: "Define qué tipo de ícono se muestra a la izquierda: Icon (pictograma genérico, ej. avión o casa) o Flags (bandera de país). Icon es el valor por defecto."
+    - name: Show Icon Left
+      type: Boolean
+      desc: Muestra u oculta el ícono (o bandera) a la izquierda del título. Activado por defecto.
+    - name: Show Icon Right
+      type: Boolean
+      desc: Muestra u oculta la flecha (chevron) a la derecha de la fila. Activado por defecto.
+    - name: Show Badge
+      type: Boolean
+      desc: Muestra u oculta la etiqueta «Badge» junto a la flecha derecha. Activado por defecto.
+    - name: Title
+      type: Text
+      desc: Texto editable de la opción (por defecto «Opción»).
+  user-widget:
+    - name: Container
+      type: Variant
+      desc: Agrega o quita un fondo tipo tarjeta alrededor del widget de usuario. True muestra el fondo con esquinas redondeadas; False deja el contenido sin fondo, integrado al lienzo. True es el valor por defecto.
+    - name: Size
+      type: Variant
+      desc: "Ajusta el tamaño general del widget: Large usa un avatar y tipografía más grandes con más ancho; Small los reduce para espacios compactos. Large es el valor por defecto."
+  section:
+    - name: Title
+      type: Text
+      desc: Texto editable del encabezado de la sección (por defecto «Tu reserva»). Se oculta automáticamente cuando Show Title está desactivado.
+    - name: Show Title
+      type: Boolean
+      desc: "Muestra u oculta el encabezado de la sección. Activado por defecto: al desactivarlo, el título desaparece y la lista de opciones pasa a ocupar ese espacio."
+    - name: Options
+      type: Slot
+      desc: Espacio donde se insertan las filas de opciones (instancias de Option Navbar u otro componente permitido), separadas por dividers. Acepta uno o varios elementos; por defecto trae tres filas de ejemplo.
+---
+
+## Sidebar
+
+Menú lateral de la reserva: cabecera con el widget de usuario y las opciones agrupadas en secciones. Es el panel que acompaña al pasajero dentro de Mi reserva.
+
+<FigmaEmbed node="6567:79655" />
+
+### Resumen
+
+Panel vertical que abre con un `User Widget` (avatar, nombre y correo) y debajo apila tres `Section` con sus filas `Option Navbar`: «Tu reserva», «Adicionales» y «Cambios y devoluciones». Desde la instancia se puede apagar el avatar y cada una de las tres secciones por separado.
+
+La matriz reúne cinco paneles: `Country Selector`, `Sidebar` (navegación pública, sin cabecera), `Index Sidebar`, `Sidebar Admin Usuario` y `Sidebar` (menú de la reserva, con avatar). Son cinco componentes independientes, sin propiedades de variante; solo el último expone propiedades de instancia, que son las que se documentan acá.
+
+### Propiedades
+
+Propiedades configurables del componente Sidebar.
+
+<PropsTable block="sidebar" />
+
+## Option Navbar
+
+Fila de opción de las sidebars: ícono o bandera, título, badge y chevron. Es la pieza que se repite en todos los menús laterales del kit.
+
+<FigmaEmbed node="7503:122547" title="Option Navbar" />
+
+### Resumen
+
+Cada fila es un enlace a una sección: lleva un ícono o una bandera a la izquierda, el título de la opción y, a la derecha, un badge opcional y la flecha. Los tres elementos accesorios se pueden apagar desde la instancia.
+
+6 variantes = `State` (3) × `Content` (2), matriz completa. Es la fila de opción que compone todas las sidebars del kit. El cuadrante va en fondo primary porque los estados Hover y Selected usan terciary y secondary como relleno.
+
+### Propiedades
+
+Propiedades configurables del componente Option Navbar.
+
+<PropsTable block="option-navbar" />
+
+## User Widget
+
+Cabecera con avatar, nombre y correo del usuario que abre las sidebars de la reserva y de Mi cuenta.
+
+<FigmaEmbed node="7503:122778" title="User Widget" />
+
+### Resumen
+
+Identifica al usuario en sesión: avatar con indicador de estado, nombre y correo. Puede ir dentro de una cápsula con fondo y borde o suelto sobre el panel, y tiene un tamaño grande para cabeceras y uno compacto para filas.
+
+4 variantes = `Container` (2) × `Size` (2), matriz completa. Es la cabecera con avatar, nombre y correo que abre las sidebars de la reserva y de Mi cuenta.
+
+### Propiedades
+
+Propiedades configurables del componente User Widget.
+
+<PropsTable block="user-widget" />
+
+## Section
+
+Bloque que agrupa las filas de opción dentro de una sidebar, con un título opcional.
+
+<FigmaEmbed node="7503:122805" title="Section" />
+
+### Resumen
+
+Contenedor de un grupo de opciones: un título (por ejemplo «Tu reserva») y debajo un slot con las filas `Option Navbar` separadas por dividers. No tiene fondo propio: hereda el del panel.
+
+Sin ejes de variante: una sola versión con tres propiedades de instancia. Es el bloque que agrupa las filas dentro de una sidebar. El cuadrante va en blanco porque section no tiene fondo propio: hereda el del panel.
+
+### Propiedades
+
+Propiedades configurables del componente Section.
+
+<PropsTable block="section" />

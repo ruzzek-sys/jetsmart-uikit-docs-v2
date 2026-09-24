@@ -1,0 +1,28 @@
+---
+title: Frequent Traveler Item
+description: Tarjeta con los datos de un pasajero frecuente guardado en la cuenta, con acciones de ícono para gestionarlo.
+figma:
+  - "6186:153087"
+props:
+  frequent-traveler-item:
+    - name: Breakpoint
+      type: Variant
+      desc: Define el diseño de la tarjeta según el ancho de pantalla. Desktop muestra los datos del pasajero en una sola fila horizontal; Mobile apila el encabezado y los datos en bloques verticales más compactos. Desktop es el valor por defecto.
+    - name: Show Button Secondary
+      type: Boolean
+      desc: Agrega un segundo botón de ícono junto al principal, en la esquina superior derecha. Activado muestra dos botones de acción en línea; desactivado muestra solo uno. Desactivado es el valor por defecto.
+---
+
+<FigmaEmbed node="6186:153087" />
+
+## Resumen
+
+Frequent Traveler Item muestra los datos de un pasajero guardado como viajero frecuente, con uno o dos botones de ícono en la esquina superior derecha para actuar sobre él. Se repite en lista en la sección de viajeros frecuentes de la cuenta del usuario.
+
+2 variantes = `Breakpoint` (2), matriz completa. `Desktop` es una sola fila con los datos en línea (872 × 88); `Mobile` es una tarjeta apilada con los datos en dos filas (388 × 180). El botón secundario se activa por propiedad de instancia, no por variante.
+
+## Propiedades
+
+Propiedades del componente Frequent Traveler Item
+
+<PropsTable block="frequent-traveler-item" />

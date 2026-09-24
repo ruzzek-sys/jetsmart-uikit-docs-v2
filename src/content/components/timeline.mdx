@@ -1,0 +1,34 @@
+---
+title: Timeline
+description: Hitos con imagen, año, título y descripción que se encadenan en una línea de tiempo horizontal.
+figma:
+  - "6065:117652"
+props:
+  timeline:
+    - name: Alignment
+      type: Variant
+      desc: Left ubica el punto conector y alinea el texto a la izquierda del bloque. Right lo ubica y alinea a la derecha. Center centra el punto y el texto. Left es el valor por defecto.
+    - name: Year
+      type: Text
+      desc: "Texto del año que encabeza el hito, arriba del título. Valor por defecto: «2017»."
+    - name: Title
+      type: Text
+      desc: "Texto en negrita del hito. Valor por defecto: «Primer vuelo»."
+    - name: Description
+      type: Text
+      desc: "Texto de apoyo bajo el título. Valor por defecto: «Despegamos en Chile conectando Santiago con regiones»."
+---
+
+<FigmaEmbed node="6065:117652" />
+
+## Resumen
+
+El Timeline Item es un hito de una línea de tiempo: una imagen, un punto conector sobre la línea y, debajo, el año, un título en negrita y un texto de apoyo. Se encadenan varios en fila para contar una historia en orden cronológico, como la trayectoria de la compañía.
+
+3 variantes = `Alignment` (3), matriz completa. La familia son dos componentes: `Timeline Item`, el hito suelto, y `History Timeline Section`, la sección ya armada con cinco instancias de ese hito. Las columnas de la matriz recorren `Left` (primer hito de la línea), `Center` (hitos intermedios) y `Right` (último hito de la línea).
+
+## Propiedades
+
+Lo que puedes ajustar en cada instancia del Timeline Item sin salir de la variante.
+
+<PropsTable block="timeline" />

@@ -1,0 +1,25 @@
+---
+title: Selector Card
+description: Tarjeta seleccionable con ícono, título y línea de detalle para elegir entre opciones.
+figma:
+  - "6065:116556"
+props:
+  selector-card:
+    - name: State
+      type: Variant
+      desc: Controla el estado visual del card. Default muestra el ícono a color y el card interactivo. Selected resalta el card con un borde de color y un halo alrededor, indicando la opción activa. Disabled atenúa el ícono, el título y el subtítulo en gris, indicando que la opción no está disponible. Default es el valor por defecto.
+---
+
+<FigmaEmbed node="6065:116556" />
+
+## Resumen
+
+El Selector Card es una tarjeta seleccionable con ícono, título y línea de detalle. Se usa para elegir una opción entre varias presentadas lado a lado, como en el paso de Solicitud de devolución del Check-in.
+
+Un solo eje, `State`, con tres valores; los tres comparten estructura y solo cambian el borde y la sombra.
+
+## Propiedades
+
+Propiedades configurables del componente Selector Card.
+
+<PropsTable block="selector-card" />

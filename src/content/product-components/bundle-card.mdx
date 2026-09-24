@@ -1,0 +1,84 @@
+---
+title: Bundle Card
+description: "Tarjetas para ofrecer paquetes de servicios y planes: las tarifas por bundle, las alianzas con Bci y la tarjeta de beneficios. Cada una tiene sus propios maestros y sus propiedades."
+figma:
+  - "6186:139756"
+  - "7834:118776"
+  - "7834:119172"
+props:
+  bundle-card:
+    - name: Featured
+      type: Variant
+      desc: False muestra la tarjeta en fondo blanco, con el botón «Seleccionar» de contorno azul marino. True resalta la tarjeta con fondo azul marino sólido y un botón «Seleccionar» en rojo sólido, para destacar visualmente el bundle recomendado. False es el valor por defecto.
+    - name: Feature Item Repeat Stack
+      type: Slot
+      desc: Slot repetible que acepta instancias del set Feature Item (ícono + texto), para agregar, quitar o reordenar libremente las filas de beneficios que lista la tarjeta (equipaje, FlexiSMART, embarque prioritario, etc.). Solo admite los valores preferidos definidos para este slot.
+  bci-alliance-card:
+    - name: Type
+      type: Variant
+      desc: Default muestra la tarjeta en fondo blanco, con badge y textos en tonos azul marino, para alianzas regulares (ej. Alianzas Bci). Featured resalta la tarjeta con fondo azul marino sólido y botón «Ver más» en rojo, para destacar un plan premium (ej. All You Can Fly). Default es el valor por defecto.
+    - name: List Item
+      type: Slot
+      desc: Slot repetible que acepta ÚNICAMENTE instancias del componente Feature Item (ícono + texto) — ningún otro componente es un valor válido. Permite agregar, quitar o reordenar libremente las filas de beneficios que lista la tarjeta (equipaje, FlexiSMART, embarque prioritario, etc.).
+    - name: List Item2
+      type: Slot
+      desc: Mismo slot repetible que List Item, pero expuesto en la variante Featured — aloja el listado de beneficios de la tarjeta destacada (tarifa $0, vuelos ilimitados, cashback, etc.). Solo admite los valores preferidos definidos para este slot.
+  benefits-card:
+    - name: Show Badge
+      type: Boolean
+      desc: Muestra la etiqueta «Recomendado» junto al plan PLUS. Activado por defecto; en false se oculta y la tarjeta se ajusta sin ese espacio.
+---
+
+## Bundle Card
+
+Selector de tarifas: una fila de tarjetas `Bundle`, una por paquete, con sus beneficios y el botón «Seleccionar».
+
+<FigmaEmbed node="6186:139756" />
+
+### Resumen
+
+Presenta los bundles de tarifa lado a lado para que el pasajero compare y elija uno. Cada tarjeta lista los servicios que incluye el paquete (equipaje, FlexiSMART, embarque prioritario, etc.) y cierra con su botón de selección; el bundle recomendado se destaca en azul marino.
+
+La matriz reúne siete nodos reales: `Bundle` (2) + `Bundle Card` (2) + `Card - Alianzas Bci` (2) + `Benefits Card` (1). `Bundle` es la tarjeta individual y varía en `Featured` (False, tarifa estándar; True, tarifa destacada). `Bundle Card` la agrupa y varía en `Breakpoint`: Desktop muestra cuatro tarifas en fila y Mobile las pasa a un carrusel de una tarifa. Las propiedades de abajo se ajustan en cada `Bundle`.
+
+### Propiedades
+
+Propiedades configurables del componente Bundle Card.
+
+<PropsTable block="bundle-card" />
+
+## Bci Alliance Card
+
+Tarjeta de alianza: badge del plan, descripción, lista de beneficios y botón «Ver más».
+
+<FigmaEmbed node="7834:118776" title="Bci Alliance Card" />
+
+### Resumen
+
+Presenta una alianza o plan asociado con sus beneficios (descuentos en vuelos, equipaje, cashback, etc.), a quién está dirigido y un botón para ver el detalle. Se usa para alianzas regulares como Alianzas Bci y para planes premium como All You Can Fly.
+
+En la matriz aparece como `Card - Alianzas Bci`, con un solo eje de variante: `Type`. Default es la alianza estándar y Featured la alianza destacada. Cada variante expone su propio slot de beneficios.
+
+### Propiedades
+
+Propiedades configurables del componente Bci Alliance Card.
+
+<PropsTable block="bci-alliance-card" />
+
+## Benefits Card
+
+Tarjeta de beneficios del plan PLUS, con la etiqueta «Recomendado» opcional.
+
+<FigmaEmbed node="7834:119172" title="Benefits Card" />
+
+### Resumen
+
+Tarjeta compacta que resume los beneficios de un plan y lo marca como recomendado cuando corresponde.
+
+No tiene variantes: es un único maestro de 268 × 272. Lo único que se cambia desde la instancia es la visibilidad del badge.
+
+### Propiedades
+
+Lo que se cambia desde la instancia sin salir de la variante.
+
+<PropsTable block="benefits-card" />

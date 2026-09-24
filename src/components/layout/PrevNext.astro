@@ -1,0 +1,58 @@
+---
+import { getPrevNext } from '../../data/nav';
+
+interface Props {
+  current: string;
+}
+
+const { prev, next } = await getPrevNext(Astro.props.current);
+---
+
+{(prev || next) && (
+  <nav class="mt-16 grid gap-3 border-t border-line pt-8 sm:grid-cols-2" aria-label="Páginas vecinas">
+    {prev ? (
+      <a href={prev.href} class="pager" rel="prev">
+        <span class="pager__dir">← Anterior</span>
+        <span class="pager__label">{prev.label}</span>
+      </a>
+    ) : <span class="hidden sm:block" />}
+    {next && (
+      <a href={next.href} class="pager sm:text-right" rel="next">
+        <span class="pager__dir">Siguiente →</span>
+        <span class="pager__label">{next.label}</span>
+      </a>
+    )}
+  </nav>
+)}
+
+<style>
+  .pager {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-height: 44px;
+    padding: 14px 18px;
+    border: 1px solid var(--color-line);
+    border-radius: 12px;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .pager:hover {
+    border-color: var(--color-brand);
+    box-shadow: 0 4px 16px rgb(181 18 27 / 0.08);
+  }
+
+  .pager__dir {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+
+  .pager__label {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--color-ink);
+  }
+</style>

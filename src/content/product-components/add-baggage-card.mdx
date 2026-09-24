@@ -1,0 +1,31 @@
+---
+title: Add Baggage Card
+description: Tarjeta para agregar equipaje.
+figma:
+  - "6186:135425"
+tables:
+  add-baggage-card-propiedades:
+    columns:
+      - Set
+      - Eje
+      - Valores
+    rows:
+      - name: Add Baggage Card
+        meta: "`Breakpoint`"
+        desc: "Desktop: título y ruta en la misma línea, 501 px de ancho. Mobile: la ruta baja a una segunda línea, 388 px. Default: Desktop."
+      - name: Add-On Selector Row
+        meta: "`Type`"
+        desc: "Add Button: Quantity Stepper para elegir cantidad. Checkbox: alta simple de un solo ítem. Default: Add Button."
+---
+
+<FigmaEmbed node="6186:135425" />
+
+## Resumen
+
+Contenedor de la sección de equipaje: encabezado con la ruta más las filas de selección.
+
+## Propiedades
+
+Dos sets, un eje cada uno: 4 variantes en total, todas reales. La card se arma con instancias de Add-On Selector Row, así que hereda su eje Type.
+
+<DocTable id="add-baggage-card-propiedades" />

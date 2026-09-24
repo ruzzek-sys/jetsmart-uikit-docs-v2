@@ -1,0 +1,28 @@
+---
+title: Membership Plan Card
+description: Tarjeta que presenta un plan de membresía con su listado de beneficios, el selector de créditos y el precio mensual con su CTA.
+figma:
+  - "5636:125790"
+props:
+  membership-plan-card:
+    - name: Show Credit Selector
+      type: Boolean
+      desc: Muestra u oculta el selector de créditos de viaje (radio buttons con precio) sobre el precio final. True muestra las opciones (ej. 6 o 12 créditos) con su precio mensual; False oculta esa sección y el precio queda directamente bajo el listado de beneficios. True es el valor por defecto.
+    - name: Benefits List
+      type: Slot
+      desc: "Espacio que aloja el listado de beneficios del plan: instancias de Feature Item (ítem con ícono de check y texto) y de Button (como el enlace «Ver rutas disponibles»), permitiendo armar una lista de beneficios distinta para cada tarjeta de membresía. Mínimo requerido: 1 Feature Item."
+---
+
+<FigmaEmbed node="5636:125790" />
+
+## Resumen
+
+Membership Plan Card presenta un plan de membresía (por ejemplo, SMART Pass) de arriba a abajo: una cabecera con el alcance y el nombre del plan, el listado de beneficios, un selector opcional de créditos de viaje y el precio mensual con el botón de acción. Sirve para comparar y contratar planes de suscripción.
+
+Es una familia de tres componentes reales: el contenedor `Membership Plan Card`, de cabecera a CTA, y sus partes `Price Selector` (opción de crédito con radio) y `Currency Selector` (precio, moneda y periodo). Ninguno tiene propiedades de variante, así que no hay combinaciones: la tarjeta se documenta por su slot y su booleano.
+
+## Propiedades
+
+Propiedades editables de la tarjeta de membresía.
+
+<PropsTable block="membership-plan-card" />

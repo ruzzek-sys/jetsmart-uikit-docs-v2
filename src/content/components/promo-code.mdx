@@ -1,0 +1,64 @@
+---
+title: Promo Code
+description: "Ingreso y validación de códigos promocionales: el campo en línea para desktop y mobile, y el overlay que lo contiene en el flujo mobile."
+figma:
+  - "7538:135574"
+  - "6065:115139"
+props:
+  promo-code-desktop-mobile:
+    - name: State
+      type: Variant
+      desc: Collapsed muestra solo el enlace «Añadir código promocional». Empty expande el input y el botón Aplicar. Success agrega el chip del cupón y un mensaje de confirmación en verde. Error muestra el chip y un mensaje en rojo. Limit Reached muestra varios chips y un aviso de límite alcanzado. Collapsed es el valor por defecto.
+    - name: Show Alert
+      type: Boolean
+      desc: Muestra u oculta el mensaje de estado (éxito, error o límite) debajo de los chips. Activado es el valor por defecto.
+    - name: Applied Promo Codes Container
+      type: Slot
+      desc: Contenedor que recibe los chips de cupones aplicados; acepta instancias del set de chips de cupón.
+  promo-code-overlay-mobile:
+    - name: State
+      type: Heredada
+      desc: Heredada de Promo Code Mobile (instancia anidada en el overlay). Empty, Success, Error y Limit Reached controlan el chip y el mensaje de estado del input. Empty es el valor por defecto.
+    - name: Show Alert
+      type: Heredada
+      desc: Heredada de Promo Code Mobile. Muestra u oculta el mensaje de estado debajo de los chips. Activado es el valor por defecto.
+    - name: Applied Promo Codes Container
+      type: Heredada
+      desc: Heredada de Promo Code Mobile. Contenedor que recibe los chips de cupones aplicados dentro del overlay.
+---
+
+## Promo Code Desktop - Mobile
+
+Campo para ingresar un cupón, aplicarlo y ver los cupones aplicados como chips, con un mensaje de confirmación, error o límite debajo.
+
+<FigmaEmbed node="7538:135574" title="Promo Code Desktop - Mobile" />
+
+### Resumen
+
+Bloque de ingreso de código promocional: un input con su botón Aplicar, el contenedor de chips con los cupones ya aplicados y un mensaje de estado que confirma, rechaza o avisa que se alcanzó el límite. El estado se controla con una sola variante y el mensaje se puede apagar desde la instancia.
+
+Son dos maestros: `Promo Code Desktop` y `Promo Code Mobile`. La versión no es un eje: cada uno es un componente separado. En desktop `State` recorre cinco valores (Collapsed, Empty, Success, Error y Limit Reached); en mobile son cuatro, porque no tiene variante Collapsed: en mobile el disparador vive fuera del componente.
+
+### Propiedades
+
+Propiedades configurables del componente Promo Code Desktop.
+
+<PropsTable block="promo-code-desktop-mobile" />
+
+## Promo Code Overlay Mobile
+
+Panel del flujo mobile que presenta el ingreso de código promocional con su título, botón de cierre y botón Aplicar.
+
+<FigmaEmbed node="6065:115139" title="Promo Code Overlay Mobile" />
+
+### Resumen
+
+Contenedor del flujo mobile: agrupa el título «Añadir código promocional», el botón de cierre, el campo de cupón y el botón Aplicar a todo el ancho.
+
+Es un solo contenedor, sin estados propios: anida una instancia del set `Promo Code Mobile` (`State`=Empty), y todo lo que se ajusta en él se hereda de esa instancia.
+
+### Propiedades
+
+Promo Code Overlay Mobile no define propiedades propias: hereda las de Promo Code Mobile.
+
+<PropsTable block="promo-code-overlay-mobile" />

@@ -1,0 +1,96 @@
+---
+title: Flight Card
+description: Tarjeta de resultado de vuelo con horarios, escala y tarifas seleccionables, junto con las piezas internas con las que se arma.
+figma:
+  - "6186:142603"
+  - "7797:115810"
+  - "7797:115989"
+props:
+  flight-card:
+    - name: Breakpoint
+      type: Variant
+      desc: Desktop organiza la ruta y las tarifas en una sola fila horizontal ancha. Mobile apila todo verticalmente, con las tarjetas de tarifa debajo del detalle del vuelo. Desktop es el valor por defecto.
+    - name: Show Stopover
+      type: Boolean
+      desc: Muestra u oculta la fila de escala («Escala en PMC», su duración y el enlace «Ver más»). Activado es el valor por defecto.
+    - name: Show Badge
+      type: Boolean
+      desc: Muestra u oculta el badge principal celeste («Vuelo directo»), de forma independiente al badge secundario. Activado es el valor por defecto.
+    - name: Show Fee
+      type: Boolean
+      desc: "Comportamiento inconsistente entre breakpoints: en Desktop no produce ningún cambio visible; en Mobile oculta por completo las tarjetas de tarifa («Club de descuentos» / «Tarifa normal»). Activado es el valor por defecto — el binding en Mobile debería revisarse."
+    - name: Show Price
+      type: Boolean
+      desc: "Comportamiento inconsistente entre breakpoints: en Desktop oculta por completo las tarjetas de tarifa; en Mobile no produce ningún cambio visible. Activado es el valor por defecto — el binding en Desktop debería revisarse."
+    - name: Show Badge Secondary
+      type: Boolean
+      desc: Muestra u oculta el badge secundario rojo («Tarifa promocional»), de forma independiente al badge principal. Activado es el valor por defecto.
+  trip-leg-timeline:
+    - name: Breakpoint
+      type: Variant
+      desc: Ajusta la escala tipográfica y el espaciado del timeline al ancho de pantalla. Mobile compacta las horas, códigos IATA y la etiqueta de duración; Desktop los agranda para una fila más espaciosa. Desktop es el valor por defecto.
+  flight-card-stopover:
+    - name: Breakpoint
+      type: Variant
+      desc: Desktop organiza el bloque en una sola fila de 565px de ancho fijo. Mobile comprime el mismo contenido a 388px, conservando el orden de icono, escala, duración y enlace. Desktop es el valor por defecto.
+    - name: Stopovers Label
+      type: Text
+      desc: Texto junto al código IATA de la escala, ej. «Escala en PMC». Según el caso, puede cambiar a «Parada en PMC» —se usa «Escala» cuando el pasajero puede permanecer a bordo o hay conexión, y «Parada» cuando implica bajar del avión sin cambio de vuelo. Editable manualmente por instancia.
+    - name: Show Action
+      type: Boolean
+      desc: Muestra u oculta el enlace «Ver más» a la derecha de la fila; al desactivarse, el resto del contenido se centra dentro del bloque. Activado es el valor por defecto.
+---
+
+## Flight Card
+
+Tarjeta de resultado de búsqueda: un vuelo con su horario, ruta, duración, escala y las tarifas disponibles para seleccionarlo.
+
+<FigmaEmbed node="6186:142603" />
+
+### Resumen
+
+Es la card que se repite en el listado de vuelos del paso de selección. Combina el timeline del tramo, los badges del vuelo, la fila de escala y las tarjetas de tarifa con su botón «Seleccionar»; cada bloque opcional se prende o apaga desde la instancia.
+
+2 variantes = `Breakpoint` (2), matriz completa. Cinco propiedades booleanas controlan qué bloques se muestran dentro de la card. Por dentro se arma con tres piezas que solo se usan aquí: `Trip Leg Timeline`, `Flight Card Fare Option` (`Promotional` y `Default`) y `Flight Card Stopover`.
+
+### Propiedades
+
+Propiedades configurables del componente Flight Card.
+
+<PropsTable block="flight-card" />
+
+## Trip Leg Timeline
+
+Pieza interna de la Flight Card: horario, ruta y duración del tramo, con los códigos IATA de origen y destino unidos por una línea con el avión.
+
+<FigmaEmbed node="7797:115810" title="Trip Leg Timeline" />
+
+### Resumen
+
+Muestra la hora de salida y llegada con su aeropuerto, y la duración del tramo sobre la línea que los une. Solo se usa dentro de la Flight Card.
+
+Un solo eje de variante: `Breakpoint`, con `Desktop` (567 × 66) y `Mobile` (356 × 50).
+
+### Propiedades
+
+Propiedades configurables del componente Trip Leg Timeline.
+
+<PropsTable block="trip-leg-timeline" />
+
+## Flight Card Stopover
+
+Pieza interna de la Flight Card: la fila de escala, con el aeropuerto, la duración y un enlace al detalle.
+
+<FigmaEmbed node="7797:115989" title="Flight Card Stopover" />
+
+### Resumen
+
+Fila compacta que indica dónde hace escala el vuelo y cuánto dura, con el enlace «Ver más» para abrir el detalle. Solo se usa dentro de la Flight Card, y es la que prende o apaga su propiedad `Show Stopover`.
+
+Un solo eje de variante: `Breakpoint`, con `Desktop` (565 × 40) y `Mobile` (388 × 40).
+
+### Propiedades
+
+Propiedades configurables del componente Flight Card Stopover.
+
+<PropsTable block="flight-card-stopover" />

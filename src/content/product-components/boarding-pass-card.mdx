@@ -1,0 +1,28 @@
+---
+title: Boarding Pass Card
+description: Tarjeta del paso de adicionales para elegir, por pasajero, cómo se obtiene la tarjeta de embarque.
+figma:
+  - "6186:138537"
+props:
+  boarding-pass-card:
+    - name: Toggle State
+      type: Instance
+      desc: "Off: cada pasajero elige su propio embarque prioritario y tarjeta de forma independiente. On: aplica la misma selección a todos los pasajeros a la vez. On es el valor por defecto."
+    - name: Selection Table Type
+      type: Instance
+      desc: "Checkbox: permite marcar el embarque prioritario de forma independiente por cada pasajero. Radio: fuerza una única selección por pasajero. Radio es el valor por defecto."
+---
+
+<FigmaEmbed node="6186:138537" />
+
+## Resumen
+
+Tarjeta para elegir cómo recibe cada pasajero su tarjeta de embarque: obtenerla en el aeropuerto o llevarla por su cuenta. Muestra el tramo, permite recorrer los pasajeros uno a uno y ofrece un switch para aplicar la misma selección a todos a la vez.
+
+Un solo componente, sin ejes de variante: la matriz anota sus cinco bloques de composición, de arriba a abajo —`Header`, `Switch`, `Data Item`, `Passenger Stepper` y `Selection Table`— y las variantes viven en cada sub-componente anidado.
+
+## Propiedades
+
+Lo que se cambia desde la instancia sin salir del componente.
+
+<PropsTable block="boarding-pass-card" />

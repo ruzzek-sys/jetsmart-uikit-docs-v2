@@ -1,0 +1,28 @@
+---
+title: Progress Bar
+description: Barra horizontal que indica cuánto se ha completado de un proceso, en pasos de 20 %.
+figma:
+  - "6065:115112"
+props:
+  progress-bar:
+    - name: Size
+      type: Variant
+      desc: Medium es el tamaño por defecto (altura 8px). Large aumenta la altura a 12px para mejor visibilidad en espacios con más prominencia.
+    - name: Value
+      type: Variant
+      desc: Controla el porcentaje completado de la barra. Puede ser 0 (vacía), 20, 40, 60, 80 o 100 (llena). Value=0 es el valor por defecto.
+---
+
+<FigmaEmbed node="6065:115112" />
+
+## Resumen
+
+La Progress Bar es una barra horizontal que muestra el avance de un proceso o tarea: un track que se rellena según el porcentaje completado, de vacía (0) a llena (100). Viene en dos alturas, Medium para el uso habitual y Large para espacios con más prominencia.
+
+12 variantes = `Size` (2) × `Value` (6), matriz completa. El relleno se mide sobre un track de 240 px; en uso real el ancho lo define el layout.
+
+## Propiedades
+
+Controla el tamaño de la barra de progreso y el porcentaje mostrado
+
+<PropsTable block="progress-bar" />

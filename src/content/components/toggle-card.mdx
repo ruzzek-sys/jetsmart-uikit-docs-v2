@@ -1,0 +1,40 @@
+---
+title: Toggle Card
+description: Tarjeta con interruptor para activar un servicio opcional, con su pregunta, monto y texto de apoyo.
+figma:
+  - "6077:118393"
+props:
+  toggle-card:
+    - name: Show Label
+      type: Boolean
+      desc: Activado muestra la pregunta en negrita de la parte superior (capa Title). Desactivado la oculta. Activado por defecto.
+    - name: Show Caption
+      type: Boolean
+      desc: Activado muestra el texto de apoyo inferior (capa Caption, que toma su contenido de la propiedad Description). Activado por defecto.
+    - name: Show Price
+      type: Boolean
+      desc: Activado muestra el monto junto al toggle, con el prefijo de moneda «CLP» fijo. Activado por defecto.
+    - name: Title
+      type: Text
+      desc: Texto en negrita de la parte superior de la tarjeta; su visibilidad depende de Show Label.
+    - name: Price
+      type: Text
+      desc: Monto que se muestra junto al toggle; su visibilidad depende de Show Price.
+    - name: Description
+      type: Text
+      desc: Texto de apoyo inferior (capa Caption); su visibilidad depende de Show Caption.
+---
+
+<FigmaEmbed node="6077:118393" />
+
+## Resumen
+
+Tarjeta con un interruptor para activar un servicio opcional dentro de un flujo, como pedir factura. Reúne una pregunta en negrita, la etiqueta del toggle con su monto en «CLP» y un texto de apoyo debajo.
+
+Sin propiedades de variante: es un componente único. Las tres propiedades booleanas de instancia —`Show Label`, `Show Price` y `Show Caption`— dan 8 configuraciones posibles. La matriz anota el componente original y los bloques que cada booleana muestra u oculta.
+
+## Propiedades
+
+Lo que puedes ajustar en cada instancia del Toggle Card sin tocar el componente principal.
+
+<PropsTable block="toggle-card" />

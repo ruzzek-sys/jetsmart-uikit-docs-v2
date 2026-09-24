@@ -1,0 +1,66 @@
+---
+title: Icon Circle
+description: Número o ícono contenido en un círculo, para marcar pasos o destacar un ícono.
+figma:
+  - "5300:119897"
+props:
+  icon-circle:
+    - name: Style
+      type: Variant
+      desc: Solid rellena el círculo con color sólido. Outline deja el círculo transparente con un borde del color de Type. Ghost elimina el círculo por completo, mostrando solo el número o ícono. Solid es el valor por defecto.
+    - name: Type
+      type: Variant
+      desc: "Define la paleta de color: Primary usa azul marino oscuro, Tertiary usa turquesa/teal, Neutral usa gris. Primary es el valor por defecto."
+    - name: Size
+      type: Variant
+      desc: "Controla el tamaño del círculo: Large (52px), Medium (44px) o Small (36px). Large es el valor por defecto."
+    - name: Content
+      type: Variant
+      desc: Number muestra un número dentro del círculo. Icon muestra un ícono en su lugar. Number es el valor por defecto.
+    - name: Value
+      type: Text
+      desc: Texto o número que se muestra dentro del círculo cuando Content está en Number. El valor por defecto es «1».
+    - name: Label
+      type: Text
+      desc: Texto que aparece debajo del círculo cuando Show Label está activado. El valor por defecto es «Paso».
+    - name: Show Label
+      type: Boolean
+      desc: Muestra u oculta el texto de Label debajo del círculo. Off (por defecto) lo oculta; On lo revela.
+tables:
+  icon-circle-intencion-de-uso:
+    columns:
+      - Aspecto
+      - Categoría
+      - Descripción
+    rows:
+      - name: Carácter informativo
+        meta:
+          - label: Intención
+        desc: Icon Circle comunica un número de paso o un ícono dentro de un flujo visual (por ejemplo, «Cómo usar tus programas»); no representa una acción que el usuario ejecute.
+      - name: No usar como botón
+        meta:
+          - label: Interacción
+        desc: A diferencia de un control real, no tiene estados de interacción (hover, pressed, disabled) en sus variantes. No debe usarse para disparar acciones al hacer tap o clic — para eso existe el componente Button.
+---
+
+<FigmaEmbed node="5300:119897" />
+
+## Resumen
+
+Icon Circle es un círculo que contiene un número o un ícono. Sirve para numerar pasos de una secuencia o para destacar un ícono dentro de una card o un listado, y puede llevar una etiqueta de texto debajo.
+
+54 variantes = `Style` (3) × `Type` (3) × `Size` (3) × `Content` (2). `Value`, `Label` y `Show Label` son propiedades de instancia: se configuran en cada instancia y no multiplican el número de variantes.
+
+## Propiedades
+
+Propiedades editables del componente Icon Circle.
+
+<PropsTable block="icon-circle" />
+
+## Guía de uso
+
+### Intención de uso
+
+Qué comunica el componente Icon Circle y qué no debe hacerse con él.
+
+<DocTable id="icon-circle-intencion-de-uso" />

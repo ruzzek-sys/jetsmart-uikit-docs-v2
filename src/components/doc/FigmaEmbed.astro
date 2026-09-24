@@ -1,0 +1,62 @@
+---
+import { embedUrl, figmaUrl } from '../../lib/figma';
+
+/**
+ * Live Preview de un nodo de Figma.
+ * `loading="lazy"` es obligatorio: si varios iframes cargan a la vez Figma responde 403.
+ * Si un embed muestra el frame equivocado, casi siempre es caché del navegador: prueba en
+ * incógnito antes de tocar el node-id.
+ */
+interface Props {
+  /** Id del nodo tal como lo muestra Figma: «5167:54214». */
+  node: string;
+  /** Título accesible del iframe; por defecto, el de la página. */
+  title?: string;
+  label?: string;
+}
+
+const { node, label = 'Live Preview' } = Astro.props;
+const title = Astro.props.title ?? Astro.locals.doc?.data.title ?? 'JetSmart UI Kit';
+---
+
+<figure class="figma-preview">
+  <figcaption class="mb-3 flex items-center justify-between gap-3">
+    <span class="text-[13px] font-bold tracking-[0.04em] text-muted uppercase">{label}</span>
+    <a
+      href={figmaUrl(node)}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="inline-flex min-h-9 items-center gap-1.5 rounded-lg px-2 text-[13px] font-bold text-brand hover:bg-brand-light"
+    >
+      Abrir en Figma
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+        <path d="M4.5 2.5h5v5M9.5 2.5 3 9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </a>
+  </figcaption>
+  <div class="overflow-hidden rounded-xl border border-line bg-subtle">
+    <iframe title={`${title} - Figma preview`} src={embedUrl(node)} loading="lazy" allowfullscreen></iframe>
+  </div>
+</figure>
+
+<style>
+  .figma-preview {
+    margin: 32px 0;
+  }
+
+  iframe {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    max-height: 80vh;
+    border: 0;
+  }
+
+  @media (min-width: 640px) {
+    iframe {
+      aspect-ratio: 16 / 10;
+      min-height: 480px;
+      max-height: none;
+    }
+  }
+</style>

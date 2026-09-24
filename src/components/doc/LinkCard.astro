@@ -1,0 +1,47 @@
+---
+interface Props {
+  href: string;
+  title: string;
+  description?: string;
+  /** Abre en otra pestaña (links a Figma). */
+  external?: boolean;
+}
+
+const { href, title, description, external = false } = Astro.props;
+---
+
+<a href={href} class="card" {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>
+  <h3 class="card__title">{title}</h3>
+  {description && <p class="card__desc">{description}</p>}
+</a>
+
+<style>
+  .card {
+    display: block;
+    padding: 20px;
+    border: 1px solid var(--color-line);
+    border-radius: 12px;
+    background: var(--color-surface);
+    color: inherit;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .card:hover {
+    border-color: var(--color-brand);
+    box-shadow: 0 4px 16px rgb(181 18 27 / 0.08);
+  }
+
+  .card .card__title {
+    margin: 0 0 8px;
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .card .card__desc {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--color-muted);
+  }
+</style>

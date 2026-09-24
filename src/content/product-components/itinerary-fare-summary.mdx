@@ -1,0 +1,31 @@
+---
+title: Itinerary Fare Summary
+description: Tarjeta que resume el itinerario, la tarifa y los beneficios incluidos en la reserva.
+figma:
+  - "6186:156082"
+props:
+  itinerary-fare-summary:
+    - name: Breakpoint
+      type: Variant
+      desc: Desktop muestra el resumen de tarifa e itinerario con los ítems incluidos (equipaje, millas) en una fila horizontal compacta. Mobile apila la misma información verticalmente y despliega la lista completa de beneficios uno debajo del otro. Desktop es el valor por defecto.
+    - name: Backpack Row
+      type: Slot
+      desc: "Espacio reservado visible en la variante Desktop: aloja la fila horizontal de ítems de la tarifa (equipaje de mano, acumulación de millas) junto a sus íconos circulares."
+    - name: Feature Item Stack
+      type: Slot
+      desc: "Espacio reservado visible en la variante Mobile: aloja la lista vertical de beneficios incluidos en la tarifa. Solo acepta instancias del set de componentes «Feature Item»."
+---
+
+<FigmaEmbed node="6186:156082" />
+
+## Resumen
+
+Itinerary Fare Summary es la tarjeta que resume un tramo de la reserva: la ruta, los datos del vuelo en una barra de resumen y los ítems que incluye la tarifa, como el equipaje de mano o la acumulación de millas. Se usa en pantallas como «Qué incluye tu reserva» para que el pasajero confirme de un vistazo qué contrató.
+
+2 variantes = `Breakpoint` (2), matriz completa. La misma tarjeta en dos anchos: los beneficios van en fila en Desktop y apilados en Mobile.
+
+## Propiedades
+
+Propiedades configurables del componente Itinerary Fare Summary.
+
+<PropsTable block="itinerary-fare-summary" />

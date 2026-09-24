@@ -1,0 +1,40 @@
+---
+title: Radio
+description: Botón de selección única.
+figma:
+  - "6065:116033"
+props:
+  radio:
+    - name: Selected
+      type: Variant
+      desc: True rellena el ícono del radio en teal y da mayor peso al label. False muestra el ícono vacío. False es el valor por defecto.
+    - name: State
+      type: Variant
+      desc: Disabled atenúa el color del ícono y del label. Default es el valor por defecto.
+    - name: Label
+      type: Text
+      desc: Texto del label junto al ícono. «Option» es el valor por defecto.
+    - name: Show Label
+      type: Boolean
+      desc: Muestra u oculta el texto del label, dejando solo el ícono. Activado es el valor por defecto.
+    - name: Show Icon
+      type: Boolean
+      desc: Muestra u oculta el ícono del radio, dejando solo el label. Activado es el valor por defecto.
+    - name: Show Radio
+      type: Boolean
+      desc: Muestra u oculta el componente Radio completo. Activado es el valor por defecto.
+---
+
+<FigmaEmbed node="6065:116033" />
+
+## Resumen
+
+Botón de selección única que el usuario marca para elegir una opción dentro de un grupo, acompañado de un label editable. Se usa en formularios y selectores donde solo una alternativa puede quedar activa.
+
+4 variantes = `Selected` (2) × `State` (2), matriz completa. El círculo es un icono del Icon Pack ligado a variables del kit.
+
+## Propiedades
+
+Propiedades configurables del componente Radio.
+
+<PropsTable block="radio" />

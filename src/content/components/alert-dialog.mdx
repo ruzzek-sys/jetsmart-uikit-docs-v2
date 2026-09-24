@@ -1,0 +1,34 @@
+---
+title: Alert Dialog
+description: Diálogo modal para confirmaciones y avisos críticos.
+figma:
+  - "3588:81707"
+props:
+  alert-dialog:
+    - name: Breakpoint
+      type: Variant
+      desc: Desktop muestra el diálogo en fila, con el ícono y el texto alineados a la izquierda y los dos botones lado a lado a la derecha. Mobile lo muestra en columna, centrado, con los botones apilados a todo el ancho. Desktop es el valor por defecto.
+    - name: Title
+      type: Text
+      desc: "Título principal del diálogo, en negrita junto al ícono. Por defecto: «Viaja donde prefieras»."
+    - name: Description
+      type: Text
+      desc: "Texto de apoyo debajo del título que explica el motivo de la alerta. Por defecto: «Asegura tu lugar y viaja cómodo. Te asignaremos un asiento.»."
+    - name: Show Button Secondary
+      type: Boolean
+      desc: True muestra el botón secundario junto al primario. False lo oculta y deja solo el botón primario, alineado a la derecha (ej. «Entendido»). True es el valor por defecto.
+---
+
+<FigmaEmbed node="3588:81707" />
+
+## Resumen
+
+Diálogo modal que interrumpe el flujo para pedir una confirmación o avisar de algo que requiere decisión. Combina ícono, título, texto de apoyo y hasta dos botones de acción.
+
+Un solo eje de variante: `Breakpoint`. Desktop y Mobile no son el mismo diseño reescalado — cambian la disposición, la tipografía y el orden de los botones.
+
+## Propiedades
+
+Propiedades disponibles para configurar el componente Alert Dialog.
+
+<PropsTable block="alert-dialog" />

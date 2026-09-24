@@ -1,0 +1,25 @@
+---
+title: Search Summary
+description: Barra de resumen de la búsqueda que se despliega en un buscador editable dentro del flujo de compra.
+figma:
+  - "5543:35599"
+props:
+  search-summary:
+    - name: Expansion
+      type: Variant
+      desc: Collapsed muestra la barra resumida con ruta, fecha, pasajeros, el botón «Editar» y el total de la reserva con un chevron para expandir. Expanded reemplaza esa barra por el formulario editable completo (origen, destino, fecha, pasajeros, código promocional) con el botón «Modificar reserva» y una X para cerrar. Collapsed es el valor por defecto.
+---
+
+<FigmaEmbed node="5543:35599" />
+
+## Resumen
+
+Barra que resume la búsqueda en curso dentro del flujo de compra —ruta, fecha, pasajeros y total de la reserva— y que se despliega en el formulario de búsqueda completo para modificarla sin volver al inicio.
+
+2 variantes = `Expansion` (2), matriz completa. `Collapsed` es la barra de resumen y el estado por defecto (1440 × 92); `Expanded` es el buscador desplegado para editar (1440 × 256).
+
+## Propiedades
+
+Propiedades del componente Search Summary
+
+<PropsTable block="search-summary" />

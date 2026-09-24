@@ -1,0 +1,59 @@
+---
+title: Trip Status Card
+description: Tarjeta de un viaje reservado en «Mis viajes», con su itinerario y las acciones para gestionarlo.
+figma:
+  - "6186:168687"
+props:
+  trip-status-card:
+    - name: Breakpoint
+      type: Variant
+      desc: Desktop muestra la tarjeta en formato horizontal con las acciones (Ver detalles, Administra tu viaje, Hacer check-in) en una sola fila junto al pie. Mobile apila el código de reserva, la escala y las tres acciones en columna, en botones de ancho completo. Desktop es el valor por defecto.
+    - name: Show Stopover
+      type: Boolean
+      desc: Muestra u oculta la fila de escala («Escala en \[aeropuerto\] · Duración de la parada») debajo del itinerario. Activado (true) es el valor por defecto y muestra la escala; desactivado la oculta, dejando solo el itinerario directo.
+tables:
+  uso-de-botones-uso-de-botones:
+    columns:
+      - Caso
+      - Variantes
+      - Detalle
+    rows:
+      - name: Desktop
+        meta: "`Primary` · `Secondary` · `Tertiary`"
+        desc: Se pueden usar las tres variantes; el intent ajusta el color/emphasis para destacar la acción más importante o un contexto promocional/comercial.
+      - name: Mobile
+        meta: "`Primary` · `Secondary` · `Tertiary`"
+        desc: "Se apilan los 3 botones: primary, secondary con intent rojo y tertiary con intent default."
+      - name: Tertiary en mobile
+        meta:
+          - label: Evitar
+            tone: off
+          - label: Excepciones
+            tone: neutral
+        desc: En general no debe usarse en mobile por su tamaño; solo aplica en casos excepcionales.
+      - name: Jerarquía en mobile
+        meta:
+          - label: Usar intent
+            tone: brand
+        desc: Para diferenciar jerarquía en mobile es mejor variar el intent (por ejemplo, rojo) que cambiar a la variante tertiary.
+---
+
+<FigmaEmbed node="6186:168687" />
+
+## Resumen
+
+Muestra un viaje reservado —código de reserva, itinerario y, si la hay, la escala— y reúne las acciones para gestionarlo: Ver detalles, Administra tu viaje y Hacer check-in. Se usa en el listado de próximos viajes de «Mis viajes».
+
+2 variantes = `Breakpoint` (2). Grilla en horizontal: una columna por breakpoint.
+
+## Propiedades
+
+Propiedades del componente Trip Status Card
+
+<PropsTable block="trip-status-card" />
+
+## Uso de botones
+
+Criterios para elegir variante e intent según breakpoint.
+
+<DocTable id="uso-de-botones-uso-de-botones" />

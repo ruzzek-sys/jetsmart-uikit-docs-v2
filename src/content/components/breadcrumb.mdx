@@ -1,0 +1,37 @@
+---
+title: Breadcrumb
+description: Ruta de navegación que indica la ubicación del usuario dentro de la jerarquía del sitio.
+figma:
+  - "5167:59958"
+props:
+  breadcrumb:
+    - name: Levels
+      type: Variant
+      desc: 2 muestra los dos primeros niveles de la ruta; 3 y 4 suman los siguientes tramos, mostrando siempre hasta el nivel actual. El último nivel visible se resalta en negrita como página actual. 2 es el valor por defecto.
+    - name: Level 1
+      type: Text
+      desc: "Texto del primer nivel de la ruta, siempre visible como enlace gris hacia el nivel superior. Por defecto: «Ayuda»."
+    - name: Level 2
+      type: Text
+      desc: "Texto del segundo nivel. Se muestra en negrita como página actual cuando Levels=2, o como enlace gris si hay niveles siguientes visibles. Por defecto: «Antes de viajar»."
+    - name: Level 3
+      type: Text
+      desc: "Texto del tercer nivel. Solo aparece cuando Levels es 3 o 4, resaltado en negrita como página actual en el nivel 3. Por defecto: «Equipaje»."
+    - name: Level 4
+      type: Text
+      desc: "Texto del cuarto nivel. Solo aparece cuando Levels=4, donde se resalta en negrita como página actual. Por defecto: «Equipaje de mano»."
+---
+
+<FigmaEmbed node="5167:59958" />
+
+## Resumen
+
+Ruta de navegación que muestra dónde está el usuario dentro de la jerarquía del sitio, de dos a cuatro niveles. Los niveles anteriores se muestran como enlaces grises hacia el nivel superior y el último visible se resalta en negrita como página actual.
+
+Un solo eje de variante: `Levels`, con los valores 2, 3 y 4. Cada valor suma un tramo a la ruta; el texto de cada tramo se edita con `Level 1` a `Level 4`.
+
+## Propiedades
+
+Lo que se cambia desde la instancia sin salir de la variante.
+
+<PropsTable block="breadcrumb" />

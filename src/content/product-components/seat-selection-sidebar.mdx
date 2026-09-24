@@ -1,0 +1,75 @@
+---
+title: Seat Selection Sidebar
+description: Los dos paneles que forman la sidebar de selección de asientos —la leyenda de tipos y la asignación por pasajero— y el swatch de color que identifica cada tipo de asiento.
+figma:
+  - "6186:161989"
+  - "7607:59618"
+  - "7607:59909"
+props:
+  seat-types-legend-panel:
+    - name: Square Stack
+      type: Slot
+      desc: Slot destinado exclusivamente a instancias de Surcharge Detail Pane. En Seat Types Legend Panel, se incluye una por cada tipo de asiento para mostrar su recargo y revelar el detalle al expandirse.
+  seat-assignment-panel:
+    - name: Circle Check Stack
+      type: Slot
+      desc: Contenedor de tipo slot que aloja la pila de filas de pasajero (ícono de estado, nombre del pasajero y asiento asignado o «Sin selección»). Acepta tantas filas como pasajeros tenga la reserva, con un máximo de 9 pasajeros por reserva.
+  seat:
+    - name: Type
+      type: Variant
+      desc: "Controla la categoría visual del asiento en el mapa: First (azul marino oscuro), Priority (azul medio), Emergency (rojo, fila de salida de emergencia), Standard (celeste claro) y Unavailable (gris con ícono de X, asiento no disponible/ocupado). First es el valor por defecto."
+---
+
+## Seat Types Legend Panel
+
+Panel de la sidebar que presenta la leyenda de tipos de asiento, cada uno con su precio desde y el detalle de sus beneficios.
+
+<FigmaEmbed node="6186:161989" title="Seat Types Legend Panel" />
+
+### Resumen
+
+Tarjeta titulada «Tipos de asiento» que apila un `Surcharge Detail Pane` por cada tipo de asiento: el swatch de color, el nombre, el precio desde y, al expandirse, la lista de beneficios. Cierra con una fila que indica la ubicación de los baños.
+
+Forma, junto con `Seat Assignment Panel`, la sidebar de selección de asientos. No tiene variantes: lo único que se ajusta desde la instancia es el contenido del slot `Square Stack`.
+
+### Propiedades
+
+Slot y su contenido — componente Seat Types Legend Panel
+
+<PropsTable block="seat-types-legend-panel" />
+
+## Seat Assignment Panel
+
+Panel de la sidebar donde se asigna un asiento a cada pasajero del tramo y se ve el total.
+
+<FigmaEmbed node="7607:59618" title="Seat Assignment Panel" />
+
+### Resumen
+
+Tarjeta titulada «Asigna tus asientos de IDA» con un toggle para seleccionar asientos de ida y vuelta a la vez, la ruta del tramo, la lista de pasajeros con el asiento asignado o «Sin selección», un `Surcharge Detail Pane` con el total y el botón para continuar.
+
+Es el segundo de los dos paneles que forman la sidebar de selección de asientos. No tiene variantes: la lista de pasajeros vive en el slot `Circle Check Stack`, que acepta una fila por pasajero.
+
+### Propiedades
+
+Propiedades del componente Seat Assignment Panel
+
+<PropsTable block="seat-assignment-panel" />
+
+## Seat
+
+Cuadro de color que identifica el tipo de asiento; se usa como swatch dentro de Seat Types Legend Panel.
+
+<FigmaEmbed node="7607:59909" title="Seat" />
+
+### Resumen
+
+Pieza mínima de la sidebar: un cuadrado de color que representa una categoría de asiento del mapa y que se repite como swatch en la leyenda de tipos.
+
+Cinco variantes en un solo eje, `Type`: First (primera fila, más espacio y desembarque prioritario), Priority (salida rápida, filas delanteras), Emergency (salida de emergencia, fila con requisitos de seguridad), Standard (asiento sin beneficios adicionales) y Unavailable (asiento bloqueado, se muestra con una X).
+
+### Propiedades
+
+Propiedades del componente Seat
+
+<PropsTable block="seat" />

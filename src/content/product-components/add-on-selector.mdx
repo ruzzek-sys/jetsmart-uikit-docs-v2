@@ -1,0 +1,25 @@
+---
+title: Add-on Selector
+description: "Selector de opcionales FlexiSMART: dos opciones seleccionables y un enlace al bundle."
+figma:
+  - "5469:12321"
+props:
+  add-on-selector:
+    - name: Breakpoint
+      type: Variant
+      desc: "Desktop Vertical: apila las tarjetas de opción en una sola columna para pantallas anchas. Desktop Horizontal: distribuye las tarjetas en dos columnas lado a lado. Mobile: adapta el ancho de las tarjetas para pantallas angostas manteniendo el apilado vertical. Desktop Vertical es el valor por defecto."
+---
+
+<FigmaEmbed node="5469:12321" />
+
+## Resumen
+
+El Add-on Selector ofrece servicios opcionales (FlexiSMART) dentro del flujo de compra: un título, dos opciones seleccionables y un enlace al bundle.
+
+Un solo eje de variante, `Breakpoint`, con tres disposiciones: `Desktop Vertical`, `Desktop Horizontal` y `Mobile`. Las opciones son instancias del sub-componente anidado `Add-on Offer Row`, dos por variante.
+
+## Propiedades
+
+Lo que se cambia desde la instancia sin salir de la variante.
+
+<PropsTable block="add-on-selector" />

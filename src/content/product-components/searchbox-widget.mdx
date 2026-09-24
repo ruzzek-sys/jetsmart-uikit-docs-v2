@@ -1,0 +1,104 @@
+---
+title: Searchbox Widget
+description: "Buscador principal del sitio: vuelos, gestión de reserva, check-in y hoteles, en versión desktop y mobile."
+figma:
+  - "7170:10048"
+  - "7607:48082"
+props:
+  searchbox-desktop:
+    - name: Tab
+      type: Variant
+      desc: "Controla qué pestaña del buscador está activa y qué formulario se muestra debajo: Flights (buscador de vuelos con origen, destino, fecha y pasajeros), Flights Expanded (agrega millas AAdvantage y código promocional), Hotels (buscador con Booking.com), Manage Flight (formulario para gestionar una reserva) y Check In (formulario de check-in). Flights es el valor por defecto."
+  searchbox-mobile:
+    - name: Tab
+      type: Variant
+      desc: "Controla qué pestaña está activa y qué formulario se muestra debajo: Flights (buscador de vuelos), Manage Flight (gestión de reserva por apellido y correo), Check In (check-in por apellido y correo) y Hotels (buscador de hoteles). Flights es el valor por defecto."
+    - name: Expansion
+      type: Variant
+      desc: Collapsed muestra solo el encabezado del formulario activo con un chevron hacia abajo. Expanded revela todos los campos del formulario (fecha, pasajeros, código promocional, millas AAdvantage) y el botón de acción, con el chevron hacia arriba. Collapsed es el valor por defecto.
+tables:
+  searchbox-desktop-comportamiento:
+    columns:
+      - Propiedad
+      - Tipo
+      - Descripción
+    rows:
+      - name: Trigger
+        meta: "`Chevron · Input`"
+        desc: Se expande al hacer click en el botón chevron o en cualquier campo del formulario.
+      - name: Fondo al expandirse
+        meta: "`Scrim + Blur`"
+        desc: El fondo se oscurece y difumina, usando las variables de scrim y blur correspondientes.
+      - name: Motivo del colapso
+        meta: "`Espacio Seguro`"
+        desc: Colapsado, el Searchbox libera el espacio seguro para la imagen principal del header, documentado en la página [Hero Banner](/components/hero-banner/).
+      - name: Al expandirse
+        meta: "`Tapa Parcial`"
+        desc: Cubre parcialmente la imagen del header, que queda oscurecida y difuminada por el scrim y el blur.
+  searchbox-mobile-comportamiento:
+    columns:
+      - Propiedad
+      - Tipo
+      - Descripción
+    rows:
+      - name: Trigger
+        meta: "`Chevron · Input`"
+        desc: Se expande al hacer click en el botón chevron o en cualquier campo del formulario.
+      - name: Fondo al expandirse
+        meta: "`Scrim + Blur`"
+        desc: El fondo se oscurece y difumina, usando las variables de scrim y blur correspondientes.
+      - name: Motivo del colapso
+        meta: "`Espacio Seguro`"
+        desc: Colapsado, el Searchbox libera el espacio seguro para la imagen principal del header, documentado en la página [Hero Banner](/components/hero-banner/).
+      - name: Al expandirse
+        meta: "`Tapa Completa`"
+        desc: Cubre completamente la imagen del header, que queda oscurecida y difuminada por el scrim y el blur.
+---
+
+## Searchbox Desktop
+
+Buscador de escritorio con selector de pestañas: vuelos, gestión de reserva, check-in y hoteles, cada una con su formulario.
+
+<FigmaEmbed node="7170:10048" title="Searchbox Desktop" />
+
+### Resumen
+
+Widget de 1090px de ancho que concentra los puntos de entrada del sitio. Las pestañas de arriba cambian el formulario de abajo: origen, destino, fecha y pasajeros para vuelos; apellido, correo y código de reserva para gestionar una reserva o hacer check-in; y destino, fecha, habitaciones y pasajeros para hoteles, gestionado por Booking.com.
+
+5 variantes = `Tab` (5). La versión mobile tiene su propia matriz, con la grilla en horizontal. El estado abierto de la pestaña de vuelos no es un eje aparte: es el valor `Flights Expanded` de `Tab`, que suma millas AAdvantage, código promocional y el CTA Ver vuelos.
+
+### Propiedades
+
+Propiedades del componente Searchbox Desktop
+
+<PropsTable block="searchbox-desktop" />
+
+### Comportamiento
+
+Cómo se expande y contrae el Searchbox Desktop, y su efecto sobre el header.
+
+<DocTable id="searchbox-desktop-comportamiento" />
+
+## Searchbox Mobile
+
+Versión móvil del buscador: las mismas cuatro pestañas, con un formulario que se colapsa y se expande.
+
+<FigmaEmbed node="7607:48082" title="Searchbox Mobile" />
+
+### Resumen
+
+Buscador de 428px de ancho para pantallas angostas. Cada pestaña (vuelos, gestión de reserva, check-in y hoteles) muestra primero solo el encabezado de su formulario y se despliega con un chevron para revelar todos los campos y el botón de acción.
+
+8 variantes = `Tab` (4) × `Expansion` (2), matriz completa. Grilla en horizontal: cada par de columnas es una pestaña, en estado colapsado y expandido.
+
+### Propiedades
+
+Propiedades del componente Searchbox Mobile
+
+<PropsTable block="searchbox-mobile" />
+
+### Comportamiento
+
+Cómo se expande y contrae el Searchbox Mobile, y su efecto sobre el header.
+
+<DocTable id="searchbox-mobile-comportamiento" />

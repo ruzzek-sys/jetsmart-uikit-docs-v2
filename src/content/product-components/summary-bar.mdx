@@ -1,0 +1,122 @@
+---
+title: Summary Bar
+description: "Barra que resume la búsqueda en curso —ruta, fechas y pasajeros— con acceso directo para editarla. Viene en dos componentes: uno para escritorio y otro para móvil."
+figma:
+  - "6229:172143"
+  - "7607:56561"
+props:
+  summary-bar-desktop:
+    - name: Size
+      type: Variant
+      desc: Large muestra la barra con más altura y espaciado entre los ítems (ruta, fecha, pasajeros). Small es una versión más compacta con menor padding y tipografía más ajustada. Large es el valor por defecto.
+    - name: Style
+      type: Variant
+      desc: Solid aplica fondo blanco con borde sutil, para usarse sobre fondos neutros. Transparent quita el fondo y el borde, para superponerse sobre banners o secciones ya coloreadas. Solid es el valor por defecto.
+    - name: Show Button Primary
+      type: Boolean
+      desc: Muestra u oculta el botón «Editar» al final de la barra. Activado (true) es el valor por defecto.
+    - name: Show Item 2
+      type: Boolean
+      desc: Muestra u oculta el segundo dato de la barra (fecha del viaje) junto con su separador. Activado (true) es el valor por defecto.
+    - name: Show Item 3
+      type: Boolean
+      desc: Muestra u oculta el tercer dato de la barra (cantidad de pasajeros) junto con su separador. Activado (true) es el valor por defecto.
+  summary-bar-mobile:
+    - name: Alignment
+      type: Variant
+      desc: Left alinea la ruta, los datos y las acciones a la izquierda de la barra, dejando espacio para el botón «Editar» y el ícono de acción a la derecha. Center centra todo el contenido, para usarse en contextos más angostos sin acciones visibles. Left es el valor por defecto.
+    - name: Show Button Icon
+      type: Boolean
+      desc: Muestra u oculta el botón de ícono circular (acción secundaria, ej. «+») al final de la barra. Activado (true) es el valor por defecto.
+    - name: Show Route
+      type: Boolean
+      desc: Muestra u oculta la fila con la ruta del viaje (ej. «SCL ⇄ BBA»). Activado (true) es el valor por defecto.
+    - name: Show Items
+      type: Boolean
+      desc: Muestra u oculta por completo la fila de datos secundarios (fecha, pasajeros, escalas) debajo de la ruta. Activado (true) es el valor por defecto.
+    - name: Show Item 2
+      type: Boolean
+      desc: Dentro de la fila de datos, muestra u oculta el segundo dato (ej. «2 adultos») junto con su separador. Activado (true) es el valor por defecto.
+    - name: Show Item 3
+      type: Boolean
+      desc: Dentro de la fila de datos, muestra u oculta el tercer dato (ej. «1 escala») junto con su separador. Activado (true) es el valor por defecto.
+    - name: Show Primary Button
+      type: Boolean
+      desc: Muestra u oculta el botón de texto «Editar» en la barra. Activado (true) es el valor por defecto.
+tables:
+  formato-de-fechas-y-rutas-formato-de-fechas:
+    columns:
+      - Formato
+      - Contexto
+      - Uso y componentes
+    rows:
+      - name: sáb 16 may 2026
+        meta: "`Espacios amplios`"
+        desc: "Uso: cuando hay espacio disponible y se requiere máximo detalle. Componentes: headers, detalles de vuelo, confirmaciones."
+      - name: vie 25 ene
+        meta: "`Espacios intermedios`"
+        desc: "Uso: cuando el espacio es moderado. Componentes: cards medianas, searchbox."
+      - name: 16 ene
+        meta: "`Espacios reducidos`"
+        desc: "Uso: cuando el espacio es limitado o no se requiere tanto detalle. Componentes: cards pequeñas, widget de información."
+  formato-de-fechas-y-rutas-formato-de-rutas-y-destinos:
+    columns:
+      - Formato
+      - Contexto
+      - Uso y componentes
+    rows:
+      - name: Rio de Janeiro (BBA)
+        meta: "`Desktop`"
+        desc: "Estructura: nombre de ciudad + código IATA entre paréntesis. Uso: cuando hay espacio suficiente para mostrar contexto completo. Componentes: búsqueda, resultados, detalles de itinerario."
+      - name: BBA
+        meta: "`Mobile`"
+        desc: "Uso: solo código IATA, siempre en mobile, para garantizar consistencia —el tamaño es predecible y evita saltos de layout—. Casos especiales: ciudades con nombres largos (San Martín de los Andes → CPC, Comodoro Rivadavia → CRD) previenen ruptura de elementos por overflow de texto."
+---
+
+## Summary Bar Desktop
+
+Barra horizontal de una sola línea que muestra la ruta, las fechas y los pasajeros del viaje, con el botón «Editar» al final. Se usa en la parte superior de los pasos del booking en escritorio.
+
+<FigmaEmbed node="6229:172143" title="Summary Bar Desktop" />
+
+### Resumen
+
+Encadena los datos de la búsqueda en una sola fila, separados por divisores: la ruta con sus ciudades de origen y destino, las fechas del viaje y la cantidad de pasajeros, y cierra con el botón «Editar». El segundo y el tercer dato, y el botón, se pueden apagar desde la instancia.
+
+La matriz reúne 6 variantes en 2 componentes. En escritorio cruza `Size` (Large, Small) en las filas con `Style` (Solid, Transparent) en las columnas: Solid lleva fondo blanco y borde, Transparent se apoya directo sobre la superficie que tenga debajo.
+
+### Propiedades
+
+Propiedades del componente Summary Bar Desktop.
+
+<PropsTable block="summary-bar-desktop" />
+
+## Summary Bar Mobile
+
+Versión compacta en dos filas: la ruta arriba y los datos secundarios debajo, con el botón «Editar» y un botón de ícono a un costado. Es la que se usa en pantallas angostas y dentro de modales.
+
+<FigmaEmbed node="7607:56561" title="Summary Bar Mobile" />
+
+### Resumen
+
+Apila la ruta abreviada (ej. «SCL ⇄ BBA») sobre una fila de datos secundarios —fecha, pasajeros, escalas— y suma a la derecha el botón «Editar» y un botón de ícono circular. Cada parte se puede apagar por separado: la ruta, la fila de datos completa o cada dato dentro de ella, y ambos botones.
+
+En móvil la matriz tiene un solo eje, `Alignment`: Left alinea el contenido a la izquierda y deja las acciones a la derecha; Center centra la ruta y los datos, sin acciones visibles.
+
+### Propiedades
+
+Propiedades del componente Summary Bar Mobile.
+
+<PropsTable block="summary-bar-mobile" />
+
+## Formato de Fechas y Rutas
+
+Guía de formatos de fecha y de rutas/destinos según el espacio disponible en cada componente.
+
+### Formato de Fechas
+
+<DocTable id="formato-de-fechas-y-rutas-formato-de-fechas" />
+
+### Formato de Rutas y Destinos
+
+<DocTable id="formato-de-fechas-y-rutas-formato-de-rutas-y-destinos" />

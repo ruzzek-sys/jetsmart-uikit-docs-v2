@@ -1,0 +1,31 @@
+---
+title: Checkbox
+description: Casilla de verificación con texto de acompañamiento, para aceptar condiciones o marcar opciones.
+figma:
+  - "5205:90724"
+props:
+  checkbox:
+    - name: Checked
+      type: Variant
+      desc: False muestra el checkbox vacío, sin marcar. True muestra el checkbox marcado con el ícono de verificación. False es el valor por defecto.
+    - name: Show Label
+      type: Boolean
+      desc: True muestra el texto junto al checkbox. False lo oculta y deja solo el cuadro del checkbox, sin texto. True es el valor por defecto.
+    - name: Label
+      type: Text
+      desc: Texto que acompaña al checkbox, editable por instancia. Por defecto muestra el texto de términos y condiciones del viaje.
+---
+
+<FigmaEmbed node="5205:90724" />
+
+## Resumen
+
+Casilla de verificación que el usuario marca o desmarca, acompañada de un texto editable. Se usa para aceptar términos y condiciones o para seleccionar opciones dentro de formularios y resúmenes de compra.
+
+2 variantes = `Checked` (2). Eje único: no hay combinaciones cruzadas.
+
+## Propiedades
+
+Ajusta el estado, la visibilidad y el texto del checkbox según el contexto de uso.
+
+<PropsTable block="checkbox" />

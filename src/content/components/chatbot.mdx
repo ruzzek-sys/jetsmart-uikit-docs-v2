@@ -1,0 +1,28 @@
+---
+title: Chatbot
+description: Widget flotante que da acceso al asistente virtual con un mensaje de bienvenida.
+figma:
+  - "5205:92334"
+props:
+  chatbot:
+    - name: Breakpoint
+      type: Variant
+      desc: Desktop muestra el widget en su tamaño completo (327×96) para pantallas grandes. Mobile lo reduce a una versión compacta (245×72) para pantallas pequeñas. Desktop es el valor por defecto.
+    - name: Show Message
+      type: Boolean
+      desc: Activado muestra el globo de mensaje de bienvenida junto al avatar. Desactivado lo oculta y deja solo el avatar visible. Activado es el valor por defecto.
+---
+
+<FigmaEmbed node="5205:92334" />
+
+## Resumen
+
+Widget flotante de asistencia que invita al usuario a abrir el chat. Combina el avatar del asistente con un globo de mensaje de bienvenida que se puede ocultar.
+
+Un solo eje de variante: `Breakpoint`, con dos valores (Desktop y Mobile). Eje único: no hay combinaciones cruzadas.
+
+## Propiedades
+
+Propiedades configurables del widget de Chatbot
+
+<PropsTable block="chatbot" />

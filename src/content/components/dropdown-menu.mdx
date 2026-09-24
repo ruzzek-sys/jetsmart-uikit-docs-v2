@@ -1,0 +1,91 @@
+---
+title: Dropdown Menu
+description: Paneles desplegables de opciones, armados con filas Dropdown Option y Dropdown Search Item.
+figma:
+  - "5230:109302"
+  - "7772:115213"
+props:
+  dropdown-option:
+    - name: State
+      type: Variant
+      desc: Default es el estado en reposo del ítem en la lista. Hover resalta el fondo cuando el cursor pasa sobre la opción. Selected aplica un fondo navy sólido y texto blanco para marcar la opción actualmente elegida. Default es el valor por defecto.
+    - name: Leading
+      type: Variant
+      desc: Icon muestra un ícono genérico (por ejemplo, lápiz de edición) a la izquierda del texto. Flag muestra en su lugar una bandera de país. Icon es el valor por defecto.
+    - name: Weight
+      type: Variant
+      desc: Default usa peso de texto regular. Strong usa negrita para dar énfasis a la opción (por ejemplo, la opción seleccionada). Default es el valor por defecto.
+    - name: Label
+      type: Text
+      desc: Texto visible de la opción. Reemplaza el copy por defecto «Administrar mi reserva».
+    - name: Show Leading
+      type: Boolean
+      desc: Muestra u oculta el ícono o bandera izquierdo definido por Leading. Activado por defecto.
+    - name: Show Number
+      type: Boolean
+      desc: Muestra un número de orden (ej. «1.») antes del elemento leading, útil en listas numeradas. Desactivado por defecto.
+    - name: Show Trailing
+      type: Boolean
+      desc: Muestra u oculta el ícono chevron al extremo derecho de la opción. Activado por defecto.
+    - name: Show Code
+      type: Boolean
+      desc: Muestra un código de texto al final (ej. «SCL»), antes del chevron. Desactivado por defecto.
+    - name: Number
+      type: Text
+      desc: Valor del número de orden mostrado cuando Show Number está activo. Por defecto «1.».
+    - name: Code
+      type: Text
+      desc: Valor del código mostrado cuando Show Code está activo. Por defecto «SCL».
+    - name: Show Badge
+      type: Boolean
+      desc: Muestra un badge circular rojo con contador (ej. «+3») junto al chevron. Desactivado por defecto.
+  dropdown-search-menu:
+    - name: Scroll
+      type: Boolean
+      desc: "Muestra u oculta la barra de scroll a la derecha del menú. Default: activado."
+    - name: Position
+      type: Variant
+      desc: "Top: esquinas superiores redondeadas, para el primer ítem de la lista. Middle: sin radio, para ítems intermedios. Bottom: esquinas inferiores redondeadas, para el último ítem. Center: las cuatro esquinas redondeadas, para cuando el ítem está solo en la lista. Default: Top."
+    - name: Title
+      type: Text
+      desc: "Texto principal de la fila (p. ej. ciudad y código IATA). Default: «Santiago de Chile, SCL - Chile»."
+    - name: Description
+      type: Text
+      desc: "Texto secundario debajo del título (p. ej. nombre del aeropuerto). Default: «Comodoro Arturo Merino Benítez Int.»."
+---
+
+## Dropdown Option
+
+La fila base de un menú desplegable: una opción con texto, un elemento leading (ícono o bandera) y, opcionalmente, número de orden, código, badge contador y chevron. Es el átomo con que se arman todos los paneles de Dropdown Menu.
+
+<FigmaEmbed node="5230:109302" title="Dropdown Option" />
+
+### Resumen
+
+`Dropdown Option` es la fila de un menú desplegable: una opción con texto, un elemento leading (ícono o bandera) y, opcionalmente, número de orden, código, badge contador y chevron. Es el átomo con que se arman todos los paneles de Dropdown Menu.
+
+12 variantes = `State` (3) × `Leading` (2) × `Weight` (2), matriz completa. Es el átomo que componen todos los paneles de Dropdown Menu.
+
+### Propiedades
+
+Propiedades configurables del componente Dropdown Option.
+
+<PropsTable block="dropdown-option" />
+
+## Dropdown Search Menu
+
+El panel de resultados de un buscador tipo autocomplete: una lista de filas `Dropdown Search Item` (título, descripción y esquinas redondeadas según su posición en la lista) con scroll opcional.
+
+<FigmaEmbed node="7772:115213" title="Dropdown Search Menu" />
+
+### Resumen
+
+`Dropdown Search Menu` es el panel de resultados de un buscador tipo autocomplete: una lista de filas `Dropdown Search Item` (título, descripción y esquinas redondeadas según su posición en la lista) con scroll opcional.
+
+El propio panel expone `Scroll`, que muestra u oculta la barra de scroll a la derecha. El resto de las propiedades pertenecen a la instancia anidada `Dropdown Search Item` y se ajustan desde el panel de esa instancia: `Position` controla el radio de esquinas según el lugar en la lista (Top, Middle, Bottom o Center para un ítem solo), mientras `Title` y `Description` son el texto principal y secundario de cada fila.
+
+### Propiedades
+
+Propiedades de Dropdown Search Item (instancia anidada) · ajustables desde el panel de la instancia
+
+<PropsTable block="dropdown-search-menu" />

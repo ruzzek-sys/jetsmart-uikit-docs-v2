@@ -1,0 +1,166 @@
+---
+title: Tabs
+description: "Cinco componentes para alternar entre vistas y filtrar contenido: el chip base y las cuatro barras que se arman con él. Cada uno tiene su propio maestro, su matriz de variantes y sus propiedades."
+figma:
+  - "7350:106944"
+  - "6617:86190"
+  - "7350:106892"
+  - "6617:87408"
+  - "6617:87480"
+props:
+  chips:
+    - name: Size
+      type: Variant
+      desc: Large mide 241×52 (texto 18px, ícono 20px, padding horizontal 28px). Medium reduce a 204×44 (texto 16px, ícono 16px, padding 20px). Small baja a 174×36. El gap entre ícono y texto es 8px en los tres. Large es el valor por defecto.
+    - name: State
+      type: Variant
+      desc: Selected usa fondo color/background/brand-tertiary y texto blanco. Unselected usa fondo color/background/primary con borde color/border/secondary y texto oscuro. Unselected Ghost quita fondo y borde, dejando solo el texto y el ícono. Selected es el valor por defecto.
+    - name: Show Icon Left
+      type: Boolean
+      desc: Muestra un ícono a la izquierda del texto (por defecto la flecha «arrow-right»). Activado por defecto.
+    - name: Show Icon Right
+      type: Boolean
+      desc: Muestra un ícono a la derecha del texto. Desactivado por defecto.
+    - name: Label
+      type: Text
+      desc: "Texto del chip. Valor por defecto: «Administra tu vuelo»."
+  toggle-tab:
+    - name: Breakpoint
+      type: Variant
+      desc: Desktop usa texto 14px y fila de 44px de alto. Mobile sube el texto a 16px y la fila a 52px. El ancho es fijo en 636px en ambos. Desktop es el valor por defecto.
+    - name: State
+      type: Variant
+      desc: Determina cuál de los 4 chips se muestra activo (con el fondo de marca), mientras los demás quedan en su estilo neutro. First Item es el valor por defecto.
+    - name: Show Item 1
+      type: Boolean
+      desc: Muestra u oculta el primer chip (Chip 1) de la barra. Activado por defecto.
+    - name: Show Item 2
+      type: Boolean
+      desc: Muestra u oculta el segundo chip (Chip 2) de la barra. Activado por defecto.
+    - name: Show Item 3
+      type: Boolean
+      desc: Muestra u oculta el tercer chip (Chip 3) de la barra. Activado por defecto.
+    - name: Show Item 4
+      type: Boolean
+      desc: Muestra u oculta el cuarto chip (Chip 4) de la barra. Activado por defecto.
+  tab-bar-searchbox:
+    - name: Breakpoint
+      type: Variant
+      desc: Desktop usa chips Large (52px alto, texto 18px, ícono 20px, 718px de ancho total). Mobile cambia a chips Medium (44px alto, texto 16px, ícono 16px, 605px de ancho). El gap entre chips es 12px en ambos. Desktop es el valor por defecto.
+    - name: Selected
+      type: Variant
+      desc: Determina cuál de los 4 chips (Vuelos, Administra tu vuelo, Check-in, Hoteles) se muestra en estado seleccionado, mientras los demás quedan neutros. First es el valor por defecto.
+    - name: Show Third
+      type: Boolean
+      desc: "Muestra u oculta el tercer chip, «Check-in». Los chips 1 y 2 (Vuelos, Administra tu vuelo) no tienen booleano propio: siempre están visibles. Activado por defecto."
+    - name: Show Fourth
+      type: Boolean
+      desc: Muestra u oculta el cuarto chip, «Hoteles». Activado por defecto.
+  tab-bar-filter:
+    - name: Selected
+      type: Variant
+      desc: Determina cuál de los 6 chips (Todos, Nacionales, Internacionales, Playa, Naturaleza, Urbano) se muestra en estado Selected, mientras el resto queda Unselected. Todos son chips Medium (44px, texto 16px, ícono 16px), con 8px de gap y 832px de ancho total fijo. Option 1 (Todos) es el valor por defecto.
+    - name: Show Divider
+      type: Boolean
+      desc: Muestra la línea vertical que separa el primer chip («Todos») del resto de la barra. Activado por defecto.
+  tab-underline-item:
+    - name: Selected
+      type: Variant
+      desc: True agrega un subrayado inferior de 2px en color/border/brand-tertiary bajo todo el bloque, marcando el tramo activo. False lo quita, dejando el mismo contenido sin remarcar. Ambos miden 319×46. True es el valor por defecto.
+    - name: Step
+      type: Text
+      desc: "Contador de tramo, a la derecha del separador (ej. «1/3»). Valor por defecto: «1/3»."
+    - name: Flight Direction
+      type: Text
+      desc: "Sentido del vuelo, a la izquierda del separador (ej. «IDA» o «VUELTA»). Valor por defecto: «IDA»."
+---
+
+## Chips
+
+La píldora base del sistema de tabs: ícono opcional, texto y tres estados. Es el átomo con el que se construyen Toggle Tab, Tab Bar / Searchbox y Tab Bar Filter.
+
+<FigmaEmbed node="7350:106944" title="Chips" />
+
+### Resumen
+
+Botón en forma de píldora que representa una opción dentro de un grupo: lleva un label y hasta dos íconos, uno a cada lado. No navega por sí solo; su sentido aparece cuando se repite dentro de una barra, donde uno de los chips queda seleccionado y el resto no.
+
+Dos ejes de variante: `Size` y `State`, nueve variantes en total. `Size` cubre los tres tamaños del kit (Large, Medium, Small), que cambian alto, tipografía, tamaño de ícono y padding. `State` distingue el chip seleccionado del no seleccionado y agrega una tercera forma sin fondo ni borde, Unselected Ghost.
+
+### Propiedades
+
+Lo que puedes ajustar en cada instancia del Chip sin salir de la variante.
+
+<PropsTable block="chips" />
+
+## Toggle Tab
+
+Barra segmentada: hasta cuatro opciones dentro de un mismo contenedor redondeado, con una sola activa. Se usa para alternar entre vistas equivalentes de un mismo contenido.
+
+<FigmaEmbed node="6617:86190" title="Toggle Tab" />
+
+### Resumen
+
+Grupo de hasta cuatro ítems encerrados en un contenedor de ancho fijo (636px): el ítem activo se rellena con el color de marca y los demás quedan sobre el fondo del contenedor. A diferencia de Tab Bar, los ítems no se leen como piezas sueltas sino como un único control segmentado.
+
+Dos ejes de variante: `Breakpoint` y `State`, ocho variantes en total. `Breakpoint` ajusta el alto de la fila y el tamaño del texto entre escritorio y móvil; `State` determina cuál de los cuatro ítems está activo. La cantidad de ítems visibles no es un eje: se controla con las cuatro booleanas `Show Item`.
+
+### Propiedades
+
+Lo que puedes ajustar en cada instancia del Toggle Tab sin salir de la variante.
+
+<PropsTable block="toggle-tab" />
+
+## Tab Bar / Searchbox
+
+Selector del tipo de búsqueda sobre el buscador: Vuelos, Administra tu vuelo, Check-in y Hoteles, cada uno con su ícono. Los chips van sueltos, sin contenedor común.
+
+<FigmaEmbed node="7350:106892" title="Tab Bar Searchbox" />
+
+### Resumen
+
+Fila de hasta cuatro chips con ícono que cambia el contenido del buscador. Cada chip es una instancia de `Chips`: el seleccionado va relleno en color de marca y el resto queda sobre fondo blanco con borde.
+
+Dos ejes de variante: `Breakpoint` y `Selected`, ocho variantes en total. `Breakpoint` cambia el tamaño de los chips (Large en escritorio, Medium en móvil) y el ancho total de la barra; `Selected` determina cuál de los cuatro está activo. Los dos primeros chips no se pueden ocultar; el tercero y el cuarto tienen su propia booleana.
+
+### Propiedades
+
+Lo que puedes ajustar en cada instancia del Tab Bar / Searchbox sin salir de la variante.
+
+<PropsTable block="tab-bar-searchbox" />
+
+## Tab Bar Filter
+
+Fila de seis filtros de contenido —Todos, Nacionales, Internacionales, Playa, Naturaleza y Urbano— con un divisor que separa «Todos» del resto.
+
+<FigmaEmbed node="6617:87408" title="Tab Bar Filter" />
+
+### Resumen
+
+Barra de filtros para acotar un listado de destinos. Se arma con seis chips Medium de 44px, separados por 8px, sobre un ancho total fijo de 832px. El divisor vertical después del primer chip marca que «Todos» es la opción que anula a las demás.
+
+Un solo eje de variante: `Selected`, con seis valores —uno por chip— y ninguna versión de móvil. La cantidad de filtros no es configurable: la única booleana de la instancia es la del divisor.
+
+### Propiedades
+
+Lo que puedes ajustar en cada instancia del Tab Bar Filter sin salir de la variante.
+
+<PropsTable block="tab-bar-filter" />
+
+## Tab Underline Item
+
+Ítem de tramo de vuelo: sentido, contador, origen, destino y fecha, con un subrayado que marca el tramo activo. Es el único de los cinco que no se arma con chips.
+
+<FigmaEmbed node="6617:87480" title="Tab Underline Item" />
+
+### Resumen
+
+Pestaña de texto para recorrer los tramos de un itinerario. Cada ítem mide 319×46 y muestra dos líneas: arriba el sentido del vuelo con su contador (IDA · 1/3), abajo la ruta y la fecha. El tramo activo se marca con un subrayado de 2px; el resto queda sin remarcar.
+
+Un solo eje de variante: `Selected`, con dos valores. La selección se resuelve ítem por ítem, no desde un contenedor: una barra de tres tramos son tres instancias, y solo una de ellas va en `True`. El contenido de cada tramo se escribe en la instancia.
+
+### Propiedades
+
+Lo que puedes ajustar en cada instancia del Tab Underline Item sin salir de la variante.
+
+<PropsTable block="tab-underline-item" />

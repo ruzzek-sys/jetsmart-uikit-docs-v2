@@ -1,0 +1,28 @@
+---
+title: Passenger Stepper
+description: Selector para recorrer los pasajeros de la reserva con flechas, uno a la vez, al asignar asientos.
+figma:
+  - "5543:70065"
+props:
+  passenger-stepper:
+    - name: State
+      type: Variant
+      desc: "Default: etiqueta «Selección Pasajero» con el contador de pasajeros (p. ej. «1/2»). Selected: badge oscuro con el pasajero y el asiento asignado (p. ej. «Pasajero 1 - A07»), con opción de quitarlo. Default: Default."
+    - name: Content
+      type: Slot
+      desc: Slot central del stepper, entre los dos botones de flecha; aloja la etiqueta de texto o el badge según el State. Sin valores preferidos definidos — contenido libre.
+---
+
+<FigmaEmbed node="5543:70065" />
+
+## Resumen
+
+Passenger Stepper es la barra con dos botones de flecha que permite pasar de un pasajero a otro durante la selección de asientos. Al centro muestra la etiqueta «Selección Pasajero» con el contador de pasajeros o, una vez asignado, un badge con el pasajero y su asiento.
+
+Un solo eje de variante: `State`. `Default` muestra la etiqueta de texto con el badge contador (p. ej. «1/2») y `Selected` muestra solo el badge oscuro de asiento (p. ej. «Pasajero 1 - A07»), con la etiqueta oculta. Lo que va al centro se aloja en el slot `Content`.
+
+## Propiedades
+
+Ajustables desde el panel de la instancia
+
+<PropsTable block="passenger-stepper" />

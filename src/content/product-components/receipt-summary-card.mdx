@@ -1,0 +1,67 @@
+---
+title: Receipt Summary Card
+description: Tarjeta que resume los datos de una compra o trámite y cierra con la fila del total.
+figma:
+  - "6186:161150"
+props:
+  receipt-summary-card:
+    - name: Breakpoint
+      type: Variant
+      desc: "Desktop: tarjeta de 780px de ancho. Mobile: tarjeta de 388px de ancho. Default: Desktop."
+    - name: Show Price
+      type: Boolean
+      desc: "Muestra u oculta la fila «Total» con el monto. Default: activado."
+    - name: Title
+      type: Text
+      desc: "Texto del título de la tarjeta. Default: «Title Card»."
+    - name: Title Card Body Stack
+      type: Slot
+      desc: "Slot de contenido de la tarjeta: acepta el componente y los dos component sets predefinidos (usados por los ensamblajes Voucher y Passanger para rellenarla)."
+tables:
+  receipt-summary-card-title-card-body-stack-que-es-componente-y-que-no:
+    columns:
+      - Fila
+      - ¿Es componente?
+      - Detalle
+    rows:
+      - name: Fila texto/texto
+        meta:
+          - label: No es componente
+            tone: off
+        desc: "Frame con dos capas «Heading»: label (ej. «N° de solicitud») y valor (ej. «#MED-20260514-3312»). Solo la tipografía está enlazada a variables; el contenido se escribe manualmente en cada caso."
+      - name: Fila con Badge
+        meta:
+          - label: Badge sí es componente
+            tone: on
+        desc: Frame con «Heading» de label (ej. «Estado») + instancia real del componente Badge (ej. «Aprobado»). El Badge es swap-able; la fila que lo envuelve no lo es.
+      - name: Fila con Checkbox
+        meta:
+          - label: Checkbox sí es componente
+            tone: on
+        desc: Instancia real del componente Checkbox (ícono Font Awesome + label, ej. «Ignacio Andrés Barrios Arriola») + «Heading» de contexto (ej. «Titular de la reserva»). El Checkbox es swap-able; la fila que lo envuelve no lo es.
+      - name: Divider
+        meta:
+          - label: Sí es componente
+            tone: on
+        desc: Instancia real del componente Divider, colocada entre cada fila dentro del slot para separar los bloques de contenido.
+---
+
+<FigmaEmbed node="6186:161150" />
+
+## Resumen
+
+Tarjeta con un título, un slot de contenido y una fila «Total» con el monto al pie. Se usa para resumir lo que el usuario está por confirmar —datos del comprobante, pasajeros seleccionados— antes de pagar o continuar el flujo.
+
+Tres maestros × `Breakpoint` (2) = 6 variantes: la card base `Receipt Summary Card`, con el slot `Title Card Body Stack` vacío, y dos ensamblajes que la consumen y le rellenan el contenido: `Receipt Summary Card Voucher` (datos del comprobante) y `Receipt Summary Card Passenger` (lista de pasajeros). Cada uno existe en `Desktop` (780px) y `Mobile` (388px).
+
+## Propiedades
+
+Ajustables desde el panel de la instancia
+
+<PropsTable block="receipt-summary-card" />
+
+### Title Card Body Stack · qué es componente y qué no
+
+El slot acepta Badge, Divider y Checkbox como instancias reales de componente. Las filas de etiqueta/valor que los envuelven (label + texto, o label + Badge/Checkbox) son frames armados a mano por caso de uso —no son componentes reutilizables, solo su tipografía está enlazada a variables.
+
+<DocTable id="receipt-summary-card-title-card-body-stack-que-es-componente-y-que-no" />

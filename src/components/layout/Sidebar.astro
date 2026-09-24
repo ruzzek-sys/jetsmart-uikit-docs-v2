@@ -1,0 +1,122 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../../assets/img/logo-jetsmart.png';
+import { getNav } from '../../data/nav';
+import SidebarSearch from './SidebarSearch.astro';
+
+interface Props {
+  /** href de la página actual («/components/accordion/»). */
+  current: string;
+}
+
+const { current } = Astro.props;
+const sections = await getNav();
+---
+
+<aside
+  id="sidebar"
+  class="fixed inset-y-0 left-0 z-40 flex w-sidebar max-w-[85vw] -translate-x-full flex-col border-r border-line bg-surface transition-transform duration-200 lg:translate-x-0 [.drawer-open_&]:translate-x-0"
+  aria-label="Navegación del sitio"
+>
+  <div class="px-4 pt-5">
+    <a href="/" class="mb-4 flex flex-col items-start gap-1.5 rounded-[10px] p-2 hover:bg-subtle">
+      <Image src={logo} alt="JetSmart" height={40} class="h-10 w-auto rounded-md" loading="eager" />
+      <span class="pl-0.5 text-xs text-muted">UI Kit v1.0</span>
+    </a>
+    <SidebarSearch />
+  </div>
+
+  <nav class="flex-1 overflow-y-auto overscroll-contain px-4 pb-8" aria-label="Documentación">
+    <a
+      href="/"
+      class:list={['sidebar-link mb-3 font-medium', { 'is-active': current === '/' }]}
+      aria-current={current === '/' ? 'page' : undefined}
+      data-nav-link
+    >Introducción</a>
+
+    <div class="flex flex-col gap-1" data-nav-sections>
+      {sections.map((section) => {
+        const hasActive = section.items.some((item) => item.href === current);
+        return (
+          <details class="nav-section group" data-section-id={section.id} data-has-active={hasActive || undefined} open={hasActive}>
+            <summary class="flex min-h-11 cursor-pointer list-none items-center justify-between rounded-lg px-3 text-[13px] font-bold uppercase tracking-[0.03em] text-muted hover:bg-subtle hover:text-ink [&::-webkit-details-marker]:hidden">
+              <span>{section.label}</span>
+              <svg class="size-4 transition-transform duration-200 group-open:rotate-90" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </summary>
+            <ul class="pb-2 pl-2">
+              {section.items.map((item) => (
+                <li>
+                  <a
+                    href={item.href}
+                    class:list={['sidebar-link', { 'is-active': item.href === current }]}
+                    aria-current={item.href === current ? 'page' : undefined}
+                    data-nav-link
+                  >{item.label}</a>
+                </li>
+              ))}
+            </ul>
+          </details>
+        );
+      })}
+    </div>
+    <p class="hidden px-3 py-2 text-sm text-muted" data-nav-empty>Sin resultados.</p>
+  </nav>
+</aside>
+
+<!-- Restaura antes del primer paint qué secciones dejó abiertas la persona. -->
+<script is:inline>
+  (function () {
+    var KEY = 'jetsmart-nav-expanded';
+    var state = {};
+    try { state = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) {}
+    var sections = document.querySelectorAll('#sidebar details[data-section-id]');
+    var hasAny = Object.keys(state).length > 0;
+    sections.forEach(function (el) {
+      var id = el.getAttribute('data-section-id');
+      if (el.hasAttribute('data-has-active')) el.open = true;
+      else if (hasAny) el.open = !!state[id];
+      else el.open = id === 'foundations' || id === 'components';
+      el.addEventListener('toggle', function () {
+        if (document.documentElement.hasAttribute('data-nav-filtering')) return;
+        var next = {};
+        try { next = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) {}
+        next[id] = el.open;
+        try { localStorage.setItem(KEY, JSON.stringify(next)); } catch (e) {}
+      });
+    });
+    var active = document.querySelector('#sidebar [aria-current="page"]');
+    var scroller = active && active.closest('nav');
+    if (scroller) scroller.scrollTop = active.offsetTop - scroller.clientHeight / 2;
+  })();
+</script>
+
+<style>
+  .sidebar-link {
+    display: flex;
+    align-items: center;
+    min-height: 36px;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    color: var(--color-ink);
+  }
+
+  .sidebar-link:hover {
+    background: var(--color-subtle);
+  }
+
+  .sidebar-link.is-active {
+    background: var(--color-brand-light);
+    color: var(--color-brand-dark);
+    font-weight: 700;
+  }
+
+  /* En táctil los links necesitan 44 px de alto. */
+  @media (pointer: coarse) {
+    .sidebar-link {
+      min-height: 44px;
+    }
+  }
+</style>

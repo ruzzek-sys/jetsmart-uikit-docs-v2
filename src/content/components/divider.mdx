@@ -1,0 +1,51 @@
+---
+title: Divider
+description: Línea que separa elementos dentro de una fila o bloques apilados, en cuatro grosores.
+figma:
+  - "5230:108660"
+props:
+  divider:
+    - name: Orientation
+      type: Variant
+      desc: Inline muestra una línea vertical corta, pensada para separar elementos dentro de una misma fila de contenido. Stack muestra una línea horizontal de ancho completo, pensada para separar bloques apilados verticalmente. Inline es el valor por defecto.
+    - name: Thickness
+      type: Variant
+      desc: Controla el grosor del trazo del divisor, de 1px (Base) a 4px (Heavy), para dar más o menos énfasis visual a la separación entre contenidos. Base es el valor por defecto.
+tables:
+  divider-orientation-en-uso-real:
+    columns:
+      - Aspecto
+      - Categoría
+      - Descripción
+    rows:
+      - name: Stack — siempre con Fill
+        meta:
+          - label: Comportamiento
+        desc: "En todas las instancias del kit, Stack se aplica con ancho Fill dentro de contenedores verticales, extendiéndose al ancho completo del contenedor. Sirve para separar bloques apilados verticalmente: filas de menú, secciones de una tarjeta y el footer del cuerpo de una tarjeta."
+      - name: Inline — separa texto
+        meta:
+          - label: Uso
+        desc: Ancho fijo, ajustado a la línea de texto. Se usa dentro de filas horizontales para separar ítems de texto o metadatos adyacentes, como los niveles de un breadcrumb o pares dato-etiqueta.
+---
+
+<FigmaEmbed node="5230:108660" />
+
+## Resumen
+
+El Divider es una línea que separa contenidos: vertical y corta para dividir elementos dentro de una misma fila, u horizontal y de ancho completo para separar bloques apilados. Se usa, por ejemplo, entre las filas de un resumen de compra o entre las opciones de un menú lateral.
+
+8 variantes = `Orientation` (2) × `Thickness` (4), matriz completa. Color y grosor están ligados a variables del kit.
+
+## Propiedades
+
+Propiedades configurables del componente Divider.
+
+<PropsTable block="divider" />
+
+## Guía de uso
+
+### Orientation en uso real
+
+Cómo se comporta y para qué sirve cada valor.
+
+<DocTable id="divider-orientation-en-uso-real" />

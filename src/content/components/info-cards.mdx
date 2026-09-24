@@ -1,0 +1,75 @@
+---
+title: Info Cards
+description: Tarjeta informativa breve con ícono, título y descripción opcional, para destacar un dato o mensaje puntual.
+figma:
+  - "5561:109438"
+props:
+  info-cards:
+    - name: Layout
+      type: Variant
+      desc: Icon Inline pone el ícono junto al título en una fila. Icon Top apila el ícono sobre el título. Icon Inline es el valor por defecto.
+    - name: Emphasis
+      type: Variant
+      desc: Outlined muestra tarjeta blanca con borde. Filled usa un fondo con tono suave y sin borde. Outlined es el valor por defecto.
+    - name: Size
+      type: Variant
+      desc: Small, Medium y Large aumentan progresivamente el tamaño del ícono, la tipografía y el padding. Small es el valor por defecto.
+    - name: Title
+      type: Text
+      desc: "Texto del título de la tarjeta. Por defecto: «Título de la tarjeta»."
+    - name: Eyebrow
+      type: Text
+      desc: "Texto del antetítulo que aparece sobre el título cuando Show Eyebrow está activado. Por defecto: «ANTETÍTULO»."
+    - name: Description
+      type: Text
+      desc: "Texto de apoyo bajo el título, visible cuando Show Description está activado. Por defecto: «Descripción de apoyo de la tarjeta, en una o dos líneas.»."
+    - name: Show Icon
+      type: Boolean
+      desc: Muestra el ícono de la tarjeta. Activado por defecto.
+    - name: Show Eyebrow
+      type: Boolean
+      desc: Agrega el antetítulo sobre el título. Desactivado por defecto.
+    - name: Show Description
+      type: Boolean
+      desc: Muestra el texto de descripción bajo el título. Activado por defecto.
+    - name: Show Data Item
+      type: Boolean
+      desc: Agrega una fila de datos complementarios (p. ej. «Dato A · Dato B») entre el título y la descripción. Desactivado por defecto.
+tables:
+  info-cards-tipografia-en-ocasiones-especiales:
+    columns:
+      - Aspecto
+      - Categoría
+      - Descripción
+    rows:
+      - name: Eyebrow — estilo Featured
+        meta:
+          - label: Tipografía
+        desc: En ocasiones especiales, el antetítulo deja el estilo Pretitle (Lato SemiBold, mayúsculas) y pasa a Featured (Lato Bold, sin forzar mayúsculas), para darle más peso visual.
+      - name: Título — estilo Featured
+        meta:
+          - label: Tipografía
+        desc: El título deja Heading (Encode Sans Medium) y pasa a Featured (Lato Bold), conservando un tamaño equivalente al de la escala Small/Medium/Large de la tarjeta para no romper la jerarquía.
+---
+
+<FigmaEmbed node="5561:109438" />
+
+## Resumen
+
+Info Card es una tarjeta informativa breve que combina un ícono, un título y, opcionalmente, un antetítulo, una fila de datos complementarios y una descripción de apoyo. Sirve para destacar un dato o mensaje puntual dentro de una pantalla.
+
+12 variantes = `Layout` (2) × `Emphasis` (2) × `Size` (3). `Layout` define si el ícono va junto al título (Icon Inline) o sobre él (Icon Top); `Emphasis` alterna entre tarjeta con borde (Outlined) y con fondo de tono suave (Filled); `Size` escala ícono, tipografía y padding de Small a Large.
+
+## Propiedades
+
+Variantes de diseño y propiedades configurables de la tarjeta de información.
+
+<PropsTable block="info-cards" />
+
+## Guía de uso
+
+### Tipografía en ocasiones especiales
+
+Cómo cambia la tipografía del eyebrow y el título de la tarjeta en momentos destacados (campañas, anuncios puntuales).
+
+<DocTable id="info-cards-tipografia-en-ocasiones-especiales" />

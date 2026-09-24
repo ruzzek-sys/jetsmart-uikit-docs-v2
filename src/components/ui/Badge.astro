@@ -1,0 +1,50 @@
+---
+/** Etiqueta redonda en mayúsculas (antes .ty-badge--<tono>). */
+export type BadgeTone = 'var' | 'on' | 'off' | 'neutral' | 'brand';
+
+interface Props {
+  tone?: BadgeTone;
+}
+
+const { tone = 'var' } = Astro.props;
+---
+
+<span class:list={['badge', tone]}><slot /></span>
+
+<style>
+  .badge {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .on {
+    background: var(--color-ok-light);
+    color: var(--color-ok);
+  }
+
+  .off {
+    background: var(--color-brand-light);
+    color: var(--color-brand-dark);
+  }
+
+  .var {
+    background: var(--color-info-light);
+    color: var(--color-info);
+  }
+
+  .neutral {
+    background: var(--color-subtle);
+    color: var(--color-muted);
+  }
+
+  .brand {
+    background: var(--color-brand);
+    color: #fff;
+  }
+</style>

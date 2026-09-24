@@ -1,0 +1,96 @@
+---
+title: Quantity Stepper
+description: "Familia de controles para aumentar o disminuir cantidades: el stepper suelto, la fila con etiqueta y descripción, y el popover armado para elegir pasajeros."
+figma:
+  - "7538:131357"
+  - "7538:131725"
+  - "5356:16037"
+props:
+  quantity-stepper:
+    - name: Size
+      type: Variant
+      desc: Medium usa botones e input más grandes; Small los reduce para layouts compactos. Small es el valor por defecto.
+    - name: Number
+      type: Text
+      desc: Valor numérico mostrado entre los botones de incremento/decremento. «1» es el valor por defecto.
+  quantity-stepper-modal-content:
+    - name: Breakpoint
+      type: Variant
+      desc: Desktop muestra el label, la descripción y el stepper en una fila más ancha. Mobile reduce el ancho total del row. Desktop es el valor por defecto.
+    - name: Label
+      type: Text
+      desc: Título de la fila (p. ej. el tipo de pasajero). «Adultos» es el valor por defecto.
+    - name: Description
+      type: Text
+      desc: Texto secundario debajo del label. «18 o más años» es el valor por defecto.
+  popover-increment:
+    - name: Breakpoint
+      type: Heredada
+      desc: Heredada de Quantity Stepper Modal Content (cada fila del popover). Desktop muestra la fila más ancha; Mobile la reduce. Desktop es el valor por defecto.
+    - name: Label
+      type: Heredada
+      desc: Heredada de Quantity Stepper Modal Content. Título de cada fila (p. ej. el tipo de pasajero). «Adultos» es el valor por defecto.
+    - name: Description
+      type: Heredada
+      desc: Heredada de Quantity Stepper Modal Content. Texto secundario debajo del label de cada fila. «18 o más años» es el valor por defecto.
+    - name: Size
+      type: Heredada
+      desc: Heredada de Quantity Stepper (dentro de cada fila). Medium agranda botones e input; Small los reduce. Small es el valor por defecto.
+    - name: Number
+      type: Heredada
+      desc: Heredada de Quantity Stepper. Valor numérico mostrado entre los botones de incremento/decremento de cada fila. «1» es el valor por defecto.
+---
+
+## Quantity Stepper
+
+El control base: botón −, contador y botón +. Sirve para ajustar una cantidad entera paso a paso.
+
+<FigmaEmbed node="7538:131357" />
+
+### Resumen
+
+Stepper compacto con dos botones circulares de decremento e incremento a los lados de un valor numérico. Es la pieza que usan la fila de Modal Content y el popover de pasajeros.
+
+La familia completa suma 4 variantes en dos sets: `Size` (2) + `Breakpoint` (2), más `Popover / Increment` sin variantes; va del control suelto al popover armado. En este componente el eje es `Size`: Small (108 × 36) y Medium (144 × 52).
+
+### Propiedades
+
+Propiedades configurables del componente Quantity Stepper.
+
+<PropsTable block="quantity-stepper" />
+
+## Quantity Stepper Modal Content
+
+Fila con etiqueta y descripción a la izquierda y el stepper a la derecha. Es la unidad con la que se arman los selectores de pasajeros en modales y popovers.
+
+<FigmaEmbed node="7538:131725" title="Quantity Stepper Modal Content" />
+
+### Resumen
+
+Combina un título (p. ej. el tipo de pasajero), un texto secundario debajo y un `Quantity Stepper`. Se apila con divisores para formar listas, como en el modal «Seleccionar Pasajeros».
+
+Un solo eje de variante: `Breakpoint`. Desktop (350 × 52) usa la fila más ancha y el stepper grande; Mobile (230 × 44) reduce el ancho del row y el stepper.
+
+### Propiedades
+
+Propiedades configurables del componente Quantity Stepper Modal Content.
+
+<PropsTable block="quantity-stepper-modal-content" />
+
+## Popover / Increment
+
+El popover armado: varias filas de pasajeros con su stepper y un botón Confirmar al final.
+
+<FigmaEmbed node="5356:16037" title="Popover / Increment" />
+
+### Resumen
+
+Panel flotante que agrupa cuatro filas de `Quantity Stepper Modal Content` —Adultos, Adolescentes, Niños y Bebés— separadas por divisores, con el botón «Confirmar» para cerrar la selección.
+
+No tiene variantes (279 × 355). Todo lo que se ajusta viene de sus componentes anidados: `Quantity Stepper Modal Content` en cada fila y `Quantity Stepper` dentro de ella.
+
+### Propiedades
+
+Popover / Increment no define propiedades propias: hereda las de sus componentes anidados.
+
+<PropsTable block="popover-increment" />

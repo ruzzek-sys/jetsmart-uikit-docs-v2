@@ -1,0 +1,206 @@
+---
+title: Table
+description: "Familia de tablas de datos: la tabla desktop con la celda que la arma, y sus dos traducciones a mobile, en filas de etiqueta y valor o en tarjetas con estado."
+figma:
+  - "6567:84339"
+  - "7479:111930"
+  - "7479:112155"
+  - "7479:112159"
+props:
+  data-table-cell:
+    - name: Role
+      type: Variant
+      desc: Define si la celda es un encabezado de columna o una celda de contenido. Header (por defecto) usa texto en negrita sobre fondo gris claro; Body usa texto regular sin fondo.
+    - name: Width
+      type: Variant
+      desc: Ancho de la celda, de XS a XL, o Fill para ocupar el espacio disponible. XS es el valor por defecto.
+    - name: Label
+      type: Text
+      desc: Texto principal de la celda. Por defecto dice «Contenido».
+    - name: Show Label
+      type: Boolean
+      desc: Muestra el texto principal (Label). On es el valor por defecto; Off deja la celda sin texto principal.
+    - name: Caption
+      type: Text
+      desc: Texto secundario, más pequeño y gris, debajo del Label. Por defecto dice «Descripción».
+    - name: Show Caption
+      type: Boolean
+      desc: Muestra el texto secundario (Caption) bajo el Label. Off es el valor por defecto; On revela la línea de descripción.
+    - name: Show Slots
+      type: Boolean
+      desc: Interruptor maestro de la fila de slots. Debe estar activo para que Slot 1 y Slot 2 se vean, incluso si sus propios booleanos están en On. Off es el valor por defecto.
+    - name: Slot 1
+      type: Instance
+      desc: Componente intercambiable en la primera posición de la fila de slots (ícono, botón, etc.), visible cuando Show Slots y Show Slot 1 están activos.
+    - name: Show Slot 1
+      type: Boolean
+      desc: Muestra el primer slot dentro de la fila de slots. Requiere que Show Slots también esté activo. Off es el valor por defecto.
+    - name: Slot 2
+      type: Instance
+      desc: Componente intercambiable en la segunda posición de la fila de slots, visible cuando Show Slots y Show Slot 2 están activos.
+    - name: Show Slot 2
+      type: Boolean
+      desc: Muestra el segundo slot dentro de la fila de slots. Requiere que Show Slots también esté activo. Off es el valor por defecto.
+  table-desktop:
+    - name: Summary
+      type: Boolean
+      desc: Barra superior con un título y una acción a la derecha. Collapsed (off) es el valor por defecto; Expanded (on) revela la fila de resumen sobre el encabezado.
+    - name: Summary Label
+      type: Text
+      desc: Texto de la barra de resumen, visible solo cuando Summary está activo. Por defecto dice «Resumen».
+    - name: Summary Slot
+      type: Instance
+      desc: Componente intercambiable a la derecha de la barra de resumen (por ejemplo un botón), visible solo cuando Summary está activo.
+    - name: Header
+      type: Boolean
+      desc: Fila de encabezados con los títulos de columna. On es el valor por defecto; Off la oculta y la tabla empieza directo en las filas de contenido.
+    - name: Zebra
+      type: Boolean
+      desc: Alterna el fondo de las filas para facilitar la lectura horizontal. Off es el valor por defecto; On aplica una franja gris clara a las filas alternas.
+    - name: Pagination
+      type: Boolean
+      desc: Controles de paginación (Anterior/Siguiente y números de página) debajo de la tabla. Off es el valor por defecto.
+  table-mobile-row:
+    - name: Type
+      type: Variant
+      desc: Define el énfasis visual de la fila. Group (por defecto) resalta el Label en negrita y deja el Value en gris; Item invierte el énfasis, con el Label en gris y el Value en negrita.
+    - name: Label
+      type: Text
+      desc: Texto a la izquierda de la fila. Por defecto dice «Equipaje de mano».
+    - name: Value
+      type: Text
+      desc: Texto a la derecha de la fila. Por defecto dice «55×35×25 cm · 10 kg».
+  table-mobile-card-mis-vuelos:
+    - name: Type
+      type: Variant
+      desc: Define el estado del vuelo mostrado en la insignia superior derecha. Complete (por defecto) muestra «Completado» en verde; Cancelled muestra «Cancelado» en rojo.
+    - name: Show Primary Button
+      type: Boolean
+      desc: Muestra el botón «Descargar voucher» en la parte inferior de la tarjeta. Off es el valor por defecto.
+    - name: Show Secondary Button
+      type: Boolean
+      desc: Muestra el botón «Solicitar devolución» debajo del primario (o solo, si el primario está oculto). On es el valor por defecto.
+  table-mobile-card-estado-de-vuelo:
+    - name: Status
+      type: Variant
+      desc: Define el estado del vuelo mostrado en la insignia superior derecha, y si aparece el botón de acción. On Time (por defecto) muestra «A tiempo» en verde, sin botón. Cancelled muestra «Cancelado» en rojo y revela el botón «Solicitar devolución». Landed muestra «Aterrizó» en amarillo, sin botón.
+tables:
+  table-desktop-slot-de-resumen-y-estilo-zebra:
+    columns:
+      - Aspecto
+      - Categoría
+      - Descripción
+    rows:
+      - name: Slot de resumen
+        meta:
+          - label: Comportamiento
+        desc: "Es un slot de tipo componente intercambiable: al reemplazar el placeholder punteado por un botón, badge u otro elemento, la barra de resumen adopta el ancho real de ese contenido en vez de quedar fija en los 64px del ejemplo por defecto."
+      - name: Por qué alargarlo
+        meta:
+          - label: Intención
+        desc: Permite mostrar información variable en el resumen —desde un total corto hasta un botón de acción más ancho— sin rediseñar el componente para cada caso de uso.
+      - name: Zebra
+        meta:
+          - label: Comportamiento
+        desc: Al activarlo, aplica una franja de fondo gris clara únicamente a las filas pares (2, 4, 6...) del cuerpo; el encabezado, el resumen y la paginación no se ven afectados.
+      - name: Beneficio del zebra
+        meta:
+          - label: Legibilidad
+        desc: En una tabla de 6 columnas, la alternancia de fondo ayuda al ojo a seguir una fila de punta a punta sin perderse en la fila vecina, reduciendo errores de lectura horizontal en sets de datos densos.
+---
+
+## Data Table Cell
+
+Celda con la que se arma la tabla desktop: sirve tanto de encabezado de columna como de celda de contenido.
+
+### Resumen
+
+Unidad mínima de la tabla de datos. Muestra un texto principal con una línea secundaria opcional y una fila de hasta dos slots para íconos, badges o botones; cada pieza se prende o se apaga desde la instancia.
+
+12 variantes = `Role` (2) × `Width` (6), matriz completa. `Role` distingue el encabezado (Header) de la celda de contenido (Body) y `Width` recorre los anchos XS, S, M, L, XL y Fill. Los slots arrancan con `Data Table Slot Placeholder`, un marcador sin ejes ni propiedades que se reemplaza por Badge, Button u otro componente vía la propiedad de slot.
+
+### Propiedades
+
+Celda de la tabla de datos, con variantes de encabezado y contenido, y slots opcionales para íconos o acciones.
+
+<PropsTable block="data-table-cell" />
+
+## Table Desktop
+
+Tabla de datos para vistas de escritorio, con barra de resumen, encabezado, filas alternas y paginación opcionales.
+
+<FigmaEmbed node="6567:84339" title="Table Desktop" />
+
+### Resumen
+
+Tabla completa para desktop, armada con celdas `Data Table Cell`. Sobre la fila de encabezados puede llevar una barra de resumen con título y una acción a la derecha, y debajo de las filas, los controles de paginación.
+
+1 variante: es un componente sin ejes VARIANT. Toda su variación son 6 propiedades: `Header`, `Zebra`, `Summary`, `Summary Label`, `Summary Slot` y `Pagination`.
+
+### Propiedades
+
+Tabla de datos para vistas desktop, con encabezado, resumen y paginación configurables.
+
+<PropsTable block="table-desktop" />
+
+### Guía de uso
+
+#### Slot de resumen y estilo zebra
+
+Cómo aprovechar el slot intercambiable del resumen y la franja zebra entre filas.
+
+<DocTable id="table-desktop-slot-de-resumen-y-estilo-zebra" />
+
+## Table Mobile Row
+
+Fila de etiqueta y valor con la que la tabla desktop se traduce a una lista vertical en mobile.
+
+<FigmaEmbed node="7479:111930" title="Table Mobile Row" />
+
+### Resumen
+
+Fila de una tabla en vista mobile: una etiqueta a la izquierda y un valor a la derecha. Traduce la tabla desktop a una lista vertical de pares etiqueta/valor: cada fila desktop se abre en un bloque Group seguido de una fila Item por columna; es la estrategia de lista, pensada para tablas de datos como las de precios de equipaje.
+
+2 variantes = `Type` (2), matriz completa. Group resalta la etiqueta y Item invierte el énfasis hacia el valor.
+
+### Propiedades
+
+Fila de una tabla en vista mobile, con dos variantes de énfasis entre etiqueta y valor.
+
+<PropsTable block="table-mobile-row" />
+
+## Table Mobile Card — Mis vuelos
+
+Tarjeta de vuelo para el listado de Mis vuelos en mobile, con insignia de estado y botones de acción.
+
+<FigmaEmbed node="7479:112155" title="Table Mobile Card — Mis vuelos" />
+
+### Resumen
+
+Tarjeta que comprime una fila de la tabla desktop en mobile, con una insignia de estado arriba a la derecha y hasta dos botones de acción abajo. Es la estrategia de card, pensada para listados con estado.
+
+2 variantes = `Type` (2), matriz completa: Complete y Cancelled. Antes se llamaba «Card Table».
+
+### Propiedades
+
+Tarjeta de vuelo para la sección Mis vuelos en vista mobile, con estado y botones de acción configurables.
+
+<PropsTable block="table-mobile-card-mis-vuelos" />
+
+## Table Mobile Card — Estado de vuelo
+
+Tarjeta de estado de vuelo en mobile; el botón de devolución aparece solo cuando el vuelo está cancelado.
+
+<FigmaEmbed node="7479:112159" title="Table Mobile Card — Estado de vuelo" />
+
+### Resumen
+
+Tarjeta que muestra el estado de un vuelo en mobile con una insignia de color. No expone propiedades además del eje: el botón «Solicitar devolución» viene incluido en la variante cancelada, que por eso es más alta (148px contra 92px).
+
+3 variantes = `Status` (3), matriz completa: On Time, Cancelled y Landed. Antes se llamaba «Card Table Estado de Vuelo».
+
+### Propiedades
+
+Tarjeta de estado de vuelo en vista mobile; el botón de devolución aparece solo cuando el vuelo está cancelado.
+
+<PropsTable block="table-mobile-card-estado-de-vuelo" />

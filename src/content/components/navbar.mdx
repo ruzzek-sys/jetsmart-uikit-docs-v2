@@ -1,0 +1,183 @@
+---
+title: Navbar
+description: "La barra de navegación del sitio y sus piezas: la Navbar principal, el enlace Nav Link, la barra del flujo de compra y el menú Mobile."
+figma:
+  - "6232:174145"
+  - "7607:42580"
+  - "7607:42659"
+  - "7607:42873"
+props:
+  navbar:
+    - name: Breakpoint
+      type: Variant
+      desc: Desktop muestra el menú de navegación completo junto al logo. Mobile lo colapsa en una barra compacta con ícono de menú hamburguesa. Desktop es el valor por defecto.
+    - name: Type
+      type: Variant
+      desc: "Default: menú completo con botón «Iniciar sesión». Login: menú completo con usuario autenticado (avatar), carrito y selector de país. User Admin: igual que Login pero con ícono de notificaciones en vez del selector de país. Standard: sin menú de navegación, solo botones de registro/inicio de sesión y selector de país. Default es el valor por defecto."
+    - name: Left Content
+      type: Slot
+      desc: Contiene los enlaces de navegación (Nav Link) del lado izquierdo. Queda vacío en la variante Standard.
+    - name: Right Content
+      type: Slot
+      desc: "Contiene el bloque de acciones del lado derecho: inicio de sesión o cuenta de usuario, carrito, notificaciones y/o selector de país, según el Type."
+  nav-link:
+    - name: Size
+      type: Variant
+      desc: "Escala el tamaño del enlace: Small (20 px), Medium (28 px) y Large (32 px) ajustan la tipografía, el ícono y el alto del componente. Small es el valor por defecto."
+    - name: State
+      type: Variant
+      desc: Default muestra el enlace en su estilo de reposo. Hover oscurece levemente el color del texto al pasar el cursor. Active marca la página actual con texto en negrita y un subrayado inferior color cian. Disabled atenúa el texto y el ícono a un gris claro y desactiva la interacción. Default es el valor por defecto.
+    - name: Label
+      type: Text
+      desc: Texto visible del enlace de navegación. Su valor por defecto es «Link».
+    - name: Show Chevron
+      type: Boolean
+      desc: Muestra u oculta el ícono de flecha hacia abajo junto al texto, usado para indicar que el enlace despliega un submenú. Su valor por defecto es true (visible).
+  navbar-booking:
+    - name: Step
+      type: Variant
+      desc: "Controla el paso del flujo de reserva mostrado en el centro de la barra: Trip, Services, Seats, Details o Payment. Cada valor actualiza el texto «Paso X de 5», el ícono y la etiqueta, y avanza la barra de progreso inferior. Trip es el valor por defecto."
+    - name: Login
+      type: Variant
+      desc: False muestra el botón «Iniciar Sesión». True lo reemplaza por el avatar, nombre del usuario («Juan Pablo») y flecha desplegable de la cuenta ya autenticada. False es el valor por defecto.
+  menu-mobile:
+    - name: Type
+      type: Variant
+      desc: Default muestra el menú de navegación principal (Ofertas y Destinos, Mi viaje, Beneficios JetSMART, Ayuda, Estado de vuelo). Flags muestra el selector de país expandido con la lista de banderas disponibles. Default es el valor por defecto.
+    - name: Links
+      type: Slot
+      desc: "Contenedor de contenido libre compartido entre ambas variantes: acepta la lista de ítems que se inserte dentro del menú, ya sean enlaces de navegación o la lista de banderas de país."
+tables:
+  navbar-casos-de-uso:
+    columns:
+      - Aspecto
+      - Categoría
+      - Descripción
+    rows:
+      - name: Default
+        meta:
+          - label: Visitante
+        desc: "Header para visitantes no autenticados en el sitio público: navegación completa (Ofertas y Destinos, Mi viaje, Beneficios JetSMART, Ayuda, Estado de vuelo) más el CTA «Iniciar sesión». En mobile colapsa a logo + botón de login + menú hamburguesa."
+      - name: Login
+        meta:
+          - label: Usuario autenticado
+        desc: "Las mismas páginas públicas que Default, pero con sesión iniciada: conserva la navegación completa y agrega carrito + selector de país, reemplazando el botón de login por el selector con avatar y nombre. En mobile mantiene el avatar junto al menú hamburguesa."
+      - name: Administración
+        meta:
+          - label: Área de cuenta
+        desc: "Para secciones de cuenta o administración (gestión de viaje, reservas) donde las notificaciones importan más que cambiar de país: cambia el selector de país por el ícono de notificaciones."
+      - name: Standard
+        meta:
+          - label: Flujo enfocado
+        desc: "Header minimalista sin enlaces de navegación, para flujos donde no se quiere que el usuario se distraiga (p. ej. antes de una reserva o una landing de registro): sólo logo, botones «Inscríbete»/«Iniciar Sesión» y selector de país. El slot Left Content queda vacío, listo para insertar otro elemento (como el Step Bar de Navbar Booking)."
+  menu-mobile-como-usarlo:
+    columns:
+      - Aspecto
+      - Categoría
+      - Descripción
+    rows:
+      - name: Alto
+        meta:
+          - label: Se estira
+        desc: "El panel cubre la pantalla completa. Los 931 px son la referencia de diseño: ponlo en Fill container en el eje vertical."
+      - name: Apertura
+        meta:
+          - label: Instancias
+        desc: Se abre desde el menú hamburguesa de Navbar en Breakpoint=Mobile. No lo uses en Desktop.
+      - name: Aperturas
+        meta:
+          - label: No mezclar
+        desc: "Flags y Expanded son dos aperturas distintas: no muestres el listado de países y el submenú a la vez."
+      - name: Enlaces
+        meta:
+          - label: Instancias
+        desc: Los ítems de navegación deben ser instancias de Nav Link, no texto suelto; el orden y los textos se editan ahí.
+---
+
+## Navbar
+
+Barra de navegación principal del sitio: logo, enlaces de navegación a la izquierda y acciones de cuenta a la derecha.
+
+<FigmaEmbed node="6232:174145" />
+
+### Resumen
+
+Encabezado fijo de las páginas del sitio. Reúne el logo, los enlaces de navegación y el bloque de acciones del usuario (inicio de sesión o cuenta, carrito, notificaciones y selector de país), que cambia según el estado de la sesión.
+
+6 variantes de 8 posibles = `Breakpoint` (2) × `Type` (4), matriz incompleta: en Mobile solo existen Default y Login. Los dos extremos de la barra son slots (`Left Content` y `Right Content`).
+
+### Propiedades
+
+Lo que se cambia desde la instancia sin salir de la variante.
+
+<PropsTable block="navbar" />
+
+### Guía de uso
+
+#### Casos de uso
+
+Cuándo usar cada tipo del Navbar.
+
+<DocTable id="navbar-casos-de-uso" />
+
+## Nav Link
+
+Enlace de texto de la barra de navegación, con chevron opcional para indicar un submenú.
+
+<FigmaEmbed node="7607:42580" title="Nav Link" />
+
+### Resumen
+
+Es la pieza que se repite dentro del slot izquierdo de la Navbar. Lleva una etiqueta de texto y, opcionalmente, una flecha hacia abajo cuando el enlace despliega un submenú; marca la página actual con negrita y subrayado cian.
+
+12 variantes = `Size` (3) × `State` (4), matriz completa. `Label` y `Show Chevron` se ajustan desde la instancia, sin cambiar de variante.
+
+### Propiedades
+
+Lo que se cambia desde la instancia sin salir de la variante.
+
+<PropsTable block="nav-link" />
+
+## Navbar Booking
+
+Barra superior del flujo de compra, con el paso actual y una barra de progreso.
+
+<FigmaEmbed node="7607:42659" title="Navbar Booking" />
+
+### Resumen
+
+Reemplaza a la Navbar durante la reserva. Muestra en el centro el paso en curso («Paso X de 5») con su ícono y etiqueta, una barra de progreso inferior, y a la derecha el acceso a la cuenta.
+
+10 variantes = `Step` (5) × `Login` (2), matriz completa. Es la barra del flujo de compra: no tiene propiedades de instancia, todo se resuelve cambiando de variante.
+
+### Propiedades
+
+Propiedades del componente Navbar Booking.
+
+<PropsTable block="navbar-booking" />
+
+## Menu Mobile
+
+Panel que abre el menú hamburguesa de la Navbar en Mobile.
+
+<FigmaEmbed node="7607:42873" title="Menu Mobile" />
+
+### Resumen
+
+Menú lateral de pantalla completa para Mobile. Arriba lleva el logo, el botón de cerrar y el selector de país; debajo, la lista de enlaces de navegación y los botones de registro e inicio de sesión.
+
+Un solo eje de variante, `Type`, con Default (menú principal cerrado) y Flags (selector de país abierto). Es el panel que abre el menú hamburguesa de Navbar en Mobile: 428 px de ancho y alto completo de pantalla.
+
+### Propiedades
+
+Propiedades del componente Menu Mobile.
+
+<PropsTable block="menu-mobile" />
+
+### Guía de uso
+
+#### Cómo usarlo
+
+Reglas de uso del panel de menú mobile.
+
+<DocTable id="menu-mobile-como-usarlo" />

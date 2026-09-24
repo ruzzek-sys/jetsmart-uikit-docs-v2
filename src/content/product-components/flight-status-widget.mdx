@@ -1,0 +1,28 @@
+---
+title: Flight Status Widget
+description: Widget para consultar el estado de un vuelo por número de vuelo o por ruta.
+figma:
+  - "6186:148344"
+props:
+  flight-status-widget:
+    - name: Breakpoint
+      type: Variant
+      desc: Ajusta el layout al ancho de pantalla. Desktop muestra las opciones de búsqueda como tarjetas con texto de ayuda y ubica Origen/Destino en fila. Mobile condensa la selección en un toggle simple sin texto de ayuda y apila los campos en columna. Desktop es el valor por defecto.
+    - name: Search Mode
+      type: Variant
+      desc: Define el formulario visible. Flight Number pide número de vuelo y fecha. Route pide origen, destino y fecha. Current Search reemplaza el formulario por el resumen de la búsqueda activa (origen → destino, fecha) con un botón para modificarla. Flight Number es el valor por defecto.
+---
+
+<FigmaEmbed node="6186:148344" />
+
+## Resumen
+
+Formulario compacto para consultar el estado de un vuelo. El usuario busca por número de vuelo y fecha, o por origen, destino y fecha; una vez hecha la consulta, el widget puede mostrar en su lugar el resumen de la búsqueda activa con un botón para modificarla.
+
+6 variantes = `Breakpoint` (2) × `State` (3). En el panel de propiedades el eje de estado se llama `Search Mode`: Flight Number, Route y Current Search.
+
+## Propiedades
+
+Propiedades configurables del componente Flight Status Widget
+
+<PropsTable block="flight-status-widget" />

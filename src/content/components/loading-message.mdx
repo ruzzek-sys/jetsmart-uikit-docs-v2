@@ -1,0 +1,31 @@
+---
+title: Loading Message
+description: Pantalla de espera que avisa que el itinerario se está preparando y pide no cerrar ni retroceder.
+figma:
+  - "5562:111454"
+props:
+  loading-message:
+    - name: Breakpoint
+      type: Variant
+      desc: Define el layout de la pantalla de carga. Desktop muestra una tarjeta horizontal ancha con la ilustración y el texto centrados. Mobile muestra una tarjeta vertical angosta con el mismo contenido apilado. Desktop es el valor por defecto.
+    - name: Title
+      type: Text
+      desc: Titular principal sobre la ilustración. Texto editable; por defecto dice «¡Tu viaje está casi listo!».
+    - name: Description
+      type: Text
+      desc: Texto de apoyo bajo el titular, explica que el itinerario está por estar listo y pide no cerrar ni retroceder. Texto editable; por defecto dice «En unos segundos tendrás tu itinerario listo. No cierres esta ventana ni vuelvas atrás.».
+---
+
+<FigmaEmbed node="5562:111454" />
+
+## Resumen
+
+Loading Message es la tarjeta de espera que aparece mientras se genera el itinerario del viaje: una ilustración con un titular y un texto de apoyo que le pide al usuario no cerrar la ventana ni volver atrás. El titular y el texto son editables.
+
+2 variantes = `Breakpoint` (2), matriz completa. El fondo, la ilustración y el radio de 40 px vienen del componente; la copy está fija en el main.
+
+## Propiedades
+
+Propiedades configurables del componente Loading Message.
+
+<PropsTable block="loading-message" />

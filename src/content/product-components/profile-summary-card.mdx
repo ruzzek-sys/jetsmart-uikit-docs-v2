@@ -1,0 +1,31 @@
+---
+title: Profile Summary Card
+description: Tarjeta de bienvenida de «Mi cuenta» con el avatar, el saludo al socio y el avance de su perfil.
+figma:
+  - "5543:64060"
+props:
+  profile-summary-card:
+    - name: Breakpoint
+      type: Variant
+      desc: "Desktop: tarjeta horizontal de 868px con el avatar a la izquierda y el botón arriba a la derecha. Mobile: tarjeta vertical de 388px con todo el contenido apilado y el botón al pie. Default: Desktop."
+    - name: Show Button Primary
+      type: Boolean
+      desc: "Muestra u oculta el botón «Completar perfil». Apágalo cuando el perfil del socio ya está completo. Default: activado."
+    - name: Title
+      type: Text
+      desc: Texto del saludo mostrado junto al avatar (p. ej. «Hola, José Miguel Barrios Rojas»). Editable por instancia; el valor por defecto es un nombre de ejemplo.
+---
+
+<FigmaEmbed node="5543:64060" />
+
+## Resumen
+
+Profile Summary Card encabeza la sección «Mi cuenta»: muestra el avatar del socio con el enlace «Agregar avatar», un saludo con su nombre, el tipo de membresía y una barra que indica qué porcentaje del perfil está completo, junto al botón «Completar perfil» que lleva a terminarlo.
+
+2 variantes = `Breakpoint` (2), matriz completa. Fondo, radio y espaciados están ligados a variables del kit. En `Desktop` es una tarjeta horizontal de 868 × 168 con el avatar a la izquierda; en `Mobile`, una tarjeta vertical de 388 × 374 con el contenido apilado.
+
+## Propiedades
+
+Ajustables desde el panel de la instancia
+
+<PropsTable block="profile-summary-card" />

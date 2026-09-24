@@ -1,0 +1,28 @@
+---
+title: FAQ Panel
+description: Bloque de preguntas frecuentes con título y filas de pregunta que se expanden para mostrar la respuesta.
+figma:
+  - "5279:112230"
+props:
+  faq-panel:
+    - name: Type
+      type: Variant
+      desc: "Row: fila colapsada que muestra solo la pregunta con un ícono «+». Accordion: expande la fila y revela el contenido de la respuesta debajo, cambiando el ícono a «−». Row es el valor por defecto."
+    - name: Answer Content
+      type: Slot
+      desc: "Contenido de la respuesta que aparece debajo de la pregunta cuando Type está en Accordion: texto explicativo, tabla de precios u otros bloques de contenido según el caso."
+---
+
+<FigmaEmbed node="5279:112230" />
+
+## Resumen
+
+FAQ Panel agrupa preguntas frecuentes bajo un título. Cada pregunta es un `FAQ Item` que se muestra colapsado, solo con la pregunta, o desplegado con su respuesta debajo, que puede ser texto, una tabla de precios u otros bloques de contenido.
+
+La familia son tres componentes: `FAQ Question Row` es el átomo, la fila con la pregunta y el botón de ícono; `FAQ Item` lo reutiliza como instancia y es el component set con el eje `Type`; y `FAQ Panel` es el bloque compuesto, con título, que reúne varias filas. La matriz recorre en columnas los tres componentes y en filas las 2 variantes de `Type`: `Row`, solo la fila de pregunta (68 px), y `Accordion`, pregunta más contenido desplegado (544 px).
+
+## Propiedades
+
+Lo que se cambia desde la instancia sin salir de la variante.
+
+<PropsTable block="faq-panel" />

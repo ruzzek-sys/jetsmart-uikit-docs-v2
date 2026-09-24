@@ -1,0 +1,49 @@
+---
+title: Modal
+description: Ventana superpuesta al contenido para confirmar una acción o mostrar información, con título, cuerpo libre y acciones en el pie.
+figma:
+  - "6232:173946"
+props:
+  modal:
+    - name: Size
+      type: Variant
+      desc: Controla el tamaño y layout del modal. Desktop S es el valor por defecto (tarjeta centrada, compacta); Desktop M y Desktop L amplían el ancho de la tarjeta para contenido más extenso; Mobile ocupa todo el viewport sin bordes redondeados ni márgenes; Mobile Scroll es la variante mobile pensada para contenido que excede el alto de pantalla.
+    - name: Title
+      type: Text
+      desc: "Texto del título principal del modal, mostrado en la parte superior. Valor por defecto: «Título del modal»."
+    - name: Show Subtitle
+      type: Boolean
+      desc: Muestra u oculta el texto de apoyo bajo el título. Activado revela el subtítulo; desactivado (valor por defecto) lo oculta y el título queda solo.
+    - name: Subtitle
+      type: Text
+      desc: "Texto de apoyo mostrado bajo el título cuando «Show Subtitle» está activo. Valor por defecto: «Texto de apoyo bajo el título»."
+    - name: Show Close Button
+      type: Boolean
+      desc: Muestra u oculta el botón de cierre (ícono X) en la esquina superior derecha. Activado (valor por defecto) lo muestra; desactivado lo oculta por completo.
+    - name: Show Footer
+      type: Boolean
+      desc: Muestra u oculta todo el pie del modal, incluyendo la línea divisoria y ambos botones de acción. Activado (valor por defecto) lo muestra; desactivado elimina el pie y el modal se ajusta en alto.
+    - name: Show Secondary Action
+      type: Boolean
+      desc: Muestra u oculta el botón secundario (outline) dentro del pie. Activado (valor por defecto) lo muestra junto al botón primario; desactivado deja solo el botón primario.
+    - name: Show Primary Action
+      type: Boolean
+      desc: Muestra u oculta el botón primario (relleno) dentro del pie. Activado (valor por defecto) lo muestra junto al botón secundario; desactivado deja solo el botón secundario.
+    - name: Body
+      type: Slot
+      desc: Espacio de contenido reservado en el cuerpo del modal, donde se inserta el componente o layout interno específico de cada caso de uso.
+---
+
+<FigmaEmbed node="6232:173946" />
+
+## Resumen
+
+Ventana que se superpone al contenido de la página para pedir una decisión o mostrar información sin sacar al usuario de su contexto. Reúne un título con subtítulo opcional, un botón de cierre, un cuerpo libre y un pie con acción primaria y secundaria.
+
+Un maestro con cinco tamaños, un slot de cuerpo e interruptores de visibilidad. La propiedad `Size` recorre `Desktop S`, `Desktop M`, `Desktop L`, `Mobile` y `Mobile Scroll`; el slot `Body` recibe el contenido de cada caso, y `Show Subtitle`, `Show Close Button`, `Show Footer`, `Show Secondary Action` y `Show Primary Action` encienden o apagan sus partes.
+
+## Propiedades
+
+Propiedades configurables del componente Modal
+
+<PropsTable block="modal" />

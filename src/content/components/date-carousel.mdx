@@ -1,0 +1,31 @@
+---
+title: Date Carousel
+description: Tira de fechas con precio para elegir el día de vuelo y comparar tarifas.
+figma:
+  - "5205:106790"
+props:
+  date-carousel:
+    - name: Selected
+      type: Variant
+      desc: False muestra la tarjeta con fondo blanco y texto en azul marino. True resalta la tarjeta con fondo azul marino y texto en blanco, indicando el día seleccionado en el carrusel. False es el valor por defecto.
+    - name: Date
+      type: Text
+      desc: Etiqueta de fecha mostrada en la parte superior de la tarjeta (p. ej. «Vie 16/01»), en texto destacado.
+    - name: Price
+      type: Text
+      desc: Precio desde el cual parte el vuelo para esa fecha, mostrado debajo de «desde» (p. ej. «$30.990»).
+---
+
+<FigmaEmbed node="5205:106790" />
+
+## Resumen
+
+Tira de fechas con precio para elegir el día de vuelo: cada celda muestra la fecha y el precio «desde» de ese día, y la seleccionada se resalta en azul marino. Se usa en la selección de vuelos para comparar tarifas entre días cercanos.
+
+Dos maestros: `Date Carousel / Day`, la celda de día, con su eje `Selected`, y `Date Carousel`, el carrusel que la usa siete veces entre dos flechas. En la matriz, las columnas recorren `Selected` (`False` y `True`) y las filas, la celda y el carrusel armado.
+
+## Propiedades
+
+Propiedades del componente Date Carousel / Day
+
+<PropsTable block="date-carousel" />

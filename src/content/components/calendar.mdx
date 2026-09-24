@@ -1,0 +1,121 @@
+---
+title: Calendar
+description: "Familia de calendarios para elegir fechas de vuelo con su categoría de precio: el desplegable de escritorio, la tarjeta de un mes y el modal móvil."
+figma:
+  - "5167:80655"
+props:
+  calendar-dropdown:
+    - name: Show Price Category
+      type: Boolean
+      desc: Muestra la leyenda de categorías de precio (Mejor, Conveniente, Estándar) debajo del calendario. Activado por defecto.
+    - name: Show Header
+      type: Boolean
+      desc: Muestra la fila superior con el tipo de viaje, el resumen del vuelo y el botón Confirmar. Activado por defecto.
+    - name: Show Trip Type
+      type: Boolean
+      desc: Muestra los radio buttons de Ida y vuelta y Solo ida dentro de la fila superior. Activado por defecto.
+    - name: Show Close Button
+      type: Boolean
+      desc: Muestra el botón de cierre (X) en la esquina superior derecha del componente. Activado por defecto.
+  calendar-card:
+    - name: Show Price Category
+      type: Boolean
+      desc: Muestra la leyenda de categorías de precio (Mejor, Conveniente, Estándar) debajo del calendario. Activado por defecto.
+    - name: Show Arrows
+      type: Boolean
+      desc: Muestra las flechas de navegación entre meses en el encabezado. Activado por defecto.
+  calendar-modal:
+    - name: Show Close Button
+      type: Boolean
+      desc: Muestra el botón de cierre (X) dentro del encabezado. Solo tiene efecto cuando el encabezado está visible. Activado por defecto.
+    - name: Show Header
+      type: Boolean
+      desc: Muestra el encabezado con el título «Seleccionar fechas» y el botón de cierre. Al desactivarse, oculta ambos elementos. Activado por defecto.
+    - name: Show Footer
+      type: Boolean
+      desc: Muestra la barra inferior con el botón de acción («Entendido»). Al desactivarse, el contenido del calendario ocupa el espacio restante. Activado por defecto.
+    - name: Calendar Content
+      type: Slot
+      desc: Contenedor donde se inserta el calendario desplazable (fechas, leyenda de colores y barra de scroll). Puede reemplazarse por otro contenido.
+tables:
+  calendar-color-en-calendar-day:
+    columns:
+      - Aspecto
+      - Categoría
+      - Descripción
+    rows:
+      - name: Días seleccionados
+        meta:
+          - label: Estado
+        desc: "Al seleccionar uno o más días, el número de cada día seleccionado se completa con el tono cyan (brand-tertiary #14AEC7) y texto blanco — un color exclusivo de este estado, distinto de hover, disponible o disabled, para que la selección se lea con claridad sin importar cuántas fechas abarque."
+      - name: Precio bajo
+        meta:
+          - label: Mejor
+        desc: "El contorno del día se pinta en verde (utility-success #16A34A), señalando las fechas con la tarifa más baja del rango — para que el usuario identifique de un vistazo las opciones más económicas."
+      - name: Precio medio
+        meta:
+          - label: Conveniente
+        desc: "El contorno del día se pinta en amarillo (utility-warning #EAB308), indicando una tarifa intermedia: ni la más económica ni la más alta del rango mostrado."
+      - name: Precio alto
+        meta:
+          - label: Estándar
+        desc: "El contorno del día se pinta en rojo (utility-error #DC2626), marcando las fechas con la tarifa más alta del rango, para diferenciarlas visualmente de las opciones más convenientes."
+---
+
+## Calendar Dropdown
+
+Calendario desplegable de escritorio que muestra dos meses lado a lado junto al tipo de viaje, el resumen del vuelo y el botón Confirmar. Es el que se abre desde el buscador de vuelos.
+
+<FigmaEmbed node="5167:80655" title="Calendar Dropdown" />
+
+### Resumen
+
+Panel que agrupa todo lo necesario para elegir fechas en desktop: una fila superior con los radio buttons de tipo de viaje, el resumen del tramo y la acción de confirmar; debajo, dos meses con flechas de navegación y, al pie, la leyenda de categorías de precio. Cada una de esas partes se puede apagar desde la instancia.
+
+Es uno de los tres componentes de vista de una familia de 11 maestros en cuatro niveles de composición, donde cada nivel consume al anterior. Se arma con `Calendar Two Months` —dos `Calendar Month` de escritorio— más `Calendar Flight Summary`. Por debajo están las piezas base: `Calendar Day` (eje `Type`: día de la semana, disponible, hover, seleccionado, deshabilitado, mes adyacente y los precios low, half y high), `Calendar Row`, `Calendar Price Legend` y `Calendar Header`. `Calendar Month` recorre `Breakpoint` (Desktop, Mobile) × `Color` (con o sin categorías de precio).
+
+### Propiedades
+
+Lo que se cambia desde la instancia sin salir de la variante.
+
+<PropsTable block="calendar-dropdown" />
+
+## Calendar Card
+
+Tarjeta con un solo mes y flechas para pasar de uno a otro. Se usa embebida en el contenido de la pantalla, por ejemplo al cambiar la fecha de un vuelo en mobile.
+
+### Resumen
+
+Calendario compacto de un mes dentro de una card, con el nombre del mes y las flechas de navegación arriba y la leyenda de categorías de precio abajo. Las flechas y la leyenda se pueden apagar desde la instancia.
+
+Se arma con un `Calendar Month` más las flechas de navegación; comparte con el resto de la familia las piezas base `Calendar Day`, `Calendar Row` y `Calendar Price Legend`.
+
+### Propiedades
+
+Lo que se puede activar o desactivar desde la instancia.
+
+<PropsTable block="calendar-card" />
+
+## Calendar Modal
+
+Modal de pantalla completa para elegir fechas en mobile: encabezado con título y cierre, meses que se recorren con scroll y una barra inferior con la acción.
+
+### Resumen
+
+Vista móvil del calendario. Arriba lleva el título «Seleccionar fechas» con el botón de cierre y el `Calendar Header` con las fechas de ida y vuelta y la leyenda de precios; al centro, el slot con los meses desplazables; abajo, el botón de acción. Encabezado, cierre y footer se pueden apagar, y el slot admite otro contenido.
+
+Se arma con `Calendar Scroll` —ocho `Calendar Month` mobile en columna— más `Calendar Header`, el encabezado del modal y el footer.
+
+### Propiedades
+
+Lo que se puede activar o desactivar desde la instancia.
+
+<PropsTable block="calendar-modal" />
+
+## Guía de uso
+
+### Color en Calendar Day
+
+Cómo se comunica el estado de selección y el nivel de precio mediante color.
+
+<DocTable id="calendar-color-en-calendar-day" />
