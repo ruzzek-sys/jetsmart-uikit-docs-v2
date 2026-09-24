@@ -6,6 +6,7 @@ import Toc, { type TocHeading } from '../components/layout/Toc.astro';
 import PageHeader from '../components/layout/PageHeader.astro';
 import PrevNext from '../components/layout/PrevNext.astro';
 import { getSectionOf } from '../data/nav';
+import favicon from '../assets/img/favicon.png';
 
 /**
  * Layout de todas las páginas: sidebar + topbar + contenido + índice lateral.
@@ -34,7 +35,7 @@ const pageTitle = current === '/' ? 'JetSmart UI Kit' : `${title} - JetSmart UI 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{pageTitle}</title>
     {description && <meta name="description" content={description} />}
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href={favicon.src} />
     <slot name="head" />
   </head>
   <body>
