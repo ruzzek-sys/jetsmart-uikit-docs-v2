@@ -1,0 +1,61 @@
+---
+import Tabs from '../../ui/Tabs.astro';
+import TabPanel from '../../ui/TabPanel.astro';
+import Table from '../../ui/Table.astro';
+import Token from '../../ui/Token.astro';
+import Caption from '../../ui/Caption.astro';
+import Swatch from './Swatch.astro';
+import Ratio from './Ratio.astro';
+import { contrast, MIN_BORDER, MIN_TEXT } from '../../../lib/contrast';
+import { SEMANTIC, tokenCount } from '../../../data/foundations/colors';
+
+/**
+ * «Tokens semánticos · Tier 2»: una pestaña por categoría (background, content, border, effect)
+ * y, dentro, una tabla por grupo con el alias real a Tier 1 y el contraste sobre blanco y negro.
+ * Los bordes se miden contra el 3:1 de WCAG 1.4.11; el resto contra el 4,5:1 del texto.
+ */
+---
+
+<Tabs tabs={SEMANTIC.map((c) => ({ key: c.key, label: c.label, count: tokenCount(c) }))}>
+  {SEMANTIC.map((cat, i) => {
+    const min = cat.key === 'border' ? MIN_BORDER : MIN_TEXT;
+    return (
+      <TabPanel key={cat.key} hidden={i > 0} intro={cat.intro} meta={`${cat.key}/… · scope ${cat.scope}`}>
+        {cat.groups.map((group) => (
+          <>
+            <h4 class="group">{group.label}</h4>
+            <p class="group__desc" set:html={group.desc} />
+            <Table columns={['Token', '', 'Primitivo Tier 1', 'Hex', '◻ Blanco', '◼ Negro']}>
+              {group.tokens.map((t) => (
+                <tr>
+                  <td><Token name={`${cat.key}/${t.name}`} /></td>
+                  <td><Swatch hex={t.hex} category={cat.key} /></td>
+                  <td>{t.alias ? <code>{t.alias}</code> : <span class="direct">valor directo</span>}</td>
+                  <td class="num">{t.hex.toLowerCase()}</td>
+                  <td class="num"><Ratio value={contrast(t.hex, '#FFFFFF')} min={min} /></td>
+                  <td class="num"><Ratio value={contrast(t.hex, '#000000')} min={min} /></td>
+                </tr>
+              ))}
+            </Table>
+            {group.note && <Caption><Fragment set:html={group.note} /></Caption>}
+          </>
+        ))}
+      </TabPanel>
+    );
+  })}
+</Tabs>
+
+<style>
+  .group {
+    margin: 32px 0 0;
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  .group__desc {
+    margin: 6px 0 0;
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--color-muted);
+  }
+</style>

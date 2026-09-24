@@ -1,0 +1,59 @@
+---
+import type { TokenCategory } from '../../../data/foundations/colors';
+
+/**
+ * Muestra de un color en una celda de tabla. Cambia según dónde se aplica el token:
+ * fondo = bloque relleno, content = «Aa» en ese color, border = contorno, effect = sombra.
+ */
+interface Props {
+  hex: string;
+  category?: TokenCategory;
+}
+
+const { hex, category = 'primitive' } = Astro.props;
+---
+
+{category === 'content' ? (
+  <span class="swatch swatch--text" style={`color:${hex}`}>Aa</span>
+) : category === 'border' ? (
+  <span class="swatch swatch--border" style={`border-color:${hex}`}></span>
+) : category === 'effect' ? (
+  <span class="swatch swatch--effect" style={`box-shadow:0 2px 8px 2px ${hex}`}></span>
+) : (
+  <span class="swatch" style={`background:${hex}`}></span>
+)}
+
+<style>
+  .swatch {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 28px;
+    border: 1px solid rgb(30 42 58 / 0.12);
+    border-radius: 6px;
+    vertical-align: middle;
+  }
+
+  .swatch--text,
+  .swatch--border,
+  .swatch--effect {
+    background: #fff;
+  }
+
+  .swatch--text {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .swatch--border {
+    border-width: 3px;
+    border-style: solid;
+  }
+
+  .swatch--effect {
+    width: 36px;
+    height: 24px;
+  }
+</style>

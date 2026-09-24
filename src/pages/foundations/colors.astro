@@ -1,0 +1,443 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Section from '../../components/doc/Section.astro';
+import Stats from '../../components/ui/Stats.astro';
+import Chain from '../../components/ui/Chain.astro';
+import Note from '../../components/ui/Note.astro';
+import Caption from '../../components/ui/Caption.astro';
+import Table from '../../components/ui/Table.astro';
+import Badge from '../../components/ui/Badge.astro';
+import Rules from '../../components/ui/Rules.astro';
+import Items from '../../components/ui/Items.astro';
+import InfoGrid from '../../components/ui/InfoGrid.astro';
+import Pair from '../../components/ui/Pair.astro';
+import RampTabs from '../../components/foundations/colors/RampTabs.astro';
+import SemanticTabs from '../../components/foundations/colors/SemanticTabs.astro';
+import PairsTable from '../../components/foundations/colors/PairsTable.astro';
+import CoverageTable from '../../components/foundations/colors/CoverageTable.astro';
+import PracticeCol from '../../components/foundations/colors/PracticeCol.astro';
+import { sections } from '../../lib/sections';
+import { APPLY, APPLY_RULES, COLLECTIONS, COLOR_VARS_CSS, NAMING, UPDATES, ZONE_DOCS } from '../../data/foundations/colors';
+
+const S = sections({
+  resumen: 'Resumen',
+  primitivos: 'Tokens primitivos · Tier 1',
+  rampa: 'Cómo se lee una rampa',
+  semanticos: 'Tokens semánticos · Tier 2',
+  nombres: 'Anatomía del nombre',
+  pares: 'Pares fondo · contenido',
+  contraste: 'Cobertura de contraste',
+  figma: 'Cómo usar en Figma',
+  practicas: 'Buenas y malas prácticas',
+});
+---
+
+<BaseLayout
+  title="Colors"
+  description="Nueve rampas primitivas, 77 tokens semánticos y 18 parejas de fondo y contenido ya validadas por contraste."
+  headings={S.headings}
+>
+  {/* Variables --c-* (semánticos) y --p-* (primitivos) para las demos de prácticas. */}
+  <style is:inline set:html={COLOR_VARS_CSS} />
+
+  <Section {...S.resumen}>
+    <p>
+      El color del kit se organiza en tres niveles. Los <strong>primitivos de Tier 1</strong> son la paleta
+      cruda: rampas de 11 pasos sin rol y sin scope, que nunca se aplican sobre un componente. Los
+      <strong>tokens semánticos de Tier 2</strong> hacen alias a un primitivo y le suman las dos cosas que
+      importan al usarlo: el rol que representa y la propiedad donde puede aplicarse. La
+      <strong>aplicación</strong> en un componente apunta siempre a Tier 2, así que un color aplicado no
+      guarda un valor: guarda una referencia. Esa cadena es lo que permite cambiar la marca en un solo lugar.
+    </p>
+
+    <Stats
+      items={[
+        { value: 9, label: 'Rampas de 11 pasos' },
+        { value: 106, label: 'Primitivos de color' },
+        { value: 77, label: 'Tokens semánticos' },
+        { value: 18, label: 'Parejas validadas' },
+      ]}
+    />
+
+    <Chain
+      steps={[
+        { tier: 'Tier 1 · Primitivo', code: 'color/brand/royal-navy-blue/500', note: '#153266 · valor crudo, sin rol' },
+        { tier: 'Tier 2 · Semántico', code: 'color/background/brand-primary', note: 'aquí viven el rol y el scope', focus: true },
+        { tier: 'Aplicación', code: 'Fill del botón', note: 'nunca al primitivo, nunca a un hex' },
+        { tier: 'Producto', code: 'Todos los componentes que lo usan', note: 'se actualizan solos' },
+      ]}
+    />
+
+    <Note>
+      <strong>El scope es parte del token:</strong> cada variable de Tier 2 declara en qué propiedades puede
+      aplicarse —<code>FRAME_FILL</code>, <code>SHAPE_FILL</code>, <code>TEXT_FILL</code>,
+      <code>STROKE_COLOR</code> o <code>EFFECT_COLOR</code>—. Si un token no aparece en el picker de una
+      propiedad, no es un error de Figma: es que no debe usarse ahí.
+    </Note>
+  </Section>
+
+  <Section {...S.primitivos}>
+    <p>
+      Nueve rampas de 11 pasos —cuatro de marca, una neutra y cuatro de utilidad— más el blanco y el negro
+      absolutos. Los contrastes de cada tabla están calculados con la fórmula de WCAG 2.1 sobre los mismos
+      hex del archivo, y la columna de alias indica cuántos tokens semánticos referencian ese paso: es el
+      mejor indicador de qué está realmente en uso.
+    </p>
+    <RampTabs />
+  </Section>
+
+  <Section {...S.rampa}>
+    <p>
+      Todas las rampas comparten la misma estructura, y cada zona tiene un trabajo distinto. Saber qué hace
+      cada una evita elegir un paso por gusto visual.
+    </p>
+    <Table columns={['Pasos', 'Zona', 'Para qué sirve']} roles>
+      {ZONE_DOCS.map((z) => (
+        <tr>
+          <td class="num">{z.range}</td>
+          <td><Badge tone="neutral">{z.tag}</Badge></td>
+          <td class="muted" set:html={z.text} />
+        </tr>
+      ))}
+    </Table>
+    <Note tone="accent">
+      <strong>Regla única · Tier 1 → Tier 2:</strong> un primitivo nunca se aplica directo a un componente.
+      Solo alimenta un token semántico. Los pasos sin alias no son un olvido, son reserva: antes de crear un
+      token nuevo, revisa si ya existe uno semántico que resuelva el caso.
+    </Note>
+  </Section>
+
+  <Section {...S.semanticos}>
+    <p>
+      Cuatro categorías que se corresponden con las cuatro propiedades que se pintan: fondo, contenido,
+      borde y sombra. La columna de primitivo muestra el alias real de cada token, así que la tabla también
+      se lee al revés: si cambia un paso de la rampa, ahí están los tokens afectados.
+    </p>
+    <SemanticTabs />
+  </Section>
+
+  <Section {...S.nombres}>
+    <p>
+      El nombre de un token de color dice dónde se aplica y con cuánto énfasis. Si tienes que abrir el
+      picker para saber qué hace, el nombre está mal usado.
+    </p>
+    <Table columns={['Parte del nombre', 'Qué es', 'Qué indica']} roles>
+      {NAMING.map((n) => (
+        <tr>
+          <td><code>{n.part}</code></td>
+          <td><Badge tone="neutral">{n.kind}</Badge></td>
+          <td class="muted" set:html={n.text} />
+        </tr>
+      ))}
+    </Table>
+    <Note>
+      <strong>Cómo se combinan:</strong> <code>background/brand-primary-subtle</code> es un fondo, de marca
+      primaria, en su versión tintada de baja énfasis. Y como todo fondo <code>-subtle</code> pide un
+      contenido <code>-strong</code>, su pareja es <code>content/brand-primary-strong</code>.
+    </Note>
+  </Section>
+
+  <Section {...S.pares}>
+    <p>
+      Esta es la tabla que evita la mayoría de los errores de color: el fondo determina el contenido. No se
+      elige por gusto, se busca la pareja. Los tokens <code>on-*</code> existen justamente para que nadie
+      tenga que decidir el color del texto sobre un fondo sólido.
+    </p>
+    <PairsTable />
+    <Note tone="warn">
+      <strong>La única pareja que falla:</strong> <code>background/brand-tertiary</code> con
+      <code>content/on-brand-tertiary</code> queda en 2,66:1, porque bayou/500 es un color claro con
+      contenido blanco. Si el bloque lleva texto, usa el fondo <code>-subtle</code> con contenido
+      <code>-strong</code>, o el fondo <code>-strong</code> con contenido blanco.
+    </Note>
+  </Section>
+
+  <Section {...S.contraste}>
+    <p>
+      El paso 500 de una rampa es el color de identidad, no una garantía de contraste. Estos son los casos
+      donde el kit obliga a saltar a otro token, y los dos donde el bajo contraste es intencional.
+    </p>
+    <CoverageTable />
+
+    <InfoGrid
+      items={[
+        { tag: '1.4.3 · AA', title: 'Texto normal', text: '4,5:1 contra su fondo. Es el mínimo de todo el texto de cuerpo, labels y captions del producto.' },
+        { tag: '1.4.3 · AA large', title: 'Texto grande', text: '3:1 a partir de 18 px en Bold o 24 px en Regular. Aplica a displays y headings, no al cuerpo.' },
+        { tag: '1.4.11 · AA', title: 'Componentes y bordes', text: '3:1 para bordes de input, contornos de control y el anillo de foco: todo lo que comunica estado.' },
+        { tag: '1.4.1 · A', title: 'No solo color', text: 'El color nunca puede ser el único portador de información. Siempre acompañado de texto o icono.' },
+      ]}
+    />
+
+    <Note tone="accent">
+      <strong>Regla corta:</strong> si el color comunica algo —estado, foco, acción— tiene que cumplir
+      contraste. Si solo decora, puede no cumplirlo.
+    </Note>
+  </Section>
+
+  <Section {...S.figma}>
+    <h3>1 · Dónde están las variables</h3>
+    <p>
+      Todas las variables viven en el archivo <code>Jetsmart UI Kit v1.0</code> y se consumen por librería
+      desde los archivos de producto. Saber en qué colección buscar evita crear tokens duplicados.
+    </p>
+    <Table columns={['Colección', 'Modo', 'Variables', 'De color', 'Rol']} wideLast>
+      {COLLECTIONS.map((c) => (
+        <tr>
+          <td><strong>{c.name}</strong></td>
+          <td><Badge tone="neutral">{c.mode}</Badge></td>
+          <td class="num">{c.total}</td>
+          <td class="num">{c.colors || '—'}</td>
+          <td class="muted" set:html={c.role} />
+        </tr>
+      ))}
+    </Table>
+    <Caption>
+      Tier 2: Color tiene un solo modo (Theme 1). La estructura de alias ya permite agregar un tema oscuro
+      más adelante sin tocar un solo componente.
+    </Caption>
+
+    <h3>2 · Cómo se aplican</h3>
+    <p>
+      La propiedad que estás pintando determina la categoría del token. Si el picker no te muestra el token
+      que buscas, casi siempre es porque lo estás aplicando en la propiedad equivocada.
+    </p>
+    <Table columns={['Propiedad que pintas', 'Categoría', 'Cómo se aplica']} roles>
+      {APPLY.map((a) => (
+        <tr>
+          <td><strong>{a.property}</strong></td>
+          <td><code>{a.category}</code></td>
+          <td class="muted" set:html={a.how} />
+        </tr>
+      ))}
+    </Table>
+
+    <Rules items={APPLY_RULES} />
+
+    <h3>3 · Cómo se actualizan</h3>
+    <p>
+      Un cambio de color se hace siempre en la variable, nunca en el componente. Dónde se edita depende de
+      si cambia el rol de un token o el color de la marca.
+    </p>
+    <Items items={UPDATES.map((u) => ({ title: u.goal, badge: u.where, text: u.text }))} />
+
+    <Note tone="warn">
+      <strong>Lo que rompe la cadena:</strong> corregir el color directamente en el nodo —escribir un hex en
+      el Fill o desenlazar la variable— crea una excepción invisible. El componente se ve igual y pasa la
+      revisión, pero deja de heredar: el próximo cambio de marca no lo alcanza y hay que buscarlo a mano.
+    </Note>
+
+    <Note tone="warn">
+      <strong>Editar un primitivo mueve todo lo que lo referencia:</strong> cambiar el valor de una variable
+      de Tier 1 alcanza a cada token semántico que le hace alias, incluidos los que nadie quería tocar.
+      Antes de editarlo, revisa la columna de alias de su rampa y recalcula el contraste de las parejas
+      afectadas.
+    </Note>
+  </Section>
+
+  <Section {...S.practicas}>
+    <p>
+      Cinco pares de ejemplos que contrastan el uso correcto del sistema de color con el error equivalente.
+      Casi todos los errores comparten el mismo síntoma: el resultado se ve bien. El daño aparece después,
+      cuando hay que cambiar un color de marca, cuando alguien mide el contraste, o cuando el mismo
+      componente se usa sobre otro fondo. La regla de fondo es siempre la misma: la propiedad que se pinta
+      decide la categoría del token, el fondo decide el contenido y el contraste decide la variante.
+    </p>
+
+    <Pair eyebrow="01 · La propiedad decide la categoría" title="Elegir el token por lo que se pinta, no por el color que se quiere ver">
+      <p>
+        Sobre un fondo de marca el texto lleva su par <code>on-*</code>, no un blanco genérico. Hoy
+        <code>content/on-brand-primary</code> y <code>content/inverse</code> se ven iguales —los dos
+        apuntan a blanco—, pero solo el primero está atado a ese fondo: si el azul de marca cambia, el
+        par se actualiza con él e inverse no.
+      </p>
+      <PracticeCol slot="do" kind="do" label="Texto con content/on-brand-primary"
+        contrast={['background/brand-primary', 'content/on-brand-primary']}
+        styles="Fill: background/brand-primary · Texto: content/on-brand-primary"
+        note="on-brand-primary es el contenido declarado para ese fondo. Si mañana brand-primary deja de admitir blanco, este token se re-apunta y el botón hereda el cambio sin que nadie lo toque.">
+        <div class="demo" style="background: var(--c-background-brand-primary); color: var(--c-content-on-brand-primary)">
+          <span class="demo__eyebrow">Tarifa Zero</span>
+          <span class="demo__title">Vuelo directo a Lima</span>
+          <span class="demo__text">Incluye equipaje de mano</span>
+        </div>
+      </PracticeCol>
+      <PracticeCol slot="dont" kind="dont" label="Texto con content/inverse (o white)"
+        contrast={['background/brand-primary', 'content/inverse']}
+        styles="Fill: background/brand-primary · Texto: content/inverse"
+        note="Hoy se ve idéntico: content/inverse y content/on-brand-primary apuntan los dos a blanco. Pero inverse es el contenido genérico sobre fondos oscuros, no el par de brand-primary. Si el azul de marca cambia a un tono que no admita blanco, on-brand-primary se actualiza con él e inverse no: el botón se queda con el color equivocado.">
+        <div class="demo" style="background: var(--c-background-brand-primary); color: var(--c-content-inverse)">
+          <span class="demo__eyebrow">Tarifa Zero</span>
+          <span class="demo__title">Vuelo directo a Lima</span>
+          <span class="demo__text">Incluye equipaje de mano</span>
+        </div>
+      </PracticeCol>
+    </Pair>
+
+    <Pair eyebrow="02 · Tier 1 no se aplica" title="Un primitivo nunca toca un componente">
+      <p>
+        Tier 1 es la paleta cruda: 106 colores sin significado. Tier 2 les da un rol. Aplicar un primitivo
+        directamente funciona a la primera y rompe el sistema en la segunda, porque el componente deja de
+        responder a los cambios de marca y de tema.
+      </p>
+      <PracticeCol slot="do" kind="do" label="El componente usa el token semántico"
+        styles="Fill: background/brand-secondary → brand/medium-ruby/500"
+        note="El componente apunta a Tier 2, y Tier 2 apunta a Tier 1. Cambiar el rojo de marca es editar un alias en un solo lugar.">
+        <div class="demo" style="background: var(--c-background-brand-secondary); color: var(--c-content-on-brand-secondary)">
+          <span class="demo__eyebrow">Oferta limitada</span>
+          <span class="demo__title">Reservar ahora</span>
+        </div>
+      </PracticeCol>
+      <PracticeCol slot="dont" kind="dont" label="El componente usa el primitivo directo"
+        styles="Fill: color/brand/medium-ruby/500 · Texto: color/white"
+        note="Píxel por píxel es el mismo botón, y por eso pasa la revisión. Cuando la marca cambie de rojo, este botón se queda con el anterior y hay que buscarlo a mano.">
+        <div class="demo" style="background: var(--p-brand-medium-ruby-500); color: var(--p-white)">
+          <span class="demo__eyebrow">Oferta limitada</span>
+          <span class="demo__title">Reservar ahora</span>
+        </div>
+      </PracticeCol>
+    </Pair>
+
+    <Pair eyebrow="03 · El fondo decide el contenido" title="Cada fondo sólido ya tiene su pareja de contenido">
+      <p>
+        Los tokens <code>on-*</code> existen para que nadie tenga que decidir el color del texto sobre un
+        fondo. Amber es el caso más claro del kit: su par es negro, aunque el instinto diga blanco porque el
+        fondo se ve saturado.
+      </p>
+      <PracticeCol slot="do" kind="do" label="Amber con contenido negro"
+        contrast={['background/brand-accent', 'content/on-brand-accent']}
+        styles="background/brand-accent · content/on-brand-accent"
+        note="content/on-brand-accent apunta a color/black. La pareja está declarada precisamente para no dejar esta decisión al ojo.">
+        <div class="demo" style="background: var(--c-background-brand-accent); color: var(--c-content-on-brand-accent)">
+          <span class="demo__eyebrow">Promoción</span>
+          <span class="demo__title">Oferta Zero · CLP 19.990</span>
+        </div>
+      </PracticeCol>
+      <PracticeCol slot="dont" kind="dont" label="Amber con contenido blanco"
+        contrast={['background/brand-accent', 'content/inverse']}
+        styles="background/brand-accent · content/inverse"
+        note="El texto todavía se adivina en una pantalla buena y desaparece con sol, con brillo bajo o para cualquier persona con baja visión.">
+        <div class="demo" style="background: var(--c-background-brand-accent); color: var(--c-content-inverse)">
+          <span class="demo__eyebrow">Promoción</span>
+          <span class="demo__title">Oferta Zero · CLP 19.990</span>
+        </div>
+      </PracticeCol>
+    </Pair>
+
+    <Pair eyebrow="04 · Subtle va con strong" title="Sobre un fondo <code>-subtle</code>, el contenido va en <code>-strong</code>">
+      <p>
+        Los pasos claros de una rampa están pensados como fondo, no como color de contenido. Bayou y amber
+        son los casos críticos: su paso 500 sobre su paso 100 no supera 2,5:1. El kit lo resuelve con los
+        tokens <code>-strong</code>, que bajan a 700–900.
+      </p>
+      <PracticeCol slot="do" kind="do" label="Fondo tintado con contenido -strong"
+        contrast={['background/brand-tertiary-subtle', 'content/brand-tertiary-strong']}
+        styles="background/brand-tertiary-subtle · content/brand-tertiary-strong"
+        note="El token -strong existe solo para esto. No es un tono más oscuro por gusto: es el paso que hace legible el bloque tintado.">
+        <div class="demo" style="background: var(--c-background-brand-tertiary-subtle); color: var(--c-content-brand-tertiary-strong)">
+          <span class="demo__eyebrow">Servicios incluidos</span>
+          <span class="demo__title">Equipaje de mano incluido</span>
+        </div>
+      </PracticeCol>
+      <PracticeCol slot="dont" kind="dont" label="Fondo tintado con el color base"
+        contrast={['background/brand-tertiary-subtle', 'content/brand-tertiary']}
+        styles="background/brand-tertiary-subtle · content/brand-tertiary"
+        note="Los dos tokens son «bayou», así que el resultado parece coherente. Coherente y no legible: está lejos del 4,5:1 que exige el texto.">
+        <div class="demo" style="background: var(--c-background-brand-tertiary-subtle); color: var(--c-content-brand-tertiary)">
+          <span class="demo__eyebrow">Servicios incluidos</span>
+          <span class="demo__title">Equipaje de mano incluido</span>
+        </div>
+      </PracticeCol>
+    </Pair>
+
+    <Pair eyebrow="05 · El color no es el mensaje" title="El estado se escribe; el color solo lo refuerza">
+      <p>
+        WCAG 1.4.1 prohíbe usar el color como único portador de información. Alrededor de un 8% de los
+        hombres no distingue el rojo del verde, y nadie distingue nada con la pantalla en modo lectura o
+        bajo el sol.
+      </p>
+      <PracticeCol slot="do" kind="do" label="Icono, texto y color juntos"
+        contrast={['background/utility-error-subtle', 'content/utility-error']}
+        styles="background/utility-error-subtle · content/utility-error · border/utility-error"
+        note="Tres señales redundantes: el icono, la frase y el color. Si se quita cualquiera de las tres, el mensaje sigue entendiéndose.">
+        <div class="demo" style="background: var(--c-background-utility-error-subtle); color: var(--c-content-utility-error); border: 1px solid var(--c-border-utility-error)">
+          <span class="demo__eyebrow"><span class="demo__icon">✕</span> Pago rechazado</span>
+          <span class="demo__text">Revisa los datos de tu tarjeta o intenta con otro medio de pago.</span>
+          <span class="field">
+            <span class="field__label">Número de tarjeta</span>
+            <span class="field__value">4242 4242 4242 424</span>
+          </span>
+        </div>
+      </PracticeCol>
+      <PracticeCol slot="dont" kind="dont" label="Solo el borde rojo indica el error"
+        styles="border/utility-error · sin content/utility-error"
+        note="El campo está mal y el usuario no sabe por qué. Además, en escala de grises el borde rojo y el borde por defecto son casi el mismo gris.">
+        <div class="demo" style="background: var(--c-background-primary); border: 2px solid var(--c-border-utility-error)">
+          <span class="field__label">Número de tarjeta</span>
+          <span class="field__value">4242 4242 4242 424</span>
+        </div>
+      </PracticeCol>
+    </Pair>
+  </Section>
+</BaseLayout>
+
+<style>
+  /* Demos de prácticas: los colores salen de las variables --c-* / --p-* de COLOR_VARS_CSS. */
+  .demo {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
+    padding: 16px 18px;
+    border-radius: 10px;
+  }
+
+  .demo__eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .demo__title {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  .demo__text {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .demo__icon {
+    flex: 0 0 auto;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .field {
+    display: block;
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background: var(--c-background-primary);
+    font-size: 14px;
+  }
+
+  .field__label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--c-content-secondary);
+  }
+
+  .field__value {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 14px;
+    color: var(--c-content-primary);
+  }
+</style>

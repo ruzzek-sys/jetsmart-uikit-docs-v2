@@ -1,0 +1,34 @@
+---
+import Table from '../../ui/Table.astro';
+import Token from '../../ui/Token.astro';
+import Badge from '../../ui/Badge.astro';
+import Swatch from './Swatch.astro';
+import Ratio from './Ratio.astro';
+import { contrast } from '../../../lib/contrast';
+import { COVERAGE, tokenOf } from '../../../data/foundations/colors';
+
+/** «Cobertura de contraste»: los tokens que no alcanzan su mínimo sobre blanco y qué usar en su lugar. */
+const rows = COVERAGE.map((item) => {
+  const info = tokenOf(item.token);
+  const ratio = contrast(info.hex, '#FFFFFF');
+  return { ...item, info, ratio, passes: ratio !== null && ratio >= item.min };
+});
+---
+
+<Table columns={['Token', '', 'Sobre blanco', 'Mínimo que no alcanza', 'Qué usar']} wideLast>
+  {rows.map((r) => (
+    <tr>
+      <td><Token name={r.token} /></td>
+      <td><Swatch hex={r.info.hex} category={r.info.category} /></td>
+      <td class="num"><Ratio value={r.ratio} min={r.min} /></td>
+      <td><Badge tone={r.passes ? 'on' : 'off'}>{r.rule}</Badge></td>
+      <td class="muted">
+        {r.intentional ? (
+          <><strong>Intencional.</strong> <Fragment set:html={r.intentional} /></>
+        ) : (
+          <>Reemplazo: <Token name={r.fix!} /> <span>({r.why})</span></>
+        )}
+      </td>
+    </tr>
+  ))}
+</Table>

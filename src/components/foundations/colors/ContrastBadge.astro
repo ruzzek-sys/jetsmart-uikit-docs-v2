@@ -1,0 +1,17 @@
+---
+import Badge from '../../ui/Badge.astro';
+import { contrast, MIN_TEXT, ratioText, wcagLevel } from '../../../lib/contrast';
+import { tokenOf } from '../../../data/foundations/colors';
+
+/** Badge «12,50:1 · AAA» con el contraste de una pareja fondo · contenido (paths completos de token). */
+interface Props {
+  bg: string;
+  fg: string;
+}
+
+const { bg, fg } = Astro.props;
+const ratio = contrast(tokenOf(bg).hex, tokenOf(fg).hex);
+const level = wcagLevel(ratio);
+---
+
+<Badge tone={ratio !== null && ratio >= MIN_TEXT ? 'on' : 'off'}>{`${ratioText(ratio)} · ${level.label}`}</Badge>

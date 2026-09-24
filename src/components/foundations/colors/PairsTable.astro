@@ -1,0 +1,45 @@
+---
+import Table from '../../ui/Table.astro';
+import Token from '../../ui/Token.astro';
+import Badge from '../../ui/Badge.astro';
+import Caption from '../../ui/Caption.astro';
+import Ratio from './Ratio.astro';
+import { contrast, MIN_TEXT, wcagLevel } from '../../../lib/contrast';
+import { PAIRS, tokenOf } from '../../../data/foundations/colors';
+
+/** «Pares fondo · contenido»: cada pareja con su muestra, el ratio calculado y el nivel WCAG. */
+const rows = PAIRS.map((pair) => {
+  const bg = tokenOf(pair.bg);
+  const fg = tokenOf(pair.fg);
+  const ratio = contrast(bg.hex, fg.hex);
+  return { ...pair, bgHex: bg.hex, fgHex: fg.hex, ratio, level: wcagLevel(ratio) };
+});
+---
+
+<Table columns={['Fondo', 'Contenido', 'Muestra', 'Ratio', 'WCAG']}>
+  {rows.map((r) => (
+    <tr>
+      <td><Token name={r.bg} /></td>
+      <td><Token name={r.fg} /></td>
+      <td><span class="sample" style={`background:${r.bgHex};color:${r.fgHex}`}>Aa 100%</span></td>
+      <td class="num"><Ratio value={r.ratio} min={MIN_TEXT} /></td>
+      <td><Badge tone={r.level.tone}>{r.level.label}</Badge></td>
+    </tr>
+  ))}
+</Table>
+<Caption>AA large solo vale para texto de 18 px o más en Bold, o 24 px en Regular. Para texto de cuerpo, exige AA.</Caption>
+
+<style>
+  .sample {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 92px;
+    padding: 7px 12px;
+    border: 1px solid rgb(30 42 58 / 0.12);
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+</style>

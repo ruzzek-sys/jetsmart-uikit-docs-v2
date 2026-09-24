@@ -1,0 +1,31 @@
+---
+import { ratioText } from '../../../lib/contrast';
+
+/** Ratio de contraste de una celda: verde si alcanza el mínimo, rojo si no, «—» si no se puede calcular. */
+interface Props {
+  value: number | null;
+  min: number;
+}
+
+const { value, min } = Astro.props;
+---
+
+{value === null ? (
+  <span class="muted">—</span>
+) : (
+  <span class:list={['ratio', value >= min ? 'ok' : 'fail']}>{ratioText(value)}</span>
+)}
+
+<style>
+  .ratio {
+    font-weight: 600;
+  }
+
+  .ok {
+    color: var(--color-ok);
+  }
+
+  .fail {
+    color: var(--color-brand);
+  }
+</style>

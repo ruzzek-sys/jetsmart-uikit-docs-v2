@@ -1,0 +1,52 @@
+---
+import PairCol from '../../ui/PairCol.astro';
+import ContrastBadge from './ContrastBadge.astro';
+
+/**
+ * Columna de un <Pair> de Colors: igual que <PairCol>, pero con el badge de contraste de la
+ * pareja entre la demo y la línea de estilos. <PairCol> no tiene lugar para ese badge, así que
+ * se usa en modo `bare` y el recuadro blanco de la demo se dibuja aquí.
+ * Uso: <PracticeCol slot="do" kind="do" label="…" contrast={['background/…', 'content/…']} styles="…" note="…">demo</PracticeCol>
+ */
+interface Props {
+  kind: 'do' | 'dont';
+  label: string;
+  styles?: string;
+  note?: string;
+  /** [fondo, contenido] por path completo de token. */
+  contrast?: [string, string];
+}
+
+const { kind, label, styles, note, contrast } = Astro.props;
+---
+
+<PairCol kind={kind} label={label} styles={styles} note={note} bare>
+  <div class="frame"><slot /></div>
+  {contrast && <p class="contrast"><ContrastBadge bg={contrast[0]} fg={contrast[1]} /></p>}
+</PairCol>
+
+<style>
+  /* Mismo recuadro que .col__demo de <PairCol>. */
+  .frame {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 16px;
+    overflow: hidden;
+    border: 1px solid var(--color-line);
+    border-radius: 8px;
+    background: var(--color-surface);
+    color: var(--color-ink);
+  }
+
+  .frame > :global(div) {
+    max-width: 100%;
+    overflow-wrap: break-word;
+  }
+
+  .contrast {
+    margin: 12px 0 0;
+    line-height: 1.5;
+  }
+</style>

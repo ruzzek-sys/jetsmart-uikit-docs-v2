@@ -1,0 +1,86 @@
+---
+import Tabs from '../../ui/Tabs.astro';
+import TabPanel from '../../ui/TabPanel.astro';
+import Table from '../../ui/Table.astro';
+import Token from '../../ui/Token.astro';
+import Badge from '../../ui/Badge.astro';
+import Caption from '../../ui/Caption.astro';
+import Swatch from './Swatch.astro';
+import Ratio from './Ratio.astro';
+import { contrast, MIN_TEXT } from '../../../lib/contrast';
+import { ALIAS_COUNT, RAMPS, rampStepPath, zoneOf, type Ramp } from '../../../data/foundations/colors';
+
+/**
+ * «Tokens primitivos · Tier 1»: una pestaña por rampa, con la tira de pasos y la tabla de
+ * contraste sobre blanco y negro, zona y cantidad de alias en Tier 2.
+ */
+const keyOf = (ramp: Ramp) => ramp.path || 'base';
+/** El punto de color de cada pestaña es el paso 500 (o el primero, en la rampa Base). */
+const dotOf = (ramp: Ramp) => (ramp.steps[5] ?? ramp.steps[0]).hex;
+
+// <Tabs> solo pinta texto en el botón: el punto de color va como ::before, con un color por pestaña.
+const dotsCss = RAMPS.map((r) => `.cl-ramps [data-tab="${keyOf(r)}"]::before{background:${dotOf(r)}}`).join('');
+---
+
+<style is:inline set:html={dotsCss} />
+
+<div class="ramps cl-ramps">
+  <Tabs tabs={RAMPS.map((r) => ({ key: keyOf(r), label: r.label }))}>
+    {RAMPS.map((ramp, i) => (
+      <TabPanel
+        key={keyOf(ramp)}
+        hidden={i > 0}
+        intro={ramp.desc}
+        meta={`${ramp.path ? `color/${ramp.path}/…` : 'color/white · color/black'} · ${ramp.role} · ${ramp.steps.length} pasos`}
+      >
+        <div class="strip">
+          {ramp.steps.map((s) => <span class="strip__step" style={`background:${s.hex}`} title={`${s.step} · ${s.hex}`}></span>)}
+        </div>
+        <Table columns={['Token', '', 'Hex', '◻ Blanco', '◼ Negro', 'Zona', 'Alias Tier 2']}>
+          {ramp.steps.map((s) => {
+            const path = rampStepPath(ramp, s);
+            const count = ALIAS_COUNT[path] ?? 0;
+            return (
+              <tr>
+                <td><Token name={`color/${path}`} /></td>
+                <td><Swatch hex={s.hex} /></td>
+                <td class="num">{s.hex.toLowerCase()}</td>
+                <td class="num"><Ratio value={contrast(s.hex, '#FFFFFF')} min={MIN_TEXT} /></td>
+                <td class="num"><Ratio value={contrast(s.hex, '#000000')} min={MIN_TEXT} /></td>
+                <td><Badge tone="neutral">{zoneOf(s.step)}</Badge></td>
+                <td>{count ? <Badge tone="on">{`${count} ${count === 1 ? 'token' : 'tokens'}`}</Badge> : <span>—</span>}</td>
+              </tr>
+            );
+          })}
+        </Table>
+        <Caption><Fragment set:html={ramp.note} /></Caption>
+      </TabPanel>
+    ))}
+  </Tabs>
+</div>
+
+<style>
+  .ramps :global([data-tab])::before {
+    content: '';
+    display: inline-block;
+    flex: none;
+    width: 10px;
+    height: 10px;
+    margin-right: 7px;
+    border: 1px solid rgb(30 42 58 / 0.15);
+    border-radius: 999px;
+  }
+
+  .strip {
+    display: flex;
+    height: 48px;
+    margin-top: 20px;
+    overflow: hidden;
+    border: 1px solid var(--color-line);
+    border-radius: 10px;
+  }
+
+  .strip__step {
+    flex: 1;
+  }
+</style>
