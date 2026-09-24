@@ -1,0 +1,117 @@
+---
+import Tabs from '../../ui/Tabs.astro';
+import TabPanel from '../../ui/TabPanel.astro';
+import Token from '../../ui/Token.astro';
+import Caption from '../../ui/Caption.astro';
+import SampleViz from './SampleViz.astro';
+import { FAMILIES, demoLabel, rem } from '../../../data/foundations/spacing';
+
+/**
+ * «Tokens semánticos · Tier 2»: un tab por familia y, en cada panel, una fila por token con
+ * su alias, uso y la muestra del gap o padding real.
+ */
+---
+
+<Tabs tabs={FAMILIES.map((f) => ({ key: f.key, label: f.label, count: f.tokens.length }))}>
+  {FAMILIES.map((f, i) => (
+    <TabPanel key={f.key} intro={f.intro} meta={`${f.property} · ${f.scale} · scope ${f.scope}`} hidden={i > 0}>
+      <div class="samples">
+        {f.tokens.map((t) => (
+          <article class="sample">
+            <div class="sample__info">
+              <h4><Token name={`spacing/${f.key}/${t.step}`} /></h4>
+              <p class="sample__alias">→ {t.alias} · {t.px} px · {rem(t.px)}</p>
+              <p class="sample__use">{t.use}</p>
+              <p class="sample__prop">Propiedad: {f.property}</p>
+            </div>
+            <div class="sample__visual">
+              <SampleViz family={f.key} px={t.px} />
+              <p class="sample__label">{demoLabel(f.key, t.px)}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+      <Caption><Fragment set:html={f.note} /></Caption>
+    </TabPanel>
+  ))}
+</Tabs>
+
+<style>
+  .samples {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    overflow: hidden;
+    border: 1px solid var(--color-line);
+    border-radius: 12px;
+  }
+
+  .sample {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(220px, 0.8fr);
+    align-items: center;
+    gap: 28px;
+    padding: 20px 22px;
+    border-bottom: 1px solid var(--color-line);
+    background: var(--color-surface);
+  }
+
+  .sample:last-child {
+    border-bottom: 0;
+  }
+
+  .sample__info h4 {
+    margin: 0 0 6px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .sample__alias {
+    margin: 0 0 8px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-muted);
+  }
+
+  .sample__use {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--color-muted);
+  }
+
+  .sample__prop {
+    margin: 8px 0 0;
+    font-size: 12px;
+    line-height: 1.55;
+    color: var(--color-muted);
+  }
+
+  .sample__visual {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    min-width: 0;
+  }
+
+  .sample__label {
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--color-muted);
+  }
+
+  @media (max-width: 860px) {
+    .sample {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 16px;
+    }
+  }
+
+  @media (max-width: 639px) {
+    .sample {
+      padding: 16px;
+    }
+  }
+</style>

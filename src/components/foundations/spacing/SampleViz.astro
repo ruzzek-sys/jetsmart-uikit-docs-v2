@@ -1,0 +1,135 @@
+---
+import type { FamilyKey } from '../../../data/foundations/spacing';
+
+/**
+ * Muestra visual de un token semántico: el gap o padding real aplicado sobre bloques.
+ * Las familias de página (inset-page, gap-page) se dibujan a escala ×0,35 para que quepan.
+ */
+interface Props {
+  family: FamilyKey;
+  px: number;
+}
+
+const { family, px } = Astro.props;
+const scaled = Math.round(px * 0.35);
+const scaleTitle = `Escala visual ×0,35 · valor real ${px} px`;
+---
+
+{family === 'stack' && (
+  <div class="viz viz--stack" style={`gap:${px}px`}>
+    <span class="block block--wide"></span><span class="block block--wide"></span>
+  </div>
+)}
+{family === 'inline' && (
+  <div class="viz viz--inline" style={`gap:${px}px`}>
+    <span class="block block--chip"></span><span class="block block--chip"></span>
+  </div>
+)}
+{family === 'inset-x' && (
+  <div class="viz viz--inset" style={`padding-left:${px}px;padding-right:${px}px`}>
+    <span class="block block--fill"></span>
+  </div>
+)}
+{family === 'inset-y' && (
+  <div class="viz viz--inset viz--inset-y" style={`padding-top:${px}px;padding-bottom:${px}px`}>
+    <span class="block block--fill-y"></span>
+  </div>
+)}
+{family === 'inset-page' && (
+  <div class="viz viz--page" style={`padding:${scaled}px`} title={scaleTitle}>
+    <span class="block block--page"></span>
+  </div>
+)}
+{family === 'gap-page' && (
+  <div class="viz viz--gap-page" style={`gap:${Math.max(scaled, px === 0 ? 0 : 8)}px`} title={scaleTitle}>
+    <span class="block block--section"></span><span class="block block--section"></span>
+  </div>
+)}
+
+<style>
+  .viz {
+    display: flex;
+    align-items: stretch;
+    max-width: 100%;
+  }
+
+  .viz--stack {
+    flex-direction: column;
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .viz--inline {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .viz--inset {
+    align-items: center;
+    min-width: min(180px, 100%);
+    max-width: 280px;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    border-radius: 8px;
+    background: #e7edf4;
+  }
+
+  .viz--inset-y {
+    width: 248px;
+    padding-right: 14px;
+    padding-left: 14px;
+  }
+
+  .viz--page {
+    width: 220px;
+    height: 140px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    background: #eef2f6;
+  }
+
+  .viz--gap-page {
+    flex-direction: column;
+    width: 220px;
+  }
+
+  .block {
+    display: block;
+    border-radius: 6px;
+    background: #153266;
+  }
+
+  .block--wide {
+    width: 100%;
+    height: 22px;
+  }
+
+  .block--chip {
+    width: 90px;
+    height: 32px;
+    flex-shrink: 1;
+  }
+
+  .block--fill {
+    flex: 1 1 auto;
+    width: 180px;
+    min-width: 0;
+    height: 36px;
+  }
+
+  .block--fill-y {
+    width: 100%;
+    height: 20px;
+  }
+
+  .block--page {
+    flex: 1 1 auto;
+    width: 100%;
+    min-height: 0;
+  }
+
+  .block--section {
+    width: 100%;
+    height: 48px;
+  }
+</style>

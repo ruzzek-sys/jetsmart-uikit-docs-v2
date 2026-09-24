@@ -1,0 +1,462 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Section from '../../components/doc/Section.astro';
+import Stats from '../../components/ui/Stats.astro';
+import Chain from '../../components/ui/Chain.astro';
+import Note from '../../components/ui/Note.astro';
+import Caption from '../../components/ui/Caption.astro';
+import Table from '../../components/ui/Table.astro';
+import Token from '../../components/ui/Token.astro';
+import Badge from '../../components/ui/Badge.astro';
+import Rules from '../../components/ui/Rules.astro';
+import Items from '../../components/ui/Items.astro';
+import InfoGrid from '../../components/ui/InfoGrid.astro';
+import Pair from '../../components/ui/Pair.astro';
+import PairCol from '../../components/ui/PairCol.astro';
+import Bar from '../../components/foundations/spacing/Bar.astro';
+import FamilyTabs from '../../components/foundations/spacing/FamilyTabs.astro';
+import GridPreviews from '../../components/foundations/spacing/GridPreviews.astro';
+import { sections } from '../../lib/sections';
+import {
+  ALIAS_COUNT,
+  APPLY,
+  APPLY_RULES,
+  BREAKPOINTS,
+  COLLECTIONS,
+  COMPARE,
+  COMPARE_INFO,
+  GRID_INFO,
+  PRIMITIVES,
+  UPDATES,
+  rem,
+  zoneOf,
+  zoneTone,
+} from '../../data/foundations/spacing';
+
+const S = sections({
+  resumen: 'Resumen',
+  primitivos: 'Tokens primitivos · Tier 1',
+  semanticos: 'Tokens semánticos · Tier 2',
+  comparativa: 'Dos escalas, no confundir',
+  grid: 'Sistema de grid',
+  figma: 'Cómo usar en Figma',
+  practicas: 'Buenas y malas prácticas',
+});
+---
+
+<BaseLayout
+  title="Spacing"
+  description="19 primitivos en múltiplos de 4 px, 6 familias semánticas y un grid de 3 breakpoints que ordenan el espacio del kit."
+  headings={S.headings}
+>
+  <Section {...S.resumen}>
+    <p>
+      El spacing del kit se organiza en dos niveles. Los <strong>primitivos de Tier 1</strong> son la escala
+      cruda: 19 pasos de 0 a 128 px, casi todos múltiplos de 4, sin rol. Los <strong>tokens semánticos de
+      Tier 2</strong> hacen alias a un primitivo y le suman el trabajo que importa: stack, inline, inset-x,
+      inset-y, inset-page o gap-page. Un espaciado aplicado en un componente no guarda un valor: guarda una
+      referencia. Esa cadena es lo que permite cambiar el ritmo del producto en un solo lugar.
+    </p>
+
+    <Stats
+      items={[
+        { value: 19, label: 'Pasos primitivos' },
+        { value: 57, label: 'Tokens semánticos' },
+        { value: 6, label: 'Familias de rol' },
+        { value: 3, label: 'Breakpoints de grid' },
+      ]}
+    />
+
+    <Chain
+      steps={[
+        { tier: 'Tier 1 · Primitivo', code: 'spacing/6', note: '24 px · valor crudo, sin rol' },
+        { tier: 'Tier 2 · Semántico', code: 'spacing/stack/3xl', note: 'aquí vive el rol', focus: true },
+        { tier: 'Aplicación', code: 'Gap del auto layout', note: 'nunca el primitivo, nunca un número' },
+        { tier: 'Producto', code: 'Todos los componentes que lo usan', note: 'se actualizan solos' },
+      ]}
+    />
+
+    <Note>
+      <strong>El scope es GAP:</strong> el campo de Gap o Padding del panel filtra automáticamente los tokens
+      de spacing. Si el picker no muestra el token esperado, la causa habitual es estar en la propiedad
+      incorrecta: stack es gap de columna, inline es gap de fila, inset es padding.
+    </Note>
+  </Section>
+
+  <Section {...S.primitivos}>
+    <p>
+      Escala completa de 0 a 128 px. Cubre el ritmo entre elementos, los paddings de componente y los bloques
+      grandes de layout. Es la escala con más alias en Tier 2: cada barra se dibuja a partir del mismo valor
+      en px, y la columna de alias cuenta cuántos tokens semánticos apuntan a ese paso.
+    </p>
+    <Table columns={['Token', 'Escala', 'Px', 'Rem', 'Zona', 'Alias Tier 2']}>
+      {PRIMITIVES.map((p) => {
+        const path = `spacing/${p.step}`;
+        const count = ALIAS_COUNT[path] ?? 0;
+        const zone = zoneOf(p);
+        return (
+          <tr>
+            <td><Token name={path} /></td>
+            <td><Bar px={p.px} /></td>
+            <td class="num">{p.px} px</td>
+            <td class="num">{rem(p.px)}</td>
+            <td><Badge tone={zoneTone(zone)}>{zone}</Badge></td>
+            <td>{count ? <Badge tone="on">{`${count} ${count === 1 ? 'token' : 'tokens'}`}</Badge> : <span class="muted">—</span>}</td>
+          </tr>
+        );
+      })}
+    </Table>
+    <Caption>
+      spacing/0,5 es el único paso fuera del múltiplo de 4: existe para ajustes finos de 2 px en iconos y
+      bordes. Los pasos 11 (44 px) y 13 (52 px) no tienen alias en Tier 2: son reserva. Ningún componente
+      pequeño debería usar los pasos de layout (64–128 px) directo: si necesita ese espacio, probablemente
+      sea un layout de página.
+    </Caption>
+  </Section>
+
+  <Section {...S.semanticos}>
+    <p>
+      Seis familias, dos escalas. stack, inline, inset-x e inset-y cubren el componente (0–36 px). inset-page
+      y gap-page cubren el layout de página (0–128 px). Cada fila muestra el token, el primitivo al que
+      apunta y el gap o padding real aplicado en el ejemplo. El nombre del paso no se comparte entre esas
+      dos escalas: <code>md</code> no significa lo mismo en todas las familias.
+    </p>
+    <FamilyTabs />
+  </Section>
+
+  <Section {...S.comparativa}>
+    <p>
+      El prefijo de familia importa tanto como el paso seleccionado. Ante la duda entre inset y gap: si se
+      separa el contenido del borde, corresponde inset; si se separan dos bloques entre sí, corresponde gap.
+    </p>
+    <InfoGrid items={COMPARE_INFO} />
+    <Table columns={['Token', 'Escala', 'Px', 'Qué resuelve']}>
+      {COMPARE.map((c) => (
+        <tr>
+          <td><Token name={`spacing/${c.token}`} /></td>
+          <td><Bar px={c.px} /></td>
+          <td class="num">{c.px} px</td>
+          <td class="muted">{c.solves}</td>
+        </tr>
+      ))}
+    </Table>
+  </Section>
+
+  <Section {...S.grid}>
+    <p>
+      Columnas, gutter y margin ordenan cualquier layout. Los tres cambian según el ancho de pantalla; el
+      gutter es el único valor que se mantiene fijo en 20 px en todo el kit. El ancho de columna es siempre
+      automático (stretch): se reparte el espacio disponible entre el número de columnas del breakpoint.
+    </p>
+    <InfoGrid items={GRID_INFO} />
+    <Table columns={['Breakpoint', 'Ancho', 'Columnas', 'Gutter', 'Margin', 'Qué cambia']} wideLast>
+      {BREAKPOINTS.map((bp) => (
+        <tr>
+          <td><strong>{bp.label}</strong></td>
+          <td class="num">{bp.range}</td>
+          <td class="num">{bp.columns}</td>
+          <td class="num">{bp.gutter} px</td>
+          <td class="num">{bp.margin} px</td>
+          <td class="muted">{bp.note}</td>
+        </tr>
+      ))}
+    </Table>
+    <Caption>
+      El ancho de columna es siempre automático (stretch): se reparte el espacio disponible. El gutter es un
+      canal que no debe contener ningún elemento; si un contenedor abarca varias columnas, los gutters internos
+      pueden ignorarse.
+    </Caption>
+    <GridPreviews />
+  </Section>
+
+  <Section {...S.figma}>
+    <h3>1 · Dónde están las variables</h3>
+    <p>
+      El spacing vive repartido en dos colecciones del archivo <code>Jetsmart UI Kit v1.0</code> y se consume
+      por librería desde los archivos de producto.
+    </p>
+    <Table columns={['Colección', 'Modo', 'Variables', 'De spacing', 'Rol']} wideLast>
+      {COLLECTIONS.map((c) => (
+        <tr>
+          <td><strong set:html={c.name} /></td>
+          <td><Badge tone="neutral">{c.mode}</Badge></td>
+          <td class="num">{c.total}</td>
+          <td class="num">{c.spacing}</td>
+          <td class="muted">{c.role}</td>
+        </tr>
+      ))}
+    </Table>
+    <Caption>
+      La nomenclatura es <code>spacing/familia/paso</code>, por ejemplo <code>spacing/inset-x/lg</code>.
+      Tier 2: Spatial &amp; Shape tiene un solo modo (Theme 1) y comparte colección con radios y bordes.
+    </Caption>
+
+    <h3>2 · Cómo se aplican</h3>
+    <p>
+      La propiedad en edición determina la familia del token. Si el picker no muestra el token esperado, la
+      causa habitual es estar en la propiedad incorrecta.
+    </p>
+    <Table columns={['Propiedad en edición', 'Familia', 'Cómo se aplica']} roles>
+      {APPLY.map((a) => (
+        <tr>
+          <td><strong>{a.property}</strong></td>
+          <td><code>{a.family}</code></td>
+          <td class="muted">{a.how}</td>
+        </tr>
+      ))}
+    </Table>
+
+    <Rules items={APPLY_RULES} />
+
+    <h3>3 · Cómo se actualizan</h3>
+    <p>
+      Un cambio de spacing se hace siempre en la variable, nunca en el nodo. Dónde se edita depende de si
+      cambia el rol de un token o la escala base.
+    </p>
+    <Items items={UPDATES} />
+
+    <Note tone="warn">
+      <strong>Lo que interrumpe la cadena:</strong> escribir un número directamente en Gap o Padding
+      desenlaza la variable. El layout se mantiene visualmente igual y pasa la revisión, pero deja de
+      heredar: el siguiente ajuste de ritmo no lo alcanza.
+    </Note>
+
+    <Note tone="warn">
+      <strong>Editar un primitivo afecta a todos sus alias:</strong> cambiar <code>spacing/4</code> de
+      16 a 18 alcanza a cada token semántico que lo referencia —stack/xl, inline/xl, inset-x/xl e
+      inset-y/xl—, incluidos aquellos que no se pretendía modificar.
+    </Note>
+  </Section>
+
+  <Section {...S.practicas}>
+    <p>
+      Cinco pares que contrastan el uso correcto del sistema de spacing con el error equivalente. La mayoría
+      de los errores pasa una revisión visual. El impacto aparece al cambiar el ritmo del producto, al
+      reutilizar un mismo paso en dos escalas distintas, o al apuntar el auto layout a la familia incorrecta.
+      La regla es siempre la misma: la propiedad decide la familia, la familia decide la escala y el
+      primitivo nunca se aplica al componente.
+    </p>
+
+    <Pair eyebrow="01 · La propiedad decide la familia" title="Gap de columna es stack; gap de fila es inline">
+      <p>
+        El mismo 8 px existe en <code>stack/md</code> e <code>inline/md</code>. No son dos copias del valor:
+        son dos roles distintos. Si el ritmo vertical se ajusta y el horizontal no, solo conserva el
+        comportamiento esperado el componente que apunta a la familia correcta.
+      </p>
+      <PairCol slot="do" kind="do" label="Columna con stack, fila con inline"
+        styles="itemSpacing columna: spacing/stack/md · fila: spacing/inline/sm"
+        note="Cada gap vive en la propiedad para la que fue declarado. El picker de Figma solo ofrece la familia correcta si el auto layout está en la dirección correcta.">
+        <div class="demo demo--stack">
+          <span class="demo__block">Título</span>
+          <span class="demo__gap">stack/md · 8 px</span>
+          <span class="demo__block">Párrafo</span>
+        </div>
+        <div class="demo demo--inline">
+          <span class="demo__chip">Icono</span>
+          <span class="demo__gap">inline/sm · 4 px</span>
+          <span class="demo__chip">Label</span>
+        </div>
+      </PairCol>
+      <PairCol slot="dont" kind="dont" label="Stack usado en una fila" styles="itemSpacing fila: spacing/stack/sm"
+        note="El resultado visual es idéntico: stack/sm e inline/sm apuntan ambos a 4 px. Cuando el ritmo vertical cambie, el botón modificará su separación horizontal sin una decisión explícita.">
+        <div class="demo demo--inline">
+          <span class="demo__chip">Icono</span>
+          <span class="demo__gap demo__gap--wrong">stack/sm · 4 px</span>
+          <span class="demo__chip">Label</span>
+        </div>
+      </PairCol>
+    </Pair>
+
+    <Pair eyebrow="02 · El mismo paso no es el mismo valor" title="inset-x/md no es inset-page/md">
+      <p>
+        Las dos escalas reutilizan los mismos nombres de paso. <code>md</code> en componente son 8 px;
+        <code>md</code> en página son 48 px. Elegir por el sufijo y no por la familia es el error de mayor
+        impacto del sistema.
+      </p>
+      <PairCol slot="do" kind="do" label="Botón con inset de componente"
+        styles="padding: spacing/inset-y/md + spacing/inset-x/lg · 8 / 12 px"
+        note="El botón cabe en una toolbar. El padding es de componente: none a 6xl, 0 a 36 px.">
+        <div class="pad" style="padding: 8px 12px">
+          <strong>Reservar</strong>
+          <span>inset-y/md · inset-x/lg</span>
+        </div>
+      </PairCol>
+      <PairCol slot="dont" kind="dont" label="Botón con inset de página" styles="padding: spacing/inset-page/md · 48 px"
+        note="Seis veces más grande, mismo nombre de paso. inset-page es el padding de una pantalla, no el de un control.">
+        <div class="pad" style="padding: 48px">
+          <strong>Reservar</strong>
+          <span>inset-page/md</span>
+        </div>
+      </PairCol>
+    </Pair>
+
+    <Pair eyebrow="03 · Tier 1 no se aplica" title="Un primitivo nunca toca un componente">
+      <p>
+        Tier 1 es la escala cruda: 19 números sin significado. Tier 2 les asigna un rol. Aplicar
+        <code>spacing/4</code> de forma directa funciona en la primera revisión y desvincula el componente
+        del sistema en la siguiente.
+      </p>
+      <PairCol slot="do" kind="do" label="El componente usa el token semántico" styles="Gap: spacing/stack/md → spacing/2 · 8 px"
+        note="El formulario apunta a Tier 2, y Tier 2 apunta a Tier 1. Cambiar el ritmo entre campos es editar un alias en un solo lugar.">
+        <div class="demo demo--stack">
+          <span class="demo__block">Campo</span>
+          <span class="demo__gap">stack/md → spacing/2</span>
+          <span class="demo__block">Campo</span>
+        </div>
+      </PairCol>
+      <PairCol slot="dont" kind="dont" label="El componente usa el primitivo directo" styles="Gap: spacing/2 · 8 px"
+        note="El resultado es visualmente idéntico. Cuando el ritmo de stack/md cambie, este componente permanecerá en 8 px y deberá localizarse de forma manual.">
+        <div class="demo demo--stack">
+          <span class="demo__block">Campo</span>
+          <span class="demo__gap demo__gap--wrong">spacing/2 · 8 px</span>
+          <span class="demo__block">Campo</span>
+        </div>
+      </PairCol>
+    </Pair>
+
+    <Pair eyebrow="04 · Los pasos grandes son de página" title="64–128 px no caben dentro de un componente">
+      <p>
+        Los primitivos 16, 20, 24 y 32 (64 a 128 px) existen para inset-page y gap-page. Si un botón, un
+        input o una tarjeta requieren ese espacio, el problema no es el padding: el bloque debería tratarse
+        como layout.
+      </p>
+      <PairCol slot="do" kind="do" label="Tarjeta con inset de componente, secciones con gap-page"
+        styles="padding: spacing/inset-x/xl + spacing/inset-y/xl"
+        note="16 px es el límite superior habitual de una tarjeta. La separación entre esa tarjeta y la siguiente corresponde a gap-page, no a un inset adicional.">
+        <div class="pad" style="padding: 16px 16px">
+          <strong>Tarifa Zero</strong>
+          <span>inset-x/xl · inset-y/xl · 16 px</span>
+        </div>
+      </PairCol>
+      <PairCol slot="dont" kind="dont" label="Tarjeta con un paso de página" styles="padding-top/bottom: spacing/16 · 64 px"
+        note="El primitivo de 64 px no tiene alias en inset-y. Aplicarlo directamente en la tarjeta la convierte en una sección sin declararlo.">
+        <div class="pad" style="padding: 64px 16px">
+          <strong>Tarifa Zero</strong>
+          <span>inset-y/… no · spacing/16</span>
+        </div>
+      </PairCol>
+    </Pair>
+
+    <Pair eyebrow="05 · Inset no es gap" title="Aplicar padding a un contenedor no es separar dos contenedores">
+      <p>
+        inset-page separa el contenido del borde de la pantalla. gap-page separa secciones entre sí.
+        Intercambiarlos produce pantallas con exceso de espacio o con separación insuficiente, aunque el
+        valor numérico sea el mismo.
+      </p>
+      <PairCol slot="do" kind="do" label="Padding de página + gap entre secciones" styles="padding: inset-page/lg · gap: gap-page/md"
+        note="El contenedor usa inset-page como padding. Las secciones se separan con gap-page. Cada token tiene una función definida y puede actualizarse de forma independiente.">
+        <div class="page">
+          <div class="page__section">Hero</div>
+          <span class="demo__gap">gap-page/md · 48 px</span>
+          <div class="page__section">Tarifas</div>
+        </div>
+      </PairCol>
+      <PairCol slot="dont" kind="dont" label="Toda la separación resuelta como padding" styles="padding adicional entre bloques · sin gap-page"
+        note="Las dos secciones se perciben como un único bloque con padding excesivo. Para ajustar la separación entre ellas habría que editar el padding de cada una en lugar de un solo gap.">
+        <div class="page page--padded">
+          <div class="page__section">Hero</div>
+          <div class="page__section">Tarifas</div>
+        </div>
+      </PairCol>
+    </Pair>
+  </Section>
+</BaseLayout>
+
+<style>
+  .muted {
+    color: var(--color-muted);
+  }
+
+  /* Demos de prácticas */
+  .demo {
+    display: flex;
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--color-line);
+    border-radius: 8px;
+    background: var(--color-surface);
+  }
+
+  .demo--stack {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .demo--inline {
+    flex-flow: row wrap;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+  }
+
+  .demo__block,
+  .demo__chip,
+  .page__section {
+    display: block;
+    padding: 8px 12px;
+    border-radius: 6px;
+    background: var(--color-brand-light);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-brand-dark);
+  }
+
+  .demo__chip {
+    display: inline-block;
+  }
+
+  .demo__gap {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-ok);
+  }
+
+  .demo__gap--wrong {
+    color: var(--color-brand);
+  }
+
+  .pad {
+    width: 100%;
+    border: 1px dashed rgb(181 18 27 / 0.25);
+    border-radius: 8px;
+    background: var(--color-brand-light);
+    color: var(--color-brand-dark);
+  }
+
+  .pad strong,
+  .pad span {
+    display: block;
+  }
+
+  .pad strong {
+    font-size: 15px;
+    color: inherit;
+  }
+
+  .pad span {
+    margin-top: 4px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    opacity: 0.8;
+  }
+
+  .page {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    padding: 16px;
+    border: 1px solid var(--color-line);
+    border-radius: 8px;
+    background: var(--color-surface);
+  }
+
+  .page--padded {
+    gap: 0;
+    padding: 28px 16px;
+  }
+
+  .page--padded .page__section + .page__section {
+    margin-top: 28px;
+  }
+</style>

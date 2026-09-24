@@ -1,0 +1,84 @@
+---
+import { BREAKPOINTS } from '../../../data/foundations/spacing';
+
+/**
+ * Una maqueta por breakpoint con sus columnas, gutter y margin reales. Bajo 640 px el margin
+ * y el gutter se dibujan a la mitad: 12 columnas con 64 px de margin no caben en un móvil.
+ */
+---
+
+<div class="grids">
+  {BREAKPOINTS.map((bp) => (
+    <article class="grid">
+      <header>
+        <h4>{bp.label}</h4>
+        <p>{bp.range} · {bp.columns} columnas · gutter {bp.gutter} px · margin {bp.margin} px</p>
+      </header>
+      <div class="grid__frame" style={`--margin:${bp.margin}px;--gutter:${bp.gutter}px;--cols:${bp.columns}`}>
+        <div class="grid__cols">
+          {Array.from({ length: bp.columns }, () => <span class="grid__col"></span>)}
+        </div>
+      </div>
+    </article>
+  ))}
+</div>
+
+<style>
+  .grids {
+    display: grid;
+    gap: 16px;
+    margin-top: 24px;
+  }
+
+  .grid {
+    padding: 16px;
+    border: 1px solid var(--color-line);
+    border-radius: 12px;
+    background: var(--color-subtle);
+  }
+
+  .grid h4 {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  .grid header p {
+    margin: 4px 0 12px;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--color-muted);
+  }
+
+  .grid__frame {
+    padding-right: var(--margin);
+    padding-left: var(--margin);
+    overflow: hidden;
+    border: 1px solid var(--color-line);
+    border-radius: 8px;
+    background: var(--color-surface);
+  }
+
+  .grid__cols {
+    display: grid;
+    grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+    gap: var(--gutter);
+    min-height: 72px;
+  }
+
+  .grid__col {
+    min-height: 72px;
+    background: var(--color-brand-light);
+  }
+
+  @media (max-width: 639px) {
+    .grid__frame {
+      padding-right: calc(var(--margin) / 2);
+      padding-left: calc(var(--margin) / 2);
+    }
+
+    .grid__cols {
+      gap: calc(var(--gutter) / 2);
+    }
+  }
+</style>

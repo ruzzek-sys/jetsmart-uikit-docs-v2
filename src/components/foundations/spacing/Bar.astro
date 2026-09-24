@@ -1,0 +1,33 @@
+---
+import { MAX_PX } from '../../../data/foundations/spacing';
+
+/** Barra horizontal proporcional al valor en px, sobre la escala completa (0–128 px). */
+interface Props {
+  px: number;
+}
+
+const { px } = Astro.props;
+// Los valores chicos (2 px) conservan un mínimo visible; el 0 queda vacío.
+const width = px === 0 ? 0 : Math.max((px / MAX_PX) * 100, 1.2);
+---
+
+<span class="bar" title={`${px} px`}><span class="bar__fill" style={`width:${width}%`}></span></span>
+
+<style>
+  .bar {
+    display: block;
+    width: 160px;
+    height: 10px;
+    overflow: hidden;
+    border-radius: 999px;
+    background: var(--color-subtle);
+  }
+
+  .bar__fill {
+    display: block;
+    height: 100%;
+    border-radius: 999px;
+    background: var(--color-brand);
+    opacity: 0.8;
+  }
+</style>
