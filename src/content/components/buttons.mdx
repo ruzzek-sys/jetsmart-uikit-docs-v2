@@ -101,7 +101,7 @@ tables:
       - name: Uso en mobile
         meta:
           - label: Responsive
-        desc: En mobile siempre se usa el tipo Secondary en lugar de Primary, para aligerar el peso visual de fondos sólidos en pantallas pequeñas.
+        desc: "En breakpoint Mobile se restringe el uso a `Type=Primary` y `Type=Secondary` (52px de alto en `Size=Large`), que cumplen el área táctil mínima de 44×44px recomendada por WCAG 2.5.5. `Type=Tertiary` queda excluido de este contexto: su altura de 28px en el mismo Size no alcanza ese mínimo, comprometiendo la accesibilidad táctil en pantallas pequeñas."
 ---
 
 ## Button
